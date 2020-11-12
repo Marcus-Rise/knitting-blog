@@ -12,4 +12,5 @@ module.exports = {
   moduleNameMapper: {
     "^.+\\.module\\.s?css$": "identity-obj-proxy",
   },
+  setupFiles: ["./jest.setup.js"],
 };
