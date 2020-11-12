@@ -10,6 +10,7 @@ CMD npm install \
 
 FROM node:${NODE_VERSION}-alpine AS check
 WORKDIR /app
+ENV CI true
 
 COPY package*.json ./
 
