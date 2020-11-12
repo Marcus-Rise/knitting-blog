@@ -1,8 +1,8 @@
 import React from "react";
 import Head from "next/head";
-import { Footer } from "../src/components/footer.component";
 import "../src/styles/globals.scss";
 import type { AppProps } from "next/app";
+import { Footer } from "../src/components/footer";
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => (
   <>
