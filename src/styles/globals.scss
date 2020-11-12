@@ -1,0 +1,27 @@
+@use "~bootstrap/scss/bootstrap-grid";
+@use "typography";
+@use "variables";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bad+Script&display=swap');
+
+:root {
+  --primary: #{variables.$primary};
+  --secondary: #{variables.$secondary};
+  --accent: #{variables.$accent};
+}
+
+html, body {
+  @include typography.font-family;
+}
+
+body {
+  margin: 0;
+}
+
+#__next {
+  height: 100% !important;
+}
+
+main {
+  min-height: 90vh;
+}

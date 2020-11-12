@@ -1,0 +1,26 @@
+@mixin font-family {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  line-height: 1rem;
+}
+
+@mixin black {
+  @include font-family;
+  font-weight: 900;
+}
+
+@mixin bold {
+  @include font-family;
+  font-weight: 700;
+}
+
+@mixin regular {
+  @include font-family;
+  font-weight: 400;
+}
+
+@mixin light {
+  @include font-family;
+
+  font-weight: 300;
+}
