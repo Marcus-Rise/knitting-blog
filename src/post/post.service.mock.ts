@@ -5,7 +5,7 @@ import { injectable } from "inversify";
 @injectable()
 class PostServiceMock implements IPostService {
   async getList(limit: number): Promise<IPost[]> {
-    const item = {
+    const item: IPost = {
       title: "Как вязать красиво",
       slug: "slugslugslugslug",
       date: "Ноябрь 11, 2020",
