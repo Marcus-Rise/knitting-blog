@@ -1,0 +1,26 @@
+$mobile-screen-width: 700px;
+
+@mixin media-max($size) {
+  @media (max-width: $size) {
+    @content;
+  }
+}
+
+@mixin media-min($size) {
+  @media (min-width: $size) {
+    @content;
+  }
+}
+
+@mixin media-mobile-only() {
+  @include media-max($mobile-screen-width) {
+    @content
+  }
+}
+
+@mixin media-mobile-up() {
+  @include media-min($mobile-screen-width) {
+    @content
+  }
+}
+

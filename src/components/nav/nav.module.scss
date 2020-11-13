@@ -1,4 +1,6 @@
 @use "../../styles/typography";
+@use "../../styles/grid";
+
 
 .root {
   $border: 1px dashed #000000;
@@ -10,7 +12,7 @@
   padding-bottom: $padding;
 
 
-  @media (max-width: 700px) {
+  @include grid.media-mobile-only {
     border: none;
     $padding: 1rem;
     padding: $padding;
@@ -21,13 +23,13 @@
   display: flex;
   justify-content: flex-end;
 
-  @media (min-width: 700px) {
+  @include grid.media-mobile-up {
     display: none;
   }
 }
 
 .itemsContainer {
-  @media (max-width: 700px) {
+  @include grid.media-mobile-only {
     display: none;
 
     position: fixed;
@@ -48,7 +50,7 @@
   align-items: center;
   padding: 0;
 
-  @media (max-width: 700px) {
+  @include grid.media-mobile-only {
     flex-direction: column;
   }
 }
@@ -64,7 +66,7 @@
     color: inherit;
   }
 
-  @media (max-width: 700px) {
+  @include grid.media-mobile-only {
     margin-bottom: 1.5rem;
   }
 }
