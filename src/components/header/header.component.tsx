@@ -1,16 +1,19 @@
 import React from "react";
 import Image from "next/image";
 import styles from "./header.module.scss";
+import type { INavLink } from "../nav";
+import { Nav } from "../nav";
 
 interface IProps {
   title: string;
   logoSrc: string;
   logoSize: number;
+  links: Array<INavLink>;
 }
 
 const Header: React.FC<IProps> = (props) => {
   return (
-    <header>
+    <header className={styles.root}>
       <div className={styles.logoContainer}>
         <div className="container">
           <div className="row align-items-center flex-column">
@@ -23,6 +26,7 @@ const Header: React.FC<IProps> = (props) => {
           </div>
         </div>
       </div>
+      <Nav items={props.links} />
     </header>
   );
 };
