@@ -5,9 +5,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Bad+Script&display=swap');
 
 :root {
-  --primary: #{variables.$primary};
-  --secondary: #{variables.$secondary};
-  --accent: #{variables.$accent};
+  --primary: #{variables.$color-primary};
+  --secondary: #{variables.$color-secondary};
+  --accent: #{variables.$color-accent};
 }
 
 html, body {

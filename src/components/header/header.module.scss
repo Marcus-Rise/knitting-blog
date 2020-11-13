@@ -1,0 +1,33 @@
+@use "../../styles/typography";
+@use "../../styles/grid";
+
+.root {
+  display: flex;
+  flex-direction: column;
+
+  @include grid.media-mobile-only {
+    flex-direction: column-reverse;
+  }
+}
+
+.logoContainer {
+  $padding: 1.75rem;
+  padding-top: $padding;
+  padding-bottom: $padding;
+  box-sizing: border-box;
+
+  background-image: url("/header_background_left.png"), url("/header_background_right.png");
+  background-repeat: no-repeat, no-repeat;
+  background-size: contain, contain;
+  background-position: left top, right bottom;
+
+  @include grid.media-mobile-only {
+    background: none;
+  }
+}
+
+.title {
+  @include typography.BadScript;
+
+  font-size: 2.5rem;
+}

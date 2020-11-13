@@ -1,0 +1,26 @@
+@use "variables";
+
+@mixin media-max($size) {
+  @media (max-width: $size) {
+    @content;
+  }
+}
+
+@mixin media-min($size) {
+  @media (min-width: $size) {
+    @content;
+  }
+}
+
+@mixin media-mobile-only() {
+  @include media-max(variables.$mobile-screen-width) {
+    @content
+  }
+}
+
+@mixin media-mobile-up() {
+  @include media-min(variables.$mobile-screen-width) {
+    @content
+  }
+}
+

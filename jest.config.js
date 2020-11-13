@@ -10,6 +10,8 @@ module.exports = {
     },
   },
   moduleNameMapper: {
+    "^.+\\.svg$": "<rootDir>/jest.assets.mock.js",
     "^.+\\.module\\.s?css$": "identity-obj-proxy",
   },
+  setupFiles: ["./jest.setup.js"],
 };
