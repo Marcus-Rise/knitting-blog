@@ -2,8 +2,9 @@ import { PostServiceMock } from "./post.service.mock";
 
 describe("PostServiceMock", () => {
   test("getList", async () => {
-    const list = await new PostServiceMock().getList();
+    const number = 10;
+    const list = await new PostServiceMock().getList(number);
 
-    expect(list).toHaveLength(3);
+    expect(list).toHaveLength(number);
   });
 });
