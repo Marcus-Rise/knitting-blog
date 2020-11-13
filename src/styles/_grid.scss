@@ -1,4 +1,4 @@
-$mobile-screen-width: 700px;
+@use "variables";
 
 @mixin media-max($size) {
   @media (max-width: $size) {
@@ -13,13 +13,13 @@ $mobile-screen-width: 700px;
 }
 
 @mixin media-mobile-only() {
-  @include media-max($mobile-screen-width) {
+  @include media-max(variables.$mobile-screen-width) {
     @content
   }
 }
 
 @mixin media-mobile-up() {
-  @include media-min($mobile-screen-width) {
+  @include media-min(variables.$mobile-screen-width) {
     @content
   }
 }
