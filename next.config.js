@@ -9,6 +9,7 @@ module.exports = withPWA({
   crossOrigin: "anonymous",
   images: {
     deviceSizes: [320, 420, 768, 1024, 1200],
+    domains: ["cdn.pixabay.com"],
   },
   reactStrictMode: true,
   webpack(config) {
