@@ -2,7 +2,9 @@
 
 exports[`Header render 1`] = `
 <DocumentFragment>
-  <header>
+  <header
+    class="root"
+  >
     <div
       class="logoContainer"
     >
@@ -50,6 +52,43 @@ exports[`Header render 1`] = `
         </div>
       </div>
     </div>
+    <nav
+      class="root"
+    >
+      <div
+        class="mobileToggle"
+      >
+        <button
+          class="root"
+        >
+          <img
+            alt="menu"
+            src="[object Object]"
+          />
+        </button>
+      </div>
+      <div
+        class="itemsContainer "
+      >
+        <div
+          class="container"
+        >
+          <ul
+            class="ul"
+          >
+            <li
+              class="li"
+            >
+              <a
+                href="/#"
+              >
+                RRR
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
   </header>
 </DocumentFragment>
 `;
