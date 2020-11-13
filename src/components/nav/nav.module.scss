@@ -1,0 +1,72 @@
+@use "../../styles/typography";
+
+.root {
+  $border: 1px dashed #000000;
+  border-top: $border;
+  border-bottom: $border;
+
+  $padding: 0.5rem;
+  padding-top: $padding;
+  padding-bottom: $padding;
+
+
+  @media (max-width: 700px) {
+    border: none;
+    $padding: 1rem;
+    padding: $padding;
+  }
+}
+
+.mobileToggle {
+  display: flex;
+  justify-content: flex-end;
+
+  @media (min-width: 700px) {
+    display: none;
+  }
+}
+
+.itemsContainer {
+  @media (max-width: 700px) {
+    display: none;
+
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 901;
+
+    background-color: white;
+
+    width: 80vw;
+  }
+}
+
+.ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0;
+
+  @media (max-width: 700px) {
+    flex-direction: column;
+  }
+}
+
+.li {
+  @include typography.light;
+
+  font-size: 1.25rem;
+  text-transform: uppercase;
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  @media (max-width: 700px) {
+    margin-bottom: 1.5rem;
+  }
+}
+
+
