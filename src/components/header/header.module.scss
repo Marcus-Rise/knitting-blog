@@ -2,12 +2,18 @@
 
 .logoContainer {
   $padding: 1rem;
-  padding: $padding 0 0 $padding;
+  padding-top: $padding;
+  padding-bottom: $padding;
+  box-sizing: border-box;
 
   background-image: url("/header_background_left.png"), url("/header_background_right.png");
   background-repeat: no-repeat, no-repeat;
   background-size: contain, contain;
   background-position: left top, right bottom;
+
+  @media (max-width: 700px)  {
+    background: none;
+  }
 }
 
 .title {
