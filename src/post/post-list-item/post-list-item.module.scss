@@ -1,0 +1,53 @@
+@use "../../styles/typography";
+
+.root {
+
+}
+
+.title {
+  @include typography.bold;
+  font-size: 2rem;
+}
+
+.meta {
+  color: var(--secondary);
+  font-size: 1rem;
+}
+
+.image {
+  height: 320px;
+  width: auto;
+  overflow: hidden;
+}
+
+.imageLabel {
+  @include typography.BadScript;
+
+  color: var(--primary);
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.description {
+  line-height: 1.5rem;
+}
+
+.link {
+  text-decoration: none;
+  color: var(--primary);
+  border: .15rem dashed var(--accent);
+  padding: .5rem 3rem;
+  box-sizing: border-box;
+  display: block;
+
+  &:hover {
+    border: none;
+    color: white;
+    background-color: var(--accent);
+    padding: .65rem 3rem;
+  }
+
+  &:focus {
+    box-shadow: inset 0 0 4px 2px rgba(0, 0, 0, 0.25);
+  }
+}
