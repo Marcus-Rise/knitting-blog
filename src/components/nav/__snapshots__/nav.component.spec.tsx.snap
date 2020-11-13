@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Nav items 1`] = `
+<DocumentFragment>
+  <nav
+    class="root"
+  >
+    <div
+      class="mobileToggle"
+    >
+      <button
+        class="root"
+      >
+        <img
+          alt="menu"
+          src="[object Object]"
+        />
+      </button>
+    </div>
+    <div
+      class="itemsContainer "
+    >
+      <div
+        class="container"
+      >
+        <ul
+          class="ul"
+        >
+          <li
+            class="li"
+          >
+            <a
+              href="/#"
+            >
+              Главная
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</DocumentFragment>
+`;

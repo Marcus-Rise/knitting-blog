@@ -4,7 +4,9 @@ import React from "react";
 
 describe("Header", () => {
   test("render", () => {
-    const { asFragment } = render(<Header logoSize={50} title={"title"} logoSrc={"http://test.com"} />);
+    const { asFragment } = render(
+      <Header logoSize={50} title={"title"} logoSrc={"http://test.com"} links={[{ title: "RRR", link: "#" }]} />,
+    );
 
     expect(asFragment()).toMatchSnapshot();
   });
