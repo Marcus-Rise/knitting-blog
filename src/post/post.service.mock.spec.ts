@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import { PostServiceMock } from "./post.service.mock";
 
 describe("PostServiceMock", () => {
