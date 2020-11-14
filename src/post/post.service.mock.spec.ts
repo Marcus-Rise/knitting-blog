@@ -11,15 +11,16 @@ describe("PostServiceMock", () => {
 
   describe("getBySlug", () => {
     test("slugslugslugslug", async () => {
-      const post = await new PostServiceMock().getBySlug("slugslugslugslug");
+      const service = new PostServiceMock();
+      const slug = "slugslugslugslug";
 
-      expect(post).not.toBeNull();
-    });
-
-    test("slug", async () => {
-      const post = await new PostServiceMock().getBySlug("slug");
+      let post = await service.getBySlug(slug);
 
       expect(post).toBeNull();
+
+      post = await service.getBySlug(slug);
+
+      expect(post).not.toBeNull();
     });
   });
 });
