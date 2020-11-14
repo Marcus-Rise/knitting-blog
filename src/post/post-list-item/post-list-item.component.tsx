@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./post-list-item.module.scss";
 import type { IPost } from "../post.interface";
 import Image from "next/image";
+import Link from "next/link";
 
 interface IProps extends IPost {
   className?: string;
@@ -18,9 +19,16 @@ const PostListItem: React.FC<IProps> = (props) => (
     <p className={styles.description}>{props.description}</p>
     <div className="row justify-content-center">
       <div className="col-auto">
-        <a className={styles.link} href={"/" + props.slug}>
-          Читать далее
-        </a>
+        <div className={styles.link}>
+          <Link
+            href={{
+              pathname: "/[slug]",
+              query: { slug: props.slug },
+            }}
+          >
+            Читать далее
+          </Link>
+        </div>
       </div>
     </div>
   </div>

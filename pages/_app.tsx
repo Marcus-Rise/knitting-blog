@@ -11,19 +11,23 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   const links: Array<INavLink> = [
     {
       title: "Главная",
-      link: "#",
+      link: "/",
     },
     {
-      title: "Главная2",
-      link: "#",
+      title: "Шапочки",
+      link: "/",
     },
     {
-      title: "Главная3",
-      link: "#",
+      title: "Шарфы",
+      link: "/",
     },
     {
-      title: "Главная4",
-      link: "#",
+      title: "Свитера",
+      link: "/",
+    },
+    {
+      title: "Жакеты",
+      link: "/",
     },
   ];
 
