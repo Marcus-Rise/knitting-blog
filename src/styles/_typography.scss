@@ -1,14 +1,13 @@
 @mixin Montserrat {
   font-family: 'Montserrat', sans-serif;
   font-size: 1rem;
-  line-height: 1rem;
 }
 
 @mixin BadScript {
   font-family: 'Bad Script', cursive;
   font-size: 1rem;
-  line-height: 1rem;
-  letter-spacing: 0.2em;
+  line-height: initial;
+  letter-spacing: .2em;
   font-weight: normal;
 }
 
