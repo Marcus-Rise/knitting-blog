@@ -14,7 +14,7 @@ const getStaticProps: GetStaticProps<IProps> = async () => {
 
   return {
     props: {
-      posts: await postService.getList(10, 0),
+      posts: await postService.getList(5, 0),
     },
   };
 };
