@@ -5,7 +5,15 @@ import { injectable } from "inversify";
 @injectable()
 class PostServiceMock implements IPostService {
   async getList(limit: number): Promise<IPost[]> {
-    const item: IPost = {
+    return new Array(limit).fill(PostServiceMock.generatePost());
+  }
+
+  async getBySlug(slug: string): Promise<IPost | null> {
+    return slug === "slugslugslugslug" ? PostServiceMock.generatePost() : null;
+  }
+
+  private static generatePost(): IPost {
+    return {
       title: "Как вязать красиво",
       slug: "slugslugslugslug",
       date: "Ноябрь 11, 2020",
@@ -14,8 +22,6 @@ class PostServiceMock implements IPostService {
       imageLabel: "Милый кролик",
       imageSrc: "https://cdn.pixabay.com/photo/2020/03/16/16/31/hare-4937565_1280.jpg",
     };
-
-    return new Array(limit).fill(item);
   }
 }
 

@@ -8,4 +8,18 @@ describe("PostServiceMock", () => {
 
     expect(list).toHaveLength(number);
   });
+
+  describe("getBySlug", () => {
+    test("slugslugslugslug", async () => {
+      const post = await new PostServiceMock().getBySlug("slugslugslugslug");
+
+      expect(post).not.toBeNull();
+    });
+
+    test("slug", async () => {
+      const post = await new PostServiceMock().getBySlug("slug");
+
+      expect(post).toBeNull();
+    });
+  });
 });
