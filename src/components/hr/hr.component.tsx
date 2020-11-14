@@ -1,6 +1,11 @@
+import type { CSSProperties } from "react";
 import React from "react";
 import styles from "./hr.module.scss";
 
-const Hr: React.FC = () => <hr className={styles.hr} />;
+interface IProps {
+  styles?: CSSProperties;
+}
+
+const Hr: React.FC<IProps> = (props) => <hr className={styles.hr} style={props.styles} />;
 
 export { Hr };

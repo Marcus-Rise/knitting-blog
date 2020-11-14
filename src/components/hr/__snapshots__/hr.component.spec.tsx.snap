@@ -7,3 +7,12 @@ exports[`Hr render 1`] = `
   />
 </DocumentFragment>
 `;
+
+exports[`Hr styles 1`] = `
+<DocumentFragment>
+  <hr
+    class="hr"
+    style="margin-top: 3rem; margin-bottom: 3rem;"
+  />
+</DocumentFragment>
+`;

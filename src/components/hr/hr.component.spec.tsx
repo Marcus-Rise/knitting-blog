@@ -8,4 +8,10 @@ describe("Hr", () => {
 
     expect(asFragment()).toMatchSnapshot();
   });
+
+  test("styles", () => {
+    const { asFragment } = render(<Hr styles={{ marginTop: "3rem", marginBottom: "3rem" }} />);
+
+    expect(asFragment()).toMatchSnapshot();
+  });
 });
