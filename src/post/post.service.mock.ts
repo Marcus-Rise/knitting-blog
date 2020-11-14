@@ -17,13 +17,14 @@ class PostServiceMock implements IPostService {
   }
 
   async getBySlug(slug: string): Promise<IPost | null> {
-    const post = this.items.find((i) => i.slug === slug);
+    let post = this.items.find((i) => i.slug === slug);
 
     if (!post) {
-      this.items.push(PostServiceMock.generatePost(slug));
+      post = PostServiceMock.generatePost(slug);
+      this.items.push(post);
     }
 
-    return post ?? null;
+    return post;
   }
 
   private static generatePost(slug = "slugslugslugslug"): IPost {

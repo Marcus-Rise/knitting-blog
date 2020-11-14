@@ -3,8 +3,8 @@ import type { IPost, IPostService } from "../src/post";
 import { POST_SERVICE_PROVIDER } from "../src/post";
 import type { GetStaticPaths, GetStaticProps } from "next";
 import { inject } from "../src/ioc";
-import { PostListItem } from "../src/post/post-list-item";
 import { useRouter } from "next/router";
+import { PostWithContent } from "../src/post/post-with-content";
 
 interface IProps {
   post: IPost | null;
@@ -39,7 +39,13 @@ const PostPage: React.FC<IProps> = (props) => {
   const { isFallback } = useRouter();
 
   return (
-    <div className="container">{isFallback ? <>Loading...</> : props.post && <PostListItem {...props.post} />}</div>
+    <div className="container">
+      <div className="row">
+        <div className="col-12" style={{ marginTop: "3rem" }}>
+          {isFallback ? <>Loading...</> : props.post && <PostWithContent {...props.post} />}
+        </div>
+      </div>
+    </div>
   );
 };
 

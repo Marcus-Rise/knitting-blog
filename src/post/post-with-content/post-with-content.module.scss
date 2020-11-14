@@ -1,0 +1,25 @@
+@use "../../styles/typography";
+
+.title {
+  @include typography.BadScript;
+  font-size: 2rem;
+  color: var(--primary);
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.meta {
+  text-align: center;
+  color: var(--secondary);
+  text-transform: uppercase;
+}
+
+.description {
+  line-height: 1.5rem;
+  letter-spacing: 0.2em;
+}
+
+.footer {
+  color: var(--secondary);
+  text-align: right;
+}
