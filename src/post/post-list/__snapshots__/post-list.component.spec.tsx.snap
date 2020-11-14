@@ -55,12 +55,15 @@ exports[`PostList render 1`] = `
           <div
             class="col-auto"
           >
-            <a
+            <div
               class="link"
-              href="/slugslugslugslug"
             >
-              Читать далее
-            </a>
+              <a
+                href="/slugslugslugslug"
+              >
+                Читать далее
+              </a>
+            </div>
           </div>
         </div>
       </div>

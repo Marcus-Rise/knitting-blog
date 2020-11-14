@@ -49,12 +49,15 @@ exports[`PostListItem render 1`] = `
       <div
         class="col-auto"
       >
-        <a
+        <div
           class="link"
-          href="/slug"
         >
-          Читать далее
-        </a>
+          <a
+            href="/slug"
+          >
+            Читать далее
+          </a>
+        </div>
       </div>
     </div>
   </div>
