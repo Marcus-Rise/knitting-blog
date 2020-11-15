@@ -1,5 +1,5 @@
 import "reflect-metadata";
-import { PostInMemoryRepository } from "./post.in-memory.repository";
+import { PostInMemoryRepository } from "./post-in-memory.repository";
 
 describe("PostInMemoryRepository", () => {
   describe("find", () => {
