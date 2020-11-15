@@ -13,7 +13,7 @@ const PostListItem: React.FC<IProps> = (props) => (
     <h2 className={styles.title}>{props.title}</h2>
     <p className={styles.meta}>{props.date}</p>
     <div className={styles.image}>
-      <Image src={props.imageSrc} alt={props.imageLabel} height={320} width={"auto"} layout={"responsive"} />
+      <Image src={props.imageSrc} alt={props.imageLabel} height={"auto"} width={"auto"} layout={"responsive"} />
     </div>
     <p className={styles.imageLabel}>{props.imageLabel}</p>
     <p className={styles.description}>{props.description}</p>

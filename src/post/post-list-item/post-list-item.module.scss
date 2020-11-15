@@ -17,12 +17,19 @@
 }
 
 .image {
-  @include grid.media-mobile-up {
-    height: 320px;
-  }
+  $height: 320px;
+  height: $height;
 
   width: auto;
   overflow: hidden;
+
+  img {
+    object-fit: cover;
+    height: $height !important;
+    max-height: none !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+  }
 }
 
 .imageLabel {
