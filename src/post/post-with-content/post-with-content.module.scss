@@ -1,5 +1,11 @@
 @use "../../styles/typography";
 
+.root {
+  img {
+    object-fit: cover;
+  }
+}
+
 .title {
   @include typography.BadScript;
   font-size: 2rem;

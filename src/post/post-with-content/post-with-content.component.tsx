@@ -17,7 +17,7 @@ const PostWithContent: React.FC<IProps> = (props) => {
     ));
 
   return (
-    <>
+    <div className={styles.root}>
       <h2 className={styles.title}>{props.title}</h2>
       <Hr />
       <p className={styles.meta}>{props.date}</p>
@@ -29,7 +29,7 @@ const PostWithContent: React.FC<IProps> = (props) => {
       <Hr styles={{ marginTop: "3rem", marginBottom: "3rem" }} />
       <p className={styles.description}>{props.description}</p>
       <p className={styles.footer}>{props.date}</p>
-    </>
+    </div>
   );
 };
 
