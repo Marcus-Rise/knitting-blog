@@ -9,7 +9,7 @@ describe("PostListItem", () => {
         title={"title"}
         slug={"slug"}
         description={"description"}
-        date={"Ноябрь 11, 2020"}
+        date={"2020-11-11T17:47:51+0000"}
         imageLabel={"image"}
         imageSrc={"http://test.com"}
       />,
