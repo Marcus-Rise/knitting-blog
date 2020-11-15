@@ -8,7 +8,7 @@ describe("PostWithContent", () => {
       <PostWithContent
         title={"title"}
         slug={"slug"}
-        date={"11 Nov, 2020"}
+        date={"2020-11-11T17:47:51+0000"}
         imageSrc={"http://test.com"}
         imageLabel={"image"}
         description={"descr"}

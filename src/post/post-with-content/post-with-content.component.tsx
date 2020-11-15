@@ -29,7 +29,7 @@ const PostWithContent: React.FC<IProps> = (props) => {
       <div className="row justify-content-center">{images}</div>
       <Hr styles={{ marginTop: "3rem", marginBottom: "3rem" }} />
       <p className={styles.description}>{props.description}</p>
-      <p className={styles.footer}>{props.date}</p>
+      <p className={styles.footer}>{DateToString(props.date)}</p>
     </div>
   );
 };
