@@ -12,5 +12,5 @@ interface IPostRepository {
   find(criteria?: IFindCriteria): Promise<IPost | null>;
 }
 
-export type { IPostRepository };
+export type { IPostRepository, IFindCriteria };
 export { POST_REPOSITORY_PROVIDER };
