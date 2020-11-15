@@ -8,7 +8,7 @@ interface IFindCriteria {
 }
 
 interface IPostRepository {
-  list(criteria?: IFindCriteria, limit?: number, offset?: number): Promise<IPost[]>;
+  list(criteria?: IFindCriteria, offset?: number, limit?: number): Promise<IPost[]>;
   find(criteria?: IFindCriteria): Promise<IPost | null>;
 }
 

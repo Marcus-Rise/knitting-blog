@@ -43,7 +43,7 @@ describe("PostService", () => {
         }),
       );
 
-      const items = await postService.getList(10, 0);
+      const items = await postService.getList(0, 10);
 
       expect(items).toHaveLength(0);
     });
@@ -55,7 +55,7 @@ describe("PostService", () => {
         }),
       );
 
-      const items = await postService.getList(10, 0);
+      const items = await postService.getList(0, 10);
 
       expect(items).toHaveLength(5);
     });
