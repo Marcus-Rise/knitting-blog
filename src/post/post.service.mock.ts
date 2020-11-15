@@ -6,7 +6,7 @@ import { injectable } from "inversify";
 class PostServiceMock implements IPostService {
   private readonly items: IPost[] = [];
 
-  async getList(limit: number): Promise<IPost[]> {
+  async getList(offset: number, limit: number): Promise<IPost[]> {
     if (!this.items.length || this.items.length < limit) {
       while (this.items.length < limit) {
         this.items.push(PostServiceMock.generatePost(`slug${this.items.length}`));

@@ -12,7 +12,7 @@ interface IProps {
 
 const getStaticPaths: GetStaticPaths = async () => {
   const postService = inject<IPostService>(POST_SERVICE_PROVIDER);
-  const posts = await postService.getList(5, 0);
+  const posts = await postService.getList(0, 5);
 
   return {
     paths: posts.map(({ slug }) => ({
