@@ -1,15 +1,38 @@
-import json from "./post-prismic.dto.json";
+import json from "./post-prismic-dto.json";
+import type { IPostPrismicDto } from "./post-prismic.dto.interface";
 import { PostPrismicDto } from "./post-prismic.dto";
 
 describe("PostPrismicDto", () => {
-  test("constructor", () => {
-    const dto = new PostPrismicDto(json);
+  const object: IPostPrismicDto = json as IPostPrismicDto;
+  const dto = new PostPrismicDto(object);
 
-    expect(dto.title).toEqual(json.data.title[0].text);
-    expect(dto.slug).toEqual(json.uid);
-    expect(dto.date).toEqual(json.first_publication_date);
-    expect(dto.description).toEqual(json.data.description[0].text);
-    expect(dto.imageSrc).toEqual(json.data.main_image.url);
-    expect(dto.imageLabel).toEqual(json.data.main_image.alt);
+  test("title", () => {
+    expect(dto.title).toEqual(object.data.title[0].text);
+  });
+
+  test("slug", () => {
+    expect(dto.slug).toEqual(object.uid);
+  });
+
+  test("date", () => {
+    expect(dto.date).toEqual(object.first_publication_date);
+  });
+
+  test("description", () => {
+    expect(dto.description).toEqual(object.data.description[0].text);
+  });
+
+  test("imageSrc", () => {
+    expect(dto.imageSrc).toEqual(object.data.main_image.url);
+  });
+
+  test("imageLabel", () => {
+    const alt = object.data.main_image.alt;
+
+    if (!alt) {
+      expect(dto.imageLabel).toEqual("");
+    } else {
+      expect(dto.imageLabel.length).toBeGreaterThan(0);
+    }
   });
 });
