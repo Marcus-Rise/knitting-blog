@@ -13,7 +13,7 @@ exports[`PostListItem render 1`] = `
     <p
       class="meta"
     >
-      Ноябрь 11, 2020
+      ноябрь 11, 2020
     </p>
     <div
       class="image"

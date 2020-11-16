@@ -1,0 +1,14 @@
+.root {
+  line-height: 1.75rem;
+
+
+  li {
+    line-height: 1.75rem;
+    letter-spacing: .2em;
+
+    &::marker {
+      color: var(--accent);
+      font-size: 1.3rem;
+    }
+  }
+}
