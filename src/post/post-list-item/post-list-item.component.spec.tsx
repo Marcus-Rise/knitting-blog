@@ -12,6 +12,7 @@ describe("PostListItem", () => {
         date={"2020-11-11T17:47:51+0000"}
         imageLabel={"image"}
         imageSrc={"http://test.com"}
+        content={[]}
       />,
     );
 
