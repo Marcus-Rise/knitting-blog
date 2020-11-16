@@ -16,6 +16,7 @@ const getStaticProps: GetStaticProps<IProps> = async () => {
     props: {
       posts: await postService.getList(0, 5),
     },
+    revalidate: 60,
   };
 };
 
