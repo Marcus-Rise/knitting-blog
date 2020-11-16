@@ -32,6 +32,7 @@ const getStaticProps: GetStaticProps<IProps> = async (context) => {
       post,
     },
     notFound: !post,
+    revalidate: 60,
   };
 };
 
