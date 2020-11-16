@@ -4,8 +4,11 @@ import { mock } from "jest-mock-extended";
 import type { IPrismicService } from "../prismic";
 import type ApiSearchResponse from "prismic-javascript/types/ApiSearchResponse";
 import type { IPostPrismicDto } from "./post-prismic.dto.interface";
+import json from "./post-prismic-dto.json";
 
 describe("PostPrismicRepository", () => {
+  const object: IPostPrismicDto = json as IPostPrismicDto;
+
   describe("find", () => {
     test("not exist", async () => {
       const repo = new PostPrismicRepository(
@@ -27,12 +30,11 @@ describe("PostPrismicRepository", () => {
         mock<IPrismicService>({
           client: {
             getByUID: () =>
-              Promise.resolve(
-                mock<IPostPrismicDto>({
-                  uid: slug,
-                  slugs: [slug],
-                }),
-              ),
+              Promise.resolve({
+                ...object,
+                uid: slug,
+                slugs: [slug],
+              }),
           },
         }),
       );
@@ -70,10 +72,11 @@ describe("PostPrismicRepository", () => {
               Promise.resolve(
                 mock<ApiSearchResponse>({
                   results: [
-                    mock<IPostPrismicDto>({
+                    {
+                      ...object,
                       uid: slug,
                       slugs: [slug],
-                    }),
+                    },
                   ],
                 }),
               ),
