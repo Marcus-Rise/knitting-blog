@@ -14,12 +14,13 @@ const PostContent: React.FC<IProps> = (props) => {
     if (slice.type === SliceTypeEnum.IMAGE_GALLERY) {
       const images = slice.items.map((image, imageIndex) => (
         <div className="col-auto" key={image.url + imageIndex}>
-          <Image src={image.url} alt={image.alt ?? ""} height={320} width={"auto"} />{" "}
+          <Image src={image.url} alt={image.alt ?? ""} height={320} width={"auto"} />
+          <p className={styles.imageLabel}>{image.alt}</p>
         </div>
       ));
 
       return (
-        <div key={sliceIndex} className="row justify-content-center">
+        <div key={sliceIndex} className={`row justify-content-center ${styles.imageGallery}`}>
           {images}
         </div>
       );
@@ -40,6 +41,8 @@ const PostContent: React.FC<IProps> = (props) => {
         case Elements.paragraph:
           return <p key={sliceIndex}>{slice.text}</p>;
         case Elements.listItem:
+          return <li key={sliceIndex}>{slice.text}</li>;
+        case Elements.oListItem:
           return <li key={sliceIndex}>{slice.text}</li>;
         case Elements.em:
           return <em key={sliceIndex}>{slice.text}</em>;

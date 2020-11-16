@@ -32,6 +32,11 @@ exports[`PostWithContent render 1`] = `
         style="visibility: visible; position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
       />
     </div>
+    <p
+      class="imageLabel"
+    >
+      image
+    </p>
     <div
       class="root"
     />

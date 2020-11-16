@@ -22,6 +22,14 @@
   text-transform: uppercase;
 }
 
+.imageLabel {
+  @include typography.BadScript;
+
+  color: var(--primary);
+  text-align: center;
+  font-size: 1.5rem;
+}
+
 .description {
   line-height: 1.5rem;
   letter-spacing: 0.2em;

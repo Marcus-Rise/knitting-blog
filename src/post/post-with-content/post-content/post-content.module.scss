@@ -1,3 +1,5 @@
+@use "../../../styles/typography";
+
 .root {
   line-height: 1.75rem;
 
@@ -11,4 +13,19 @@
       font-size: 1.3rem;
     }
   }
+}
+
+.imageGallery {
+  $margin: 2rem;
+
+  margin-top: $margin;
+  margin-bottom: $margin;
+}
+
+.imageLabel {
+  @include typography.BadScript;
+
+  color: var(--primary);
+  text-align: center;
+  //font-size: 1.5rem;
 }

@@ -15,6 +15,7 @@ const PostWithContent: React.FC<IProps> = (props) => {
       <Hr />
       <p className={styles.meta}>{DateToString(props.date)}</p>
       <Image src={props.imageSrc} alt={props.imageLabel} height={320} width={"auto"} layout={"responsive"} />
+      <p className={styles.imageLabel}>{props.imageLabel}</p>
 
       <PostContent content={props.content} />
 
