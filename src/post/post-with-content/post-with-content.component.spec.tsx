@@ -12,6 +12,7 @@ describe("PostWithContent", () => {
         imageSrc={"http://test.com"}
         imageLabel={"image"}
         description={"descr"}
+        content={[]}
       />,
     );
 
