@@ -6,8 +6,13 @@ import type { AppProps } from "next/app";
 import { Footer } from "../src/components/footer";
 import { Header } from "../src/components/header";
 import type { INavLink } from "../src/components/nav";
+import { useInject } from "../src/ioc";
+import type { IAppService } from "../src/app";
+import { APP_SERVICE_PROVIDER } from "../src/app";
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
+  const { siteConfig } = useInject<IAppService>(APP_SERVICE_PROVIDER);
+
   const links: Array<INavLink> = [
     {
       title: "Главная",
@@ -36,11 +41,11 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
       <Head>
         <title>Blog</title>
       </Head>
-      <Header title={"Nadya’s knits"} logoSize={125} logoSrc={"/logo.svg"} links={links} />
+      <Header title={siteConfig.title} logoSize={125} logoSrc={"/logo.svg"} links={links} />
       <main>
         <Component {...pageProps} />
       </main>
-      <Footer year={new Date().getFullYear()} author={"Ilya Konstantinov"} authorLink={"https://marcus-rise.dev"} />
+      <Footer year={new Date().getFullYear()} author={siteConfig.author.name} authorLink={siteConfig.author.url} />
     </>
   );
 };
