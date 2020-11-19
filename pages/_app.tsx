@@ -39,7 +39,7 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   return (
     <>
       <Head>
-        <title>Blog</title>
+        <title>{siteConfig.title}</title>
       </Head>
       <Header title={siteConfig.title} logoSize={125} logoSrc={"/logo.svg"} links={links} />
       <main>
