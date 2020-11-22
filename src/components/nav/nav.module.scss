@@ -1,7 +1,6 @@
 @use "../../styles/typography";
 @use "../../styles/grid";
 
-
 .root {
   $border: 1px dashed #000000;
   border-top: $border;
@@ -32,6 +31,8 @@
   @include grid.media-mobile-only {
     display: none;
 
+    flex-direction: column;
+
     position: fixed;
     top: 0;
     right: 0;
@@ -43,6 +44,15 @@
   }
 }
 
+.itemsContainerShow {
+  display: flex;
+}
+
+.closeButtonContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+
 .ul {
   list-style: none;
   display: flex;
@@ -52,23 +62,9 @@
 
   @include grid.media-mobile-only {
     flex-direction: column;
+    margin: 0;
   }
 }
 
-.li {
-  @include typography.light;
-
-  font-size: 1.25rem;
-  text-transform: uppercase;
-
-  a {
-    text-decoration: none;
-    color: inherit;
-  }
-
-  @include grid.media-mobile-only {
-    margin-bottom: 1.5rem;
-  }
-}
 
 
