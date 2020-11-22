@@ -21,6 +21,7 @@ COPY pages ./pages
 COPY public ./public
 COPY src ./src
 COPY ./*.js* ./
+COPY ./*.ts* ./
 
 RUN npm run lint
 RUN npm run test
