@@ -66,5 +66,17 @@
   }
 }
 
+.li {
+  @include grid.media-mobile-only {
+    padding-bottom: 1rem;
+    width: 60%;
+    text-align: center;
+
+    &:not(:last-child) {
+      border-bottom: 1px dashed black;
+      margin-bottom: 1rem;
+    }
+  }
+}
 
 

@@ -19,7 +19,9 @@ exports[`Nav items 1`] = `
         <ul
           class="ul"
         >
-          <li>
+          <li
+            class="li"
+          >
             Главная
           </li>
         </ul>
