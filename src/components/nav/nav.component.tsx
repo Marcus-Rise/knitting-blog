@@ -17,11 +17,11 @@ const Nav: React.FC<IProps> = (props) => {
   const items = useMemo(
     () =>
       props.items.map((i) => (
-        <li key={i.title} className={styles.li}>
+        <li key={i.title} className={styles.li} onClick={closeMenu}>
           <Link href={i.link}>{i.title}</Link>
         </li>
       )),
-    [props.items],
+    [closeMenu, props.items],
   );
 
   return (

@@ -44,7 +44,25 @@ exports[`Nav items 1`] = `
 
 exports[`Nav mobile close on item click 1`] = `
 "Snapshot Diff:
-Compared values have no visual difference."
+- First value
++ Second value
+
+@@ -13,14 +13,11 @@
+            src=\\"[object Object]\\"
+          />
+        </button>
+      </div>
+      <div
+-       class=\\"root\\"
+-     />
+-     <div
+-       class=\\"itemsContainer d-flex\\"
++       class=\\"itemsContainer \\"
+      >
+        <div
+          class=\\"container\\"
+        >
+          <ul"
 `;
 
 exports[`Nav mobile open on humburger click 1`] = `
