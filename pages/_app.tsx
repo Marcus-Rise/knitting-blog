@@ -39,7 +39,8 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   return (
     <>
       <Head>
-        <title>{siteConfig.title}</title>
+        <title key={"title"}>{siteConfig.title}</title>
+        <meta key={"meta-title"} name={"title"} content={siteConfig.title} />
       </Head>
       <Header title={siteConfig.title} logoSize={125} logoSrc={"/logo.svg"} links={links} />
       <main>

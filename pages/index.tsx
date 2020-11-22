@@ -3,7 +3,10 @@ import type { GetStaticProps } from "next";
 import { PostList } from "../src/post/post-list";
 import type { IPost, IPostService } from "../src/post";
 import { POST_SERVICE_PROVIDER } from "../src/post";
-import { inject } from "../src/ioc";
+import { inject, useInject } from "../src/ioc";
+import Head from "next/head";
+import type { IAppService } from "../src/app";
+import { APP_SERVICE_PROVIDER } from "../src/app";
 
 interface IProps {
   posts: Array<IPost>;
@@ -21,10 +24,23 @@ const getStaticProps: GetStaticProps<IProps> = async () => {
 };
 
 const Home: React.FC<IProps> = (props) => {
+  const { siteConfig } = useInject<IAppService>(APP_SERVICE_PROVIDER);
+
   return (
-    <div className="container">
-      <PostList items={props.posts} />
-    </div>
+    <>
+      <Head>
+        <title key={"title"}>{siteConfig.title}</title>
+        <meta key={"meta-title"} name={"title"} content={siteConfig.title} />
+        <meta
+          key={"description"}
+          name={"description"}
+          content={props.posts.map((i) => i.title.toLowerCase()).join(", ")}
+        />
+      </Head>
+      <div className="container">
+        <PostList items={props.posts} />
+      </div>
+    </>
   );
 };
 
