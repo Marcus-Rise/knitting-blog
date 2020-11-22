@@ -19,7 +19,7 @@ const Nav: React.FC<IProps> = (props) => {
   const items = useMemo(
     () =>
       props.items.map((i) => (
-        <li key={i.title} onClick={closeMenu}>
+        <li className={styles.li} key={i.title} onClick={closeMenu}>
           <NavItem {...i} />
         </li>
       )),
