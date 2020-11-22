@@ -79,11 +79,7 @@ exports[`Header render 1`] = `
             <li
               class="li"
             >
-              <a
-                href="/#"
-              >
-                RRR
-              </a>
+              RRR
             </li>
           </ul>
         </div>
