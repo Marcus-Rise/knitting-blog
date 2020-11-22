@@ -8,17 +8,10 @@ exports[`Nav items 1`] = `
     <div
       class="mobileToggle"
     >
-      <button
-        class="root"
-      >
-        <img
-          alt="menu"
-          src="[object Object]"
-        />
-      </button>
+      <button />
     </div>
     <div
-      class="itemsContainer "
+      class="itemsContainer"
     >
       <div
         class="container"
@@ -26,9 +19,7 @@ exports[`Nav items 1`] = `
         <ul
           class="ul"
         >
-          <li
-            class="li"
-          >
+          <li>
             Главная
           </li>
         </ul>
@@ -43,22 +34,26 @@ exports[`Nav mobile close on item click 1`] = `
 - First value
 + Second value
 
-@@ -13,14 +13,11 @@
-            src=\\"[object Object]\\"
-          />
-        </button>
+@@ -6,18 +6,12 @@
+        class=\\"mobileToggle\\"
+      >
+        <button />
       </div>
       <div
--       class=\\"root\\"
--     />
--     <div
--       class=\\"itemsContainer d-flex\\"
-+       class=\\"itemsContainer \\"
+-       class=\\"itemsContainer itemsContainerShow\\"
+-     >
+-       <div
+-         class=\\"closeButtonContainer\\"
++       class=\\"itemsContainer\\"
       >
+-         <button />
+-          
+-       </div>
         <div
           class=\\"container\\"
         >
-          <ul"
+          <ul
+            class=\\"ul\\""
 `;
 
 exports[`Nav mobile open on humburger click 1`] = `
@@ -66,20 +61,24 @@ exports[`Nav mobile open on humburger click 1`] = `
 - First value
 + Second value
 
-@@ -13,11 +13,14 @@
-            src=\\"[object Object]\\"
-          />
-        </button>
+@@ -6,12 +6,18 @@
+        class=\\"mobileToggle\\"
+      >
+        <button />
       </div>
       <div
--       class=\\"itemsContainer \\"
-+       class=\\"root\\"
-+     />
-+     <div
-+       class=\\"itemsContainer d-flex\\"
-      >
+-       class=\\"itemsContainer\\"
++       class=\\"itemsContainer itemsContainerShow\\"
++     >
++       <div
++         class=\\"closeButtonContainer\\"
+        >
++         <button />
++          
++       </div>
         <div
           class=\\"container\\"
         >
-          <ul"
+          <ul
+            class=\\"ul\\""
 `;

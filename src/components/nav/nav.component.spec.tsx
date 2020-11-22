@@ -2,6 +2,23 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { Nav } from "./nav.component";
 import React from "react";
 
+jest.mock("./nav-item", () => ({
+  __esModule: true,
+  NavItem: jest.fn((props) => <>{props.title}</>),
+}));
+jest.mock("../overlay", () => ({
+  __esModule: true,
+  Overlay: jest.fn(() => <></>),
+}));
+jest.mock("../mobile-menu-button", () => ({
+  __esModule: true,
+  MobileMenuButton: jest.fn((props) => <button onClick={props.onClick} />),
+}));
+jest.mock("../mobile-menu-close-button", () => ({
+  __esModule: true,
+  MobileMenuCloseButton: jest.fn((props) => <button onClick={props.onClick} />),
+}));
+
 describe("Nav", () => {
   test("items", () => {
     const { asFragment } = render(
