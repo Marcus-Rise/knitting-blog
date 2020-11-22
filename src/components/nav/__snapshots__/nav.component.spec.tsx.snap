@@ -42,6 +42,11 @@ exports[`Nav items 1`] = `
 </DocumentFragment>
 `;
 
+exports[`Nav mobile close on item click 1`] = `
+"Snapshot Diff:
+Compared values have no visual difference."
+`;
+
 exports[`Nav mobile open on humburger click 1`] = `
 "Snapshot Diff:
 - First value

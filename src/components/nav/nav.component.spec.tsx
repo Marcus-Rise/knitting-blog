@@ -35,4 +35,24 @@ describe("Nav", () => {
 
     expect(firstRender).toMatchDiffSnapshot(asFragment());
   });
+
+  test("mobile close on item click", () => {
+    const { asFragment } = render(
+      <Nav
+        items={[
+          {
+            title: "Главная",
+            link: "#",
+          },
+        ]}
+      />,
+    );
+    fireEvent.click(screen.getByRole("button"));
+    const firstRender = asFragment();
+
+    const byText = screen.getByText("Главная");
+    fireEvent.click(byText);
+
+    expect(firstRender).toMatchDiffSnapshot(asFragment());
+  });
 });
