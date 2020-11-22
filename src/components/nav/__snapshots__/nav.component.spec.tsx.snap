@@ -29,11 +29,7 @@ exports[`Nav items 1`] = `
           <li
             class="li"
           >
-            <a
-              href="/#"
-            >
-              Главная
-            </a>
+            Главная
           </li>
         </ul>
       </div>
