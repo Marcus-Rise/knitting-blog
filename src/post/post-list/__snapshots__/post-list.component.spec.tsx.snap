@@ -58,11 +58,7 @@ exports[`PostList render 1`] = `
             <div
               class="link"
             >
-              <a
-                href="/slugslugslugslug"
-              >
-                Читать далее
-              </a>
+              Читать далее
             </div>
           </div>
         </div>

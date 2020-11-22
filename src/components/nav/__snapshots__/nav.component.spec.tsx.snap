@@ -29,15 +29,57 @@ exports[`Nav items 1`] = `
           <li
             class="li"
           >
-            <a
-              href="/#"
-            >
-              Главная
-            </a>
+            Главная
           </li>
         </ul>
       </div>
     </div>
   </nav>
 </DocumentFragment>
+`;
+
+exports[`Nav mobile close on item click 1`] = `
+"Snapshot Diff:
+- First value
++ Second value
+
+@@ -13,14 +13,11 @@
+            src=\\"[object Object]\\"
+          />
+        </button>
+      </div>
+      <div
+-       class=\\"root\\"
+-     />
+-     <div
+-       class=\\"itemsContainer d-flex\\"
++       class=\\"itemsContainer \\"
+      >
+        <div
+          class=\\"container\\"
+        >
+          <ul"
+`;
+
+exports[`Nav mobile open on humburger click 1`] = `
+"Snapshot Diff:
+- First value
++ Second value
+
+@@ -13,11 +13,14 @@
+            src=\\"[object Object]\\"
+          />
+        </button>
+      </div>
+      <div
+-       class=\\"itemsContainer \\"
++       class=\\"root\\"
++     />
++     <div
++       class=\\"itemsContainer d-flex\\"
+      >
+        <div
+          class=\\"container\\"
+        >
+          <ul"
 `;
