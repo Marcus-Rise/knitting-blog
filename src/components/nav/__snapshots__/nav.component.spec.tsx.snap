@@ -41,3 +41,26 @@ exports[`Nav items 1`] = `
   </nav>
 </DocumentFragment>
 `;
+
+exports[`Nav mobile open on humburger click 1`] = `
+"Snapshot Diff:
+- First value
++ Second value
+
+@@ -13,11 +13,14 @@
+            src=\\"[object Object]\\"
+          />
+        </button>
+      </div>
+      <div
+-       class=\\"itemsContainer \\"
++       class=\\"root\\"
++     />
++     <div
++       class=\\"itemsContainer d-flex\\"
+      >
+        <div
+          class=\\"container\\"
+        >
+          <ul"
+`;

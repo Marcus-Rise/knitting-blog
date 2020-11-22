@@ -13,5 +13,5 @@ module.exports = {
     "^.+\\.svg$": "<rootDir>/jest.assets.mock.js",
     "^.+\\.module\\.s?css$": "identity-obj-proxy",
   },
-  setupFiles: ["./jest.setup.js"],
+  setupFilesAfterEnv: ["./jest.setup.ts"],
 };
