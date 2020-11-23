@@ -14,7 +14,7 @@
   @include grid.media-md {
     border: none;
     $padding: 1rem;
-    padding: $padding;
+    padding: $padding $padding 0 $padding;
   }
 }
 
