@@ -9,27 +9,15 @@ exports[`Header render 1`] = `
       class="logoContainer"
     >
       <div
-        class="container"
+        class="logo"
       >
-        <div
-          class="row align-items-center flex-column"
-        >
-          <div
-            class="col-auto"
-          >
-            <img />
-          </div>
-          <div
-            class="col-auto"
-          >
-            <h1
-              class="title"
-            >
-              title
-            </h1>
-          </div>
-        </div>
+        <img />
       </div>
+      <h1
+        class="title"
+      >
+        title
+      </h1>
     </div>
     <nav />
   </header>
