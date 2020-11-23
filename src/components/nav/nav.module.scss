@@ -11,7 +11,7 @@
   padding-bottom: $padding;
 
 
-  @include grid.media-mobile-only {
+  @include grid.media-md {
     border: none;
     $padding: 1rem;
     padding: $padding;
@@ -19,16 +19,16 @@
 }
 
 .mobileToggle {
-  display: flex;
+  display: none;
   justify-content: flex-end;
 
-  @include grid.media-mobile-up {
-    display: none;
+  @include grid.media-md {
+    display: flex;
   }
 }
 
 .itemsContainer {
-  @include grid.media-mobile-only {
+  @include grid.media-md {
     display: none;
 
     flex-direction: column;
@@ -60,14 +60,14 @@
   align-items: center;
   padding: 0;
 
-  @include grid.media-mobile-only {
+  @include grid.media-md {
     flex-direction: column;
     margin: 0;
   }
 }
 
 .li {
-  @include grid.media-mobile-only {
+  @include grid.media-md {
     padding-bottom: 1rem;
     width: 60%;
     text-align: center;

@@ -1,4 +1,4 @@
-@use "variables";
+@use "variables" as v;
 
 @mixin media-max($size) {
   @media (max-width: $size) {
@@ -12,15 +12,14 @@
   }
 }
 
-@mixin media-mobile-only() {
-  @include media-max(variables.$mobile-screen-width) {
-    @content
+@mixin media-sm() {
+  @include media-max(v.$screen-sm) {
+    @content;
   }
 }
 
-@mixin media-mobile-up() {
-  @include media-min(variables.$mobile-screen-width) {
-    @content
+@mixin media-md() {
+  @include media-max(v.$screen-md) {
+    @content;
   }
 }
-
