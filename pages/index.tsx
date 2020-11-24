@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import React from "react";
 import type { GetStaticProps } from "next";
 import { PostList } from "../src/post/post-list";

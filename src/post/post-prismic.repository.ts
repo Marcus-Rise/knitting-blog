@@ -35,7 +35,7 @@ class PostPrismicRepository implements IPostRepository {
     await this.prismic.client
       .query(Prismic.Predicates.at("document.type", "post"), {
         orderings: "[document.first_publication_date desc]",
-        pageSize: limit ?? [],
+        pageSize: limit ?? "",
       })
       .then((data) => {
         items = data.results.map<IPost>((i) => new PostPrismicDto(i)).map((i) => classToPlain(i) as IPost);

@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import React from "react";
 import type { IPost, IPostService } from "../src/post";
 import { POST_SERVICE_PROVIDER } from "../src/post";
