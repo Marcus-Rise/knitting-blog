@@ -6,6 +6,10 @@ jest.mock("../nav", () => ({
   __esModule: true,
   Nav: jest.fn(() => <nav />),
 }));
+jest.mock("next/link", () => ({
+  __esModule: true,
+  default: jest.fn((props) => <>{props.children}</>),
+}));
 jest.mock("next/image", () => ({
   __esModule: true,
   default: jest.fn((props) => (
