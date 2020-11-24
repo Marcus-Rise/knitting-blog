@@ -15,7 +15,7 @@ class PostService implements IPostService {
     return this.repo.find({ slug });
   }
 
-  async getList(offset: number, limit: number): Promise<IPost[]> {
+  async getList(offset: number, limit?: number): Promise<IPost[]> {
     return this.repo.list({}, offset, limit);
   }
 }
