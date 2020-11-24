@@ -26,3 +26,18 @@ COPY ./*.ts* ./
 RUN npm run lint
 RUN npm run test
 
+FROM check AS build
+
+RUN npm run build
+RUN npm prune --production && npm cache clear --force
+
+FROM node:${NODE_VERSION} AS prod
+WORKDIR /app
+ENV NODE_ENV=production
+
+COPY --from=build /app/package*.json ./
+COPY --from=build /app/node_modules ./node_modules
+COPY --from=build /app/.next ./.next
+
+CMD npm run start
+
