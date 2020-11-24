@@ -6,6 +6,10 @@ jest.mock("../nav", () => ({
   __esModule: true,
   Nav: jest.fn(() => <nav />),
 }));
+jest.mock("next/link", () => ({
+  __esModule: true,
+  default: jest.fn((props) => <>{props.children}</>),
+}));
 jest.mock("next/image", () => ({
   __esModule: true,
   default: jest.fn((props) => (
@@ -16,7 +20,7 @@ jest.mock("next/image", () => ({
 describe("Header", () => {
   test("render", () => {
     const { asFragment } = render(
-      <Header logoSize={50} title={"title"} logoSrc={"http://test.com"} links={[{ title: "RRR", link: "#" }]} />,
+      <Header title={"title"} logoSrc={"http://test.com"} links={[{ title: "RRR", link: "#" }]} />,
     );
 
     expect(asFragment()).toMatchSnapshot();

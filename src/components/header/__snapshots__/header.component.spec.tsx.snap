@@ -5,32 +5,24 @@ exports[`Header render 1`] = `
   <header
     class="root"
   >
-    <div
-      class="logoContainer"
+    <a
+      class="link"
     >
       <div
-        class="container"
+        class="logoContainer"
       >
         <div
-          class="row align-items-center flex-column"
+          class="logo"
         >
-          <div
-            class="col-auto"
-          >
-            <img />
-          </div>
-          <div
-            class="col-auto"
-          >
-            <h1
-              class="title"
-            >
-              title
-            </h1>
-          </div>
+          <img />
         </div>
+        <h1
+          class="title"
+        >
+          title
+        </h1>
       </div>
-    </div>
+    </a>
     <nav />
   </header>
 </DocumentFragment>
