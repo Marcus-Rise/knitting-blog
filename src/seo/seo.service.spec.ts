@@ -2,15 +2,34 @@ import "reflect-metadata";
 import { SeoService } from "./seo.service";
 import { mock } from "jest-mock-extended";
 import type { IPost, IPostService } from "../post";
+import type { IAppService } from "../app";
 
 describe("SeoService", () => {
-  test("generateRobotsTxt", async () => {
-    const service = new SeoService(mock<IPostService>());
+  describe("generateRobotsTxt", () => {
+    test("robots are not allowed", async () => {
+      const service = new SeoService(
+        mock<IPostService>(),
+        mock<IAppService>({
+          allowRobots: false,
+        }),
+      );
 
-    const data = await service.generateRobotsTxt("hostname");
+      const data = await service.generateRobotsTxt("hostname");
 
-    expect(data.length).toBeGreaterThan(0);
-    expect(data).toMatchSnapshot();
+      expect(data.length).toBeGreaterThan(0);
+      expect(data).toMatchSnapshot();
+    });
+    test("robots are allowed", async () => {
+      const service = new SeoService(
+        mock<IPostService>(),
+        mock<IAppService>({ allowRobots: true }),
+      );
+
+      const data = await service.generateRobotsTxt("hostname");
+
+      expect(data.length).toBeGreaterThan(0);
+      expect(data).toMatchSnapshot();
+    });
   });
 
   test("generateSitemap", async () => {
@@ -26,6 +45,7 @@ describe("SeoService", () => {
             }),
           ]),
       }),
+      mock<IAppService>(),
     );
 
     const data = await service.generateSitemap("hostname");

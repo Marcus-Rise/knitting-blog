@@ -1,6 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SeoService generateRobotsTxt 1`] = `
+exports[`SeoService generateRobotsTxt robots are allowed 1`] = `
+"User-agent: *
+Allow: /
+Sitemap: https://hostname/sitemap.xml"
+`;
+
+exports[`SeoService generateRobotsTxt robots are not allowed 1`] = `
 "User-agent: *
 Disallow: /
 Sitemap: https://hostname/sitemap.xml"
