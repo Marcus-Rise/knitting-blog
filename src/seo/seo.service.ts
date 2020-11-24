@@ -2,7 +2,6 @@ import type { ISeoService } from "./seo.service.interface";
 import { inject, injectable } from "inversify";
 import type { IPostService } from "../post";
 import { POST_SERVICE_PROVIDER } from "../post";
-import { SitemapStream, streamToPromise } from "sitemap";
 
 @injectable()
 class SeoService implements ISeoService {
@@ -21,25 +20,20 @@ class SeoService implements ISeoService {
   }
 
   async generateSitemap(hostName: string): Promise<string> {
-    const smStream = new SitemapStream({
-      hostname: `https://${hostName}`,
-    });
-
+    let buf = `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
     const posts = await this.posts.getList(0);
 
     posts.forEach((post) => {
-      smStream.write({
-        url: `/${post.slug}`,
-        changefreq: "daily",
-        priority: 0.9,
-      });
+      const url = `https://${hostName}/${post.slug}`;
+      const period = "daily";
+      const priority = 0.9;
+
+      buf += `<url><loc>${url}</loc><changefreq>${period}</changefreq><priority>${priority}</priority></url>`;
     });
 
-    smStream.end();
+    buf += `</urlset>`;
 
-    const buffer = await streamToPromise(smStream);
-
-    return buffer.toString();
+    return buf.toString();
   }
 }
 
