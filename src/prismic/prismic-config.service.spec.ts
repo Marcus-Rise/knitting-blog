@@ -16,7 +16,7 @@ describe("PrismicConfigService", () => {
     });
 
     test("defined", () => {
-      const url = "URL_TEST";
+      const url = "https://test.cdn.prismic.io/api/v2";
       process.env.PRISMIC_URL = url;
       const { endPoint } = new PrismicConfigService();
 
@@ -36,6 +36,23 @@ describe("PrismicConfigService", () => {
       const { authToken } = new PrismicConfigService();
 
       expect(authToken).toEqual(token);
+    });
+  });
+
+  describe("repoName", () => {
+    test("empty endpoint is empty repo name", () => {
+      const { endPoint, repoName } = new PrismicConfigService();
+
+      expect(endPoint).toEqual("");
+      expect(repoName).toEqual("");
+    });
+    test("defined endpoint is not empty repo name", () => {
+      const url = "https://test.cdn.prismic.io/api/v2";
+      process.env.PRISMIC_URL = url;
+      const { endPoint, repoName } = new PrismicConfigService();
+
+      expect(endPoint).toEqual(url);
+      expect(repoName).toEqual("test");
     });
   });
 });
