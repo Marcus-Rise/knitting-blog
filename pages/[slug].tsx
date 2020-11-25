@@ -9,6 +9,9 @@ import { PostWithContent } from "../src/post/post-with-content";
 import type { IAppService } from "../src/app";
 import { APP_SERVICE_PROVIDER } from "../src/app";
 import Head from "next/head";
+import type { IPrismicConfigService } from "../src/prismic/prismic-config.service.interface";
+import { PRISMIC_CONFIG_SERVICE_PROVIDER } from "../src/prismic/prismic-config.service.interface";
+import { PreviewAlert } from "../src/components/preview-alert";
 
 interface IProps {
   post: IPost | null;
@@ -51,6 +54,7 @@ const getStaticProps: GetStaticProps<IProps> = async (context) => {
 
 const PostPage: React.FC<IProps> = (props) => {
   const { title } = useInject<IAppService>(APP_SERVICE_PROVIDER);
+  const { repoName } = useInject<IPrismicConfigService>(PRISMIC_CONFIG_SERVICE_PROVIDER);
   const { isFallback } = useRouter();
 
   return (
@@ -62,8 +66,12 @@ const PostPage: React.FC<IProps> = (props) => {
           </title>
           <meta key={"meta-title"} name={"title"} content={`${title} | ${props.post?.title}`} />
           <meta key={"description"} name={"description"} content={props.post?.description} />
+          {props.isPreview && (
+            <script async defer src={`https://static.cdn.prismic.io/prismic.js?new=true&repo=${repoName}`} />
+          )}
         </Head>
       )}
+      {props.post && props.isPreview && <PreviewAlert title={props.post?.title} />}
       <div className="container">
         <div className="row">
           <div className="col-12" style={{ marginTop: "3rem" }}>
