@@ -1,4 +1,4 @@
-const PRISMIC_CONFIG_SERVICE_PROVIDER = "IPrismicConfigService";
+const PRISMIC_CONFIG_SERVICE_PROVIDER = Symbol("IPrismicConfigService");
 
 interface IPrismicConfigService {
   readonly endPoint: string;
