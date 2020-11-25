@@ -21,4 +21,34 @@ describe("SeoConfigService", () => {
       expect(allowRobots).toBeTruthy();
     });
   });
+
+  describe("googleVerificationCode", () => {
+    test("empty", () => {
+      const { googleVerificationCode } = new SeoConfigService();
+
+      expect(googleVerificationCode).toEqual("");
+    });
+    test("is not empty", () => {
+      const env = "true";
+      process.env.GOOGLE_VERIFICATION = env;
+      const { googleVerificationCode } = new SeoConfigService();
+
+      expect(googleVerificationCode).toEqual(env);
+    });
+  });
+
+  describe("yandexVerificationCode", () => {
+    test("empty", () => {
+      const { yandexVerificationCode } = new SeoConfigService();
+
+      expect(yandexVerificationCode).toEqual("");
+    });
+    test("is not empty", () => {
+      const env = "true";
+      process.env.YANDEX_VERIFICATION = env;
+      const { yandexVerificationCode } = new SeoConfigService();
+
+      expect(yandexVerificationCode).toEqual(env);
+    });
+  });
 });
