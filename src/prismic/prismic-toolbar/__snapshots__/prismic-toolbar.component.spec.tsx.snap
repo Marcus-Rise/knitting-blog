@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PrismicToolbar render 1`] = `
+<DocumentFragment>
+  <div
+    data-testid="head"
+  >
+    <script
+      async=""
+      defer=""
+      src="https://static.cdn.prismic.io/prismic.js?new=true&repo=repo"
+    />
+  </div>
+</DocumentFragment>
+`;

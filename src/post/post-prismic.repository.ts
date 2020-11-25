@@ -14,7 +14,17 @@ class PostPrismicRepository implements IPostRepository {
   async find(criteria?: IFindCriteria): Promise<IPost | null> {
     let post: IPost | null = null;
 
-    if (criteria?.slug) {
+    if (criteria?.previewRef) {
+      await this.prismic.client
+        .query(Prismic.Predicates.at("document.type", "post"), { ref: criteria.previewRef })
+        .then((data) => {
+          if (data) {
+            post = new PostPrismicDto(data.results[0]);
+            post = classToPlain(post) as IPost;
+          }
+        })
+        .catch(console.error);
+    } else if (criteria?.slug) {
       await this.prismic.client
         .getByUID("post", criteria.slug, {})
         .then((data) => {

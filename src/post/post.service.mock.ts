@@ -39,6 +39,14 @@ class PostServiceMock implements IPostService {
       content: [],
     };
   }
+
+  async getById(): Promise<IPost | null> {
+    return null;
+  }
+
+  async getPreview(): Promise<IPost | null> {
+    return null;
+  }
 }
 
 export { PostServiceMock };

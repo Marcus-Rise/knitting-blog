@@ -10,6 +10,49 @@ describe("PostPrismicRepository", () => {
   const object: IPostPrismicDto = json as IPostPrismicDto;
 
   describe("find", () => {
+    describe("preview", () => {
+      test("not exist", async () => {
+        const repo = new PostPrismicRepository(
+          mock<IPrismicService>({
+            client: {
+              query: () =>
+                Promise.resolve(
+                  mock<ApiSearchResponse>({
+                    results: [],
+                  }),
+                ),
+            },
+          }),
+        );
+        const item = await repo.find({ previewRef: "" });
+
+        expect(item).toBeNull();
+      });
+      test("exist", async () => {
+        const repo = new PostPrismicRepository(
+          mock<IPrismicService>({
+            client: {
+              query: () =>
+                Promise.resolve(
+                  mock<ApiSearchResponse>({
+                    results: [
+                      mock<IPostPrismicDto>({
+                        data: {
+                          title: [{ text: "title" }],
+                        },
+                      }),
+                    ],
+                  }),
+                ),
+            },
+          }),
+        );
+        const item = await repo.find({ previewRef: "ref" });
+
+        expect(item).not.toBeNull();
+      });
+    });
+
     test("not exist", async () => {
       const repo = new PostPrismicRepository(
         mock<IPrismicService>({

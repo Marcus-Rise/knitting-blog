@@ -4,7 +4,9 @@ const POST_REPOSITORY_PROVIDER = Symbol("IPostRepository");
 
 interface IFindCriteria {
   slug?: string;
+  id?: string;
   title?: string;
+  previewRef?: string;
 }
 
 interface IPostRepository {

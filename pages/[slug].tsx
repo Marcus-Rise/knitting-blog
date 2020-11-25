@@ -9,9 +9,14 @@ import { PostWithContent } from "../src/post/post-with-content";
 import type { IAppService } from "../src/app";
 import { APP_SERVICE_PROVIDER } from "../src/app";
 import Head from "next/head";
+import type { IPrismicConfigService } from "../src/prismic/prismic-config.service.interface";
+import { PRISMIC_CONFIG_SERVICE_PROVIDER } from "../src/prismic/prismic-config.service.interface";
+import { PreviewAlert } from "../src/components/preview-alert";
+import { PrismicToolbar } from "../src/prismic/prismic-toolbar";
 
 interface IProps {
   post: IPost | null;
+  isPreview: boolean;
 }
 
 const getStaticPaths: GetStaticPaths = async () => {
@@ -27,13 +32,21 @@ const getStaticPaths: GetStaticPaths = async () => {
 };
 
 const getStaticProps: GetStaticProps<IProps> = async (context) => {
+  const isPreview = !!context.preview;
   const postService = inject<IPostService>(POST_SERVICE_PROVIDER);
 
-  const post = await postService.getBySlug(String(context.params?.slug));
+  let post: IPost | null;
+
+  if (isPreview) {
+    post = await postService.getPreview(context.previewData.ref);
+  } else {
+    post = await postService.getBySlug(String(context.params?.slug));
+  }
 
   return {
     props: {
       post,
+      isPreview,
     },
     notFound: !post,
     revalidate: 60,
@@ -42,6 +55,7 @@ const getStaticProps: GetStaticProps<IProps> = async (context) => {
 
 const PostPage: React.FC<IProps> = (props) => {
   const { title } = useInject<IAppService>(APP_SERVICE_PROVIDER);
+  const { repoName } = useInject<IPrismicConfigService>(PRISMIC_CONFIG_SERVICE_PROVIDER);
   const { isFallback } = useRouter();
 
   return (
@@ -54,6 +68,12 @@ const PostPage: React.FC<IProps> = (props) => {
           <meta key={"meta-title"} name={"title"} content={`${title} | ${props.post?.title}`} />
           <meta key={"description"} name={"description"} content={props.post?.description} />
         </Head>
+      )}
+      {props.post && props.isPreview && (
+        <>
+          <PreviewAlert title={props.post?.title} />
+          <PrismicToolbar repositoryName={repoName} />
+        </>
       )}
       <div className="container">
         <div className="row">

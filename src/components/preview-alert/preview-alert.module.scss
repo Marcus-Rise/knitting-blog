@@ -1,0 +1,24 @@
+.root {
+  position: sticky;
+  top: 0;
+  width: 100vw;
+  padding: .05rem 2rem;
+  background-color: var(--primary);
+  color: white;
+  font-size: 1.5rem;
+  z-index: 2;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.close {
+  text-decoration: none;
+  font-size: 2rem;
+  color: white;
+
+  &:hover {
+    cursor: pointer;
+  }
+}

@@ -13,7 +13,7 @@ class PrismicService implements IPrismicService {
     @inject(PRISMIC_CONFIG_SERVICE_PROVIDER)
     private readonly config: IPrismicConfigService,
   ) {
-    this.client = Prismic.client(this.config.endPoint);
+    this.client = Prismic.client(this.config.endPoint, { accessToken: this.config.authToken });
   }
 }
 

@@ -51,11 +51,11 @@ interface Text {
 interface IPostPrismicDto extends Document {
   data: {
     title: Array<Text>;
-    main_image: Image;
+    main_image: Image | Record<string, unknown>;
     description: Array<Text>;
     body: BodySlice[];
   };
 }
 
-export type { IPostPrismicDto };
+export type { IPostPrismicDto, Image };
 export { SliceTypeEnum };

@@ -5,13 +5,15 @@ import type { IPrismicConfigService } from "./prismic-config.service.interface";
 
 describe("PrismicService", () => {
   test("client", () => {
-    const prismicUrl = "prismicUrl1";
+    const url = "prismicUrl1";
+    const token = "token";
     const { client } = new PrismicService(
       mock<IPrismicConfigService>({
-        endPoint: prismicUrl,
+        endPoint: url,
+        authToken: token,
       }),
     );
 
-    expect(client.api.url).toEqual(prismicUrl);
+    expect(client.api.url).toEqual(`${url}?access_token=${token}`);
   });
 });
