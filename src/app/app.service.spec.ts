@@ -3,10 +3,10 @@ import { AppService } from "./app.service";
 
 describe("AppService", () => {
   test("siteConfig", () => {
-    const { siteConfig } = new AppService();
+    const { author, title } = new AppService();
 
-    expect(siteConfig.title).toEqual("Надя вяжет");
-    expect(siteConfig.author.name).toEqual("Ilya Konstantinov");
-    expect(siteConfig.author.url).toEqual("https://marcus-rise.dev");
+    expect(title).toEqual("Надя вяжет");
+    expect(author.name).toEqual("Ilya Konstantinov");
+    expect(author.url).toEqual("https://marcus-rise.dev");
   });
 });

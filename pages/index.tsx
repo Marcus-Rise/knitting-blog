@@ -25,13 +25,13 @@ const getStaticProps: GetStaticProps<IProps> = async () => {
 };
 
 const Home: React.FC<IProps> = (props) => {
-  const { siteConfig } = useInject<IAppService>(APP_SERVICE_PROVIDER);
+  const { title } = useInject<IAppService>(APP_SERVICE_PROVIDER);
 
   return (
     <>
       <Head>
-        <title key={"title"}>{siteConfig.title}</title>
-        <meta key={"meta-title"} name={"title"} content={siteConfig.title} />
+        <title key={"title"}>{title}</title>
+        <meta key={"meta-title"} name={"title"} content={title} />
         <meta
           key={"description"}
           name={"description"}
