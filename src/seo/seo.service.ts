@@ -2,18 +2,18 @@ import type { ISeoService } from "./seo.service.interface";
 import { inject, injectable } from "inversify";
 import type { IPostService } from "../post";
 import { POST_SERVICE_PROVIDER } from "../post";
-import type { IAppService } from "../app";
-import { APP_SERVICE_PROVIDER } from "../app";
+import type { ISeoConfigService } from "./seo-config.service.interface";
+import { SEO_CONFIG_SERVICE_PROVIDER } from "./seo-config.service.interface";
 
 @injectable()
 class SeoService implements ISeoService {
   constructor(
     @inject(POST_SERVICE_PROVIDER) private readonly posts: IPostService,
-    @inject(APP_SERVICE_PROVIDER) private readonly app: IAppService,
+    @inject(SEO_CONFIG_SERVICE_PROVIDER) private readonly config: ISeoConfigService,
   ) {}
 
   async generateRobotsTxt(hostName: string): Promise<string> {
-    const sections: { [p: string]: string } = !this.app.allowRobots
+    const sections: { [p: string]: string } = !this.config.allowRobots
       ? {
           "User-agent": "*",
           Disallow: "/",

@@ -1,14 +1,14 @@
 import "reflect-metadata";
 import { PrismicService } from "./prismic.service";
 import { mock } from "jest-mock-extended";
-import type { IAppService } from "../app";
+import type { IPrismicConfigService } from "./prismic-config.service.interface";
 
 describe("PrismicService", () => {
   test("client", () => {
     const prismicUrl = "prismicUrl1";
     const { client } = new PrismicService(
-      mock<IAppService>({
-        prismicUrl,
+      mock<IPrismicConfigService>({
+        endPoint: prismicUrl,
       }),
     );
 

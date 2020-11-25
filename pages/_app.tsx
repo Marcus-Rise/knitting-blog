@@ -11,7 +11,7 @@ import type { IAppService } from "../src/app";
 import { APP_SERVICE_PROVIDER } from "../src/app";
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
-  const { siteConfig } = useInject<IAppService>(APP_SERVICE_PROVIDER);
+  const { title, author } = useInject<IAppService>(APP_SERVICE_PROVIDER);
 
   const links: Array<INavLink> = [
     {
@@ -39,14 +39,14 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   return (
     <>
       <Head>
-        <title key={"title"}>{siteConfig.title}</title>
-        <meta key={"meta-title"} name={"title"} content={siteConfig.title} />
+        <title key={"title"}>{title}</title>
+        <meta key={"meta-title"} name={"title"} content={title} />
       </Head>
-      <Header title={siteConfig.title} logoSrc={"/logo.svg"} links={links} />
+      <Header title={title} logoSrc={"/logo.svg"} links={links} />
       <main>
         <Component {...pageProps} />
       </main>
-      <Footer year={new Date().getFullYear()} author={siteConfig.author.name} authorLink={siteConfig.author.url} />
+      <Footer year={new Date().getFullYear()} author={author.name} authorLink={author.url} />
     </>
   );
 };

@@ -41,7 +41,7 @@ const getStaticProps: GetStaticProps<IProps> = async (context) => {
 };
 
 const PostPage: React.FC<IProps> = (props) => {
-  const { siteConfig } = useInject<IAppService>(APP_SERVICE_PROVIDER);
+  const { title } = useInject<IAppService>(APP_SERVICE_PROVIDER);
   const { isFallback } = useRouter();
 
   return (
@@ -49,9 +49,9 @@ const PostPage: React.FC<IProps> = (props) => {
       {!isFallback && (
         <Head>
           <title key={"title"}>
-            {siteConfig.title} | {props.post?.title}
+            {title} | {props.post?.title}
           </title>
-          <meta key={"meta-title"} name={"title"} content={`${siteConfig.title} | ${props.post?.title}`} />
+          <meta key={"meta-title"} name={"title"} content={`${title} | ${props.post?.title}`} />
           <meta key={"description"} name={"description"} content={props.post?.description} />
         </Head>
       )}

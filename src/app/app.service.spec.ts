@@ -2,22 +2,15 @@ import "reflect-metadata";
 import { AppService } from "./app.service";
 
 describe("AppService", () => {
-  test("prismicUrl", () => {
-    const { prismicUrl } = new AppService();
+  test("title", () => {
+    const { title } = new AppService();
 
-    expect(prismicUrl).toEqual("");
+    expect(title).toEqual("Надя вяжет");
   });
-  describe("allow robots", () => {
-    test("empty is false", () => {
-      const { allowRobots } = new AppService();
+  test("author", () => {
+    const { author } = new AppService();
 
-      expect(allowRobots).toBeFalsy();
-    });
-    test("true string is true", () => {
-      process.env.ALLOW_ROBOTS = "true";
-      const { allowRobots } = new AppService();
-
-      expect(allowRobots).toBeTruthy();
-    });
+    expect(author.name).toEqual("Ilya Konstantinov");
+    expect(author.url).toEqual("https://marcus-rise.dev");
   });
 });
