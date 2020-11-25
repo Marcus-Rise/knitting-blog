@@ -2,12 +2,6 @@ import "reflect-metadata";
 import { PrismicConfigService } from "./prismic-config.service";
 
 describe("PrismicConfigService", () => {
-  const OLD_ENV = process.env;
-
-  afterEach(() => {
-    process.env = { ...OLD_ENV };
-  });
-
   describe("endPoint", () => {
     test("undefined is empty string", () => {
       const { endPoint } = new PrismicConfigService();

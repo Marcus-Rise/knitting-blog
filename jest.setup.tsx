@@ -17,3 +17,13 @@ process.env = {
 expect.extend({ toMatchDiffSnapshot });
 
 jest.mock("next/link", (): React.FC => ({ children }) => <>{children}</>);
+jest.mock("next/head", () => ({
+  __esModule: true,
+  default: jest.fn((props) => <div data-testid="head">{props.children}</div>),
+}));
+
+const OLD_ENV = process.env;
+
+afterEach(() => {
+  process.env = { ...OLD_ENV };
+});
