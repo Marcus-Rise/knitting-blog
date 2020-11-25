@@ -14,8 +14,19 @@ class PostPrismicDto implements IPost {
   content: IPostContent;
 
   constructor(dto: IPostPrismicDto) {
-    this.title = dto.data.title[0].text;
-    this.slug = dto.uid ?? dto.slugs[0];
+    if (dto.data.title.length) {
+      this.title = dto.data.title[0].text;
+    } else {
+      this.title = "";
+    }
+
+    if (dto.uid) {
+      this.slug = dto.uid;
+    } else if (dto.slugs.length) {
+      this.slug = dto.slugs[0];
+    } else {
+      this.slug = "";
+    }
 
     if (dto.data.description.length) {
       this.description = dto.data.description[0].text;
