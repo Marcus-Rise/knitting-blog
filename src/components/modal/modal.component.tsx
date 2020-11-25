@@ -1,9 +1,11 @@
 import React, { useCallback } from "react";
 import styles from "./modal.module.scss";
 import { Overlay } from "../overlay";
+import classNames from "classnames";
 
 interface IProps {
   onClose: () => void;
+  splash?: boolean;
 }
 
 const Modal: React.FC<IProps> = (props) => {
@@ -12,7 +14,7 @@ const Modal: React.FC<IProps> = (props) => {
   return (
     <>
       <Overlay onClose={props.onClose}>
-        <div className={styles.modal} onClick={onModalClick}>
+        <div className={classNames(styles.modal, { [styles.splash]: props.splash })} onClick={onModalClick}>
           {props.children}
         </div>
       </Overlay>
