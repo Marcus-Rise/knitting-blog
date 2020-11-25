@@ -12,6 +12,7 @@ import Head from "next/head";
 
 interface IProps {
   post: IPost | null;
+  isPreview: boolean;
 }
 
 const getStaticPaths: GetStaticPaths = async () => {
@@ -27,13 +28,21 @@ const getStaticPaths: GetStaticPaths = async () => {
 };
 
 const getStaticProps: GetStaticProps<IProps> = async (context) => {
+  const isPreview = !!context.preview;
   const postService = inject<IPostService>(POST_SERVICE_PROVIDER);
 
-  const post = await postService.getBySlug(String(context.params?.slug));
+  let post: IPost | null;
+
+  if (isPreview) {
+    post = await postService.getPreview(context.previewData.ref);
+  } else {
+    post = await postService.getBySlug(String(context.params?.slug));
+  }
 
   return {
     props: {
       post,
+      isPreview,
     },
     notFound: !post,
     revalidate: 60,
