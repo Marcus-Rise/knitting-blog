@@ -24,7 +24,7 @@ describe("SeoConfigService", () => {
     });
     test("is not empty", () => {
       const env = "true";
-      process.env.GOOGLE_VERIFICATION = env;
+      process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION = env;
       const { googleVerificationCode } = new SeoConfigService();
 
       expect(googleVerificationCode).toEqual(env);
@@ -39,7 +39,7 @@ describe("SeoConfigService", () => {
     });
     test("is not empty", () => {
       const env = "true";
-      process.env.YANDEX_VERIFICATION = env;
+      process.env.NEXT_PUBLIC_YANDEX_VERIFICATION = env;
       const { yandexVerificationCode } = new SeoConfigService();
 
       expect(yandexVerificationCode).toEqual(env);
