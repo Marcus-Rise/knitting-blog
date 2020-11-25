@@ -3,13 +3,13 @@ import { inject, injectable } from "inversify";
 import type { IPostService } from "../post";
 import { POST_SERVICE_PROVIDER } from "../post";
 import type { ISeoConfigService } from "./seo-config.service.interface";
-import { SEO_CONFIG_SERVICE } from "./seo-config.service.interface";
+import { SEO_CONFIG_SERVICE_PROVIDER } from "./seo-config.service.interface";
 
 @injectable()
 class SeoService implements ISeoService {
   constructor(
     @inject(POST_SERVICE_PROVIDER) private readonly posts: IPostService,
-    @inject(SEO_CONFIG_SERVICE) private readonly config: ISeoConfigService,
+    @inject(SEO_CONFIG_SERVICE_PROVIDER) private readonly config: ISeoConfigService,
   ) {}
 
   async generateRobotsTxt(hostName: string): Promise<string> {
