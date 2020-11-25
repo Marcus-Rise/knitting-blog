@@ -22,6 +22,10 @@ class PostService implements IPostService {
   async getById(id: string): Promise<IPost | null> {
     return this.repo.find({ id });
   }
+
+  async getPreview(ref: string): Promise<IPost | null> {
+    return this.repo.find({ previewRef: ref });
+  }
 }
 
 export { PostService };

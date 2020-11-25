@@ -25,4 +25,11 @@ describe("PostServiceMock", () => {
 
     expect(post).toBeNull();
   });
+
+  test("getPreview", async () => {
+    const service = new PostServiceMock();
+    const post = await service.getPreview();
+
+    expect(post).toBeNull();
+  });
 });
