@@ -11,7 +11,6 @@ interface ISiteConfig {
 interface IAppService {
   prismicUrl: string;
   siteConfig: ISiteConfig;
-  allowRobots: boolean;
 }
 
 export type { IAppService, ISiteConfig };

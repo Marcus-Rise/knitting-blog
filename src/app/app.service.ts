@@ -5,11 +5,9 @@ import { injectable } from "inversify";
 class AppService implements IAppService {
   prismicUrl: string;
   siteConfig: ISiteConfig;
-  allowRobots: boolean;
 
   constructor() {
     this.prismicUrl = process.env.PRISMIC_URL || "";
-    this.allowRobots = Boolean(process.env.ALLOW_ROBOTS);
 
     this.siteConfig = {
       title: "Надя вяжет",
