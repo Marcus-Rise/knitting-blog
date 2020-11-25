@@ -18,6 +18,10 @@ class PostService implements IPostService {
   async getList(offset: number, limit?: number): Promise<IPost[]> {
     return this.repo.list({}, offset, limit);
   }
+
+  async getById(id: string): Promise<IPost | null> {
+    return this.repo.find({ id });
+  }
 }
 
 export { PostService };

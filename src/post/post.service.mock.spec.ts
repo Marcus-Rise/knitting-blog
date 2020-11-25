@@ -18,4 +18,11 @@ describe("PostServiceMock", () => {
       expect(post).not.toBeNull();
     });
   });
+
+  test("getById", async () => {
+    const service = new PostServiceMock();
+    const post = await service.getById();
+
+    expect(post).toBeNull();
+  });
 });

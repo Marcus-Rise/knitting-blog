@@ -35,6 +35,30 @@ describe("PostService", () => {
     });
   });
 
+  describe("getById", () => {
+    test("exist", async () => {
+      const postService = new PostService(
+        mock<IPostRepository>({
+          find: () => Promise.resolve(mock<IPost>()),
+        }),
+      );
+      const item = await postService.getById("id");
+
+      expect(item).not.toBeNull();
+    });
+
+    test("not exist", async () => {
+      const postService = new PostService(
+        mock<IPostRepository>({
+          find: () => Promise.resolve(null),
+        }),
+      );
+      const item = await postService.getById("id");
+
+      expect(item).toBeNull();
+    });
+  });
+
   describe("getList", () => {
     test("empty", async () => {
       const postService = new PostService(
