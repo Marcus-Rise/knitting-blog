@@ -5,6 +5,7 @@ import { Hr } from "../../components/hr";
 import Image from "next/image";
 import { DateToString } from "../../utils/date-to-string";
 import { PostContent } from "./post-content";
+import { ImageView } from "../../components/image-view";
 
 type IProps = IPost;
 
@@ -15,7 +16,9 @@ const PostWithContent: React.FC<IProps> = (props) => {
       <Hr />
       <p className={styles.meta}>{DateToString(props.date)}</p>
       {props.imageSrc && (
-        <Image src={props.imageSrc} alt={props.imageLabel} height={320} width={"auto"} layout={"responsive"} />
+        <ImageView src={props.imageSrc} alt={props.imageLabel}>
+          <Image src={props.imageSrc} alt={props.imageLabel} height={320} width={"auto"} layout={"responsive"} />
+        </ImageView>
       )}
       <p className={styles.imageLabel}>{props.imageLabel}</p>
 
