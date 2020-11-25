@@ -2,12 +2,6 @@ import "reflect-metadata";
 import { AppService } from "./app.service";
 
 describe("AppService", () => {
-  const OLD_ENV = process.env;
-
-  afterEach(() => {
-    process.env = { ...OLD_ENV };
-  });
-
   test("title", () => {
     const { title } = new AppService();
 
