@@ -17,4 +17,19 @@ describe("PrismicConfigService", () => {
       expect(endPoint).toEqual(url);
     });
   });
+  describe("authToken", () => {
+    test("undefined is empty string", () => {
+      const { authToken } = new PrismicConfigService();
+
+      expect(authToken).toEqual("");
+    });
+
+    test("defined", () => {
+      const token = "TOKEN";
+      process.env.PRISMIC_AUTH_TOKEN = token;
+      const { authToken } = new PrismicConfigService();
+
+      expect(authToken).toEqual(token);
+    });
+  });
 });
