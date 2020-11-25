@@ -3,12 +3,9 @@ import { injectable } from "inversify";
 
 @injectable()
 class AppService implements IAppService {
-  prismicUrl: string;
   siteConfig: ISiteConfig;
 
   constructor() {
-    this.prismicUrl = process.env.PRISMIC_URL || "";
-
     this.siteConfig = {
       title: "Надя вяжет",
       author: {

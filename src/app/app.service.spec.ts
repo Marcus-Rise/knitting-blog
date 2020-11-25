@@ -2,9 +2,11 @@ import "reflect-metadata";
 import { AppService } from "./app.service";
 
 describe("AppService", () => {
-  test("prismicUrl", () => {
-    const { prismicUrl } = new AppService();
+  test("siteConfig", () => {
+    const { siteConfig } = new AppService();
 
-    expect(prismicUrl).toEqual("");
+    expect(siteConfig.title).toEqual("Надя вяжет");
+    expect(siteConfig.author.name).toEqual("Ilya Konstantinov");
+    expect(siteConfig.author.url).toEqual("https://marcus-rise.dev");
   });
 });

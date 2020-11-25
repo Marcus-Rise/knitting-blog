@@ -9,7 +9,6 @@ interface ISiteConfig {
 }
 
 interface IAppService {
-  prismicUrl: string;
   siteConfig: ISiteConfig;
 }
 
