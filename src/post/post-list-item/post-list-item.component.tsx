@@ -16,7 +16,14 @@ const PostListItem: React.FC<IProps> = (props) => (
     <p className={styles.meta}>{DateToString(props.date)}</p>
     <ImageView src={props.imageSrc} alt={props.imageLabel}>
       <div className={styles.image}>
-        <Image src={props.imageSrc} alt={props.imageLabel} height={"auto"} width={"auto"} layout={"responsive"} />
+        <Image
+          src={props.imageSrc}
+          alt={props.imageLabel}
+          height={"auto"}
+          width={"auto"}
+          layout={"responsive"}
+          priority
+        />
       </div>
     </ImageView>
     <p className={styles.imageLabel}>{props.imageLabel}</p>
