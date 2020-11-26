@@ -13,8 +13,8 @@ describe("ImageView", () => {
     { src: "/src2", alt: "alt2" },
     { src: "/src3", alt: "alt3" },
   ];
-  const open = (): void => {
-    const children = screen.queryByTestId("children");
+  const open = (id = "children"): void => {
+    const children = screen.queryByTestId(id);
     expect(children).not.toBeNull();
 
     if (children) {
@@ -206,5 +206,44 @@ describe("ImageView", () => {
 
       checkImage(0);
     });
+  });
+
+  test("unique event", () => {
+    render(
+      <>
+        <ImageView album={items} currentIndex={0}>
+          <div data-testid="children0" />
+        </ImageView>
+        <ImageView album={items} currentIndex={1}>
+          <div data-testid="children1" />
+        </ImageView>
+        <ImageView album={items} currentIndex={2}>
+          <div data-testid="children2" />
+        </ImageView>
+      </>,
+    );
+    open("children0");
+
+    checkImage(0);
+
+    goNextByKeyboard();
+    goNextByKeyboard();
+
+    checkImage(0, false);
+    checkImage(1, false);
+    checkImage(2);
+
+    close();
+
+    open("children1");
+
+    checkImage(2, false);
+    checkImage(1);
+
+    close();
+
+    open("children2");
+
+    checkImage(2);
   });
 });
