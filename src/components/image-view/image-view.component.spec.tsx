@@ -13,8 +13,8 @@ describe("ImageView", () => {
     { src: "/src2", alt: "alt2" },
     { src: "/src3", alt: "alt3" },
   ];
-  const open = (): void => {
-    const children = screen.queryByTestId("children");
+  const open = (id = "children"): void => {
+    const children = screen.queryByTestId(id);
     expect(children).not.toBeNull();
 
     if (children) {
@@ -29,58 +29,81 @@ describe("ImageView", () => {
       fireEvent.click(closeButton);
     }
   };
+  const checkImage = (index: number, isExist = true): void => {
+    const image = items[index];
+    const element = screen.queryByAltText(image.alt);
 
-  test("close", () => {
-    render(
-      <ImageView album={items}>
-        <div data-testid="children" />
-      </ImageView>,
-    );
+    if (isExist) {
+      expect(element).not.toBeNull();
+    } else {
+      expect(element).toBeNull();
+    }
+  };
+  const getBackButton = () => screen.queryByText("‹");
+  const getNextButton = () => screen.queryByText("›");
+  const goBackByKeyboard = () => fireEvent.keyDown(document, { code: "ArrowLeft" });
+  const goBackByArrowButton = () => {
+    const buttonBack = getBackButton();
 
-    expect(screen.queryByTestId("modal")).toBeNull();
+    if (buttonBack) {
+      fireEvent.click(buttonBack);
+    }
+  };
+  const goNextByKeyboard = () => fireEvent.keyDown(document, { code: "ArrowRight" });
+  const goNextByArrowButton = () => {
+    const buttonNext = getNextButton();
 
-    open();
+    if (buttonNext) {
+      fireEvent.click(buttonNext);
+    }
+  };
 
-    expect(screen.queryByTestId("modal")).not.toBeNull();
-
-    close();
-
-    expect(screen.queryByTestId("modal")).toBeNull();
+  beforeAll(() => {
+    expect(items).toHaveLength(3);
   });
-  describe("navigation", () => {
-    const checkImage = (index: number, isExist = true): void => {
-      const image = items[index];
-      const element = screen.queryByAltText(image.alt);
 
-      if (isExist) {
-        expect(element).not.toBeNull();
-      } else {
-        expect(element).toBeNull();
-      }
-    };
-    const getBackButton = () => screen.queryByText("‹");
-    const getNextButton = () => screen.queryByText("›");
-    const goBackByKeyboard = () => fireEvent.keyDown(document, { code: "ArrowLeft" });
-    const goBackByArrowButton = () => {
-      const buttonBack = getBackButton();
+  describe("close", () => {
+    test("hide on close", () => {
+      render(
+        <ImageView album={items}>
+          <div data-testid="children" />
+        </ImageView>,
+      );
 
-      if (buttonBack) {
-        fireEvent.click(buttonBack);
-      }
-    };
-    const goNextByKeyboard = () => fireEvent.keyDown(document, { code: "ArrowRight" });
-    const goNextByArrowButton = () => {
-      const buttonNext = getNextButton();
+      expect(screen.queryByTestId("modal")).toBeNull();
 
-      if (buttonNext) {
-        fireEvent.click(buttonNext);
-      }
-    };
+      open();
 
-    beforeAll(() => {
-      expect(items).toHaveLength(3);
+      expect(screen.queryByTestId("modal")).not.toBeNull();
+
+      close();
+
+      expect(screen.queryByTestId("modal")).toBeNull();
     });
 
+    test("restore index on close", () => {
+      render(
+        <ImageView album={items}>
+          <div data-testid="children" />
+        </ImageView>,
+      );
+      open();
+
+      checkImage(0);
+
+      goNextByArrowButton();
+      checkImage(0, false);
+      checkImage(1);
+
+      close();
+      open();
+
+      checkImage(1, false);
+      checkImage(0);
+    });
+  });
+
+  describe("navigation", () => {
     test("next by keyboard", () => {
       render(
         <ImageView album={items}>
@@ -183,5 +206,44 @@ describe("ImageView", () => {
 
       checkImage(0);
     });
+  });
+
+  test("unique event", () => {
+    render(
+      <>
+        <ImageView album={items} currentIndex={0}>
+          <div data-testid="children0" />
+        </ImageView>
+        <ImageView album={items} currentIndex={1}>
+          <div data-testid="children1" />
+        </ImageView>
+        <ImageView album={items} currentIndex={2}>
+          <div data-testid="children2" />
+        </ImageView>
+      </>,
+    );
+    open("children0");
+
+    checkImage(0);
+
+    goNextByKeyboard();
+    goNextByKeyboard();
+
+    checkImage(0, false);
+    checkImage(1, false);
+    checkImage(2);
+
+    close();
+
+    open("children1");
+
+    checkImage(2, false);
+    checkImage(1);
+
+    close();
+
+    open("children2");
+
+    checkImage(2);
   });
 });

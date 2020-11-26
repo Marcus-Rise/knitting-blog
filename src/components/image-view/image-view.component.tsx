@@ -15,10 +15,14 @@ interface IProps {
 
 const ImageView: React.FC<IProps> = (props) => {
   const [isShow, setIsShow] = useState(false);
-  const [currentIndex, setCurrentIndex] = useState<number>(props.currentIndex ?? 0);
+  const setInitialCurrentIndex = useCallback((): number => props.currentIndex ?? 0, [props.currentIndex]);
+  const [currentIndex, setCurrentIndex] = useState<number>(setInitialCurrentIndex);
+
   const close = useCallback(() => {
     setIsShow(false);
-  }, []);
+    setCurrentIndex(setInitialCurrentIndex);
+  }, [setInitialCurrentIndex]);
+
   const open = useCallback(() => {
     setIsShow(true);
   }, []);
@@ -33,26 +37,32 @@ const ImageView: React.FC<IProps> = (props) => {
     setCurrentIndex((index) => index + 1);
   }, []);
 
-  useEffect(() => {
-    const navigate = (e: KeyboardEvent): void => {
-      switch (e.code) {
-        case "ArrowLeft":
-          if (isBackExist) {
-            slideLeft();
-          }
-          break;
-        case "ArrowRight":
-          if (isNextExist) {
-            slideRight();
-          }
-          break;
+  const navigate = useCallback(
+    (e: KeyboardEvent): void => {
+      if (isShow) {
+        switch (e.code) {
+          case "ArrowLeft":
+            if (isBackExist) {
+              slideLeft();
+            }
+            break;
+          case "ArrowRight":
+            if (isNextExist) {
+              slideRight();
+            }
+            break;
+        }
       }
-    };
+    },
+    [isShow, isBackExist, slideLeft, isNextExist, slideRight],
+  );
+
+  useEffect(() => {
     const event = "keydown";
     document.addEventListener(event, navigate);
 
     return () => document.removeEventListener(event, navigate);
-  }, [isBackExist, isNextExist, slideLeft, slideRight]);
+  }, [navigate]);
 
   const buttonBack = useMemo(
     () => (
@@ -80,18 +90,7 @@ const ImageView: React.FC<IProps> = (props) => {
     [isNextExist, slideRight],
   );
 
-  const image = useMemo(() => {
-    const currentImage = props.album[currentIndex];
-
-    return (
-      <div>
-        <div className={styles.image}>
-          <NextImage src={currentImage.src} alt={currentImage.alt} layout={"fill"} loading={"eager"} quality={100} />
-        </div>
-        {currentImage.alt && <p className={styles.alt}>{currentImage.alt}</p>}
-      </div>
-    );
-  }, [currentIndex, props.album]);
+  const currentImage = props.album[currentIndex];
 
   const ModalWrapper: React.FC = useCallback(
     (props) => (
@@ -117,7 +116,18 @@ const ImageView: React.FC<IProps> = (props) => {
       {isShow && (
         <ModalWrapper>
           {buttonBack}
-          {image}
+          <div>
+            <div className={styles.image}>
+              <NextImage
+                src={currentImage.src}
+                alt={currentImage.alt}
+                layout={"fill"}
+                loading={"eager"}
+                quality={100}
+              />
+            </div>
+            {currentImage.alt && <p className={styles.alt}>{currentImage.alt}</p>}
+          </div>
           {buttonNext}
         </ModalWrapper>
       )}
