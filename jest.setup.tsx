@@ -21,6 +21,10 @@ jest.mock("next/head", () => ({
   __esModule: true,
   default: jest.fn((props) => <div data-testid="head">{props.children}</div>),
 }));
+jest.mock("next/image", () => ({
+  __esModule: true,
+  default: jest.fn((props) => <img src={props.src} alt={props.alt} height={props.height} width={props.width} />),
+}));
 
 const OLD_ENV = process.env;
 
