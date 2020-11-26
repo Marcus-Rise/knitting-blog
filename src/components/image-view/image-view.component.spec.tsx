@@ -9,43 +9,54 @@ jest.mock("../modal", () => ({
 
 describe("ImageView", () => {
   const items = [
-    { src: "/src1", alt: "alt" },
-    { src: "/src2", alt: "alt" },
-    { src: "/src3", alt: "alt" },
+    { src: "/src1", alt: "alt1" },
+    { src: "/src2", alt: "alt2" },
+    { src: "/src3", alt: "alt3" },
   ];
-  test("close", () => {
-    const [item] = items;
-    render(
-      <ImageView alt={item.alt} src={item.src}>
-        <div data-testid="children" />
-      </ImageView>,
-    );
-
-    expect(screen.queryByTestId("modal")).toBeNull();
-
+  const open = (): void => {
     const children = screen.queryByTestId("children");
     expect(children).not.toBeNull();
 
     if (children) {
       fireEvent.click(children);
     }
-
-    expect(screen.queryByTestId("modal")).not.toBeNull();
-
+  };
+  const close = (): void => {
     const closeButton = screen.queryByText("X");
     expect(closeButton).not.toBeNull();
 
     if (closeButton) {
       fireEvent.click(closeButton);
     }
+  };
+
+  test("close", () => {
+    render(
+      <ImageView album={items}>
+        <div data-testid="children" />
+      </ImageView>,
+    );
+
+    expect(screen.queryByTestId("modal")).toBeNull();
+
+    open();
+
+    expect(screen.queryByTestId("modal")).not.toBeNull();
+
+    close();
 
     expect(screen.queryByTestId("modal")).toBeNull();
   });
   describe("navigation", () => {
-    const checkImage = (index: number): void => {
+    const checkImage = (index: number, isExist = true): void => {
       const image = items[index];
       const element = screen.queryByAltText(image.alt);
-      expect(element).not.toBeNull();
+
+      if (isExist) {
+        expect(element).not.toBeNull();
+      } else {
+        expect(element).toBeNull();
+      }
     };
     const getBackButton = () => screen.queryByText("‹");
     const getNextButton = () => screen.queryByText("›");
@@ -66,128 +77,109 @@ describe("ImageView", () => {
       }
     };
 
+    beforeAll(() => {
+      expect(items).toHaveLength(3);
+    });
+
     test("next by keyboard", () => {
-      const [item] = items;
       render(
-        <ImageView alt={item.alt} src={item.src} album={items}>
+        <ImageView album={items}>
           <div data-testid="children" />
         </ImageView>,
       );
-      const children = screen.queryByTestId("children");
-      expect(children).not.toBeNull();
-
-      if (children) {
-        fireEvent.click(children);
-      }
+      open();
 
       checkImage(0);
 
       goNextByKeyboard();
+      checkImage(0, false);
 
       checkImage(1);
     });
 
     test("next by button", () => {
-      const [item] = items;
       render(
-        <ImageView alt={item.alt} src={item.src} album={items}>
+        <ImageView album={items}>
           <div data-testid="children" />
         </ImageView>,
       );
-      const children = screen.queryByTestId("children");
-      expect(children).not.toBeNull();
-
-      if (children) {
-        fireEvent.click(children);
-      }
+      open();
 
       checkImage(0);
 
       goNextByArrowButton();
+
+      checkImage(0, false);
 
       checkImage(1);
     });
 
     test("next is not exist", () => {
-      const [firstItem, item] = items;
       render(
-        <ImageView alt={item.alt} src={item.src} album={[firstItem, item]}>
+        <ImageView album={items} currentIndex={2}>
           <div data-testid="children" />
         </ImageView>,
       );
-      const children = screen.queryByTestId("children");
-      expect(children).not.toBeNull();
+      open();
 
-      if (children) {
-        fireEvent.click(children);
-      }
+      checkImage(2);
 
-      checkImage(0);
+      expect(getNextButton()).toBeNull();
+      goNextByKeyboard();
+
+      checkImage(2);
 
       goNextByArrowButton();
 
-      checkImage(0);
+      checkImage(2);
     });
 
     test("back by keyboard", () => {
-      const [item, itemLast] = items;
       render(
-        <ImageView alt={itemLast.alt} src={itemLast.src} album={[item, itemLast]}>
+        <ImageView album={items} currentIndex={2}>
           <div data-testid="children" />
         </ImageView>,
       );
-      const children = screen.queryByTestId("children");
-      expect(children).not.toBeNull();
+      open();
 
-      if (children) {
-        fireEvent.click(children);
-      }
-
-      checkImage(1);
+      checkImage(2);
 
       goBackByKeyboard();
 
-      checkImage(0);
+      checkImage(1);
     });
 
     test("back by button", () => {
-      const [item, itemLast] = items;
       render(
-        <ImageView alt={itemLast.alt} src={itemLast.src} album={[item, itemLast]}>
+        <ImageView album={items} currentIndex={2}>
           <div data-testid="children" />
         </ImageView>,
       );
-      const children = screen.queryByTestId("children");
-      expect(children).not.toBeNull();
+      open();
 
-      if (children) {
-        fireEvent.click(children);
-      }
-
-      checkImage(1);
+      checkImage(2);
 
       goBackByArrowButton();
 
-      checkImage(0);
+      checkImage(1);
     });
 
     test("back is not exist", () => {
-      const [item, itemLast] = items;
       render(
-        <ImageView alt={item.alt} src={item.src} album={[item, itemLast]}>
+        <ImageView album={items}>
           <div data-testid="children" />
         </ImageView>,
       );
-      const children = screen.queryByTestId("children");
-      expect(children).not.toBeNull();
-
-      if (children) {
-        fireEvent.click(children);
-      }
+      open();
 
       checkImage(0);
 
+      expect(getBackButton()).toBeNull();
       goBackByArrowButton();
+
+      checkImage(0);
+
+      goBackByKeyboard();
 
       checkImage(0);
     });

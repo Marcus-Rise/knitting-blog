@@ -14,7 +14,7 @@ const PostListItem: React.FC<IProps> = (props) => (
   <div className={[props.className, styles.root].join(" ")}>
     <h2 className={styles.title}>{props.title}</h2>
     <p className={styles.meta}>{DateToString(props.date)}</p>
-    <ImageView src={props.imageSrc} alt={props.imageLabel}>
+    <ImageView album={[{ src: props.imageSrc, alt: props.imageLabel }]}>
       <div className={styles.image}>
         <Image
           src={props.imageSrc}

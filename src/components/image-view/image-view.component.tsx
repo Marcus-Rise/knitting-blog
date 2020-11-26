@@ -8,13 +8,14 @@ interface ImageItem {
   alt: string;
 }
 
-interface IProps extends ImageItem {
-  album?: ImageItem[];
+interface IProps {
+  currentIndex?: number;
+  album: ImageItem[];
 }
 
 const ImageView: React.FC<IProps> = (props) => {
   const [isShow, setIsShow] = useState(false);
-  const [currentImage, setCurrentImage] = useState<ImageItem>({ src: props.src, alt: props.alt });
+  const [currentIndex, setCurrentIndex] = useState<number>(props.currentIndex ?? 0);
   const close = useCallback(() => {
     setIsShow(false);
   }, []);
@@ -22,51 +23,28 @@ const ImageView: React.FC<IProps> = (props) => {
     setIsShow(true);
   }, []);
 
-  const currentIndex: number = useMemo(() => props.album?.findIndex((i) => i.src === currentImage.src) ?? -1, [
-    props.album,
-    currentImage.src,
-  ]);
-
-  const isNextExist: boolean = useMemo(() => {
-    let res = false;
-
-    if (props.album) {
-      res = currentIndex < props.album.length - 1;
-    }
-
-    return res;
-  }, [currentIndex, props.album]);
-
-  const isBackExist: boolean = useMemo(() => {
-    let res = false;
-
-    if (props.album) {
-      res = currentIndex > 0;
-    }
-
-    return res;
-  }, [currentIndex, props.album]);
+  const isNextExist: boolean = useMemo(() => currentIndex < props.album.length - 1, [currentIndex, props.album]);
+  const isBackExist: boolean = useMemo(() => currentIndex > 0, [currentIndex]);
 
   const slideLeft = useCallback(() => {
-    if (props.album && isBackExist) {
-      setCurrentImage(props.album[currentIndex - 1]);
-    }
-  }, [props.album, currentIndex, isBackExist]);
-
+    setCurrentIndex((index) => index - 1);
+  }, []);
   const slideRight = useCallback(() => {
-    if (props.album && isNextExist) {
-      setCurrentImage(props.album[currentIndex + 1]);
-    }
-  }, [props.album, currentIndex, isNextExist]);
+    setCurrentIndex((index) => index + 1);
+  }, []);
 
   useEffect(() => {
     const navigate = (e: KeyboardEvent): void => {
       switch (e.code) {
         case "ArrowLeft":
-          slideLeft();
+          if (isBackExist) {
+            slideLeft();
+          }
           break;
         case "ArrowRight":
-          slideRight();
+          if (isNextExist) {
+            slideRight();
+          }
           break;
       }
     };
@@ -74,17 +52,15 @@ const ImageView: React.FC<IProps> = (props) => {
     document.addEventListener(event, navigate);
 
     return () => document.removeEventListener(event, navigate);
-  });
+  }, [isBackExist, isNextExist, slideLeft, slideRight]);
 
   const buttonBack = useMemo(
     () => (
       <>
         {isBackExist && (
-          <button
-            className={styles.navigationButton}
-            dangerouslySetInnerHTML={{ __html: "&#8249;" }}
-            onClick={slideLeft}
-          />
+          <button className={styles.navigationButton} onClick={slideLeft}>
+            ‹
+          </button>
         )}
       </>
     ),
@@ -95,27 +71,42 @@ const ImageView: React.FC<IProps> = (props) => {
     () => (
       <>
         {isNextExist && (
-          <button
-            className={styles.navigationButton}
-            dangerouslySetInnerHTML={{ __html: "&#8250;" }}
-            onClick={slideRight}
-          />
+          <button className={styles.navigationButton} onClick={slideRight}>
+            ›
+          </button>
         )}
       </>
     ),
     [isNextExist, slideRight],
   );
 
-  const image = useMemo(
-    () => (
+  const image = useMemo(() => {
+    const currentImage = props.album[currentIndex];
+
+    return (
       <div>
         <div className={styles.image}>
           <NextImage src={currentImage.src} alt={currentImage.alt} layout={"fill"} loading={"eager"} quality={100} />
         </div>
         {currentImage.alt && <p className={styles.alt}>{currentImage.alt}</p>}
       </div>
+    );
+  }, [currentIndex, props.album]);
+
+  const ModalWrapper: React.FC = useCallback(
+    (props) => (
+      <Modal onClose={close} splash>
+        <div className={styles.root}>
+          <div className={styles.header}>
+            <button className={styles.close} onClick={close}>
+              X
+            </button>
+          </div>
+          <div className={styles.container}>{props.children}</div>
+        </div>
+      </Modal>
     ),
-    [currentImage],
+    [close],
   );
 
   return (
@@ -124,20 +115,11 @@ const ImageView: React.FC<IProps> = (props) => {
         {props.children}
       </div>
       {isShow && (
-        <Modal onClose={close} splash>
-          <div className={styles.root}>
-            <div className={styles.header}>
-              <button className={styles.close} onClick={close}>
-                X
-              </button>
-            </div>
-            <div className={styles.container}>
-              {buttonBack}
-              {image}
-              {buttonNext}
-            </div>
-          </div>
-        </Modal>
+        <ModalWrapper>
+          {buttonBack}
+          {image}
+          {buttonNext}
+        </ModalWrapper>
       )}
     </>
   );

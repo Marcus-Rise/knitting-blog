@@ -16,7 +16,7 @@ const PostWithContent: React.FC<IProps> = (props) => {
       <Hr />
       <p className={styles.meta}>{DateToString(props.date)}</p>
       {props.imageSrc && (
-        <ImageView src={props.imageSrc} alt={props.imageLabel}>
+        <ImageView album={[{ src: props.imageSrc, alt: props.imageLabel }]}>
           <div className={styles.image}>
             <Image
               src={props.imageSrc}
