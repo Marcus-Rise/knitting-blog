@@ -18,6 +18,32 @@
   width: 100%;
 }
 
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.navigationButton {
+  background: none;
+  border: none;
+  font-size: 3rem;
+
+  width: 10vw;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
 .close {
   padding: 0 0 1rem;
   display: block;
