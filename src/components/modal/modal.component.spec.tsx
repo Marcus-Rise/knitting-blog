@@ -29,4 +29,18 @@ describe("Modal", () => {
 
     expect(close).toBeTruthy();
   });
+  test("close on escape key pressed", () => {
+    let close = false;
+    const onClose = () => {
+      close = true;
+    };
+
+    render(<Modal onClose={onClose} />);
+
+    fireEvent.keyDown(screen.getByTestId("overlay"), { code: "Escap2e" });
+    expect(close).toBeFalsy();
+
+    fireEvent.keyDown(screen.getByTestId("overlay"), { code: "Escape" });
+    expect(close).toBeTruthy();
+  });
 });
