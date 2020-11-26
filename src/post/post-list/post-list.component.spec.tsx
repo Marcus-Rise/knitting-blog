@@ -3,6 +3,11 @@ import { PostList } from "./post-list.component";
 import React from "react";
 import type { IPost } from "../post.interface";
 
+jest.mock("../post-list-item", () => ({
+  __esModule: true,
+  PostListItem: jest.fn((props) => <div data-testid={`item-${props.slug}`} />),
+}));
+
 describe("PostList", () => {
   test("render", () => {
     const item: IPost = {

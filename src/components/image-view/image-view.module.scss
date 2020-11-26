@@ -1,0 +1,65 @@
+@use "../../styles/typography";
+@use "../../styles/grid";
+
+.preview {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.header {
+  width: 100%;
+}
+
+.close {
+  padding: 0 0 1rem;
+  display: block;
+  margin-left: auto;
+  text-decoration: none;
+  font-size: 2rem;
+  border: none;
+  background: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.image {
+  & > div {
+    position: relative !important;
+    overflow: auto !important;
+    width: 80vw;
+    height: 80vh;
+
+    @include grid.media-sm {
+      height: 70vh;
+    }
+  }
+
+  img {
+    width: 100vw !important;
+    height: 100vh !important;
+    object-fit: contain !important;
+  }
+}
+
+.alt {
+  @include typography.BadScript;
+  color: var(--primary);
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 2rem;
+
+  @include grid.media-sm {
+    font-size: 1.5rem;
+  }
+}
+
