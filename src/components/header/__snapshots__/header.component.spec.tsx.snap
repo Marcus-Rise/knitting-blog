@@ -14,7 +14,12 @@ exports[`Header render 1`] = `
         <div
           class="logo"
         >
-          <img />
+          <img
+            alt="title"
+            height="auto"
+            src="http://test.com"
+            width="auto"
+          />
         </div>
         <h1
           class="title"

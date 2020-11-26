@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Elements } from "prismic-reactjs";
 import styles from "./post-content.module.scss";
 import { SliceTypeEnum } from "../../post-prismic.dto.interface";
+import { ImageView } from "../../../components/image-view";
 
 interface IProps {
   content: IPostContent;
@@ -12,10 +13,14 @@ interface IProps {
 const PostContent: React.FC<IProps> = (props) => {
   const slices = props.content.map((slice, sliceIndex) => {
     if (slice.type === SliceTypeEnum.IMAGE_GALLERY) {
-      const images = slice.items.map((image, imageIndex) => (
+      const images = slice.items.map((image, imageIndex, items) => (
         <div className="col-auto" key={image.url + imageIndex}>
-          <Image src={image.url} alt={image.alt ?? ""} height={320} width={"auto"} />
-          <p className={styles.imageLabel}>{image.alt}</p>
+          <ImageView src={image.url} alt={image.alt ?? ""} album={items.map((i) => ({ src: i.url, alt: i.alt ?? "" }))}>
+            <div className={styles.image}>
+              <Image src={image.url} alt={image.alt ?? ""} height={320} width={"auto"} />
+            </div>
+            <p className={styles.imageLabel}>{image.alt}</p>
+          </ImageView>
         </div>
       ));
 
