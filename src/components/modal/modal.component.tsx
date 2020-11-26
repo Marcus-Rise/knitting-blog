@@ -18,9 +18,10 @@ const Modal: React.FC<IProps> = (props) => {
       }
     };
 
-    document.addEventListener("keydown", close);
+    const event = "keydown";
+    document.addEventListener(event, close);
 
-    return () => document.removeEventListener("keydown", close);
+    return () => document.removeEventListener(event, close);
   });
 
   return (
