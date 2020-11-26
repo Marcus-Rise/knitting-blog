@@ -11,13 +11,15 @@ type IProps = IPost;
 
 const PostWithContent: React.FC<IProps> = (props) => {
   return (
-    <div className={styles.root}>
+    <>
       <h2 className={styles.title}>{props.title}</h2>
       <Hr />
       <p className={styles.meta}>{DateToString(props.date)}</p>
       {props.imageSrc && (
         <ImageView src={props.imageSrc} alt={props.imageLabel}>
-          <Image src={props.imageSrc} alt={props.imageLabel} height={320} width={"auto"} layout={"responsive"} />
+          <div className={styles.image}>
+            <Image src={props.imageSrc} alt={props.imageLabel} height={320} width={"auto"} layout={"responsive"} />
+          </div>
         </ImageView>
       )}
       <p className={styles.imageLabel}>{props.imageLabel}</p>
@@ -25,7 +27,7 @@ const PostWithContent: React.FC<IProps> = (props) => {
       <PostContent content={props.content} />
 
       <p className={styles.footer}>{DateToString(props.date)}</p>
-    </div>
+    </>
   );
 };
 
