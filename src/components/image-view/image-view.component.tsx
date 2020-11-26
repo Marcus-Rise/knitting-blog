@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Modal } from "../modal";
 import NextImage from "next/image";
 import styles from "./image-view.module.scss";
@@ -21,24 +21,44 @@ const ImageView: React.FC<IProps> = (props) => {
   const open = useCallback(() => {
     setIsShow(true);
   }, []);
+
+  const currentIndex: number = useMemo(() => props.album?.findIndex((i) => i.src === currentImage.src) ?? -1, [
+    props.album,
+    currentImage.src,
+  ]);
+
+  const isNextExist: boolean = useMemo(() => {
+    let res = false;
+
+    if (props.album) {
+      res = currentIndex < props.album.length - 1;
+    }
+
+    return res;
+  }, [currentIndex, props.album]);
+
+  const isBackExist: boolean = useMemo(() => {
+    let res = false;
+
+    if (props.album) {
+      res = currentIndex > 0;
+    }
+
+    return res;
+  }, [currentIndex, props.album]);
+
   const slideLeft = useCallback(() => {
-    if (props.album) {
-      const currentIndex = props.album.findIndex((i) => i.src === currentImage.src);
-
-      if (currentIndex > 0) {
-        setCurrentImage(props.album[currentIndex - 1]);
-      }
+    if (props.album && isBackExist) {
+      setCurrentImage(props.album[currentIndex - 1]);
     }
-  }, [props.album, currentImage.src]);
+  }, [props.album, currentIndex, isBackExist]);
+
   const slideRight = useCallback(() => {
-    if (props.album) {
-      const currentIndex = props.album.findIndex((i) => i.src === currentImage.src);
-
-      if (currentIndex < props.album.length - 1) {
-        setCurrentImage(props.album[currentIndex + 1]);
-      }
+    if (props.album && isNextExist) {
+      setCurrentImage(props.album[currentIndex + 1]);
     }
-  }, [props.album, currentImage.src]);
+  }, [props.album, currentIndex, isNextExist]);
+
   useEffect(() => {
     const navigate = (e: KeyboardEvent): void => {
       switch (e.code) {
@@ -56,6 +76,48 @@ const ImageView: React.FC<IProps> = (props) => {
     return () => document.removeEventListener(event, navigate);
   });
 
+  const buttonBack = useMemo(
+    () => (
+      <>
+        {isBackExist && (
+          <button
+            className={styles.navigationButton}
+            dangerouslySetInnerHTML={{ __html: "&#8249;" }}
+            onClick={slideLeft}
+          />
+        )}
+      </>
+    ),
+    [isBackExist, slideLeft],
+  );
+
+  const buttonNext = useMemo(
+    () => (
+      <>
+        {isNextExist && (
+          <button
+            className={styles.navigationButton}
+            dangerouslySetInnerHTML={{ __html: "&#8250;" }}
+            onClick={slideRight}
+          />
+        )}
+      </>
+    ),
+    [isNextExist, slideRight],
+  );
+
+  const image = useMemo(
+    () => (
+      <div>
+        <div className={styles.image}>
+          <NextImage src={currentImage.src} alt={currentImage.alt} layout={"fill"} loading={"eager"} quality={100} />
+        </div>
+        {currentImage.alt && <p className={styles.alt}>{currentImage.alt}</p>}
+      </div>
+    ),
+    [currentImage],
+  );
+
   return (
     <>
       <div className={styles.preview} onClick={open}>
@@ -70,32 +132,9 @@ const ImageView: React.FC<IProps> = (props) => {
               </button>
             </div>
             <div className={styles.container}>
-              {props.album?.length && (
-                <button
-                  className={styles.navigationButton}
-                  dangerouslySetInnerHTML={{ __html: "&#8249;" }}
-                  onClick={slideLeft}
-                />
-              )}
-              <div>
-                <div className={styles.image}>
-                  <NextImage
-                    src={currentImage.src}
-                    alt={currentImage.alt}
-                    layout={"fill"}
-                    loading={"eager"}
-                    quality={100}
-                  />
-                </div>
-                {currentImage.alt && <p className={styles.alt}>{currentImage.alt}</p>}
-              </div>
-              {props.album?.length && (
-                <button
-                  className={styles.navigationButton}
-                  dangerouslySetInnerHTML={{ __html: "&#8250;" }}
-                  onClick={slideRight}
-                />
-              )}
+              {buttonBack}
+              {image}
+              {buttonNext}
             </div>
           </div>
         </Modal>
