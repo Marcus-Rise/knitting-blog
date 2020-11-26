@@ -27,25 +27,24 @@ const ImageView: React.FC<IProps> = (props) => {
   const isBackExist: boolean = useMemo(() => currentIndex > 0, [currentIndex]);
 
   const slideLeft = useCallback(() => {
-    if (isBackExist) {
-      setCurrentIndex((index) => index - 1);
-    }
-  }, [isBackExist]);
-
+    setCurrentIndex((index) => index - 1);
+  }, []);
   const slideRight = useCallback(() => {
-    if (isNextExist) {
-      setCurrentIndex((index) => index + 1);
-    }
-  }, [isNextExist]);
+    setCurrentIndex((index) => index + 1);
+  }, []);
 
   useEffect(() => {
     const navigate = (e: KeyboardEvent): void => {
       switch (e.code) {
         case "ArrowLeft":
-          slideLeft();
+          if (isBackExist) {
+            slideLeft();
+          }
           break;
         case "ArrowRight":
-          slideRight();
+          if (isNextExist) {
+            slideRight();
+          }
           break;
       }
     };
@@ -53,7 +52,7 @@ const ImageView: React.FC<IProps> = (props) => {
     document.addEventListener(event, navigate);
 
     return () => document.removeEventListener(event, navigate);
-  }, [slideLeft, slideRight]);
+  }, [isBackExist, isNextExist, slideLeft, slideRight]);
 
   const buttonBack = useMemo(
     () => (
