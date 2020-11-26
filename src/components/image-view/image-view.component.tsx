@@ -14,11 +14,7 @@ interface IProps extends ImageItem {
 
 const ImageView: React.FC<IProps> = (props) => {
   const [isShow, setIsShow] = useState(false);
-  const [currentImage, setCurrentImage] = useState<ImageItem>(() => {
-    const [item] = props.album ?? [];
-
-    return item ?? { ...props };
-  });
+  const [currentImage, setCurrentImage] = useState<ImageItem>({ src: props.src, alt: props.alt });
   const close = useCallback(() => {
     setIsShow(false);
   }, []);
