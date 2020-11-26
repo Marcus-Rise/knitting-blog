@@ -14,11 +14,11 @@ const PostListItem: React.FC<IProps> = (props) => (
   <div className={[props.className, styles.root].join(" ")}>
     <h2 className={styles.title}>{props.title}</h2>
     <p className={styles.meta}>{DateToString(props.date)}</p>
-    <div className={styles.image}>
-      <ImageView src={props.imageSrc} alt={props.imageLabel}>
+    <ImageView src={props.imageSrc} alt={props.imageLabel}>
+      <div className={styles.image}>
         <Image src={props.imageSrc} alt={props.imageLabel} height={"auto"} width={"auto"} layout={"responsive"} />
-      </ImageView>
-    </div>
+      </div>
+    </ImageView>
     <p className={styles.imageLabel}>{props.imageLabel}</p>
     <p className={styles.description}>{props.description}</p>
     <div className="row justify-content-center">

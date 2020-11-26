@@ -2,6 +2,11 @@ import { render } from "@testing-library/react";
 import React from "react";
 import { PostListItem } from "./post-list-item.component";
 
+jest.mock("../../components/image-view", () => ({
+  __esModule: true,
+  ImageView: jest.fn((props) => <div data-testid="image-view">{props.children}</div>),
+}));
+
 describe("PostListItem", () => {
   test("render", () => {
     const { asFragment } = render(
