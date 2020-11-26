@@ -70,7 +70,13 @@ const ImageView: React.FC<IProps> = (props) => {
               </button>
             </div>
             <div className={styles.image}>
-              <NextImage src={currentImage.src} alt={currentImage.alt} layout={"fill"} loading={"eager"} />
+              <NextImage
+                src={currentImage.src}
+                alt={currentImage.alt}
+                layout={"fill"}
+                loading={"eager"}
+                quality={100}
+              />
             </div>
             {currentImage.alt && <p className={styles.alt}>{currentImage.alt}</p>}
           </div>
