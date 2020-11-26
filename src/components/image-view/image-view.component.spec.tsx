@@ -41,4 +41,32 @@ describe("ImageView", () => {
 
     expect(screen.queryByTestId("modal")).toBeNull();
   });
+  test("navigation", () => {
+    let [item] = items;
+    render(
+      <ImageView alt={item.alt} src={item.src} album={items}>
+        <div data-testid="children" />
+      </ImageView>,
+    );
+
+    const children = screen.queryByTestId("children");
+    expect(children).not.toBeNull();
+
+    if (children) {
+      fireEvent.click(children);
+    }
+
+    let image = screen.queryByAltText(item.alt);
+    expect(image).not.toBeNull();
+
+    fireEvent.keyDown(document, { code: "ArrowRight" });
+    item = items[1];
+    image = screen.queryByAltText(item.alt);
+    expect(image).not.toBeNull();
+
+    fireEvent.keyDown(document, { code: "ArrowLeft" });
+    item = items[0];
+    image = screen.queryByAltText(item.alt);
+    expect(image).not.toBeNull();
+  });
 });
