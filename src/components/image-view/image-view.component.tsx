@@ -58,11 +58,9 @@ const ImageView: React.FC<IProps> = (props) => {
     () => (
       <>
         {isBackExist && (
-          <button
-            className={styles.navigationButton}
-            dangerouslySetInnerHTML={{ __html: "&#8249;" }}
-            onClick={slideLeft}
-          />
+          <button className={styles.navigationButton} onClick={slideLeft}>
+            ‹
+          </button>
         )}
       </>
     ),
@@ -73,11 +71,9 @@ const ImageView: React.FC<IProps> = (props) => {
     () => (
       <>
         {isNextExist && (
-          <button
-            className={styles.navigationButton}
-            dangerouslySetInnerHTML={{ __html: "&#8250;" }}
-            onClick={slideRight}
-          />
+          <button className={styles.navigationButton} onClick={slideRight}>
+            ›
+          </button>
         )}
       </>
     ),
@@ -97,26 +93,33 @@ const ImageView: React.FC<IProps> = (props) => {
     );
   }, [currentIndex, props.album]);
 
+  const ModalWrapper: React.FC = useCallback(
+    (props) => (
+      <Modal onClose={close} splash>
+        <div className={styles.root}>
+          <div className={styles.header}>
+            <button className={styles.close} onClick={close}>
+              X
+            </button>
+          </div>
+          <div className={styles.container}>{props.children}</div>
+        </div>
+      </Modal>
+    ),
+    [close],
+  );
+
   return (
     <>
       <div className={styles.preview} onClick={open}>
         {props.children}
       </div>
       {isShow && (
-        <Modal onClose={close} splash>
-          <div className={styles.root}>
-            <div className={styles.header}>
-              <button className={styles.close} onClick={close}>
-                X
-              </button>
-            </div>
-            <div className={styles.container}>
-              {buttonBack}
-              {image}
-              {buttonNext}
-            </div>
-          </div>
-        </Modal>
+        <ModalWrapper>
+          {buttonBack}
+          {image}
+          {buttonNext}
+        </ModalWrapper>
       )}
     </>
   );
