@@ -13,9 +13,9 @@ interface IProps {
 const PostContent: React.FC<IProps> = (props) => {
   const slices = props.content.map((slice, sliceIndex) => {
     if (slice.type === SliceTypeEnum.IMAGE_GALLERY) {
-      const images = slice.items.map((image, imageIndex) => (
+      const images = slice.items.map((image, imageIndex, items) => (
         <div className="col-auto" key={image.url + imageIndex}>
-          <ImageView src={image.url} alt={image.alt ?? ""}>
+          <ImageView src={image.url} alt={image.alt ?? ""} album={items.map((i) => ({ src: i.url, alt: i.alt ?? "" }))}>
             <div className={styles.image}>
               <Image src={image.url} alt={image.alt ?? ""} height={320} width={"auto"} />
             </div>
