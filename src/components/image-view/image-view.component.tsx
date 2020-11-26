@@ -15,10 +15,14 @@ interface IProps {
 
 const ImageView: React.FC<IProps> = (props) => {
   const [isShow, setIsShow] = useState(false);
-  const [currentIndex, setCurrentIndex] = useState<number>(props.currentIndex ?? 0);
+  const setInitialCurrentIndex = useCallback((): number => props.currentIndex ?? 0, [props.currentIndex]);
+  const [currentIndex, setCurrentIndex] = useState<number>(setInitialCurrentIndex);
+
   const close = useCallback(() => {
     setIsShow(false);
-  }, []);
+    setCurrentIndex(setInitialCurrentIndex);
+  }, [setInitialCurrentIndex]);
+
   const open = useCallback(() => {
     setIsShow(true);
   }, []);
