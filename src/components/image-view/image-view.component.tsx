@@ -8,13 +8,14 @@ interface ImageItem {
   alt: string;
 }
 
-interface IProps extends ImageItem {
-  album?: ImageItem[];
+interface IProps {
+  currentIndex?: number;
+  album: ImageItem[];
 }
 
 const ImageView: React.FC<IProps> = (props) => {
   const [isShow, setIsShow] = useState(false);
-  const [currentImage, setCurrentImage] = useState<ImageItem>({ src: props.src, alt: props.alt });
+  const [currentIndex, setCurrentIndex] = useState<number>(props.currentIndex ?? 0);
   const close = useCallback(() => {
     setIsShow(false);
   }, []);
@@ -22,42 +23,20 @@ const ImageView: React.FC<IProps> = (props) => {
     setIsShow(true);
   }, []);
 
-  const currentIndex: number = useMemo(() => props.album?.findIndex((i) => i.src === currentImage.src) ?? -1, [
-    props.album,
-    currentImage.src,
-  ]);
-
-  const isNextExist: boolean = useMemo(() => {
-    let res = false;
-
-    if (props.album) {
-      res = currentIndex < props.album.length - 1;
-    }
-
-    return res;
-  }, [currentIndex, props.album]);
-
-  const isBackExist: boolean = useMemo(() => {
-    let res = false;
-
-    if (props.album) {
-      res = currentIndex > 0;
-    }
-
-    return res;
-  }, [currentIndex, props.album]);
+  const isNextExist: boolean = useMemo(() => currentIndex < props.album.length - 1, [currentIndex, props.album]);
+  const isBackExist: boolean = useMemo(() => currentIndex > 0, [currentIndex]);
 
   const slideLeft = useCallback(() => {
-    if (props.album && isBackExist) {
-      setCurrentImage(props.album[currentIndex - 1]);
+    if (isBackExist) {
+      setCurrentIndex((index) => index - 1);
     }
-  }, [props.album, currentIndex, isBackExist]);
+  }, [isBackExist]);
 
   const slideRight = useCallback(() => {
-    if (props.album && isNextExist) {
-      setCurrentImage(props.album[currentIndex + 1]);
+    if (isNextExist) {
+      setCurrentIndex((index) => index + 1);
     }
-  }, [props.album, currentIndex, isNextExist]);
+  }, [isNextExist]);
 
   useEffect(() => {
     const navigate = (e: KeyboardEvent): void => {
@@ -74,7 +53,7 @@ const ImageView: React.FC<IProps> = (props) => {
     document.addEventListener(event, navigate);
 
     return () => document.removeEventListener(event, navigate);
-  });
+  }, [slideLeft, slideRight]);
 
   const buttonBack = useMemo(
     () => (
@@ -106,17 +85,18 @@ const ImageView: React.FC<IProps> = (props) => {
     [isNextExist, slideRight],
   );
 
-  const image = useMemo(
-    () => (
+  const image = useMemo(() => {
+    const currentImage = props.album[currentIndex];
+
+    return (
       <div>
         <div className={styles.image}>
           <NextImage src={currentImage.src} alt={currentImage.alt} layout={"fill"} loading={"eager"} quality={100} />
         </div>
         {currentImage.alt && <p className={styles.alt}>{currentImage.alt}</p>}
       </div>
-    ),
-    [currentImage],
-  );
+    );
+  }, [currentIndex, props.album]);
 
   return (
     <>

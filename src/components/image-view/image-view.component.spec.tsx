@@ -14,9 +14,8 @@ describe("ImageView", () => {
     { src: "/src3", alt: "alt" },
   ];
   test("close", () => {
-    const [item] = items;
     render(
-      <ImageView alt={item.alt} src={item.src}>
+      <ImageView album={items}>
         <div data-testid="children" />
       </ImageView>,
     );
@@ -67,9 +66,8 @@ describe("ImageView", () => {
     };
 
     test("next by keyboard", () => {
-      const [item] = items;
       render(
-        <ImageView alt={item.alt} src={item.src} album={items}>
+        <ImageView album={items}>
           <div data-testid="children" />
         </ImageView>,
       );
@@ -88,9 +86,8 @@ describe("ImageView", () => {
     });
 
     test("next by button", () => {
-      const [item] = items;
       render(
-        <ImageView alt={item.alt} src={item.src} album={items}>
+        <ImageView album={items}>
           <div data-testid="children" />
         </ImageView>,
       );
@@ -109,9 +106,8 @@ describe("ImageView", () => {
     });
 
     test("next is not exist", () => {
-      const [firstItem, item] = items;
       render(
-        <ImageView alt={item.alt} src={item.src} album={[firstItem, item]}>
+        <ImageView album={items} currentIndex={2}>
           <div data-testid="children" />
         </ImageView>,
       );
@@ -130,9 +126,8 @@ describe("ImageView", () => {
     });
 
     test("back by keyboard", () => {
-      const [item, itemLast] = items;
       render(
-        <ImageView alt={itemLast.alt} src={itemLast.src} album={[item, itemLast]}>
+        <ImageView album={items} currentIndex={2}>
           <div data-testid="children" />
         </ImageView>,
       );
@@ -151,9 +146,8 @@ describe("ImageView", () => {
     });
 
     test("back by button", () => {
-      const [item, itemLast] = items;
       render(
-        <ImageView alt={itemLast.alt} src={itemLast.src} album={[item, itemLast]}>
+        <ImageView album={items} currentIndex={2}>
           <div data-testid="children" />
         </ImageView>,
       );
@@ -172,9 +166,8 @@ describe("ImageView", () => {
     });
 
     test("back is not exist", () => {
-      const [item, itemLast] = items;
       render(
-        <ImageView alt={item.alt} src={item.src} album={[item, itemLast]}>
+        <ImageView album={items}>
           <div data-testid="children" />
         </ImageView>,
       );
