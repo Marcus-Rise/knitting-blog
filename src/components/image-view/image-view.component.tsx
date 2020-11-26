@@ -69,16 +69,34 @@ const ImageView: React.FC<IProps> = (props) => {
                 X
               </button>
             </div>
-            <div className={styles.image}>
-              <NextImage
-                src={currentImage.src}
-                alt={currentImage.alt}
-                layout={"fill"}
-                loading={"eager"}
-                quality={100}
-              />
+            <div className={styles.container}>
+              {props.album?.length && (
+                <button
+                  className={styles.navigationButton}
+                  dangerouslySetInnerHTML={{ __html: "&#8249;" }}
+                  onClick={slideLeft}
+                />
+              )}
+              <div>
+                <div className={styles.image}>
+                  <NextImage
+                    src={currentImage.src}
+                    alt={currentImage.alt}
+                    layout={"fill"}
+                    loading={"eager"}
+                    quality={100}
+                  />
+                </div>
+                {currentImage.alt && <p className={styles.alt}>{currentImage.alt}</p>}
+              </div>
+              {props.album?.length && (
+                <button
+                  className={styles.navigationButton}
+                  dangerouslySetInnerHTML={{ __html: "&#8250;" }}
+                  onClick={slideRight}
+                />
+              )}
             </div>
-            {currentImage.alt && <p className={styles.alt}>{currentImage.alt}</p>}
           </div>
         </Modal>
       )}

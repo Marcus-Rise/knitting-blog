@@ -79,5 +79,18 @@ describe("ImageView", () => {
 
     fireEvent.keyDown(document, { code: "ArrowRight" });
     checkImage(2);
+
+    const buttonBack = screen.queryByText("‹");
+    const buttonNext = screen.queryByText("›");
+    expect(buttonBack).not.toBeNull();
+    expect(buttonNext).not.toBeNull();
+
+    if (buttonBack && buttonNext) {
+      fireEvent.click(buttonBack);
+      checkImage(1);
+
+      fireEvent.click(buttonNext);
+      checkImage(2);
+    }
   });
 });
