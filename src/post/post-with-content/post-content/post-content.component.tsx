@@ -16,7 +16,9 @@ const PostContent: React.FC<IProps> = (props) => {
       const images = slice.items.map((image, imageIndex) => (
         <div className="col-auto" key={image.url + imageIndex}>
           <ImageView src={image.url} alt={image.alt ?? ""}>
-            <Image src={image.url} alt={image.alt ?? ""} height={320} width={"auto"} />
+            <div className={styles.image}>
+              <Image src={image.url} alt={image.alt ?? ""} height={320} width={"auto"} />
+            </div>
             <p className={styles.imageLabel}>{image.alt}</p>
           </ImageView>
         </div>
