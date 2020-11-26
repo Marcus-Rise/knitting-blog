@@ -42,7 +42,7 @@ describe("ImageView", () => {
     expect(screen.queryByTestId("modal")).toBeNull();
   });
   test("navigation", () => {
-    let [item] = items;
+    const [item] = items;
     render(
       <ImageView alt={item.alt} src={item.src} album={items}>
         <div data-testid="children" />
@@ -56,17 +56,28 @@ describe("ImageView", () => {
       fireEvent.click(children);
     }
 
-    let image = screen.queryByAltText(item.alt);
-    expect(image).not.toBeNull();
+    const checkImage = (index: number): void => {
+      const image = items[index];
+      const element = screen.queryByAltText(image.alt);
+      expect(element).not.toBeNull();
+    };
 
-    fireEvent.keyDown(document, { code: "ArrowRight" });
-    item = items[1];
-    image = screen.queryByAltText(item.alt);
-    expect(image).not.toBeNull();
+    checkImage(0);
 
     fireEvent.keyDown(document, { code: "ArrowLeft" });
-    item = items[0];
-    image = screen.queryByAltText(item.alt);
-    expect(image).not.toBeNull();
+    checkImage(0);
+
+    fireEvent.keyDown(document, { code: "ArrowRight" });
+    checkImage(1);
+
+    fireEvent.keyDown(document, { code: "ArrowLeft" });
+    checkImage(0);
+
+    fireEvent.keyDown(document, { code: "ArrowRight" });
+    fireEvent.keyDown(document, { code: "ArrowRight" });
+    checkImage(2);
+
+    fireEvent.keyDown(document, { code: "ArrowRight" });
+    checkImage(2);
   });
 });

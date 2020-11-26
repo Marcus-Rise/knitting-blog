@@ -38,7 +38,7 @@ const ImageView: React.FC<IProps> = (props) => {
     if (props.album) {
       const currentIndex = props.album.findIndex((i) => i.src === currentImage.src);
 
-      if (currentIndex < props.album.length + 1) {
+      if (currentIndex < props.album.length - 1) {
         setCurrentImage(props.album[currentIndex + 1]);
       }
     }
@@ -74,7 +74,7 @@ const ImageView: React.FC<IProps> = (props) => {
               </button>
             </div>
             <div className={styles.image}>
-              <NextImage src={currentImage.src} alt={currentImage.alt} layout={"fill"} />
+              <NextImage src={currentImage.src} alt={currentImage.alt} layout={"fill"} loading={"eager"} />
             </div>
             {currentImage.alt && <p className={styles.alt}>{currentImage.alt}</p>}
           </div>
