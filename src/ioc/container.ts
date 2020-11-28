@@ -6,9 +6,6 @@ import { SeoModule } from "../seo";
 
 const container = new Container();
 
-container.load(AppModule);
-container.load(PrismicModule);
-container.load(PostModule);
-container.load(SeoModule);
+container.load(AppModule, PrismicModule, PostModule, SeoModule);
 
 export { container };
