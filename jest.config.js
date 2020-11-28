@@ -14,4 +14,5 @@ module.exports = {
     "^.+\\.module\\.s?css$": "identity-obj-proxy",
   },
   setupFilesAfterEnv: ["./jest.setup.tsx"],
+  collectCoverageFrom: ["./pages/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}", "!./src/**/*.spec", "!./src/**/index.ts"],
 };
