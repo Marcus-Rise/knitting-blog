@@ -7,7 +7,7 @@
     "build": "next build",
     "lint": "eslint 'src/**/*.{js,ts,tsx}' 'pages/**/*.{js,ts,tsx}'",
     "lint:fix": "npm run lint --fix",
-    "test": "jest",
+    "test": "jest --collectCoverage",
     "start": "next start",
     "export": "next export"
   },
