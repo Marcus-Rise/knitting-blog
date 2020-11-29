@@ -1,12 +1,14 @@
 import "reflect-metadata";
-import type { NextApiHandler } from "next";
+import type { NextApiRequest, NextApiResponse } from "next";
 import { inject } from "../../src/ioc";
 import type { ISeoService } from "../../src/seo";
 import { SEO_SERVICE_PROVIDER } from "../../src/seo";
 
-const handler: NextApiHandler = async (req, res) => {
-  const service = inject<ISeoService>(SEO_SERVICE_PROVIDER);
-
+const handler = async (
+  req: NextApiRequest,
+  res: NextApiResponse,
+  service = inject<ISeoService>(SEO_SERVICE_PROVIDER),
+): Promise<void> => {
   const sitemap = await service.generateSitemap(String(req.headers.host));
 
   res.writeHead(200, {
