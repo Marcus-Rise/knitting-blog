@@ -1,10 +1,10 @@
 import React from "react";
 import type { IPostContent } from "../../post-content.inteface";
-import Image from "next/image";
 import { Elements } from "prismic-reactjs";
 import styles from "./post-content.module.scss";
 import { SliceTypeEnum } from "../../post-prismic.dto.interface";
 import { ImageView } from "../../../components/image-view";
+import { Image } from "../../../components/image";
 
 interface IProps {
   content: IPostContent;
@@ -16,10 +16,7 @@ const PostContent: React.FC<IProps> = (props) => {
       const images = slice.items.map((image, imageIndex, items) => (
         <div className="col-auto" key={image.url + imageIndex}>
           <ImageView album={items.map((i) => ({ src: i.url, alt: i.alt ?? "" }))} currentIndex={imageIndex}>
-            <div className={styles.image}>
-              <Image src={image.url} alt={image.alt ?? ""} height={320} width={"auto"} />
-            </div>
-            <p className={styles.imageLabel}>{image.alt}</p>
+            <Image src={image.url} alt={image.alt} size={320} />
           </ImageView>
         </div>
       ));
