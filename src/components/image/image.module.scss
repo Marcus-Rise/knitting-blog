@@ -1,0 +1,14 @@
+@use "../../styles/typography";
+
+.image {
+  img {
+    object-fit: cover;
+  }
+}
+
+.label {
+  @include typography.BadScript;
+
+  color: var(--primary);
+  text-align: center;
+}
