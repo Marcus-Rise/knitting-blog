@@ -1,0 +1,26 @@
+@use "../../styles/typography";
+
+.root {
+  display: grid;
+  grid-template-rows: 3fr auto;
+  grid-column-gap: 1rem;
+}
+
+.image {
+  & > div {
+    margin: 0 auto !important;
+    display: block !important;
+  }
+
+  img {
+    object-fit: cover;
+  }
+}
+
+.label {
+  @include typography.BadScript;
+
+  color: var(--primary);
+  text-align: center;
+  margin: 0;
+}

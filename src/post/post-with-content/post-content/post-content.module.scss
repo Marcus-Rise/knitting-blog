@@ -22,16 +22,3 @@
   margin-bottom: $margin;
 }
 
-.image {
-  img {
-    object-fit: cover;
-  }
-}
-
-.imageLabel {
-  @include typography.BadScript;
-
-  color: var(--primary);
-  text-align: center;
-  //font-size: 1.5rem;
-}
