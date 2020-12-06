@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Modal } from "../modal";
 import NextImage from "next/image";
 import styles from "./image-view.module.scss";
+import classNames from "classnames";
 
 interface ImageItem {
   src: string;
@@ -68,7 +69,7 @@ const ImageView: React.FC<IProps> = (props) => {
     () => (
       <>
         {isBackExist && (
-          <button className={styles.navigationButton} onClick={slideLeft}>
+          <button className={classNames(styles.navigationButton, styles.navigationBack)} onClick={slideLeft}>
             ‹
           </button>
         )}
@@ -81,7 +82,7 @@ const ImageView: React.FC<IProps> = (props) => {
     () => (
       <>
         {isNextExist && (
-          <button className={styles.navigationButton} onClick={slideRight}>
+          <button className={classNames(styles.navigationButton, styles.navigationNext)} onClick={slideRight}>
             ›
           </button>
         )}
@@ -108,6 +109,19 @@ const ImageView: React.FC<IProps> = (props) => {
     [close],
   );
 
+  const Alt = useMemo(
+    () => (
+      <>
+        {currentImage.alt && (
+          <p className={styles.alt} title={currentImage.alt}>
+            {currentImage.alt}
+          </p>
+        )}
+      </>
+    ),
+    [currentImage.alt],
+  );
+
   return (
     <>
       <div className={styles.preview} onClick={open}>
@@ -116,17 +130,9 @@ const ImageView: React.FC<IProps> = (props) => {
       {isShow && (
         <ModalWrapper>
           {buttonBack}
-          <div>
-            <div className={styles.image}>
-              <NextImage
-                src={currentImage.src}
-                alt={currentImage.alt}
-                layout={"fill"}
-                loading={"eager"}
-                quality={100}
-              />
-            </div>
-            {currentImage.alt && <p className={styles.alt}>{currentImage.alt}</p>}
+          <div className={styles.image}>
+            <NextImage src={currentImage.src} alt={currentImage.alt} layout={"fill"} loading={"eager"} quality={100} />
+            {Alt}
           </div>
           {buttonNext}
         </ModalWrapper>
