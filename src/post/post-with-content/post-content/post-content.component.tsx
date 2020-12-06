@@ -3,8 +3,7 @@ import type { IPostContent } from "../../post-content.inteface";
 import { Elements } from "prismic-reactjs";
 import styles from "./post-content.module.scss";
 import { SliceTypeEnum } from "../../post-prismic.dto.interface";
-import { ImageView } from "../../../components/image-view";
-import { Image } from "../../../components/image";
+import { ImageGallery } from "../../../components/image-gallery";
 
 interface IProps {
   content: IPostContent;
@@ -13,18 +12,8 @@ interface IProps {
 const PostContent: React.FC<IProps> = (props) => {
   const slices = props.content.map((slice, sliceIndex) => {
     if (slice.type === SliceTypeEnum.IMAGE_GALLERY) {
-      const images = slice.items.map((image, imageIndex, items) => (
-        <div className="col-auto" key={image.url + imageIndex}>
-          <ImageView album={items.map((i) => ({ src: i.url, alt: i.alt ?? "" }))} currentIndex={imageIndex}>
-            <Image src={image.url} alt={image.alt} size={320} />
-          </ImageView>
-        </div>
-      ));
-
       return (
-        <div key={sliceIndex} className={`row justify-content-center ${styles.imageGallery}`}>
-          {images}
-        </div>
+        <ImageGallery key={sliceIndex} items={slice.items.map((i) => ({ src: i.url, alt: i.alt, size: i.height }))} />
       );
     } else {
       switch (slice.type) {
