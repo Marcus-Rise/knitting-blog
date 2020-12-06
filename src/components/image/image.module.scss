@@ -1,5 +1,11 @@
 @use "../../styles/typography";
 
+.root {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
 .image {
   img {
     object-fit: cover;
