@@ -1,10 +1,10 @@
 import React from "react";
 import styles from "./post-list-item.module.scss";
-import type { IPost } from "../post.interface";
+import type { IPost } from "../../post.interface";
 import Image from "next/image";
 import Link from "next/link";
-import { DateToString } from "../../utils/date-to-string";
-import { ImageView } from "../../components/image-view";
+import { DateToString } from "../../../utils/date-to-string";
+import { ImageView } from "../../../components/image-view";
 
 interface IProps extends IPost {
   className?: string;
