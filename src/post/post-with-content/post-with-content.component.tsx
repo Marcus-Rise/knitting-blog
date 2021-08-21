@@ -18,14 +18,7 @@ const PostWithContent: React.FC<IProps> = (props) => {
       {props.imageSrc && (
         <ImageView album={[{ src: props.imageSrc, alt: props.imageLabel }]}>
           <div className={styles.image}>
-            <Image
-              src={props.imageSrc}
-              alt={props.imageLabel}
-              height={320}
-              width={"auto"}
-              layout={"responsive"}
-              priority
-            />
+            <Image src={props.imageSrc} alt={props.imageLabel} layout={"fill"} priority />
           </div>
         </ImageView>
       )}
