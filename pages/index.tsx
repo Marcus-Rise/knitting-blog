@@ -2,17 +2,16 @@ import "reflect-metadata";
 import type { FC } from "react";
 import React from "react";
 import type { GetStaticProps } from "next";
-import { PostList } from "../src/post/post-list";
-import type { IPost, IPostService } from "../src/post";
-import { POST_SERVICE_PROVIDER } from "../src/post";
-import { inject } from "../src/ioc";
-import type { IAppService } from "../src/app";
-import { APP_SERVICE_PROVIDER } from "../src/app";
-import type { ISeoConfigService } from "../src/seo";
-import { SEO_CONFIG_SERVICE_PROVIDER } from "../src/seo";
-import type { ILayoutProps } from "../src/components";
-import { Layout } from "../src/components";
-import { LINKS } from "../src/links";
+import type { IAppService, IPost, IPostService, ISeoConfigService } from "../src/server";
+import {
+  APP_SERVICE_PROVIDER,
+  inject,
+  POST_SERVICE_PROVIDER,
+  PostList,
+  SEO_CONFIG_SERVICE_PROVIDER,
+} from "../src/server";
+import type { ILayoutProps } from "../src/client";
+import { Layout, LINKS } from "../src/client";
 import Head from "next/head";
 
 interface IProps extends ILayoutProps {
@@ -28,6 +27,8 @@ const getStaticProps: GetStaticProps<IProps> = async (
   const { title, author } = app;
   const { googleVerificationCode, yandexVerificationCode } = seo;
 
+  await posts.load(0, 5);
+
   return {
     props: {
       title,
@@ -35,7 +36,7 @@ const getStaticProps: GetStaticProps<IProps> = async (
       googleVerificationCode,
       yandexVerificationCode,
       links: LINKS,
-      posts: await posts.getList(0, 5),
+      posts: [...posts.items],
     },
     revalidate: 60,
   };

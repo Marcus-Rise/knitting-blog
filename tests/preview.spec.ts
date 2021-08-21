@@ -1,7 +1,7 @@
 import handler from "../pages/api/preview";
 import { mock } from "jest-mock-extended";
 import type { NextApiRequest, NextApiResponse } from "next";
-import type { IPrismicService } from "../src/prismic";
+import type { IPrismicService } from "../src/server/prismic";
 
 describe("preview", () => {
   test("Invalid dto", async () => {

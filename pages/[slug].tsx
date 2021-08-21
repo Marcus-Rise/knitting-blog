@@ -1,24 +1,22 @@
 import "reflect-metadata";
 import type { FC } from "react";
 import React from "react";
-import type { IPost, IPostService } from "../src/post";
-import { POST_SERVICE_PROVIDER } from "../src/post";
+import type { IAppService, IPost, IPostService, ISeoConfigService } from "../src/server";
+import {
+  APP_SERVICE_PROVIDER,
+  inject,
+  POST_SERVICE_PROVIDER,
+  PostWithContent,
+  SEO_CONFIG_SERVICE_PROVIDER,
+} from "../src/server";
 import type { GetStaticPaths, GetStaticProps } from "next";
-import { inject } from "../src/ioc";
 import { useRouter } from "next/router";
-import { PostWithContent } from "../src/post/post-with-content";
-import type { IAppService } from "../src/app";
-import { APP_SERVICE_PROVIDER } from "../src/app";
 import Head from "next/head";
-import type { IPrismicConfigService } from "../src/prismic/prismic-config.service.interface";
-import { PRISMIC_CONFIG_SERVICE_PROVIDER } from "../src/prismic/prismic-config.service.interface";
-import { PreviewAlert } from "../src/components/preview-alert";
-import { PrismicToolbar } from "../src/prismic/prismic-toolbar";
-import type { ILayoutProps } from "../src/components";
-import { Layout } from "../src/components";
-import type { ISeoConfigService } from "../src/seo";
-import { SEO_CONFIG_SERVICE_PROVIDER } from "../src/seo";
-import { LINKS } from "../src/links";
+import type { IPrismicConfigService } from "../src/server/prismic/prismic-config.service.interface";
+import { PRISMIC_CONFIG_SERVICE_PROVIDER } from "../src/server/prismic/prismic-config.service.interface";
+import type { ILayoutProps } from "../src/client";
+import { Layout, LINKS, PreviewAlert } from "../src/client";
+import { PrismicToolbar } from "../src/server/prismic/prismic-toolbar";
 
 interface IProps extends ILayoutProps {
   post: IPost | null;
@@ -30,10 +28,10 @@ const getStaticPaths: GetStaticPaths = async (
   _,
   posts = inject<IPostService>(POST_SERVICE_PROVIDER),
 ) => {
-  const items = await posts.getList(0, 5);
+  await posts.load(0, 5);
 
   return {
-    paths: items.map(({ slug }) => ({
+    paths: posts.items.map(({ slug }) => ({
       params: { slug },
     })),
     fallback: true,

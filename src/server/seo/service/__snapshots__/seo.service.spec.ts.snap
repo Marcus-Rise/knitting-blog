@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SeoService generateRobotsTxt robots are allowed 1`] = `
+"User-agent: *
+Allow: /
+Sitemap: https://hostname/sitemap.xml"
+`;
+
+exports[`SeoService generateRobotsTxt robots are not allowed 1`] = `
+"User-agent: *
+Disallow: /
+Sitemap: https://hostname/sitemap.xml"
+`;
+
+exports[`SeoService generateSitemap 1`] = `
+"<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?><urlset xmlns=\\"http://www.sitemaps.org/schemas/sitemap/0.9\\"><url>
+      <loc>https://hostname/post1</loc>
+      <lastmod>2021-01-12</lastmod>
+      </url><url>
+      <loc>https://hostname/post2</loc>
+      <lastmod>2021-01-13</lastmod>
+      </url></urlset>"
+`;
