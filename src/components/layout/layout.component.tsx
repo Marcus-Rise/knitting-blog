@@ -33,9 +33,11 @@ const Layout: FC<ILayoutProps> = ({
       <link rel="manifest" href="/site.webmanifest" />
     </Head>
     <VerificationCodes googleCode={googleVerificationCode} yandexCode={yandexVerificationCode} />
-    <Header title={title} links={links} />
+    {!!links && <Header title={title} links={links} />}
     <main>{children}</main>
-    <Footer year={new Date().getFullYear()} author={author.name} authorLink={author.url} />
+    {!!author && (
+      <Footer year={new Date().getFullYear()} author={author.name} authorLink={author.url} />
+    )}
   </>
 );
 
