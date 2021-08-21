@@ -14,10 +14,9 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import type { IPrismicConfigService } from "../src/server/prismic/prismic-config.service.interface";
 import { PRISMIC_CONFIG_SERVICE_PROVIDER } from "../src/server/prismic/prismic-config.service.interface";
-import { PreviewAlert } from "../src/client/components/preview-alert";
-import { PrismicToolbar } from "../src/server/prismic/prismic-toolbar";
 import type { ILayoutProps } from "../src/client";
-import { Layout, LINKS } from "../src/client";
+import { Layout, LINKS, PreviewAlert } from "../src/client";
+import { PrismicToolbar } from "../src/server/prismic/prismic-toolbar";
 
 interface IProps extends ILayoutProps {
   post: IPost | null;
@@ -29,10 +28,10 @@ const getStaticPaths: GetStaticPaths = async (
   _,
   posts = inject<IPostService>(POST_SERVICE_PROVIDER),
 ) => {
-  const items = await posts.getList(0, 5);
+  await posts.load(0, 5);
 
   return {
-    paths: items.map(({ slug }) => ({
+    paths: posts.items.map(({ slug }) => ({
       params: { slug },
     })),
     fallback: true,

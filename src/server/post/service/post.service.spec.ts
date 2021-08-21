@@ -32,30 +32,6 @@ describe("PostService", () => {
     });
   });
 
-  describe("getById", () => {
-    test("exist", async () => {
-      const postService = new PostService(
-        mock<IPostRepository>({
-          find: () => Promise.resolve(mock<IPost>()),
-        }),
-      );
-      const item = await postService.getById("id");
-
-      expect(item).not.toBeNull();
-    });
-
-    test("not exist", async () => {
-      const postService = new PostService(
-        mock<IPostRepository>({
-          find: () => Promise.resolve(null),
-        }),
-      );
-      const item = await postService.getById("id");
-
-      expect(item).toBeNull();
-    });
-  });
-
   describe("getPreview", () => {
     test("exist", async () => {
       const postService = new PostService(
@@ -80,7 +56,7 @@ describe("PostService", () => {
     });
   });
 
-  describe("getList", () => {
+  describe("load", () => {
     test("empty", async () => {
       const postService = new PostService(
         mock<IPostRepository>({
@@ -88,9 +64,9 @@ describe("PostService", () => {
         }),
       );
 
-      const items = await postService.getList(0, 10);
+      await postService.load(0, 10);
 
-      expect(items).toHaveLength(0);
+      expect(postService.items).toHaveLength(0);
     });
 
     test("not empty", async () => {
@@ -100,9 +76,9 @@ describe("PostService", () => {
         }),
       );
 
-      const items = await postService.getList(0, 10);
+      await postService.load(0, 10);
 
-      expect(items).toHaveLength(5);
+      expect(postService.items).toHaveLength(5);
     });
   });
 });

@@ -27,6 +27,8 @@ const getStaticProps: GetStaticProps<IProps> = async (
   const { title, author } = app;
   const { googleVerificationCode, yandexVerificationCode } = seo;
 
+  await posts.load(0, 5);
+
   return {
     props: {
       title,
@@ -34,7 +36,7 @@ const getStaticProps: GetStaticProps<IProps> = async (
       googleVerificationCode,
       yandexVerificationCode,
       links: LINKS,
-      posts: await posts.getList(0, 5),
+      posts: [...posts.items],
     },
     revalidate: 60,
   };

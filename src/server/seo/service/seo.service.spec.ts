@@ -2,7 +2,7 @@ import "reflect-metadata";
 import { SeoService } from "./seo.service";
 import { mock } from "jest-mock-extended";
 import type { IPost, IPostService } from "../../post";
-import type { ISeoConfigService } from "../config/seo-config.service.interface";
+import type { ISeoConfigService } from "../config";
 
 describe("SeoService", () => {
   describe("generateRobotsTxt", () => {
@@ -35,15 +35,16 @@ describe("SeoService", () => {
   test("generateSitemap", async () => {
     const service = new SeoService(
       mock<IPostService>({
-        getList: () =>
-          Promise.resolve([
-            mock<IPost>({
-              slug: "post1",
-            }),
-            mock<IPost>({
-              slug: "post2",
-            }),
-          ]),
+        items: [
+          mock<IPost>({
+            slug: "post1",
+            date: new Date(2020, 12, 12).toJSON(),
+          }),
+          mock<IPost>({
+            slug: "post2",
+            date: new Date(2020, 12, 13).toJSON(),
+          }),
+        ],
       }),
       mock<ISeoConfigService>(),
     );
