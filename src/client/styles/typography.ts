@@ -13,4 +13,24 @@ const Montserrat = css`
   font-size: 1rem;
 `;
 
-export { BadScript, Montserrat };
+const Light = css`
+  ${Montserrat};
+  font-weight: 300;
+`;
+
+const Regular = css`
+  ${Montserrat};
+  font-weight: 400;
+`;
+
+const Bold = css`
+  ${Montserrat};
+  font-weight: 700;
+`;
+
+const Black = css`
+  ${Montserrat};
+  font-weight: 900;
+`;
+
+export { BadScript, Montserrat, Light, Regular, Bold, Black };
