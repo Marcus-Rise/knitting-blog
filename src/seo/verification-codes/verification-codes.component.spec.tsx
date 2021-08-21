@@ -4,7 +4,9 @@ import { VerificationCodes } from "./verification-codes.component";
 
 describe("VerificationCodes", () => {
   test("render", () => {
-    const { asFragment } = render(<VerificationCodes googleCode={"google"} yandexCode={"yandex"} />);
+    const { asFragment } = render(
+      <VerificationCodes googleCode={"google"} yandexCode={"yandex"} />,
+    );
 
     expect(asFragment()).toMatchSnapshot();
   });

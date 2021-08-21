@@ -1,4 +1,4 @@
-import handler from "./exit-preview";
+import handler from "../pages/api/exit-preview";
 import { mock } from "jest-mock-extended";
 import type { NextApiRequest, NextApiResponse } from "next";
 

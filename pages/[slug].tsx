@@ -37,8 +37,10 @@ const getStaticProps: GetStaticProps<IProps> = async (context) => {
 
   let post: IPost | null;
 
-  if (isPreview) {
-    post = await postService.getPreview(context.previewData.ref);
+  if (isPreview && typeof context.previewData === "object") {
+    // @ts-ignore
+    const { ref } = context.previewData;
+    post = await postService.getPreview(ref);
   } else {
     post = await postService.getBySlug(String(context.params?.slug));
   }

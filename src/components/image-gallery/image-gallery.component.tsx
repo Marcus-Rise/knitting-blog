@@ -7,7 +7,10 @@ import { ImageView } from "../image-view";
 const ImageGallery: React.FC<{
   items: IImage[];
 }> = (props) => {
-  const album = useMemo(() => props.items.map((i) => ({ src: i.src, alt: i.alt ?? "" })), [props.items]);
+  const album = useMemo(
+    () => props.items.map((i) => ({ src: i.src, alt: i.alt ?? "" })),
+    [props.items],
+  );
   const items = useMemo(
     () =>
       props.items.map((i, index) => (

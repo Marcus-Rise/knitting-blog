@@ -16,7 +16,10 @@ interface IProps {
 
 const ImageView: React.FC<IProps> = (props) => {
   const [isShow, setIsShow] = useState(false);
-  const setInitialCurrentIndex = useCallback((): number => props.currentIndex ?? 0, [props.currentIndex]);
+  const setInitialCurrentIndex = useCallback(
+    (): number => props.currentIndex ?? 0,
+    [props.currentIndex],
+  );
   const [currentIndex, setCurrentIndex] = useState<number>(setInitialCurrentIndex);
 
   const close = useCallback(() => {
@@ -28,7 +31,10 @@ const ImageView: React.FC<IProps> = (props) => {
     setIsShow(true);
   }, []);
 
-  const isNextExist: boolean = useMemo(() => currentIndex < props.album.length - 1, [currentIndex, props.album]);
+  const isNextExist: boolean = useMemo(
+    () => currentIndex < props.album.length - 1,
+    [currentIndex, props.album],
+  );
   const isBackExist: boolean = useMemo(() => currentIndex > 0, [currentIndex]);
 
   const slideLeft = useCallback(() => {
@@ -69,7 +75,10 @@ const ImageView: React.FC<IProps> = (props) => {
     () => (
       <>
         {isBackExist && (
-          <button className={classNames(styles.navigationButton, styles.navigationBack)} onClick={slideLeft}>
+          <button
+            className={classNames(styles.navigationButton, styles.navigationBack)}
+            onClick={slideLeft}
+          >
             ‹
           </button>
         )}
@@ -82,7 +91,10 @@ const ImageView: React.FC<IProps> = (props) => {
     () => (
       <>
         {isNextExist && (
-          <button className={classNames(styles.navigationButton, styles.navigationNext)} onClick={slideRight}>
+          <button
+            className={classNames(styles.navigationButton, styles.navigationNext)}
+            onClick={slideRight}
+          >
             ›
           </button>
         )}
@@ -131,7 +143,13 @@ const ImageView: React.FC<IProps> = (props) => {
         <ModalWrapper>
           {buttonBack}
           <div className={styles.image}>
-            <NextImage src={currentImage.src} alt={currentImage.alt} layout={"fill"} loading={"eager"} quality={100} />
+            <NextImage
+              src={currentImage.src}
+              alt={currentImage.alt}
+              layout={"fill"}
+              loading={"eager"}
+              quality={100}
+            />
             {Alt}
           </div>
           {buttonNext}

@@ -7,7 +7,9 @@ import { PRISMIC_CONFIG_SERVICE_PROVIDER } from "./prismic-config.service.interf
 import { PrismicConfigService } from "./prismic-config.service";
 
 const PrismicModule = new ContainerModule((bind) => {
-  bind<IPrismicConfigService>(PRISMIC_CONFIG_SERVICE_PROVIDER).to(PrismicConfigService).inSingletonScope();
+  bind<IPrismicConfigService>(PRISMIC_CONFIG_SERVICE_PROVIDER)
+    .to(PrismicConfigService)
+    .inSingletonScope();
   bind<IPrismicService>(PRISMIC_SERVICE_PROVIDER).to(PrismicService).inSingletonScope();
 });
 
