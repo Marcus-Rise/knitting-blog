@@ -11,6 +11,11 @@ const GlobalStyles = createGlobalStyle`
     margin: 0;
   }
 
+  body.modal {
+    max-height: 100vh;
+    overflow-y: hidden;
+  }
+
   #__next {
     height: 100% !important;
   }
