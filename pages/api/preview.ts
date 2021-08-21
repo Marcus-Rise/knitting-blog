@@ -1,9 +1,8 @@
 import "reflect-metadata";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { PreviewDto } from "../../src/server/prismic/preview.dto";
-import { validate } from "class-validator";
 import type { IPrismicService } from "../../src/server";
-import { inject, PRISMIC_SERVICE_PROVIDER } from "../../src/server";
+import { inject, PreviewDto, PRISMIC_SERVICE_PROVIDER } from "../../src/server";
+import { validate } from "class-validator";
 
 const handler = async (
   req: NextApiRequest,

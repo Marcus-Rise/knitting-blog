@@ -1,18 +1,19 @@
 import "reflect-metadata";
 import type { FC } from "react";
 import React from "react";
-import type { IAppService, IPostService } from "../src/server";
-import { APP_SERVICE_PROVIDER, inject, POST_SERVICE_PROVIDER } from "../src/server";
+import type { IAppService, IPostService, IPrismicConfigService } from "../src/server";
+import {
+  APP_SERVICE_PROVIDER,
+  inject,
+  POST_SERVICE_PROVIDER,
+  PRISMIC_CONFIG_SERVICE_PROVIDER,
+} from "../src/server";
 import type { GetStaticPaths, GetStaticProps } from "next";
 import { useRouter } from "next/router";
 import Head from "next/head";
-import type { IPrismicConfigService } from "../src/server/prismic/prismic-config.service.interface";
-import { PRISMIC_CONFIG_SERVICE_PROVIDER } from "../src/server/prismic/prismic-config.service.interface";
 import type { ILayoutProps } from "../src/client";
-import { Layout, LINKS, PreviewAlert } from "../src/client";
-import { PrismicToolbar } from "../src/server/prismic/prismic-toolbar";
+import { Layout, LINKS, PostWithContent, PreviewAlert, PrismicToolbar } from "../src/client";
 import type { IPost } from "../src/common/post";
-import { PostWithContent } from "../src/client/post";
 
 interface IProps {
   post: IPost | null;

@@ -1,10 +1,8 @@
 import { ContainerModule } from "inversify";
-import type { IPrismicService } from "./prismic.service.interface";
-import { PRISMIC_SERVICE_PROVIDER } from "./prismic.service.interface";
-import { PrismicService } from "./prismic.service";
-import type { IPrismicConfigService } from "./prismic-config.service.interface";
-import { PRISMIC_CONFIG_SERVICE_PROVIDER } from "./prismic-config.service.interface";
-import { PrismicConfigService } from "./prismic-config.service";
+import type { IPrismicService } from "./service";
+import { PRISMIC_SERVICE_PROVIDER, PrismicService } from "./service";
+import type { IPrismicConfigService } from "./config";
+import { PRISMIC_CONFIG_SERVICE_PROVIDER, PrismicConfigService } from "./config";
 
 const PrismicModule = new ContainerModule((bind) => {
   bind<IPrismicConfigService>(PRISMIC_CONFIG_SERVICE_PROVIDER)

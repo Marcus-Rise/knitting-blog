@@ -5,10 +5,9 @@ import type { GetStaticProps } from "next";
 import type { IAppService, IPostService } from "../src/server";
 import { APP_SERVICE_PROVIDER, inject, POST_SERVICE_PROVIDER } from "../src/server";
 import type { ILayoutProps } from "../src/client";
-import { Layout, LINKS } from "../src/client";
+import { Layout, LINKS, PostList } from "../src/client";
 import Head from "next/head";
 import type { IPost } from "../src/common/post";
-import { PostList } from "../src/client/post";
 
 interface IProps {
   posts: Array<IPost>;
