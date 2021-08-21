@@ -1,6 +1,6 @@
 /* eslint-disable */
 import { toMatchDiffSnapshot } from "snapshot-diff";
-import React from "react";
+import React, { FC } from "react";
 
 process.env = {
   ...process.env,
@@ -16,14 +16,21 @@ process.env = {
 
 expect.extend({ toMatchDiffSnapshot });
 
-jest.mock("next/link", (): React.FC => ({ children }) => <>{children}</>);
+jest.mock(
+  "next/link",
+  (): FC =>
+    ({ children }) =>
+      <>{children}</>,
+);
 jest.mock("next/head", () => ({
   __esModule: true,
   default: jest.fn((props) => <div data-testid="head">{props.children}</div>),
 }));
 jest.mock("next/image", () => ({
   __esModule: true,
-  default: jest.fn((props) => <img src={props.src} alt={props.alt} height={props.height} width={props.width} />),
+  default: jest.fn((props) => (
+    <img src={props.src} alt={props.alt} height={props.height} width={props.width} />
+  )),
 }));
 
 const OLD_ENV = process.env;

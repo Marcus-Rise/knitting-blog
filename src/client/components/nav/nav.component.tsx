@@ -1,3 +1,4 @@
+import type { FC } from "react";
 import React, { useCallback, useMemo, useState } from "react";
 import styles from "./nav.module.scss";
 import type { INavLink } from "./nav-link.interface";
@@ -11,7 +12,7 @@ interface IProps {
   items: ReadonlyArray<INavLink>;
 }
 
-const Nav: React.FC<IProps> = (props) => {
+const Nav: FC<IProps> = (props) => {
   const [showMobileMenu, setShowMenu] = useState<boolean>(false);
   const openMenu = useCallback((): void => setShowMenu(true), []);
   const closeMenu = useCallback((): void => setShowMenu(false), []);

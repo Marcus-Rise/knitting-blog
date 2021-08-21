@@ -1,3 +1,4 @@
+import type { FC } from "react";
 import React, { useCallback, useEffect } from "react";
 import styles from "./modal.module.scss";
 import { Overlay } from "../overlay";
@@ -8,13 +9,13 @@ interface IProps {
   splash?: boolean;
 }
 
-const Modal: React.FC<IProps> = (props) => {
+const Modal: FC<IProps> = ({ children, onClose, splash }) => {
   const onModalClick = useCallback((e: React.MouseEvent) => e.stopPropagation(), []);
 
   useEffect(() => {
     const close = (e: KeyboardEvent): void => {
       if (e.code === "Escape") {
-        props.onClose();
+        onClose();
       }
     };
 
@@ -26,12 +27,12 @@ const Modal: React.FC<IProps> = (props) => {
 
   return (
     <>
-      <Overlay onClose={props.onClose}>
+      <Overlay onClose={onClose}>
         <div
-          className={classNames(styles.modal, { [styles.splash]: props.splash })}
+          className={classNames(styles.modal, { [styles.splash]: splash })}
           onClick={onModalClick}
         >
-          {props.children}
+          {children}
         </div>
       </Overlay>
     </>
