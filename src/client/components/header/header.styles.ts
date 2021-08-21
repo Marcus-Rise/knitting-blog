@@ -32,8 +32,7 @@ const Container = styled.div`
   padding-bottom: 1.75rem;
   box-sizing: border-box;
 
-  background-image: url("../../assets/header_background_left.png"),
-    url("../../assets/header_background_right.png");
+  background-image: url("/header_background_left.png"), url("/header_background_right.png");
   background-repeat: no-repeat, no-repeat;
   background-size: contain, contain;
   background-position: left top, right bottom;
