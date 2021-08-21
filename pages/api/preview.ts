@@ -18,9 +18,11 @@ const handler = async (
   if (errors.length) {
     return res.status(400).json({ message: "Invalid dto" });
   } else {
-    const url = await service.client.getPreviewResolver(dto.token, dto.documentId).resolve((doc) => {
-      return `/${doc.slugs[0]}`;
-    }, "/");
+    const url = await service.client
+      .getPreviewResolver(dto.token, dto.documentId)
+      .resolve((doc) => {
+        return `/${doc.slugs[0]}`;
+      }, "/");
 
     if (!url) {
       return res.status(401).json({ message: "Invalid token" });

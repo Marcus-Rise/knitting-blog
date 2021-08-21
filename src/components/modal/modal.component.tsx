@@ -27,7 +27,10 @@ const Modal: React.FC<IProps> = (props) => {
   return (
     <>
       <Overlay onClose={props.onClose}>
-        <div className={classNames(styles.modal, { [styles.splash]: props.splash })} onClick={onModalClick}>
+        <div
+          className={classNames(styles.modal, { [styles.splash]: props.splash })}
+          onClick={onModalClick}
+        >
           {props.children}
         </div>
       </Overlay>

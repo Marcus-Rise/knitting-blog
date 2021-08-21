@@ -48,7 +48,9 @@ class PostPrismicRepository implements IPostRepository {
         pageSize: limit ?? "",
       })
       .then((data) => {
-        items = data.results.map<IPost>((i) => new PostPrismicDto(i)).map((i) => classToPlain(i) as IPost);
+        items = data.results
+          .map<IPost>((i) => new PostPrismicDto(i))
+          .map((i) => classToPlain(i) as IPost);
       })
       .catch(console.error);
 

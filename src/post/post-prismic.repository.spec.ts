@@ -57,7 +57,7 @@ describe("PostPrismicRepository", () => {
       const repo = new PostPrismicRepository(
         mock<IPrismicService>({
           client: {
-            getByUID: () => Promise.resolve((undefined as unknown) as IPostPrismicDto),
+            getByUID: () => Promise.resolve(undefined as unknown as IPostPrismicDto),
           },
         }),
       );
@@ -126,7 +126,7 @@ describe("PostPrismicRepository", () => {
           },
         }),
       );
-      const items = await repo.list({ slug: slug });
+      const items = await repo.list({ slug });
 
       expect(items).toHaveLength(1);
     });

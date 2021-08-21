@@ -1,7 +1,7 @@
-import handler from "./robots";
+import handler from "../pages/api/robots";
 import { mock } from "jest-mock-extended";
 import type { NextApiRequest, NextApiResponse } from "next";
-import type { ISeoService } from "../../src/seo";
+import type { ISeoService } from "../src/seo";
 
 describe("robots", () => {
   test("host", async () => {

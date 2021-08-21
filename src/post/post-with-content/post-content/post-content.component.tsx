@@ -13,7 +13,10 @@ const PostContent: React.FC<IProps> = (props) => {
   const slices = props.content.map((slice, sliceIndex) => {
     if (slice.type === SliceTypeEnum.IMAGE_GALLERY) {
       return (
-        <ImageGallery key={sliceIndex} items={slice.items.map((i) => ({ src: i.url, alt: i.alt, size: i.height }))} />
+        <ImageGallery
+          key={sliceIndex}
+          items={slice.items.map((i) => ({ src: i.url, alt: i.alt, size: i.height }))}
+        />
       );
     } else {
       switch (slice.type) {

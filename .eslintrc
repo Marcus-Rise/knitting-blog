@@ -1,0 +1,18 @@
+{
+  "extends": [
+    "next",
+    "next/core-web-vitals",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "rules": {
+    "prefer-const": "error",
+    "react/prop-types": "off",
+    "newline-before-return": "error",
+    "@typescript-eslint/consistent-type-imports": "error",
+    "object-shorthand": "error",
+    "react/react-in-jsx-scope": "off"
+  }
+}

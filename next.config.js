@@ -14,7 +14,7 @@ const redirects = async () => [
   },
 ];
 
-let nextConfig = {
+const nextConfig = {
   redirects,
   pwa: {
     disable: process.env.NODE_ENV !== "production",
@@ -26,14 +26,6 @@ let nextConfig = {
     domains: ["images.prismic.io"],
   },
   reactStrictMode: true,
-  webpack(config) {
-    config.module.rules.push({
-      test: /\.svg$/,
-      use: ["@svgr/webpack", "url-loader"],
-    });
-
-    return config;
-  },
 };
 
 module.exports = withPWA(nextConfig);

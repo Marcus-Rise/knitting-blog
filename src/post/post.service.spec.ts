@@ -9,10 +9,7 @@ describe("PostService", () => {
     test("exist", async () => {
       const postService = new PostService(
         mock<IPostRepository>({
-          find: () =>
-            Promise.resolve(
-              mock<IPost>({ slug }),
-            ),
+          find: () => Promise.resolve(mock<IPost>({ slug })),
         }),
       );
       const slug = "slug";

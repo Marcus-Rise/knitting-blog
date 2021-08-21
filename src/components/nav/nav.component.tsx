@@ -32,7 +32,11 @@ const Nav: React.FC<IProps> = (props) => {
         <MobileMenuButton onClick={openMenu} />
       </div>
       {showMobileMenu && <Overlay onClose={closeMenu} />}
-      <div className={classnames(styles.itemsContainer, { [styles.itemsContainerShow]: showMobileMenu })}>
+      <div
+        className={classnames(styles.itemsContainer, {
+          [styles.itemsContainerShow]: showMobileMenu,
+        })}
+      >
         {showMobileMenu && (
           <div className={styles.closeButtonContainer}>
             <MobileMenuCloseButton onClick={closeMenu} />{" "}

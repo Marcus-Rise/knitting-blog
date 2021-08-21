@@ -1,7 +1,7 @@
-import handler from "./sitemap";
+import handler from "../pages/api/sitemap";
 import { mock } from "jest-mock-extended";
 import type { NextApiRequest, NextApiResponse } from "next";
-import type { ISeoService } from "../../src/seo";
+import type { ISeoService } from "../src/seo";
 
 describe("sitemap", () => {
   test("host", async () => {
