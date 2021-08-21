@@ -33,8 +33,10 @@ describe("SeoService", () => {
   });
 
   test("generateSitemap", async () => {
+    const lastDate = new Date(2020, 12, 13);
     const service = new SeoService(
       mock<IPostService>({
+        itemLastDate: null,
         items: [
           mock<IPost>({
             slug: "post1",
@@ -42,7 +44,7 @@ describe("SeoService", () => {
           }),
           mock<IPost>({
             slug: "post2",
-            date: new Date(2020, 12, 13).toJSON(),
+            date: lastDate.toJSON(),
           }),
         ],
       }),

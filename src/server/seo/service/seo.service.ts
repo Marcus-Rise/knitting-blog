@@ -13,6 +13,10 @@ class SeoService implements ISeoService {
     @inject(SEO_CONFIG_SERVICE_PROVIDER) private readonly config: ISeoConfigService,
   ) {}
 
+  static getDateStr(lastEditDate: Date) {
+    return format(lastEditDate, "yyyy-MM-dd");
+  }
+
   async generateRobotsTxt(hostName: string): Promise<string> {
     const sections: { [p: string]: string } = !this.config.allowRobots
       ? {
@@ -35,10 +39,19 @@ class SeoService implements ISeoService {
     let buf = `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
     await this.posts.load(0);
 
+    const date = this.posts.itemLastDate;
+
+    if (!!date) {
+      buf += `<url>
+    <loc>${hostName}/</loc>
+    <lastmod>${SeoService.getDateStr(date)}</lastmod>
+    </url>`;
+    }
+
     this.posts.items.forEach((post) => {
       const url = `https://${hostName}/${post.slug}`;
       const lastEditDate = new Date(post.date);
-      const dateStr = format(lastEditDate, "yyyy-MM-dd");
+      const dateStr = SeoService.getDateStr(lastEditDate);
 
       buf += `<url>
       <loc>${url}</loc>
