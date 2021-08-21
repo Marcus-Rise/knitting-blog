@@ -4,6 +4,7 @@ import type { IPostService } from "../post";
 import { POST_SERVICE_PROVIDER } from "../post";
 import type { ISeoConfigService } from "./seo-config.service.interface";
 import { SEO_CONFIG_SERVICE_PROVIDER } from "./seo-config.service.interface";
+import { format } from "date-fns";
 
 @injectable()
 class SeoService implements ISeoService {
@@ -31,15 +32,15 @@ class SeoService implements ISeoService {
   }
 
   async generateSitemap(hostName: string): Promise<string> {
-    let buf = `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
+    let buf = `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
     const posts = await this.posts.getList(0);
 
     posts.forEach((post) => {
       const url = `https://${hostName}/${post.slug}`;
-      const period = "daily";
-      const priority = 0.9;
+      const lastEditDate = new Date(post.date);
+      const dateStr = format(lastEditDate, "yyyy-MM-dd");
 
-      buf += `<url><loc>${url}</loc><changefreq>${period}</changefreq><priority>${priority}</priority></url>`;
+      buf += `<url><loc>${url}</loc><lastmod>${dateStr}</lastmod></url>`;
     });
 
     buf += `</urlset>`;
