@@ -1,5 +1,3 @@
-const SEO_CONFIG_SERVICE_PROVIDER = Symbol("ISeoConfigService");
-
 interface ISeoConfigService {
   readonly allowRobots: boolean;
   readonly googleVerificationCode: string;
@@ -7,4 +5,3 @@ interface ISeoConfigService {
 }
 
 export type { ISeoConfigService };
-export { SEO_CONFIG_SERVICE_PROVIDER };
