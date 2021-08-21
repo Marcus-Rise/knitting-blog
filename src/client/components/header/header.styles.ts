@@ -25,6 +25,10 @@ const Root = styled.header`
 const LinkStyled = styled.a`
   color: inherit;
   text-decoration: none;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const Container = styled.div`
