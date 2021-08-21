@@ -1,0 +1,3 @@
+const PRISMIC_CONFIG_SERVICE_PROVIDER = Symbol("IPrismicConfigService");
+
+export { PRISMIC_CONFIG_SERVICE_PROVIDER };

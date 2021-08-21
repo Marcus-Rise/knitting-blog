@@ -1,7 +1,7 @@
 import "reflect-metadata";
 import { PrismicService } from "./prismic.service";
 import { mock } from "jest-mock-extended";
-import type { IPrismicConfigService } from "./prismic-config.service.interface";
+import type { IPrismicConfigService } from "../config/prismic-config.service.interface";
 
 describe("PrismicService", () => {
   test("client", () => {

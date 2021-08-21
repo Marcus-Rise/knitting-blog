@@ -1,4 +1,4 @@
-import type { IPost } from "../post.interface";
+import type { IPost } from "../../../common/post/post.interface";
 
 interface IPostService {
   readonly items: ReadonlyArray<IPost>;

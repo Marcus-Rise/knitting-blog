@@ -1,5 +1,5 @@
 import type { IPostService } from "./post.service.interface";
-import type { IPost } from "../post.interface";
+import type { IPost } from "../../../common/post/post.interface";
 import { inject, injectable } from "inversify";
 import type { IPostRepository } from "../repository";
 import { POST_REPOSITORY_PROVIDER } from "../repository";

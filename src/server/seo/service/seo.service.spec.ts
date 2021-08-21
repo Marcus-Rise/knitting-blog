@@ -1,8 +1,9 @@
 import "reflect-metadata";
 import { SeoService } from "./seo.service";
 import { mock } from "jest-mock-extended";
-import type { IPost, IPostService } from "../../post";
+import type { IPostService } from "../../post";
 import type { ISeoConfigService } from "../config";
+import type { IPost } from "../../../common/post";
 
 describe("SeoService", () => {
   describe("generateRobotsTxt", () => {

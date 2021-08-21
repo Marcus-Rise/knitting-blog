@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react";
 import { PostList } from "./post-list.component";
 import React from "react";
-import type { IPost } from "../../post.interface";
+import type { IPost } from "../../../../common/post";
 
 jest.mock("../post-list-item", () => ({
   __esModule: true,

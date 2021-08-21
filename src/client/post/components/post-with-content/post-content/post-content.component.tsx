@@ -1,9 +1,9 @@
 import React from "react";
-import type { IPostContent } from "../../../post-content.inteface";
 import { Elements } from "prismic-reactjs";
 import styles from "./post-content.module.scss";
-import { SliceTypeEnum } from "../../../repository/post-prismic.dto.interface";
-import { ImageGallery } from "../../../../../client/components/image-gallery";
+import type { IPostContent } from "../../../../../common/post";
+import { SliceTypeEnum } from "../../../../../server/post/repository";
+import { ImageGallery } from "../../../../components";
 
 interface IProps {
   content: IPostContent;
