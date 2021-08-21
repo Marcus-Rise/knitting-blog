@@ -8,7 +8,7 @@ import classnames from "classnames";
 import { NavItem } from "./nav-item";
 
 interface IProps {
-  items: Array<INavLink>;
+  items: ReadonlyArray<INavLink>;
 }
 
 const Nav: React.FC<IProps> = (props) => {

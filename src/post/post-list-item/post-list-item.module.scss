@@ -1,9 +1,5 @@
-@use "../../styles/typography";
-@use "../../styles/grid";
-
-.root {
-
-}
+@use "src/styles/typography";
+@use "src/styles/grid";
 
 .title {
   @include typography.bold;
@@ -23,6 +19,12 @@
 
   width: auto;
   overflow: hidden;
+
+  & > div {
+    &, & > img {
+      position: relative !important;
+    }
+  }
 
   img {
     object-fit: cover;

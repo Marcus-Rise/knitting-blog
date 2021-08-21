@@ -7,7 +7,7 @@ import Link from "next/link";
 interface IProps {
   title: string;
   // logoSrc: string;
-  links: Array<INavLink>;
+  links: ReadonlyArray<INavLink>;
 }
 
 const Header: React.FC<IProps> = (props) => {
