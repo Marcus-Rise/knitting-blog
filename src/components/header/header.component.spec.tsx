@@ -9,9 +9,7 @@ jest.mock("../nav", () => ({
 
 describe("Header", () => {
   test("render", () => {
-    const { asFragment } = render(
-      <Header title={"title"} logoSrc={"http://test.com"} links={[{ title: "RRR", link: "#" }]} />,
-    );
+    const { asFragment } = render(<Header title={"title"} links={[{ title: "RRR", link: "#" }]} />);
 
     expect(asFragment()).toMatchSnapshot();
   });

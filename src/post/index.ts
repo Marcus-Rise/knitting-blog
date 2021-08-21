@@ -1,4 +1,4 @@
-export type { IPost } from "./post.interface";
-export type { IPostService } from "./post.service.interface";
-export { POST_SERVICE_PROVIDER } from "./post.service.interface";
-export { PostModule } from "./post.module";
+export * from "./post.interface";
+export type { IPostService } from "./service/post.service.interface";
+export { POST_SERVICE_PROVIDER } from "./service";
+export * from "./post.module";

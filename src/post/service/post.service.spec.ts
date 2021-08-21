@@ -1,8 +1,8 @@
 import "reflect-metadata";
 import { PostService } from "./post.service";
 import { mock } from "jest-mock-extended";
-import type { IPostRepository } from "./post.repository.interface";
-import type { IPost } from "./post.interface";
+import type { IPostRepository } from "../post.repository.interface";
+import type { IPost } from "../post.interface";
 
 describe("PostService", () => {
   describe("getBySlug", () => {

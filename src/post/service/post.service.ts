@@ -1,8 +1,8 @@
 import type { IPostService } from "./post.service.interface";
-import type { IPost } from "./post.interface";
+import type { IPost } from "../post.interface";
 import { inject, injectable } from "inversify";
-import type { IPostRepository } from "./post.repository.interface";
-import { POST_REPOSITORY_PROVIDER } from "./post.repository.interface";
+import type { IPostRepository } from "../post.repository.interface";
+import { POST_REPOSITORY_PROVIDER } from "../post.repository.interface";
 
 @injectable()
 class PostService implements IPostService {
@@ -25,6 +25,10 @@ class PostService implements IPostService {
 
   async getPreview(ref: string): Promise<IPost | null> {
     return this.repo.find({ previewRef: ref });
+  }
+
+  async getForMainPage(): Promise<IPost[]> {
+    return this.getList(0, 5);
   }
 }
 
