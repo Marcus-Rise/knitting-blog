@@ -1,4 +1,4 @@
-import type { IPost } from "../post.interface";
+import type { IPost } from "../../../common/post/post.interface";
 
 const POST_REPOSITORY_PROVIDER = Symbol("IPostRepository");
 

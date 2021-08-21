@@ -1,7 +1,7 @@
-import type { IPost } from "../post.interface";
+import type { IPost } from "../../../common/post/post.interface";
 import type { Image, IPostPrismicDto } from "./post-prismic.dto.interface";
 import { SliceTypeEnum } from "./post-prismic.dto.interface";
-import type { IImageGallery, IPostContent } from "../post-content.inteface";
+import type { IImageGallery, IPostContent } from "../../../common/post/post-content.inteface";
 import type { RichTextBlock } from "prismic-reactjs";
 
 class PostPrismicDto implements IPost {

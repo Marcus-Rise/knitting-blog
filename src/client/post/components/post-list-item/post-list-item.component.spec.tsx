@@ -2,7 +2,7 @@ import { render } from "@testing-library/react";
 import React from "react";
 import { PostListItem } from "./post-list-item.component";
 
-jest.mock("../../components/image-view", () => ({
+jest.mock("../../../components", () => ({
   __esModule: true,
   ImageView: jest.fn((props) => <div data-testid="image-view">{props.children}</div>),
 }));

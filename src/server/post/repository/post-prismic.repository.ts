@@ -1,5 +1,5 @@
 import type { IFindCriteria, IPostRepository } from "./post.repository.interface";
-import type { IPost } from "../post.interface";
+import type { IPost } from "../../../common/post/post.interface";
 import { inject, injectable } from "inversify";
 import type { IPrismicService } from "../../prismic";
 import { PRISMIC_SERVICE_PROVIDER } from "../../prismic";

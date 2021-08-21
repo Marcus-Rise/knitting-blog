@@ -1,11 +1,10 @@
 import React from "react";
-import type { IPost } from "../../post.interface";
 import styles from "./post-with-content.module.scss";
-import { Hr } from "../../../../client/components/hr";
+import { Hr, ImageView } from "../../../components";
 import Image from "next/image";
 import { DateToString } from "../../../../common/utils/date-to-string";
 import { PostContent } from "./post-content";
-import { ImageView } from "../../../../client/components/image-view";
+import type { IPost } from "../../../../common/post";
 
 type IProps = IPost;
 

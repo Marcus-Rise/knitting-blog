@@ -1,7 +1,7 @@
 import React from "react";
-import type { IPost } from "../../post.interface";
 import { PostListItem } from "../post-list-item";
 import styles from "./post-list.module.scss";
+import type { IPost } from "../../../../common/post";
 
 interface IProps {
   items: Array<IPost>;
