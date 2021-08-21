@@ -47,7 +47,7 @@ const Home: FC<IProps> = ({
   links,
   posts,
   googleVerificationCode,
-  yandexVerificationCe,
+  yandexVerificationCode,
 }) => (
   <Layout
     title={title}
