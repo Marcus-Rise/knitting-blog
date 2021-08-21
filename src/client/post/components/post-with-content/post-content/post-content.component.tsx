@@ -1,3 +1,4 @@
+import type { FC } from "react";
 import React from "react";
 import { Elements } from "prismic-reactjs";
 import styles from "./post-content.module.scss";
@@ -9,8 +10,8 @@ interface IProps {
   content: IPostContent;
 }
 
-const PostContent: React.FC<IProps> = (props) => {
-  const slices = props.content.map((slice, sliceIndex) => {
+const PostContent: FC<IProps> = ({ content }) => {
+  const slices = content.map((slice, sliceIndex) => {
     if (slice.type === SliceTypeEnum.IMAGE_GALLERY) {
       return (
         <ImageGallery

@@ -1,10 +1,11 @@
+import type { FC } from "react";
 import React, { useMemo } from "react";
 import type { IImage } from "../image";
 import { Image } from "../image";
 import styles from "./image-gallery.module.scss";
 import { ImageView } from "../image-view";
 
-const ImageGallery: React.FC<{
+const ImageGallery: FC<{
   items: IImage[];
 }> = (props) => {
   const album = useMemo(

@@ -1,3 +1,4 @@
+import type { FC } from "react";
 import React, { useEffect } from "react";
 import styles from "./overlay.module.scss";
 
@@ -5,12 +6,12 @@ interface IProps {
   onClose?: () => void;
 }
 
-const Overlay: React.FC<IProps> = (props) => {
+const Overlay: FC<IProps> = ({ children, onClose }) => {
   const onClick = (e: React.MouseEvent): void => {
     e.stopPropagation();
 
-    if (props.onClose) {
-      props.onClose();
+    if (onClose) {
+      onClose();
     }
   };
 
@@ -26,7 +27,7 @@ const Overlay: React.FC<IProps> = (props) => {
 
   return (
     <div className={styles.root} onClick={onClick}>
-      {props.children}
+      {children}
     </div>
   );
 };

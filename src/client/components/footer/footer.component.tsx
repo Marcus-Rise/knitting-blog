@@ -1,3 +1,4 @@
+import type { FC } from "react";
 import React from "react";
 import styles from "./footer.module.scss";
 
@@ -7,15 +8,13 @@ interface IProps {
   authorLink: string;
 }
 
-const Footer: React.FC<IProps> = (props) => {
-  return (
-    <footer className={styles.footer}>
-      <span className="mr-1">&#9400; {props.year}</span>
-      <a href={props.authorLink} target={"_blank"} rel="noreferrer">
-        {props.author}
-      </a>
-    </footer>
-  );
-};
+const Footer: FC<IProps> = ({ author, authorLink, year }) => (
+  <footer className={styles.footer}>
+    <span className="mr-1">&#9400; {year}</span>
+    <a href={authorLink} target={"_blank"} rel="noreferrer">
+      {author}
+    </a>
+  </footer>
+);
 
 export { Footer };

@@ -1,3 +1,4 @@
+import type { FC } from "react";
 import React from "react";
 import styles from "./header.module.scss";
 import type { INavLink } from "../nav";
@@ -10,22 +11,20 @@ interface IProps {
   links: ReadonlyArray<INavLink>;
 }
 
-const Header: React.FC<IProps> = (props) => {
-  return (
-    <header className={styles.root}>
-      <Link href={"/"}>
-        <a className={styles.link}>
-          <div className={styles.logoContainer}>
-            {/*<div className={styles.logo}>*/}
-            {/*  <Image src={props.logoSrc} alt={props.title} height={"auto"} width={"auto"} layout={"responsive"} />*/}
-            {/*</div>*/}
-            <h1 className={styles.title}>{props.title}</h1>
-          </div>
-        </a>
-      </Link>
-      <Nav items={props.links} />
-    </header>
-  );
-};
+const Header: FC<IProps> = ({ links, title }) => (
+  <header className={styles.root}>
+    <Link href={"/"}>
+      <a className={styles.link}>
+        <div className={styles.logoContainer}>
+          {/*<div className={styles.logo}>*/}
+          {/*  <Image src={props.logoSrc} alt={props.title} height={"auto"} width={"auto"} layout={"responsive"} />*/}
+          {/*</div>*/}
+          <h1 className={styles.title}>{title}</h1>
+        </div>
+      </a>
+    </Link>
+    <Nav items={links} />
+  </header>
+);
 
 export { Header };

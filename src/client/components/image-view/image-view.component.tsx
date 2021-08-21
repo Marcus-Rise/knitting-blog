@@ -1,3 +1,4 @@
+import type { FC } from "react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Modal } from "../modal";
 import NextImage from "next/image";
@@ -14,7 +15,7 @@ interface IProps {
   album: ImageItem[];
 }
 
-const ImageView: React.FC<IProps> = (props) => {
+const ImageView: FC<IProps> = (props) => {
   const [isShow, setIsShow] = useState(false);
   const setInitialCurrentIndex = useCallback(
     (): number => props.currentIndex ?? 0,
@@ -105,7 +106,7 @@ const ImageView: React.FC<IProps> = (props) => {
 
   const currentImage = props.album[currentIndex];
 
-  const ModalWrapper: React.FC = useCallback(
+  const ModalWrapper: FC = useCallback(
     (props) => (
       <Modal onClose={close} splash>
         <div className={styles.root}>
