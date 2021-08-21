@@ -1,11 +1,10 @@
-import type { CSSProperties, FC } from "react";
 import React from "react";
-import styles from "./hr.module.scss";
+import styled from "styled-components";
 
-interface IProps {
-  styles?: CSSProperties;
-}
-
-const Hr: FC<IProps> = (props) => <hr className={styles.hr} style={props.styles} />;
+const Hr = styled.hr`
+  height: 0;
+  border-top: 0.1rem dashed;
+  max-width: 80%;
+`;
 
 export { Hr };
