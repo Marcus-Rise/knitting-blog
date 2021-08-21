@@ -2,6 +2,7 @@ import type { IPost } from "../post.interface";
 
 interface IPostService {
   readonly items: ReadonlyArray<IPost>;
+  readonly itemLastDate: Date | null;
 
   load(offset: number, limit?: number): Promise<void>;
 

@@ -3,6 +3,7 @@ import type { IPost } from "../post.interface";
 import { inject, injectable } from "inversify";
 import type { IPostRepository } from "../repository";
 import { POST_REPOSITORY_PROVIDER } from "../repository";
+import { isAfter } from "date-fns";
 
 @injectable()
 class PostService implements IPostService {
@@ -10,6 +11,20 @@ class PostService implements IPostService {
     @inject(POST_REPOSITORY_PROVIDER)
     private readonly repo: IPostRepository,
   ) {}
+
+  get itemLastDate(): Date | null {
+    return this._items.reduce<Date | null>((date, post) => {
+      const postDate = new Date(post.date);
+
+      if (date !== null && isAfter(postDate, date)) {
+        return postDate;
+      } else if (date === null) {
+        return postDate;
+      } else {
+        return date;
+      }
+    }, null);
+  }
 
   private _items: IPost[] = [];
 

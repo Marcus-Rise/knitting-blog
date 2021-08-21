@@ -81,4 +81,28 @@ describe("PostService", () => {
       expect(postService.items).toHaveLength(5);
     });
   });
+
+  describe("itemLastDate", () => {
+    it("should get the last date from post array", async () => {
+      const date = new Date(2020, 11, 12).toJSON();
+      const service = new PostService(
+        mock<IPostRepository>({
+          async list(): Promise<IPost[]> {
+            return [
+              mock<IPost>({ date: new Date(2020, 5, 12).toJSON() }),
+              mock<IPost>({
+                date,
+              }),
+              mock<IPost>({ date: new Date(2020, 2, 12).toJSON() }),
+              mock<IPost>({ date: new Date(2020, 7, 12).toJSON() }),
+            ];
+          },
+        }),
+      );
+
+      await service.load(0);
+
+      expect(service.itemLastDate?.toJSON()).toBe(date);
+    });
+  });
 });
