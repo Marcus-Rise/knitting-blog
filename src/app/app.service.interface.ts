@@ -1,12 +1,14 @@
 const APP_SERVICE_PROVIDER = Symbol("IAppService");
 
-interface IAppService {
-  readonly title: string;
-  readonly author: {
-    readonly name: string;
-    readonly url: string;
-  };
+interface IAppAuthor {
+  name: string;
+  url: string;
 }
 
-export type { IAppService };
+interface IAppService {
+  readonly title: string;
+  readonly author: IAppAuthor;
+}
+
+export type { IAppService, IAppAuthor };
 export { APP_SERVICE_PROVIDER };
