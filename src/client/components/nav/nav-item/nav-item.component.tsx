@@ -17,6 +17,10 @@ const Root = styled.a`
   ${media.md} {
     display: inline-block;
   }
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const NavItem: FC<IProps> = ({ link, title }) => (

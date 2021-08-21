@@ -1,12 +1,11 @@
 import type { FC } from "react";
 import React, { useCallback, useMemo, useState } from "react";
-import styles from "./nav.module.scss";
 import type { INavLink } from "./nav-link.interface";
 import { Overlay } from "../overlay";
 import { MobileMenuButton } from "../mobile-menu-button";
 import { MobileMenuCloseButton } from "../mobile-menu-close-button";
-import classnames from "classnames";
 import { NavItem } from "./nav-item";
+import { CloseButtonContainer, ItemsContainer, Li, MobileToggle, Root, Ul } from "./nav.styles";
 
 interface IProps {
   items: ReadonlyArray<INavLink>;
@@ -20,34 +19,30 @@ const Nav: FC<IProps> = (props) => {
   const items = useMemo(
     () =>
       props.items.map((i) => (
-        <li className={styles.li} key={i.title} onClick={closeMenu}>
+        <Li key={i.title} onClick={closeMenu}>
           <NavItem {...i} />
-        </li>
+        </Li>
       )),
     [closeMenu, props.items],
   );
 
   return (
-    <nav className={styles.root}>
-      <div className={styles.mobileToggle}>
+    <Root>
+      <MobileToggle>
         <MobileMenuButton onClick={openMenu} />
-      </div>
+      </MobileToggle>
       {showMobileMenu && <Overlay onClose={closeMenu} />}
-      <div
-        className={classnames(styles.itemsContainer, {
-          [styles.itemsContainerShow]: showMobileMenu,
-        })}
-      >
+      <ItemsContainer showMobileMenu={showMobileMenu}>
         {showMobileMenu && (
-          <div className={styles.closeButtonContainer}>
+          <CloseButtonContainer>
             <MobileMenuCloseButton onClick={closeMenu} />{" "}
-          </div>
+          </CloseButtonContainer>
         )}
-        <div className="container">
-          <ul className={styles.ul}>{items}</ul>
+        <div>
+          <Ul>{items}</Ul>
         </div>
-      </div>
-    </nav>
+      </ItemsContainer>
+    </Root>
   );
 };
 
