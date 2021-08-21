@@ -6,6 +6,7 @@ import { MobileMenuButton } from "../mobile-menu-button";
 import { MobileMenuCloseButton } from "../mobile-menu-close-button";
 import { NavItem } from "./nav-item";
 import { CloseButtonContainer, ItemsContainer, Li, MobileToggle, Root, Ul } from "./nav.styles";
+import { Container } from "../container";
 
 interface IProps {
   items: ReadonlyArray<INavLink>;
@@ -32,7 +33,7 @@ const Nav: FC<IProps> = (props) => {
         <MobileMenuButton onClick={openMenu} />
       </MobileToggle>
       {showMobileMenu && <Overlay onClose={closeMenu} />}
-      <ItemsContainer showMobileMenu={showMobileMenu}>
+      <ItemsContainer as={Container} showMobileMenu={showMobileMenu}>
         {showMobileMenu && (
           <CloseButtonContainer>
             <MobileMenuCloseButton onClick={closeMenu} />{" "}

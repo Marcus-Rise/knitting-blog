@@ -45,9 +45,7 @@ const Home: FC<IProps> = ({ layout, posts }) => (
         content={posts.map((i) => i.title.toLowerCase()).join(", ")}
       />
     </Head>
-    <div className="container">
-      <PostList items={posts} />
-    </div>
+    <PostList items={posts} />
   </Layout>
 );
 
