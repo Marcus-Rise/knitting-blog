@@ -1,7 +1,7 @@
 import "reflect-metadata";
 import { PostPrismicRepository } from "./post-prismic.repository";
 import { mock } from "jest-mock-extended";
-import type { IPrismicService } from "../prismic";
+import type { IPrismicService } from "../../prismic";
 import type ApiSearchResponse from "prismic-javascript/types/ApiSearchResponse";
 import type { IPostPrismicDto } from "./post-prismic.dto.interface";
 import json from "./post-prismic-dto.json";

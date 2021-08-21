@@ -1,8 +1,8 @@
 import type { IPostService } from "./post.service.interface";
 import type { IPost } from "../post.interface";
 import { inject, injectable } from "inversify";
-import type { IPostRepository } from "../post.repository.interface";
-import { POST_REPOSITORY_PROVIDER } from "../post.repository.interface";
+import type { IPostRepository } from "../repository";
+import { POST_REPOSITORY_PROVIDER } from "../repository";
 
 @injectable()
 class PostService implements IPostService {

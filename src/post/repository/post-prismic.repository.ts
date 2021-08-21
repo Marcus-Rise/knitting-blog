@@ -1,8 +1,8 @@
 import type { IFindCriteria, IPostRepository } from "./post.repository.interface";
-import type { IPost } from "./post.interface";
+import type { IPost } from "../post.interface";
 import { inject, injectable } from "inversify";
-import type { IPrismicService } from "../prismic";
-import { PRISMIC_SERVICE_PROVIDER } from "../prismic";
+import type { IPrismicService } from "../../prismic";
+import { PRISMIC_SERVICE_PROVIDER } from "../../prismic";
 import { PostPrismicDto } from "./post-prismic.dto";
 import { classToPlain } from "class-transformer";
 import Prismic from "prismic-javascript";

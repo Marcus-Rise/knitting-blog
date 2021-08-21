@@ -1,4 +1,4 @@
-import type { IPost } from "./post.interface";
+import type { IPost } from "../post.interface";
 
 const POST_REPOSITORY_PROVIDER = Symbol("IPostRepository");
 
@@ -11,6 +11,7 @@ interface IFindCriteria {
 
 interface IPostRepository {
   list(criteria?: IFindCriteria, offset?: number, limit?: number): Promise<IPost[]>;
+
   find(criteria?: IFindCriteria): Promise<IPost | null>;
 }
 

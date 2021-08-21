@@ -1,5 +1,5 @@
 import type { RichTextBlock } from "prismic-reactjs";
-import type { SliceTypeEnum } from "./post-prismic.dto.interface";
+import type { SliceTypeEnum } from "./repository";
 
 interface Slice {
   type: SliceTypeEnum;
