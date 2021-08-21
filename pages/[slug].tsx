@@ -1,13 +1,12 @@
 import "reflect-metadata";
 import type { FC } from "react";
 import React from "react";
-import type { IAppService, IPost, IPostService, ISeoConfigService } from "../src/server";
+import type { IAppService, IPost, IPostService } from "../src/server";
 import {
   APP_SERVICE_PROVIDER,
   inject,
   POST_SERVICE_PROVIDER,
   PostWithContent,
-  SEO_CONFIG_SERVICE_PROVIDER,
 } from "../src/server";
 import type { GetStaticPaths, GetStaticProps } from "next";
 import { useRouter } from "next/router";
@@ -18,8 +17,9 @@ import type { ILayoutProps } from "../src/client";
 import { Layout, LINKS, PreviewAlert } from "../src/client";
 import { PrismicToolbar } from "../src/server/prismic/prismic-toolbar";
 
-interface IProps extends ILayoutProps {
+interface IProps {
   post: IPost | null;
+  layout: ILayoutProps;
   isPreview: boolean;
   repoName: string;
 }
@@ -42,12 +42,10 @@ const getStaticProps: GetStaticProps<IProps> = async (
   context,
   posts = inject<IPostService>(POST_SERVICE_PROVIDER),
   app = inject<IAppService>(APP_SERVICE_PROVIDER),
-  seo = inject<ISeoConfigService>(SEO_CONFIG_SERVICE_PROVIDER),
   prismic = inject<IPrismicConfigService>(PRISMIC_CONFIG_SERVICE_PROVIDER),
 ) => {
   const { repoName } = prismic;
   const { title, author } = app;
-  const { googleVerificationCode, yandexVerificationCode } = seo;
   const isPreview = !!context.preview;
 
   let post: IPost | null;
@@ -62,11 +60,11 @@ const getStaticProps: GetStaticProps<IProps> = async (
 
   return {
     props: {
-      title,
-      author,
-      googleVerificationCode,
-      yandexVerificationCode,
-      links: LINKS,
+      layout: {
+        title,
+        author,
+        links: LINKS,
+      },
       post,
       isPreview,
       repoName,
@@ -76,32 +74,17 @@ const getStaticProps: GetStaticProps<IProps> = async (
   };
 };
 
-const PostPage: FC<IProps> = ({
-  title,
-  author,
-  links,
-  googleVerificationCode,
-  yandexVerificationCode,
-  isPreview,
-  post,
-  repoName,
-}) => {
+const PostPage: FC<IProps> = ({ layout, isPreview, post, repoName }) => {
   const { isFallback } = useRouter();
 
   return (
-    <Layout
-      title={title}
-      author={author}
-      links={links}
-      googleVerificationCode={googleVerificationCode}
-      yandexVerificationCode={yandexVerificationCode}
-    >
+    <Layout {...layout}>
       {!isFallback && (
         <Head>
           <title key={"title"}>
-            {title} | {post?.title}
+            {layout.title} | {post?.title}
           </title>
-          <meta key={"meta-title"} name={"title"} content={`${title} | ${post?.title}`} />
+          <meta key={"meta-title"} name={"title"} content={`${layout.title} | ${post?.title}`} />
           <meta key={"description"} name={"description"} content={post?.description} />
         </Head>
       )}

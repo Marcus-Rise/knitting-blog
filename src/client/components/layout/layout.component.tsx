@@ -5,24 +5,14 @@ import type { IAppAuthor } from "../../../server";
 import type { INavLink } from "../nav";
 import { Header } from "../header";
 import { Footer } from "../footer";
-import { VerificationCodes } from "../../../common";
 
 interface ILayoutProps {
   title: string;
   author: IAppAuthor;
-  googleVerificationCode: string;
-  yandexVerificationCode: string;
   links: ReadonlyArray<INavLink>;
 }
 
-const Layout: FC<ILayoutProps> = ({
-  title,
-  author,
-  links,
-  googleVerificationCode,
-  yandexVerificationCode,
-  children,
-}) => (
+const Layout: FC<ILayoutProps> = ({ title, author, links, children }) => (
   <>
     <Head>
       <title key={"title"}>{title}</title>
@@ -32,7 +22,6 @@ const Layout: FC<ILayoutProps> = ({
       <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
       <link rel="manifest" href="/site.webmanifest" />
     </Head>
-    <VerificationCodes googleCode={googleVerificationCode} yandexCode={yandexVerificationCode} />
     {!!links && <Header title={title} links={links} />}
     <main>{children}</main>
     {!!author && (

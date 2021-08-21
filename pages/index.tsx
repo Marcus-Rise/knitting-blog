@@ -2,61 +2,41 @@ import "reflect-metadata";
 import type { FC } from "react";
 import React from "react";
 import type { GetStaticProps } from "next";
-import type { IAppService, IPost, IPostService, ISeoConfigService } from "../src/server";
-import {
-  APP_SERVICE_PROVIDER,
-  inject,
-  POST_SERVICE_PROVIDER,
-  PostList,
-  SEO_CONFIG_SERVICE_PROVIDER,
-} from "../src/server";
+import type { IAppService, IPost, IPostService } from "../src/server";
+import { APP_SERVICE_PROVIDER, inject, POST_SERVICE_PROVIDER, PostList } from "../src/server";
 import type { ILayoutProps } from "../src/client";
 import { Layout, LINKS } from "../src/client";
 import Head from "next/head";
 
-interface IProps extends ILayoutProps {
+interface IProps {
   posts: Array<IPost>;
+  layout: ILayoutProps;
 }
 
 const getStaticProps: GetStaticProps<IProps> = async (
   _,
   app = inject<IAppService>(APP_SERVICE_PROVIDER),
-  seo = inject<ISeoConfigService>(SEO_CONFIG_SERVICE_PROVIDER),
   posts = inject<IPostService>(POST_SERVICE_PROVIDER),
 ) => {
   const { title, author } = app;
-  const { googleVerificationCode, yandexVerificationCode } = seo;
 
   await posts.load(0, 5);
 
   return {
     props: {
-      title,
-      author,
-      googleVerificationCode,
-      yandexVerificationCode,
-      links: LINKS,
+      layout: {
+        title,
+        author,
+        links: LINKS,
+      },
       posts: [...posts.items],
     },
     revalidate: 60,
   };
 };
 
-const Home: FC<IProps> = ({
-  title,
-  author,
-  links,
-  posts,
-  googleVerificationCode,
-  yandexVerificationCode,
-}) => (
-  <Layout
-    title={title}
-    author={author}
-    links={links}
-    googleVerificationCode={googleVerificationCode}
-    yandexVerificationCode={yandexVerificationCode}
-  >
+const Home: FC<IProps> = ({ layout, posts }) => (
+  <Layout {...layout}>
     <Head>
       <meta
         key={"description"}
