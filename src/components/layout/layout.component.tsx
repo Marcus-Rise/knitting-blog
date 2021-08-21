@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import React from "react";
 import Head from "next/head";
-import { VerificationCodes } from "../../seo/verification-codes";
+import { VerificationCodes } from "../../seo";
 import type { IAppAuthor } from "../../app";
 import type { INavLink } from "../nav";
 import { Header } from "../header";

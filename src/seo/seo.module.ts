@@ -1,7 +1,6 @@
 import { ContainerModule } from "inversify";
-import type { ISeoService } from "./seo.service.interface";
-import { SEO_SERVICE_PROVIDER } from "./seo.service.interface";
-import { SeoService } from "./seo.service";
+import type { ISeoService } from "./service";
+import { SEO_SERVICE_PROVIDER, SeoService } from "./service";
 import type { ISeoConfigService } from "./config";
 import { SEO_CONFIG_SERVICE_PROVIDER, SeoConfigService } from "./config";
 

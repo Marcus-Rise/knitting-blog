@@ -1,9 +1,9 @@
 import type { ISeoService } from "./seo.service.interface";
 import { inject, injectable } from "inversify";
-import type { IPostService } from "../post";
-import { POST_SERVICE_PROVIDER } from "../post";
-import type { ISeoConfigService } from "./config";
-import { SEO_CONFIG_SERVICE_PROVIDER } from "./config";
+import type { IPostService } from "../../post";
+import { POST_SERVICE_PROVIDER } from "../../post";
+import type { ISeoConfigService } from "../config";
+import { SEO_CONFIG_SERVICE_PROVIDER } from "../config";
 import { format } from "date-fns";
 
 @injectable()
