@@ -1,23 +1,23 @@
 import "reflect-metadata";
 import type { FC } from "react";
 import React from "react";
-import type { IPost, IPostService } from "../src/post";
-import { POST_SERVICE_PROVIDER, PostWithContent } from "../src/post";
+import type { IAppService, IPost, IPostService, ISeoConfigService } from "../src/server";
+import {
+  APP_SERVICE_PROVIDER,
+  inject,
+  POST_SERVICE_PROVIDER,
+  PostWithContent,
+  SEO_CONFIG_SERVICE_PROVIDER,
+} from "../src/server";
 import type { GetStaticPaths, GetStaticProps } from "next";
-import { inject } from "../src/ioc";
 import { useRouter } from "next/router";
-import type { IAppService } from "../src/app";
-import { APP_SERVICE_PROVIDER } from "../src/app";
 import Head from "next/head";
-import type { IPrismicConfigService } from "../src/prismic/prismic-config.service.interface";
-import { PRISMIC_CONFIG_SERVICE_PROVIDER } from "../src/prismic/prismic-config.service.interface";
-import { PreviewAlert } from "../src/components/preview-alert";
-import { PrismicToolbar } from "../src/prismic/prismic-toolbar";
-import type { ILayoutProps } from "../src/components";
-import { Layout } from "../src/components";
-import type { ISeoConfigService } from "../src/seo";
-import { SEO_CONFIG_SERVICE_PROVIDER } from "../src/seo";
-import { LINKS } from "../src/links";
+import type { IPrismicConfigService } from "../src/server/prismic/prismic-config.service.interface";
+import { PRISMIC_CONFIG_SERVICE_PROVIDER } from "../src/server/prismic/prismic-config.service.interface";
+import { PreviewAlert } from "../src/client/components/preview-alert";
+import { PrismicToolbar } from "../src/server/prismic/prismic-toolbar";
+import type { ILayoutProps } from "../src/client";
+import { Layout, LINKS } from "../src/client";
 
 interface IProps extends ILayoutProps {
   post: IPost | null;

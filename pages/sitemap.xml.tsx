@@ -1,7 +1,6 @@
 import type { GetServerSideProps } from "next";
-import { inject } from "../src/ioc";
-import type { ISeoService } from "../src/seo";
-import { SEO_SERVICE_PROVIDER } from "../src/seo";
+import type { ISeoService } from "../src/server";
+import { inject, SEO_SERVICE_PROVIDER } from "../src/server";
 
 const getServerSideProps: GetServerSideProps = async (
   { req, res },
