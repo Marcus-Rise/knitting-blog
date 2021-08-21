@@ -4,7 +4,7 @@ import type { IImage } from "../image";
 import { Image } from "../image";
 import { ImageView } from "../image-view";
 import styled from "styled-components";
-import { device } from "../../styles";
+import { media } from "../../styles";
 
 const Root = styled.div`
   display: grid;
@@ -14,7 +14,7 @@ const Root = styled.div`
 
   grid-template-columns: repeat(3, auto);
 
-  @media (${device.sm}) {
+  ${media.sm} {
     grid-template-columns: repeat(1, 1fr);
   }
 `;

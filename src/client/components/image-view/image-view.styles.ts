@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { BadScript, colors, device } from "../../styles";
+import { BadScript, colors, media } from "../../styles";
 
 const Root = styled.div`
   display: grid;
@@ -30,7 +30,7 @@ const ImageStyled = styled.div`
     overflow: auto !important;
     height: 80vh;
 
-    @media (${device.sm}) {
+    ${media.sm} {
       height: 70vh;
     }
   }
@@ -54,7 +54,7 @@ const Label = styled.p`
   margin: 0;
   display: inline-block;
 
-  @media (${device.sm}) {
+  ${media.sm} {
     font-size: 1.5rem;
   }
 `;

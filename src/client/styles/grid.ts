@@ -1,8 +1,10 @@
 import { screenSizes } from "./variables";
 
-const device = {
-  sm: `max-width: ${screenSizes.sm}`,
-  md: `max-width: ${screenSizes.md}`,
+const mediaQuery = (width: number) => `@media (max-width: ${width}px)`;
+
+const media = {
+  sm: mediaQuery(screenSizes.sm),
+  md: mediaQuery(screenSizes.md),
 };
 
-export { device };
+export { media };

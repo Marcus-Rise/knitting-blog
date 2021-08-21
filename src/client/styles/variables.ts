@@ -5,8 +5,8 @@ const colors = {
 };
 
 const screenSizes = {
-  sm: "425px",
-  md: "768px",
+  sm: 425,
+  md: 768,
 };
 
 export { screenSizes, colors };

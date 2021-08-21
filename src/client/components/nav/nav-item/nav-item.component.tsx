@@ -3,7 +3,7 @@ import React from "react";
 import Link from "next/link";
 import type { INavLink } from "../nav-link.interface";
 import styled from "styled-components";
-import { device, Light } from "../../../styles";
+import { Light, media } from "../../../styles";
 
 type IProps = INavLink;
 
@@ -14,7 +14,7 @@ const Root = styled.a`
   text-decoration: none;
   color: inherit;
 
-  @media (${device.md}) {
+  ${media.md} {
     display: inline-block;
   }
 `;

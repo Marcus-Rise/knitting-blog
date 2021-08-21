@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import { BadScript, device } from "../../styles";
+import { BadScript, media } from "../../styles";
 
 const Root = styled.header`
   display: flex;
   flex-direction: column;
 
-  @media (${device.md}) {
+  ${media.md} {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
@@ -17,7 +17,7 @@ const Root = styled.header`
     box-shadow: 0 5px 5px 0 rgba(50, 50, 50, 0.25);
   }
 
-  @media (${device.sm}) {
+  ${media.sm} {
     padding: 0.5rem;
   }
 `;
@@ -38,7 +38,7 @@ const Container = styled.div`
   background-size: contain, contain;
   background-position: left top, right bottom;
 
-  @media (${device.md}) {
+  ${media.md} {
     background: none;
     display: flex;
     align-items: center;
@@ -51,7 +51,7 @@ const Title = styled.h1`
   font-size: 2.5rem;
   text-align: center;
 
-  @media (${device.md}) {
+  ${media.md} {
     margin: 0;
     font-size: 1.5rem;
   }
