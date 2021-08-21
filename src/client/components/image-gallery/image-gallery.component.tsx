@@ -2,8 +2,22 @@ import type { FC } from "react";
 import React, { useMemo } from "react";
 import type { IImage } from "../image";
 import { Image } from "../image";
-import styles from "./image-gallery.module.scss";
 import { ImageView } from "../image-view";
+import styled from "styled-components";
+import { device } from "../../styles";
+
+const Root = styled.div`
+  display: grid;
+  grid-column-gap: 1rem;
+  grid-row-gap: 1rem;
+  grid-gap: 1rem;
+
+  grid-template-columns: repeat(3, auto);
+
+  @media (${device.sm}) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+`;
 
 const ImageGallery: FC<{
   items: IImage[];
@@ -22,11 +36,7 @@ const ImageGallery: FC<{
     [props.items, album],
   );
 
-  return (
-    <>
-      <div className={styles.root}>{items}</div>
-    </>
-  );
+  return <Root>{items}</Root>;
 };
 
 export { ImageGallery };
