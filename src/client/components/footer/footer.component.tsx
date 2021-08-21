@@ -18,12 +18,16 @@ const Root = styled.footer`
   padding: 1rem;
 `;
 
+const Link = styled.a`
+  margin-left: 0.25rem;
+`;
+
 const Footer: FC<IProps> = ({ author, authorLink, year }) => (
   <Root>
-    <span className="mr-1">&#9400; {year}</span>
-    <a href={authorLink} target={"_blank"} rel="noreferrer">
+    <span>&#9400; {year}</span>
+    <Link href={authorLink} target={"_blank"} rel="noreferrer">
       {author}
-    </a>
+    </Link>
   </Root>
 );
 
