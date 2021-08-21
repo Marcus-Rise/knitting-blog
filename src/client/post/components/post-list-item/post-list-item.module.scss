@@ -1,5 +1,5 @@
-@use "../../../../client/styles/typography";
-@use "../../../../client/styles/grid";
+@use "src/client/styles/typography";
+@use "src/client/styles/grid";
 
 .title {
   @include typography.bold;
