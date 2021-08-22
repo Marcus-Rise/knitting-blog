@@ -17,6 +17,7 @@ import {
 
 interface IProps extends IPost {
   className?: string;
+  priority?: boolean;
 }
 
 const PostListItem: FC<IProps> = ({
@@ -27,6 +28,7 @@ const PostListItem: FC<IProps> = ({
   imageSrc,
   slug,
   title,
+  priority,
 }) => (
   <div className={className}>
     <Title>{title}</Title>
@@ -39,6 +41,7 @@ const PostListItem: FC<IProps> = ({
           layout={"fill"}
           quality={75}
           placeholder={"blur"}
+          priority={priority}
           blurDataURL={
             "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNcXw8AAeMBMA+N6mYAAAAASUVORK5CYII="
           }
