@@ -1,14 +1,29 @@
 import type { FC } from "react";
 import React from "react";
 import { Elements } from "prismic-reactjs";
-import styles from "./post-content.module.scss";
 import type { IPostContent } from "../../../../../common/post";
 import { SliceTypeEnum } from "../../../../../server/post/repository";
 import { ImageGallery } from "../../../../components";
+import styled from "styled-components";
+import { colors } from "../../../../styles";
 
 interface IProps {
   content: IPostContent;
 }
+
+const Root = styled.div`
+  line-height: 1.75rem;
+
+  li {
+    line-height: 1.75rem;
+    letter-spacing: 0.2em;
+
+    &::marker {
+      color: ${colors.accent};
+      font-size: 1.3rem;
+    }
+  }
+`;
 
 const PostContent: FC<IProps> = ({ content }) => {
   const slices = content.map((slice, sliceIndex) => {
@@ -55,7 +70,7 @@ const PostContent: FC<IProps> = ({ content }) => {
     }
   });
 
-  return <div className={styles.root}>{slices}</div>;
+  return <Root>{slices}</Root>;
 };
 
 export { PostContent };

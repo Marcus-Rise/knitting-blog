@@ -1,20 +1,45 @@
 import type { FC } from "react";
 import React from "react";
-import styles from "./image.module.scss";
 import NextImage from "next/image";
+import styled from "styled-components";
+import { BadScript, colors } from "../../styles";
 
 interface IImage {
   src: string;
   alt?: string | null;
 }
 
+const Root = styled.div`
+  display: grid;
+  grid-template-rows: 3fr auto;
+  grid-column-gap: 1rem;
+`;
+
+const ImageStyled = styled.div`
+  & > div {
+    margin: 0 auto !important;
+    display: block !important;
+  }
+
+  img {
+    object-fit: cover;
+  }
+`;
+
+const Label = styled.p`
+  ${BadScript};
+  color: ${colors.primary};
+  text-align: center;
+  margin: 0;
+`;
+
 const Image: FC<IImage> = ({ alt, src }) => (
-  <div className={styles.root}>
-    <div className={styles.image}>
+  <Root>
+    <ImageStyled>
       <NextImage src={src} alt={alt ?? ""} height={320} width={200} />
-    </div>
-    {alt && <p className={styles.label}>{alt}</p>}
-  </div>
+    </ImageStyled>
+    {alt && <Label>{alt}</Label>}
+  </Root>
 );
 
 export { Image };

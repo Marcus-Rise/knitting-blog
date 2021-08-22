@@ -2,8 +2,17 @@ import type { FC } from "react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Modal } from "../modal";
 import NextImage from "next/image";
-import styles from "./image-view.module.scss";
-import classNames from "classnames";
+import {
+  Close,
+  Container,
+  Header,
+  ImageStyled,
+  Label,
+  NavigationButtonBack,
+  NavigationButtonNext,
+  Preview,
+  Root,
+} from "./image-view.styles";
 
 interface ImageItem {
   src: string;
@@ -73,34 +82,12 @@ const ImageView: FC<IProps> = (props) => {
   }, [navigate]);
 
   const buttonBack = useMemo(
-    () => (
-      <>
-        {isBackExist && (
-          <button
-            className={classNames(styles.navigationButton, styles.navigationBack)}
-            onClick={slideLeft}
-          >
-            ‹
-          </button>
-        )}
-      </>
-    ),
+    () => isBackExist && <NavigationButtonBack onClick={slideLeft}>‹</NavigationButtonBack>,
     [isBackExist, slideLeft],
   );
 
   const buttonNext = useMemo(
-    () => (
-      <>
-        {isNextExist && (
-          <button
-            className={classNames(styles.navigationButton, styles.navigationNext)}
-            onClick={slideRight}
-          >
-            ›
-          </button>
-        )}
-      </>
-    ),
+    () => isNextExist && <NavigationButtonNext onClick={slideRight}>›</NavigationButtonNext>,
     [isNextExist, slideRight],
   );
 
@@ -109,41 +96,29 @@ const ImageView: FC<IProps> = (props) => {
   const ModalWrapper: FC = useCallback(
     (props) => (
       <Modal onClose={close} splash>
-        <div className={styles.root}>
-          <div className={styles.header}>
-            <button className={styles.close} onClick={close}>
-              X
-            </button>
-          </div>
-          <div className={styles.container}>{props.children}</div>
-        </div>
+        <Root>
+          <Header>
+            <Close onClick={close}>X</Close>
+          </Header>
+          <Container>{props.children}</Container>
+        </Root>
       </Modal>
     ),
     [close],
   );
 
   const Alt = useMemo(
-    () => (
-      <>
-        {currentImage.alt && (
-          <p className={styles.alt} title={currentImage.alt}>
-            {currentImage.alt}
-          </p>
-        )}
-      </>
-    ),
+    () => currentImage.alt && <Label title={currentImage.alt}>{currentImage.alt}</Label>,
     [currentImage.alt],
   );
 
   return (
     <>
-      <div className={styles.preview} onClick={open}>
-        {props.children}
-      </div>
+      <Preview onClick={open}>{props.children}</Preview>
       {isShow && (
         <ModalWrapper>
           {buttonBack}
-          <div className={styles.image}>
+          <ImageStyled>
             <NextImage
               src={currentImage.src}
               alt={currentImage.alt}
@@ -152,7 +127,7 @@ const ImageView: FC<IProps> = (props) => {
               quality={100}
             />
             {Alt}
-          </div>
+          </ImageStyled>
           {buttonNext}
         </ModalWrapper>
       )}

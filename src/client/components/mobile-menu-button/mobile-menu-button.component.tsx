@@ -1,17 +1,23 @@
 import type { FC } from "react";
 import React from "react";
-import styles from "./mobile-menu-button.module.scss";
 import { hamburger } from "../../assets";
 import Image from "next/image";
+import styled from "styled-components";
 
 interface IProps {
   onClick: () => void;
 }
 
+const Root = styled.button`
+  border: none;
+  background: none;
+  cursor: pointer;
+`;
+
 const MobileMenuButton: FC<IProps> = ({ onClick }) => (
-  <button className={styles.root} onClick={onClick}>
+  <Root onClick={onClick}>
     <Image src={hamburger} alt={"menu"} />
-  </button>
+  </Root>
 );
 
 export { MobileMenuButton };
