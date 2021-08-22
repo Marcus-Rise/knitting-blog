@@ -4,6 +4,7 @@ import type { IPostService } from "../../post";
 import { POST_SERVICE_PROVIDER } from "../../post";
 import type { ISeoConfigService } from "../config";
 import { SEO_CONFIG_SERVICE_PROVIDER } from "../config";
+import * as punycode from "punycode";
 
 @injectable()
 class SeoService implements ISeoService {
@@ -14,10 +15,6 @@ class SeoService implements ISeoService {
 
   static getDateStr(lastEditDate: Date): string {
     return lastEditDate.toJSON();
-  }
-
-  static getUrlStr(url: string): string {
-    return encodeURIComponent(url);
   }
 
   async generateRobotsTxt(hostName: string): Promise<string> {
@@ -43,17 +40,16 @@ class SeoService implements ISeoService {
     await this.posts.load(0);
 
     const date = this.posts.itemLastDate;
-    const url = SeoService.getUrlStr(`${hostName}/`);
 
     if (!!date) {
       buf += `<url>
-    <loc>${url}</loc>
+    <loc>${hostName}/</loc>
     <lastmod>${SeoService.getDateStr(date)}</lastmod>
     </url>`;
     }
 
     this.posts.items.forEach((post) => {
-      const url = SeoService.getUrlStr(`${hostName}/${post.slug}/`);
+      const url = `${hostName}/${punycode.toASCII(post.slug)}/`;
       const lastEditDate = new Date(post.date);
       const dateStr = SeoService.getDateStr(lastEditDate);
 
