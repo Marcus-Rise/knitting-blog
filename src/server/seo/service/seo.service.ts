@@ -17,7 +17,7 @@ class SeoService implements ISeoService {
   }
 
   async generateRobotsTxt(hostName: string): Promise<string> {
-    const sections: { [p: string]: string } = !this.config.allowRobots
+    const sections: Record<string, string> = !this.config.allowRobots
       ? {
           "User-agent": "*",
           Disallow: "/",
