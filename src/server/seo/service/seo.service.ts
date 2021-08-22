@@ -12,8 +12,12 @@ class SeoService implements ISeoService {
     @inject(SEO_CONFIG_SERVICE_PROVIDER) private readonly config: ISeoConfigService,
   ) {}
 
-  static getDateStr(lastEditDate: Date) {
+  static getDateStr(lastEditDate: Date): string {
     return lastEditDate.toJSON();
+  }
+
+  static getUrlStr(url: string): string {
+    return encodeURIComponent(url);
   }
 
   async generateRobotsTxt(hostName: string): Promise<string> {
@@ -39,16 +43,17 @@ class SeoService implements ISeoService {
     await this.posts.load(0);
 
     const date = this.posts.itemLastDate;
+    const url = SeoService.getUrlStr(`${hostName}/`);
 
     if (!!date) {
       buf += `<url>
-    <loc>${hostName}/</loc>
+    <loc>${url}</loc>
     <lastmod>${SeoService.getDateStr(date)}</lastmod>
     </url>`;
     }
 
     this.posts.items.forEach((post) => {
-      const url = `${hostName}/${post.slug}/`;
+      const url = SeoService.getUrlStr(`${hostName}/${post.slug}/`);
       const lastEditDate = new Date(post.date);
       const dateStr = SeoService.getDateStr(lastEditDate);
 
