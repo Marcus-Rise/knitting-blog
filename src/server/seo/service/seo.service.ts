@@ -48,7 +48,7 @@ class SeoService implements ISeoService {
     }
 
     this.posts.items.forEach((post) => {
-      const url = `${hostName}/${encodeURIComponent(post.slug)}/`;
+      const url = `${hostName}/${post.slug}/`;
       const lastEditDate = new Date(post.date);
       const dateStr = SeoService.getDateStr(lastEditDate);
 
