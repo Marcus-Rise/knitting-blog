@@ -40,7 +40,7 @@ const PostListItem: FC<IProps> = ({
           quality={75}
           placeholder={"blur"}
           blurDataURL={
-            "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mO8fPJkPQAHwgLmURCnOwAAAABJRU5ErkJggg=="
+            "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNcXw8AAeMBMA+N6mYAAAAASUVORK5CYII="
           }
         />
       </ImageStyled>
