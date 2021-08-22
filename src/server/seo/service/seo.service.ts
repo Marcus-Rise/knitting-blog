@@ -49,7 +49,7 @@ class SeoService implements ISeoService {
     }
 
     this.posts.items.forEach((post) => {
-      const url = `https://${hostName}/${post.slug}`;
+      const url = encodeURI(`https://${hostName}/${post.slug}`);
       const lastEditDate = new Date(post.date);
       const dateStr = SeoService.getDateStr(lastEditDate);
 

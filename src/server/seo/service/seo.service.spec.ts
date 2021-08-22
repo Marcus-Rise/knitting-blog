@@ -40,7 +40,7 @@ describe("SeoService", () => {
         itemLastDate: null,
         items: [
           mock<IPost>({
-            slug: "post1",
+            slug: "мужскои-жакет-с-воротником-стоикои",
             date: new Date(2020, 12, 12).toJSON(),
           }),
           mock<IPost>({
@@ -52,7 +52,7 @@ describe("SeoService", () => {
       mock<ISeoConfigService>(),
     );
 
-    const data = await service.generateSitemap("hostname");
+    const data = await service.generateSitemap("надя-вяжет.рф");
 
     expect(data.length).toBeGreaterThan(0);
     expect(data).toMatchSnapshot();
