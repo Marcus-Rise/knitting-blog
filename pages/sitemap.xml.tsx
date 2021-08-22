@@ -9,8 +9,6 @@ const getServerSideProps: GetServerSideProps = async (
   const hostName = String(req.headers.host);
   const sitemap = await seo.generateSitemap(hostName);
 
-  console.log(sitemap);
-
   res.setHeader("Content-Type", "application/xml");
   res.end(sitemap);
 
