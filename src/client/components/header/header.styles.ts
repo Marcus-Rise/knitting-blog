@@ -45,7 +45,14 @@ const Container = styled.div`
     background: none;
     display: flex;
     align-items: center;
+    align-content: center;
     padding: 0;
+  }
+`;
+
+const Image = styled.div`
+  ${media.lg} {
+    display: none !important;
   }
 `;
 
@@ -55,9 +62,9 @@ const Title = styled.h1`
   text-align: center;
 
   ${media.md} {
-    margin: 0;
+    margin: 0 0.75rem 0 0;
     font-size: 1.5rem;
   }
 `;
 
-export { Root, Title, LinkStyled, Container };
+export { Root, Title, LinkStyled, Container, Image };

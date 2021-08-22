@@ -1,10 +1,12 @@
 import { screenSizes } from "./variables";
 
-const mediaQuery = (width: number) => `@media (max-width: ${width}px)`;
+const mediaMaxQuery = (width: number) => `@media (max-width: ${width}px)`;
+const mediaMinQuery = (width: number) => `@media (min-width: ${width}px)`;
 
 const media = {
-  sm: mediaQuery(screenSizes.sm),
-  md: mediaQuery(screenSizes.md),
+  sm: mediaMaxQuery(screenSizes.sm),
+  md: mediaMaxQuery(screenSizes.md),
+  lg: mediaMinQuery(screenSizes.md + 1),
 };
 
 export { media };
