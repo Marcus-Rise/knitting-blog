@@ -20,7 +20,17 @@ const PostWithContent: FC<IProps> = ({ content, date, imageLabel, imageSrc, titl
       {imageSrc && (
         <ImageView album={[{ src: imageSrc, alt: imageLabel }]}>
           <ImageStyled>
-            <Image src={imageSrc} alt={imageLabel} layout={"fill"} priority />
+            <Image
+              src={imageSrc}
+              alt={imageLabel}
+              layout={"fill"}
+              quality={25}
+              priority
+              placeholder={"blur"}
+              blurDataURL={
+                "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNcXw8AAeMBMA+N6mYAAAAASUVORK5CYII="
+              }
+            />
           </ImageStyled>
         </ImageView>
       )}

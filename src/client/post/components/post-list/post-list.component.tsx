@@ -19,7 +19,9 @@ const Item = styled.div`
 `;
 
 const PostList: FC<IProps> = ({ items }) => {
-  const posts = items.map((i) => <Item as={PostListItem} {...i} key={i.slug} />);
+  const posts = items.map((i, index) => (
+    <Item as={PostListItem} {...i} key={i.slug} priority={index === 0} />
+  ));
 
   return <List as={Container}>{posts}</List>;
 };

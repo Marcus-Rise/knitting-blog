@@ -17,6 +17,7 @@ import {
 
 interface IProps extends IPost {
   className?: string;
+  priority?: boolean;
 }
 
 const PostListItem: FC<IProps> = ({
@@ -27,13 +28,24 @@ const PostListItem: FC<IProps> = ({
   imageSrc,
   slug,
   title,
+  priority,
 }) => (
   <div className={className}>
     <Title>{title}</Title>
     <Meta>{DateToString(date)}</Meta>
     <ImageView album={[{ src: imageSrc, alt: imageLabel }]}>
       <ImageStyled>
-        <Image src={imageSrc} alt={imageLabel} layout={"fill"} quality={75} />
+        <Image
+          src={imageSrc}
+          alt={imageLabel}
+          layout={"fill"}
+          quality={25}
+          placeholder={"blur"}
+          priority={priority}
+          blurDataURL={
+            "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNcXw8AAeMBMA+N6mYAAAAASUVORK5CYII="
+          }
+        />
       </ImageStyled>
     </ImageView>
     <Label>{imageLabel}</Label>

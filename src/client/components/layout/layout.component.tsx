@@ -5,6 +5,7 @@ import type { IAppAuthor } from "../../../server";
 import type { INavLink } from "../nav";
 import { Header } from "../header";
 import { Footer } from "../footer";
+import { GlobalStyles } from "../../styles";
 
 interface ILayoutProps {
   title: string;
@@ -14,6 +15,7 @@ interface ILayoutProps {
 
 const Layout: FC<ILayoutProps> = ({ title, author, links, children }) => (
   <>
+    <GlobalStyles />
     <Head>
       <title key={"title"}>{title}</title>
       <meta key={"meta-title"} name={"title"} content={title} />
