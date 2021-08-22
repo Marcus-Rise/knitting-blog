@@ -6,7 +6,7 @@ const getServerSideProps: GetServerSideProps = async (
   { req, res },
   seo = inject<ISeoService>(SEO_SERVICE_PROVIDER),
 ) => {
-  const hostName = "https://" + String(req.headers.host);
+  const hostName = String(req.headers.host);
   const sitemap = await seo.generateSitemap(hostName);
 
   res.setHeader("Content-Type", "application/xml");
