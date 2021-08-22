@@ -21,12 +21,12 @@ class SeoService implements ISeoService {
       ? {
           "User-agent": "*",
           Disallow: "/",
-          Sitemap: `https://${hostName}/sitemap.xml`,
+          Sitemap: `${hostName}/sitemap.xml`,
         }
       : {
           "User-agent": "*",
           Allow: "/",
-          Sitemap: `https://${hostName}/sitemap.xml`,
+          Sitemap: `${hostName}/sitemap.xml`,
         };
 
     return Object.keys(sections)
@@ -42,17 +42,19 @@ class SeoService implements ISeoService {
 
     if (!!date) {
       buf += `<url>
-    <loc>https://${hostName}/</loc>
+    <loc>${hostName}/</loc>
+    <lastmod>${SeoService.getDateStr(date)}</lastmod>
     </url>`;
     }
 
     this.posts.items.forEach((post) => {
-      const url = encodeURI(`https://${hostName}/${post.slug}/`);
+      const url = encodeURI(`${hostName}/${post.slug}/`);
       const lastEditDate = new Date(post.date);
       const dateStr = SeoService.getDateStr(lastEditDate);
 
       buf += `<url>
       <loc>${url}</loc>
+      <lastmod>${dateStr}</lastmod>
       </url>`;
     });
 
