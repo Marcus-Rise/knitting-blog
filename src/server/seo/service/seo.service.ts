@@ -4,7 +4,6 @@ import type { IPostService } from "../../post";
 import { POST_SERVICE_PROVIDER } from "../../post";
 import type { ISeoConfigService } from "../config";
 import { SEO_CONFIG_SERVICE_PROVIDER } from "../config";
-import * as punycode from "punycode";
 
 @injectable()
 class SeoService implements ISeoService {
@@ -49,7 +48,7 @@ class SeoService implements ISeoService {
     }
 
     this.posts.items.forEach((post) => {
-      const url = `${hostName}/${punycode.toASCII(post.slug)}/`;
+      const url = `${hostName}/${encodeURIComponent(post.slug)}/`;
       const lastEditDate = new Date(post.date);
       const dateStr = SeoService.getDateStr(lastEditDate);
 
