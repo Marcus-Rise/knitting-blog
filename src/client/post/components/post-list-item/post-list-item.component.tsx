@@ -33,7 +33,16 @@ const PostListItem: FC<IProps> = ({
     <Meta>{DateToString(date)}</Meta>
     <ImageView album={[{ src: imageSrc, alt: imageLabel }]}>
       <ImageStyled>
-        <Image src={imageSrc} alt={imageLabel} layout={"fill"} quality={75} />
+        <Image
+          src={imageSrc}
+          alt={imageLabel}
+          layout={"fill"}
+          quality={75}
+          placeholder={"blur"}
+          blurDataURL={
+            "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mO8fPJkPQAHwgLmURCnOwAAAABJRU5ErkJggg=="
+          }
+        />
       </ImageStyled>
     </ImageView>
     <Label>{imageLabel}</Label>
