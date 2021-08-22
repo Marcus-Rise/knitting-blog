@@ -47,16 +47,16 @@ class SeoService implements ISeoService {
     </url>`;
     }
 
-    this.posts.items.forEach((post) => {
-      const url = `${hostName}/${post.slug}/`;
-      const lastEditDate = new Date(post.date);
-      const dateStr = SeoService.getDateStr(lastEditDate);
-
-      buf += `<url>
-      <loc>${url}</loc>
-      <lastmod>${dateStr}</lastmod>
-      </url>`;
-    });
+    // this.posts.items.forEach((post) => {
+    //   const url = `${hostName}/${post.slug}/`;
+    //   const lastEditDate = new Date(post.date);
+    //   const dateStr = SeoService.getDateStr(lastEditDate);
+    //
+    //   buf += `<url>
+    //   <loc>${url}</loc>
+    //   <lastmod>${dateStr}</lastmod>
+    //   </url>`;
+    // });
 
     buf += `</urlset>`;
 
