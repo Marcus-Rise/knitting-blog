@@ -35,7 +35,7 @@ class SeoService implements ISeoService {
   }
 
   async generateSitemap(hostName: string): Promise<string> {
-    let buf = `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
+    let buf = `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">`;
     await this.posts.load(0);
 
     const date = this.posts.itemLastDate;
