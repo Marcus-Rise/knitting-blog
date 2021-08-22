@@ -60,8 +60,6 @@ class SeoService implements ISeoService {
 
     buf += `</urlset>`;
 
-    console.log(buf);
-
     return buf.toString();
   }
 }
