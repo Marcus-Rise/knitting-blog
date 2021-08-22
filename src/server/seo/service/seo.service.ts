@@ -43,7 +43,6 @@ class SeoService implements ISeoService {
     if (!!date) {
       buf += `<url>
     <loc>https://${hostName}/</loc>
-    <lastmod>${SeoService.getDateStr(date)}</lastmod>
     </url>`;
     }
 
@@ -54,7 +53,6 @@ class SeoService implements ISeoService {
 
       buf += `<url>
       <loc>${url}</loc>
-      <lastmod>${dateStr}</lastmod>
       </url>`;
     });
 
