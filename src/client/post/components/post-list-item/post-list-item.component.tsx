@@ -14,6 +14,7 @@ import {
   Meta,
   Title,
 } from "./post-list-item.styles";
+import { useAmp } from "next/amp";
 
 interface IProps extends IPost {
   className?: string;
@@ -29,40 +30,54 @@ const PostListItem: FC<IProps> = ({
   slug,
   title,
   priority,
-}) => (
-  <div className={className}>
-    <Title>{title}</Title>
-    <Meta>{DateToString(date)}</Meta>
-    <ImageView album={[{ src: imageSrc, alt: imageLabel }]}>
-      <ImageStyled>
-        <Image
+}) => {
+  const isAmp = useAmp();
+
+  return (
+    <div className={className}>
+      <Title>{title}</Title>
+      <Meta>{DateToString(date)}</Meta>
+      {isAmp ? (
+        <amp-img
+          height={"100vh"}
+          width={"75vw"}
           src={imageSrc}
           alt={imageLabel}
-          layout={"fill"}
-          quality={25}
-          placeholder={"blur"}
-          priority={priority}
-          blurDataURL={
-            "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNcXw8AAeMBMA+N6mYAAAAASUVORK5CYII="
-          }
+          layout={"fixed-height"}
         />
-      </ImageStyled>
-    </ImageView>
-    <Label>{imageLabel}</Label>
-    <Description>{description}</Description>
-    <Center>
-      <Link>
-        <NextLink
-          href={{
-            pathname: "/[slug]",
-            query: { slug },
-          }}
-        >
-          Читать далее
-        </NextLink>
-      </Link>
-    </Center>
-  </div>
-);
+      ) : (
+        <ImageView album={[{ src: imageSrc, alt: imageLabel }]}>
+          <ImageStyled>
+            <Image
+              src={imageSrc}
+              alt={imageLabel}
+              layout={"fill"}
+              quality={25}
+              placeholder={"blur"}
+              priority={priority}
+              blurDataURL={
+                "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNcXw8AAeMBMA+N6mYAAAAASUVORK5CYII="
+              }
+            />
+          </ImageStyled>
+        </ImageView>
+      )}
+      <Label>{imageLabel}</Label>
+      <Description>{description}</Description>
+      <Center>
+        <Link>
+          <NextLink
+            href={{
+              pathname: "/[slug]",
+              query: { slug },
+            }}
+          >
+            Читать далее
+          </NextLink>
+        </Link>
+      </Center>
+    </div>
+  );
+};
 
 export { PostListItem };

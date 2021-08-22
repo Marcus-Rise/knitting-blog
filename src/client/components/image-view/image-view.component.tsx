@@ -13,6 +13,7 @@ import {
   Preview,
   Root,
 } from "./image-view.styles";
+import { useAmp } from "next/amp";
 
 interface ImageItem {
   src: string;
@@ -112,6 +113,8 @@ const ImageView: FC<IProps> = (props) => {
     [currentImage.alt],
   );
 
+  const isAmp = useAmp();
+
   return (
     <>
       <Preview onClick={open}>{props.children}</Preview>
@@ -119,16 +122,26 @@ const ImageView: FC<IProps> = (props) => {
         <ModalWrapper>
           {buttonBack}
           <ImageStyled>
-            <NextImage
-              src={currentImage.src}
-              alt={currentImage.alt}
-              layout={"fill"}
-              quality={100}
-              placeholder={"blur"}
-              blurDataURL={
-                "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNcXw8AAeMBMA+N6mYAAAAASUVORK5CYII="
-              }
-            />
+            {isAmp ? (
+              <amp-img
+                height={"100vh"}
+                width={"75vw"}
+                src={currentImage.src}
+                alt={currentImage.alt}
+                layout={"fixed-height"}
+              />
+            ) : (
+              <NextImage
+                src={currentImage.src}
+                alt={currentImage.alt}
+                layout={"fill"}
+                quality={100}
+                placeholder={"blur"}
+                blurDataURL={
+                  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNcXw8AAeMBMA+N6mYAAAAASUVORK5CYII="
+                }
+              />
+            )}
             {Alt}
           </ImageStyled>
           {buttonNext}

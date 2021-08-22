@@ -14,6 +14,8 @@ interface IProps {
   layout: ILayoutProps;
 }
 
+const config = { amp: "hybrid" };
+
 const getStaticProps: GetStaticProps<IProps> = async (
   _,
   app = inject<IAppService>(APP_SERVICE_PROVIDER),
@@ -49,5 +51,5 @@ const Home: FC<IProps> = ({ layout, posts }) => (
   </Layout>
 );
 
-export { getStaticProps };
+export { getStaticProps, config };
 export default Home;

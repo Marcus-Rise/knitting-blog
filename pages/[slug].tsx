@@ -72,6 +72,8 @@ const getStaticProps: GetStaticProps<IProps> = async (
   };
 };
 
+const config = { amp: "hybrid" };
+
 const PostPage: FC<IProps> = ({ layout, isPreview, post, repoName }) => {
   const { isFallback } = useRouter();
 
@@ -104,4 +106,4 @@ const PostPage: FC<IProps> = ({ layout, isPreview, post, repoName }) => {
 };
 
 export default PostPage;
-export { getStaticProps, getStaticPaths };
+export { getStaticProps, getStaticPaths, config };

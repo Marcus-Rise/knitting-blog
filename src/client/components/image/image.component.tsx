@@ -3,6 +3,7 @@ import React from "react";
 import NextImage from "next/image";
 import styled from "styled-components";
 import { BadScript, colors } from "../../styles";
+import { useAmp } from "next/amp";
 
 interface IImage {
   src: string;
@@ -33,24 +34,32 @@ const Label = styled.p`
   margin: 0;
 `;
 
-const Image: FC<IImage> = ({ alt, src }) => (
-  <Root>
-    <ImageStyled>
-      <NextImage
-        src={src}
-        alt={alt ?? ""}
-        height={320}
-        width={200}
-        quality={25}
-        placeholder={"blur"}
-        blurDataURL={
-          "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNcXw8AAeMBMA+N6mYAAAAASUVORK5CYII="
-        }
-      />
-    </ImageStyled>
-    {alt && <Label>{alt}</Label>}
-  </Root>
-);
+const Image: FC<IImage> = ({ alt, src }) => {
+  const isAmp = useAmp();
+
+  return (
+    <Root>
+      <ImageStyled>
+        {isAmp ? (
+          <amp-img src={src} alt={alt ?? ""} height={320} width={200} layout={"fixed-height"} />
+        ) : (
+          <NextImage
+            src={src}
+            alt={alt ?? ""}
+            height={320}
+            width={200}
+            quality={25}
+            placeholder={"blur"}
+            blurDataURL={
+              "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNcXw8AAeMBMA+N6mYAAAAASUVORK5CYII="
+            }
+          />
+        )}
+      </ImageStyled>
+      {alt && <Label>{alt}</Label>}
+    </Root>
+  );
+};
 
 export { Image };
 export type { IImage };
