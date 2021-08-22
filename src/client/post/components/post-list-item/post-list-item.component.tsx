@@ -33,7 +33,7 @@ const PostListItem: FC<IProps> = ({
     <Meta>{DateToString(date)}</Meta>
     <ImageView album={[{ src: imageSrc, alt: imageLabel }]}>
       <ImageStyled>
-        <Image src={imageSrc} alt={imageLabel} layout={"fill"} priority />
+        <Image src={imageSrc} alt={imageLabel} layout={"fill"} quality={75} />
       </ImageStyled>
     </ImageView>
     <Label>{imageLabel}</Label>
