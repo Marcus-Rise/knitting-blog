@@ -36,7 +36,17 @@ const Label = styled.p`
 const Image: FC<IImage> = ({ alt, src }) => (
   <Root>
     <ImageStyled>
-      <NextImage src={src} alt={alt ?? ""} height={320} width={200} />
+      <NextImage
+        src={src}
+        alt={alt ?? ""}
+        height={320}
+        width={200}
+        quality={25}
+        placeholder={"blur"}
+        blurDataURL={
+          "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNcXw8AAeMBMA+N6mYAAAAASUVORK5CYII="
+        }
+      />
     </ImageStyled>
     {alt && <Label>{alt}</Label>}
   </Root>

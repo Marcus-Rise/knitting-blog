@@ -123,8 +123,11 @@ const ImageView: FC<IProps> = (props) => {
               src={currentImage.src}
               alt={currentImage.alt}
               layout={"fill"}
-              loading={"eager"}
               quality={100}
+              placeholder={"blur"}
+              blurDataURL={
+                "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNcXw8AAeMBMA+N6mYAAAAASUVORK5CYII="
+              }
             />
             {Alt}
           </ImageStyled>
