@@ -19,6 +19,8 @@ const ImageStyled = styled.div`
   & > div {
     margin: 0 auto !important;
     display: block !important;
+    height: 200px;
+    width: 320px;
   }
 
   img {
@@ -39,8 +41,8 @@ const Image: FC<IImage> = ({ alt, src }) => (
       <NextImage
         src={src}
         alt={alt ?? ""}
-        height={320}
-        width={200}
+        height={200}
+        width={320}
         placeholder={"blur"}
         blurDataURL={
           "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNcXw8AAeMBMA+N6mYAAAAASUVORK5CYII="
