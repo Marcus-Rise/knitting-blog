@@ -41,7 +41,6 @@ const Image: FC<IImage> = ({ alt, src }) => (
         alt={alt ?? ""}
         height={320}
         width={200}
-        quality={75}
         placeholder={"blur"}
         blurDataURL={
           "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNcXw8AAeMBMA+N6mYAAAAASUVORK5CYII="
