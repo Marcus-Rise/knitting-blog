@@ -40,7 +40,7 @@ const PostListItem: FC<IProps> = ({
       {isAmp ? (
         <amp-img
           height={"100vh"}
-          width={"75vw"}
+          width={"auto"}
           src={imageSrc}
           alt={imageLabel}
           layout={"fixed-height"}
