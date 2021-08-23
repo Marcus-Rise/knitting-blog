@@ -24,7 +24,6 @@ const PostWithContent: FC<IProps> = ({ content, date, imageLabel, imageSrc, titl
               src={imageSrc}
               alt={imageLabel}
               layout={"fill"}
-              quality={50}
               priority
               placeholder={"blur"}
               blurDataURL={

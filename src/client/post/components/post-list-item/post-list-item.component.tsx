@@ -39,7 +39,6 @@ const PostListItem: FC<IProps> = ({
           src={imageSrc}
           alt={imageLabel}
           layout={"fill"}
-          quality={50}
           placeholder={"blur"}
           priority={priority}
           blurDataURL={
