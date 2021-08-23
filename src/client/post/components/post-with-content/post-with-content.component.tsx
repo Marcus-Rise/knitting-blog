@@ -13,7 +13,7 @@ const PostWithContent: FC<IProps> = ({ content, date, imageLabel, imageSrc, titl
   const dateStr = DateToString(date);
 
   return (
-    <>
+    <Container>
       <Title>{title}</Title>
       <Hr />
       <Meta>{dateStr}</Meta>
@@ -36,12 +36,10 @@ const PostWithContent: FC<IProps> = ({ content, date, imageLabel, imageSrc, titl
       )}
       <Label>{imageLabel}</Label>
 
-      <Container>
-        <PostContent content={content} />
+      <PostContent content={content} />
 
-        <Footer>{dateStr}</Footer>
-      </Container>
-    </>
+      <Footer>{dateStr}</Footer>
+    </Container>
   );
 };
 
