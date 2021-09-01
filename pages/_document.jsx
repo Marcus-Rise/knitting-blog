@@ -7,6 +7,7 @@ export default class MyDocument extends Document {
     const sheet = new ServerStyleSheet();
 
     // Step 2: Retrieve styles from components in the page
+    // eslint-disable-next-line react/display-name
     const page = renderPage((App) => (props) => sheet.collectStyles(<App {...props} />));
 
     // Step 3: Extract the styles as <style> tags
