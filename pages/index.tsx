@@ -21,7 +21,7 @@ const getStaticProps: GetStaticProps<IProps> = async (
 ) => {
   const { title, author } = app;
 
-  await posts.load(0, 5);
+  await posts.load();
 
   return {
     props: {
