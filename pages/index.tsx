@@ -36,18 +36,23 @@ const getStaticProps: GetStaticProps<IProps> = async (
   };
 };
 
-const Home: FC<IProps> = ({ layout, posts }) => (
-  <Layout {...layout}>
-    <Head>
-      <meta
-        key={"description"}
-        name={"description"}
-        content={posts.map((i) => i.title.toLowerCase()).join(", ")}
-      />
-    </Head>
-    <PostList items={posts} />
-  </Layout>
-);
+const Home: FC<IProps> = ({ layout, posts }) => {
+  const [firstPost] = posts;
+
+  return (
+    <Layout {...layout}>
+      <Head>
+        <meta
+          key={"description"}
+          name={"description"}
+          content={posts.map((i) => i.title.toLowerCase()).join(", ")}
+        />
+        <meta property="og:image" content={firstPost?.imageSrc} />
+      </Head>
+      <PostList items={posts} />
+    </Layout>
+  );
+};
 
 export { getStaticProps };
 export default Home;
