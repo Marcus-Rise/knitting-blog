@@ -4,18 +4,14 @@ import type { IImage } from "../image";
 import { Image } from "../image";
 import { ImageView } from "../image-view";
 import styled from "styled-components";
-import { media } from "../../styles";
 
 const Root = styled.div`
-  display: grid;
-  grid-column-gap: 1rem;
-  grid-row-gap: 1rem;
-  grid-gap: 1rem;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 
-  grid-template-columns: repeat(3, auto);
-
-  ${media.sm} {
-    grid-template-columns: repeat(1, 1fr);
+  & > div {
+    margin-bottom: 2rem;
   }
 `;
 
