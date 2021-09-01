@@ -92,12 +92,8 @@ const PostPage: FC<IProps> = ({ layout, isPreview, post, repoName }) => {
           <PrismicToolbar repositoryName={repoName} />
         </>
       )}
-      <div className="container">
-        <div className="row">
-          <div className="col-12" style={{ marginTop: "3rem" }}>
-            {isFallback ? <>Loading...</> : post && <PostWithContent {...post} />}
-          </div>
-        </div>
+      <div style={{ marginTop: "3rem" }}>
+        {isFallback ? <>Loading...</> : post && <PostWithContent {...post} />}
       </div>
     </Layout>
   );
