@@ -84,6 +84,7 @@ const PostPage: FC<IProps> = ({ layout, isPreview, post, repoName }) => {
           </title>
           <meta key={"meta-title"} name={"title"} content={`${layout.title} | ${post?.title}`} />
           <meta key={"description"} name={"description"} content={post?.description} />
+          <meta property="og:image" content={post?.imageSrc} />
         </Head>
       )}
       {post && isPreview && (
