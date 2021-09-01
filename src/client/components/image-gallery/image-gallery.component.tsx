@@ -4,6 +4,7 @@ import type { IImage } from "../image";
 import { Image } from "../image";
 import { ImageView } from "../image-view";
 import styled from "styled-components";
+import { media } from "../../styles";
 
 const Root = styled.div`
   display: flex;
@@ -12,6 +13,10 @@ const Root = styled.div`
 
   & > div {
     margin-bottom: 2rem;
+  }
+
+  ${media.md} {
+    justify-content: center;
   }
 `;
 
