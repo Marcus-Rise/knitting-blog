@@ -8,8 +8,8 @@ import { SEO_CONFIG_SERVICE_PROVIDER } from "../config";
 @injectable()
 class SeoService implements ISeoService {
   constructor(
-    @inject(POST_SERVICE_PROVIDER) private readonly posts: IPostService,
-    @inject(SEO_CONFIG_SERVICE_PROVIDER) private readonly config: ISeoConfigService,
+    @inject(POST_SERVICE_PROVIDER) private readonly _posts: IPostService,
+    @inject(SEO_CONFIG_SERVICE_PROVIDER) private readonly _config: ISeoConfigService,
   ) {}
 
   static getDateStr(lastEditDate: Date): string {
@@ -17,7 +17,7 @@ class SeoService implements ISeoService {
   }
 
   async generateRobotsTxt(hostName: string): Promise<string> {
-    const sections: Record<string, string> = !this.config.allowRobots
+    const sections: Record<string, string> = !this._config.allowRobots
       ? {
           "User-agent": "*",
           Disallow: "/",
@@ -36,9 +36,9 @@ class SeoService implements ISeoService {
 
   async generateSitemap(hostName: string): Promise<string> {
     let buf = `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">`;
-    await this.posts.load(0);
+    await this._posts.load();
 
-    const date = this.posts.itemLastDate;
+    const date = this._posts.itemLastDate;
 
     if (!!date) {
       buf += `<url>
@@ -47,7 +47,7 @@ class SeoService implements ISeoService {
     </url>`;
     }
 
-    this.posts.items.forEach((post) => {
+    this._posts.items.forEach((post) => {
       const url = `${hostName}/${post.slug}/`;
       const lastEditDate = new Date(post.date);
       const dateStr = SeoService.getDateStr(lastEditDate);

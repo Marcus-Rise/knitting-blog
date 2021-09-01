@@ -1,5 +1,5 @@
 import type { IPostService } from "./post.service.interface";
-import type { IPost } from "../../../common/post/post.interface";
+import type { IPost } from "../../../common/post";
 import { inject, injectable } from "inversify";
 import type { IPostRepository } from "../repository";
 import { POST_REPOSITORY_PROVIDER } from "../repository";
@@ -32,7 +32,7 @@ class PostService implements IPostService {
     return this._items;
   }
 
-  async load(offset: number, limit?: number): Promise<void> {
+  async load(offset?: number, limit?: number): Promise<void> {
     this._items = await this.repo.list({}, offset, limit);
   }
 
