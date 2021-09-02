@@ -4,19 +4,14 @@ import type { IImage } from "../image";
 import { Image } from "../image";
 import { ImageView } from "../image-view";
 import styled from "styled-components";
-import { media } from "../../styles";
 
 const Root = styled.div`
   display: flex;
-  justify-content: space-between;
   flex-wrap: wrap;
+  justify-content: center;
 
   & > div {
-    margin-bottom: 2rem;
-  }
-
-  ${media.md} {
-    justify-content: center;
+    margin: 1rem;
   }
 `;
 
