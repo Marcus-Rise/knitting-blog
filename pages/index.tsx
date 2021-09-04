@@ -30,7 +30,7 @@ const getStaticProps: GetStaticProps<IProps> = async (
         author,
         links: LINKS,
       },
-      posts: [...posts.items],
+      posts: posts.items,
     },
     revalidate: 60,
   };
