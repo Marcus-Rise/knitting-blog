@@ -4,7 +4,6 @@ import Image from "next/image";
 import NextLink from "next/link";
 import { DateToString } from "../../../../common/utils/date-to-string";
 import { ImageView } from "../../../components";
-import type { IPost } from "../../../../common/post";
 import {
   Center,
   Description,
@@ -14,8 +13,9 @@ import {
   Meta,
   Title,
 } from "./post-list-item.styles";
+import type { IPostWithoutContent } from "../../../../common/post";
 
-interface IProps extends IPost {
+interface IProps extends IPostWithoutContent {
   className?: string;
   priority?: boolean;
 }

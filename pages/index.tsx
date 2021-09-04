@@ -7,10 +7,10 @@ import { APP_SERVICE_PROVIDER, inject, POST_SERVICE_PROVIDER } from "../src/serv
 import type { ILayoutProps } from "../src/client";
 import { Layout, LINKS, PostList } from "../src/client";
 import Head from "next/head";
-import type { IPost } from "../src/common/post";
+import type { IPostList } from "../src/common/post";
 
 interface IProps {
-  posts: Array<IPost>;
+  posts: IPostList;
   layout: ILayoutProps;
 }
 
