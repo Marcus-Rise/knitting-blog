@@ -1,12 +1,12 @@
 import type { FC } from "react";
 import React from "react";
 import { PostListItem } from "../post-list-item";
-import type { IPost } from "../../../../common/post";
 import styled from "styled-components";
 import { Container } from "../../../components";
+import type { IPostList } from "../../../../common/post";
 
 interface IProps {
-  items: Array<IPost>;
+  items: IPostList;
 }
 
 const List = styled.div`

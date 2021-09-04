@@ -1,7 +1,8 @@
 import type { IPost } from "../../../common/post";
+import type { IPostList } from "../../../common/post";
 
 interface IPostService {
-  readonly items: ReadonlyArray<IPost>;
+  readonly items: IPostList;
   readonly itemLastDate: Date | null;
 
   load(offset?: number, limit?: number): Promise<void>;

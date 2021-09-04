@@ -9,13 +9,13 @@ import Prismic from "prismic-javascript";
 
 @injectable()
 class PostPrismicRepository implements IPostRepository {
-  constructor(@inject(PRISMIC_SERVICE_PROVIDER) private readonly prismic: IPrismicService) {}
+  constructor(@inject(PRISMIC_SERVICE_PROVIDER) private readonly _prismic: IPrismicService) {}
 
   async find(criteria?: IFindCriteria): Promise<IPost | null> {
     let post: IPost | null = null;
 
     if (criteria?.previewRef) {
-      await this.prismic.client
+      await this._prismic.client
         .query(Prismic.Predicates.at("document.type", "post"), { ref: criteria.previewRef })
         .then((data) => {
           if (data) {
@@ -25,7 +25,7 @@ class PostPrismicRepository implements IPostRepository {
         })
         .catch(console.error);
     } else if (criteria?.slug) {
-      await this.prismic.client
+      await this._prismic.client
         .getByUID("post", criteria.slug, {})
         .then((data) => {
           if (data) {
@@ -42,7 +42,7 @@ class PostPrismicRepository implements IPostRepository {
   async list(criteria?: IFindCriteria, offset?: number, limit?: number): Promise<IPost[]> {
     let items: IPost[] = [];
 
-    await this.prismic.client
+    await this._prismic.client
       .query(Prismic.Predicates.at("document.type", "post"), {
         orderings: "[document.first_publication_date desc]",
         pageSize: limit ?? "",
