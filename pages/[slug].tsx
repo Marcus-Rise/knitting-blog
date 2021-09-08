@@ -68,7 +68,7 @@ const getStaticProps: GetStaticProps<IProps> = async (
       repoName,
     },
     notFound: !post,
-    revalidate: 60,
+    revalidate: 600,
   };
 };
 
