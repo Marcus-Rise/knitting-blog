@@ -1,7 +1,6 @@
 export * from "./footer";
 export * from "./header";
 export * from "./hr";
-export * from "./image";
 export * from "./image-gallery";
 export * from "./image-view";
 export * from "./layout";

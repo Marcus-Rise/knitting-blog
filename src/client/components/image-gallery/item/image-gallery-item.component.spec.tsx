@@ -1,12 +1,12 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { Image } from "./image.component";
+import { ImageGalleryItem } from "./image-gallery-item.component";
 
-describe("Image", () => {
+describe("ImageGalleryItem", () => {
   test("render", () => {
     const alt = "alt test";
     const src = "example.com";
-    render(<Image alt={alt} src={src} />);
+    render(<ImageGalleryItem alt={alt} src={src} />);
 
     const image = screen.getByRole("img");
 

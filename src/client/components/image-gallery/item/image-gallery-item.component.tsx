@@ -2,7 +2,7 @@ import type { FC } from "react";
 import React from "react";
 import NextImage from "next/image";
 import styled from "styled-components";
-import { BadScript, colors } from "../../styles";
+import { BadScript, colors } from "../../../styles";
 
 interface IImage {
   src: string;
@@ -35,7 +35,7 @@ const Label = styled.p`
   margin: 0;
 `;
 
-const Image: FC<IImage> = ({ alt, src }) => (
+const ImageGalleryItem: FC<IImage> = ({ alt, src }) => (
   <Root>
     <ImageStyled>
       <NextImage
@@ -45,7 +45,7 @@ const Image: FC<IImage> = ({ alt, src }) => (
         width={320}
         placeholder={"blur"}
         blurDataURL={
-          "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNcXw8AAeMBMA+N6mYAAAAASUVORK5CYII="
+          "data:item/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNcXw8AAeMBMA+N6mYAAAAASUVORK5CYII="
         }
       />
     </ImageStyled>
@@ -53,5 +53,5 @@ const Image: FC<IImage> = ({ alt, src }) => (
   </Root>
 );
 
-export { Image };
+export { ImageGalleryItem };
 export type { IImage };

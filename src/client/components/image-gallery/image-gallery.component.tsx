@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import React, { useMemo } from "react";
-import type { IImage } from "../image";
-import { Image } from "../image";
+import type { IImage } from "./item";
+import { ImageGalleryItem } from "./item";
 import { ImageView } from "../image-view";
 import styled from "styled-components";
 
@@ -26,7 +26,7 @@ const ImageGallery: FC<{
     () =>
       props.items.map((i, index) => (
         <ImageView key={i.src + index} currentIndex={index} album={album}>
-          <Image {...i} />
+          <ImageGalleryItem {...i} />
         </ImageView>
       )),
     [props.items, album],
