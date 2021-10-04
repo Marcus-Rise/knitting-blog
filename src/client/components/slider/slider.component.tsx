@@ -1,4 +1,5 @@
 import type { FC } from "react";
+import { useCallback, useState } from "react";
 import styled from "styled-components";
 
 interface ISliderProps {
@@ -32,7 +33,7 @@ const NavigationButton = styled.button`
   opacity: 0;
   background-color: rgb(76 76 76 / 61%);
   height: 100%;
-  width: 50%;
+  width: 30%;
   top: 0;
   display: flex;
   justify-content: center;
@@ -54,6 +55,7 @@ const NavigationButtonRight = styled(NavigationButton)`
 `;
 
 const CloseButton = styled.button`
+  z-index: 100;
   border: none;
   position: absolute;
   top: 1rem;
@@ -75,15 +77,36 @@ const CloseButton = styled.button`
 `;
 
 const Slider: FC<ISliderProps> = ({ images, onClose }) => {
-  const [image] = images;
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const image = images[currentIndex];
+
+  const navigateBack = useCallback(() => {
+    setCurrentIndex((index) => {
+      if (index === 0) {
+        return images.length - 1;
+      } else {
+        return index - 1;
+      }
+    });
+  }, [images.length]);
+
+  const navigateNext = useCallback(() => {
+    setCurrentIndex((index) => {
+      if (index === images.length - 1) {
+        return 0;
+      } else {
+        return index + 1;
+      }
+    });
+  }, [images.length]);
 
   return (
     <Root>
       <CloseButton onClick={onClose}>{"X"}</CloseButton>
       <Wrapper>
-        <NavigationButtonLeft>{"<"}</NavigationButtonLeft>
+        <NavigationButtonLeft onClick={navigateBack}>{"<"}</NavigationButtonLeft>
         <Image src={image.src} alt={image.title} />
-        <NavigationButtonRight>{">"}</NavigationButtonRight>{" "}
+        <NavigationButtonRight onClick={navigateNext}>{">"}</NavigationButtonRight>{" "}
       </Wrapper>
     </Root>
   );
