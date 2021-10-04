@@ -20,13 +20,17 @@ const Root = styled.div`
 `;
 
 const Wrapper = styled.div`
+  height: 100%;
+  width: 100%;
   position: relative;
 `;
 
 const Image = styled.img`
-  object-fit: scale-down;
+  object-fit: contain;
   max-height: 100%;
   max-width: 100%;
+  height: 100%;
+  width: 100%;
 `;
 
 const NavigationButton = styled.button`
