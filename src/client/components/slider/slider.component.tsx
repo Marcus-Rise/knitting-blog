@@ -112,14 +112,25 @@ const NavigationMapListItem = styled.li<{ active?: boolean }>`
   &:not(:last-child) {
     margin-right: 0.5rem;
   }
+
+  &:hover {
+    cursor: pointer;
+    background-color: transparent;
+  }
 `;
 
-const NavigationMap: FC<{ length: number; index: number }> = ({ length, index }) => {
+const NavigationMap: FC<{ length: number; index: number; onSelect: (i: number) => void }> = ({
+  length,
+  index,
+  onSelect,
+}) => {
   const items = useMemo(
     () =>
       new Array(length)
         .fill(0)
-        .map((_, i) => <NavigationMapListItem key={i} active={index === i} />),
+        .map((_, i) => (
+          <NavigationMapListItem key={i} active={index === i} onClick={() => onSelect(i)} />
+        )),
     [index, length],
   );
 
@@ -175,7 +186,7 @@ const Slider: FC<ISliderProps> = ({ images, onClose }) => {
         </NavigationButtonRight>
       </Wrapper>
       <NavigationMapWrapper>
-        <NavigationMap length={images.length} index={currentIndex} />
+        <NavigationMap length={images.length} index={currentIndex} onSelect={setCurrentIndex} />
       </NavigationMapWrapper>
     </Root>
   );
