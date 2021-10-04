@@ -131,7 +131,7 @@ const NavigationMap: FC<{ length: number; index: number; onSelect: (i: number) =
         .map((_, i) => (
           <NavigationMapListItem key={i} active={index === i} onClick={() => onSelect(i)} />
         )),
-    [index, length],
+    [index, length, onSelect],
   );
 
   return (
