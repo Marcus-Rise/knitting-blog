@@ -16,6 +16,7 @@ const Root = styled.div`
   position: absolute;
   display: flex;
   align-items: center;
+  justify-content: center;
 `;
 
 const Wrapper = styled.div`
@@ -78,7 +79,7 @@ const CloseButton = styled.button`
   height: 3rem;
   width: 3rem;
 
-  background-color: #ffffff38;
+  background-color: rgb(76 76 76 / 61%);
 
   &:hover {
     cursor: pointer;
@@ -86,12 +87,14 @@ const CloseButton = styled.button`
 `;
 
 const NavigationMapList = styled.ul`
-  padding: 0;
   margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   list-style: none;
+  padding: 1rem;
+  border-radius: 1rem;
+  background-color: rgb(76 76 76 / 61%);
 `;
 
 const NavigationMapListItem = styled.li<{ active?: boolean }>`
@@ -100,6 +103,7 @@ const NavigationMapListItem = styled.li<{ active?: boolean }>`
   border: 0.15rem solid white;
   height: 1rem;
   width: 1rem;
+  margin-bottom: 0;
 
   &:not(:last-child) {
     margin-right: 0.5rem;
