@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import styled from "styled-components";
 import ArrowRight from "../../assets/arrow-right.png";
 
@@ -85,6 +85,51 @@ const CloseButton = styled.button`
   }
 `;
 
+const NavigationMapList = styled.ul`
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+`;
+
+const NavigationMapListItem = styled.li<{ active?: boolean }>`
+  border-radius: 100%;
+  background-color: ${(props) => (!!props.active ? `transparent` : "white")};
+  border: 0.15rem solid white;
+  height: 1rem;
+  width: 1rem;
+
+  &:not(:last-child) {
+    margin-right: 0.5rem;
+  }
+`;
+
+const NavigationMap: FC<{ length: number; index: number }> = ({ length, index }) => {
+  const items = useMemo(
+    () =>
+      new Array(length)
+        .fill(0)
+        .map((_, i) => <NavigationMapListItem key={i} active={index === i} />),
+    [index, length],
+  );
+
+  return (
+    <nav>
+      <NavigationMapList>{items}</NavigationMapList>
+    </nav>
+  );
+};
+
+const NavigationMapWrapper = styled.div`
+  position: absolute;
+  bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+`;
+
 const Slider: FC<ISliderProps> = ({ images, onClose }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const image = images[currentIndex];
@@ -121,6 +166,9 @@ const Slider: FC<ISliderProps> = ({ images, onClose }) => {
           <NavigationButtonIcon src={String(ArrowRight)} alt="navigate next" />
         </NavigationButtonRight>
       </Wrapper>
+      <NavigationMapWrapper>
+        <NavigationMap length={images.length} index={currentIndex} />
+      </NavigationMapWrapper>
     </Root>
   );
 };
