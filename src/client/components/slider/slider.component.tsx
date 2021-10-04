@@ -1,6 +1,7 @@
 import type { FC } from "react";
 import { useCallback, useState } from "react";
 import styled from "styled-components";
+import ArrowRight from "../../assets/arrow-right.png";
 
 interface ISliderProps {
   images: Array<{ title?: string; src: string }>;
@@ -46,12 +47,20 @@ const NavigationButton = styled.button`
     cursor: pointer;
   }
 `;
-
 const NavigationButtonLeft = styled(NavigationButton)`
   left: 0;
 `;
 const NavigationButtonRight = styled(NavigationButton)`
   right: 0;
+`;
+
+const NavigationButtonIcon = styled.img`
+  height: 2rem;
+  width: 2rem;
+`;
+
+const NavigationButtonIconLeft = styled(NavigationButtonIcon)`
+  transform: rotate(180deg);
 `;
 
 const CloseButton = styled.button`
@@ -104,9 +113,13 @@ const Slider: FC<ISliderProps> = ({ images, onClose }) => {
     <Root>
       <CloseButton onClick={onClose}>{"X"}</CloseButton>
       <Wrapper>
-        <NavigationButtonLeft onClick={navigateBack}>{"<"}</NavigationButtonLeft>
+        <NavigationButtonLeft onClick={navigateBack}>
+          <NavigationButtonIconLeft src={String(ArrowRight)} alt="navigate back" />
+        </NavigationButtonLeft>
         <Image src={image.src} alt={image.title} />
-        <NavigationButtonRight onClick={navigateNext}>{">"}</NavigationButtonRight>{" "}
+        <NavigationButtonRight onClick={navigateNext}>
+          <NavigationButtonIcon src={String(ArrowRight)} alt="navigate next" />
+        </NavigationButtonRight>
       </Wrapper>
     </Root>
   );
