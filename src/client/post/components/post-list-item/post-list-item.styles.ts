@@ -26,6 +26,10 @@ const ImageStyled = styled.div`
     }
   }
 
+  &:hover {
+    cursor: pointer;
+  }
+
   img {
     object-fit: cover;
     height: 320px !important;
