@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
 import ArrowRight from "../../assets/arrow-right.png";
 
@@ -149,6 +149,8 @@ const NavigationMapWrapper = styled.div`
   width: 100%;
 `;
 
+const KEY_DOWN_EVENT = "keydown";
+
 const Slider: FC<ISliderProps> = ({ images, onClose }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const image = images[currentIndex];
@@ -172,6 +174,42 @@ const Slider: FC<ISliderProps> = ({ images, onClose }) => {
       }
     });
   }, [images.length]);
+
+  const keyDownEventHandler = useCallback(
+    (e: KeyboardEvent) => {
+      switch (e.code) {
+        case "ArrowLeft": {
+          navigateBack();
+          break;
+        }
+        case "ArrowRight": {
+          navigateNext();
+          break;
+        }
+        case "ArrowDown": {
+          navigateBack();
+          break;
+        }
+        case "ArrowUp": {
+          navigateNext();
+          break;
+        }
+        case "Escape": {
+          onClose();
+          break;
+        }
+      }
+    },
+    [navigateBack, navigateNext, onClose],
+  );
+
+  useEffect(() => {
+    document.addEventListener(KEY_DOWN_EVENT, keyDownEventHandler);
+
+    return () => {
+      document.removeEventListener(KEY_DOWN_EVENT, keyDownEventHandler);
+    };
+  }, [keyDownEventHandler]);
 
   return (
     <Root>
