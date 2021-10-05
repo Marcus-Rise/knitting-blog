@@ -26,6 +26,10 @@ const ImageStyled = styled.div`
   img {
     object-fit: cover;
   }
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const Label = styled.p`
