@@ -167,7 +167,7 @@ const Slider: FC<ISliderProps> = ({ images, onClose, startIndex = 0 }) => {
     });
   }, [images.length]);
 
-  useSwipe(wrapperRef, { onLeft: navigateBack, onRight: navigateNext });
+  useSwipe(wrapperRef, { onLeft: navigateNext, onRight: navigateBack });
 
   const keyDownEventHandler = useCallback(
     (e: KeyboardEvent) => {
