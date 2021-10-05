@@ -171,6 +171,7 @@ const Slider: FC<ISliderProps> = ({ images, onClose, startIndex = 0 }) => {
 
   const keyDownEventHandler = useCallback(
     (e: KeyboardEvent) => {
+      e.preventDefault();
       switch (e.code) {
         case "ArrowLeft": {
           navigateBack();
