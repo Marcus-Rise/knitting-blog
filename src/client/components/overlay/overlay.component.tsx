@@ -2,11 +2,12 @@ import type { FC, MouseEventHandler } from "react";
 import React, { useEffect } from "react";
 import styled from "styled-components";
 
-interface IProps {
+interface IOverlayProps {
   onClose?: () => void;
+  color?: string;
 }
 
-const Root = styled.div`
+const Root = styled.div<{ color: string }>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,10 +17,10 @@ const Root = styled.div`
   z-index: 900;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(88, 88, 90, 0.5);
+  background-color: ${(props) => props.color};
 `;
 
-const Overlay: FC<IProps> = ({ children, onClose }) => {
+const Overlay: FC<IOverlayProps> = ({ children, onClose, color = "rgba(88, 88, 90, 0.5)" }) => {
   const onClick: MouseEventHandler = (e) => {
     e.stopPropagation();
 
@@ -38,7 +39,11 @@ const Overlay: FC<IProps> = ({ children, onClose }) => {
     };
   }, []);
 
-  return <Root onClick={onClick}>{children}</Root>;
+  return (
+    <Root onClick={onClick} color={color}>
+      {children}
+    </Root>
+  );
 };
 
 export { Overlay };

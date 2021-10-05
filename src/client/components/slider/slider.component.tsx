@@ -1,6 +1,7 @@
 import type { FC } from "react";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
+import { Overlay } from "../overlay";
 
 interface ISliderProps {
   images: Array<{ title?: string; src: string }>;
@@ -8,19 +9,7 @@ interface ISliderProps {
   startIndex?: number;
 }
 
-const Root = styled.div`
-  height: 100%;
-  width: 100%;
-  background-color: #2e2e2e;
-
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
 const Wrapper = styled.div`
-  height: 100%;
   width: 100%;
   position: relative;
 `;
@@ -212,7 +201,7 @@ const Slider: FC<ISliderProps> = ({ images, onClose, startIndex = 0 }) => {
   }, [keyDownEventHandler]);
 
   return (
-    <Root>
+    <Overlay color={"#2e2e2e"}>
       <CloseButton onClick={onClose}>{"X"}</CloseButton>
       <Wrapper>
         <NavigationButtonLeft onClick={navigateBack}>
@@ -226,7 +215,7 @@ const Slider: FC<ISliderProps> = ({ images, onClose, startIndex = 0 }) => {
       <NavigationMapWrapper>
         <NavigationMap length={images.length} index={currentIndex} onSelect={setCurrentIndex} />
       </NavigationMapWrapper>
-    </Root>
+    </Overlay>
   );
 };
 
