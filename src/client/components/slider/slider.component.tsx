@@ -29,8 +29,10 @@ const Image = styled.img<{ active?: boolean }>`
   max-height: 100%;
   max-width: 100%;
   height: 100%;
-  width: ${(props) => (props.active ? "100%" : 0)};
-  transition: width ease-in 0.5s;
+
+  width: ${(props) => (props.active ? "100%" : "0%")};
+  flex: ${(props) => (props.active ? "2 2 100%" : "1")};
+  transition: flex ease 1s, width ease 1s;
 `;
 
 const NavigationButton = styled.button`
