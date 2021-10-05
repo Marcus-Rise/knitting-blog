@@ -3,6 +3,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import styled from "styled-components";
 import { Overlay } from "../overlay";
 import { useSwipe } from "../swiper";
+import { useImagePreloader } from "./image-preloader";
 
 interface ISliderProps {
   images: Array<{ title?: string; src: string }>;
@@ -221,17 +222,21 @@ const Slider: FC<ISliderProps> = ({ images, onClose, startIndex = 0 }) => {
     };
   }, [keyDownEventHandler]);
 
+  useImagePreloader(images.map((i) => i.src));
+
   const items = useMemo(
     () =>
-      images.map((image, index) => (
-        <Image
-          key={image.src}
-          active={index === currentIndex}
-          src={image.src}
-          alt={image.title}
-          loading={"lazy"}
-        />
-      )),
+      images.map((image, index) => {
+        return (
+          <Image
+            key={image.src}
+            active={index === currentIndex}
+            src={index === currentIndex ? image.src : ""}
+            alt={image.title}
+            loading={"lazy"}
+          />
+        );
+      }),
     [currentIndex, images],
   );
 
