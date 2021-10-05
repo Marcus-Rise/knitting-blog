@@ -5,6 +5,7 @@ import styled from "styled-components";
 interface ISliderProps {
   images: Array<{ title?: string; src: string }>;
   onClose: () => void;
+  startIndex?: number;
 }
 
 const Root = styled.div`
@@ -150,8 +151,8 @@ const NavigationMapWrapper = styled.div`
 
 const KEY_DOWN_EVENT = "keydown";
 
-const Slider: FC<ISliderProps> = ({ images, onClose }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+const Slider: FC<ISliderProps> = ({ images, onClose, startIndex = 0 }) => {
+  const [currentIndex, setCurrentIndex] = useState(startIndex);
   const image = images[currentIndex];
 
   const navigateBack = useCallback(() => {

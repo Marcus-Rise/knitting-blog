@@ -39,7 +39,9 @@ const ImageGallery: FC<{
 
   return (
     <>
-      {sliderIndex !== null && <Slider images={album} onClose={() => setSliderIndex(null)} />}
+      {sliderIndex !== null && (
+        <Slider images={album} onClose={() => setSliderIndex(null)} startIndex={sliderIndex} />
+      )}
       <Root>{items}</Root>
     </>
   );
