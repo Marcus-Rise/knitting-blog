@@ -1,1 +1,1 @@
-export { default as hamburger } from "./hamburger.svg";
+export { default as Hamburger } from "./hamburger.svg";

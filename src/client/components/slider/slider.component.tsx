@@ -1,7 +1,6 @@
 import type { FC } from "react";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
-import ArrowRight from "../../assets/arrow-right.png";
 
 interface ISliderProps {
   images: Array<{ title?: string; src: string }>;
@@ -216,11 +215,11 @@ const Slider: FC<ISliderProps> = ({ images, onClose }) => {
       <CloseButton onClick={onClose}>{"X"}</CloseButton>
       <Wrapper>
         <NavigationButtonLeft onClick={navigateBack}>
-          <NavigationButtonIconLeft src={String(ArrowRight)} alt="navigate back" />
+          <NavigationButtonIconLeft src="/arrow-right.png" alt="navigate back" />
         </NavigationButtonLeft>
         <Image src={image.src} alt={image.title} />
         <NavigationButtonRight onClick={navigateNext}>
-          <NavigationButtonIcon src={String(ArrowRight)} alt="navigate next" />
+          <NavigationButtonIcon src="/arrow-right.png" alt="navigate next" />
         </NavigationButtonRight>
       </Wrapper>
       <NavigationMapWrapper>
