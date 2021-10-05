@@ -27,7 +27,7 @@ const NavigationButton = styled.button`
   border: none;
   position: absolute;
   opacity: 0;
-  background-color: rgb(76 76 76 / 61%);
+  background-color: rgba(76, 76, 76, 0.61);
   height: 100%;
   width: 30%;
   top: 0;
@@ -73,10 +73,11 @@ const CloseButton = styled.button`
   height: 3rem;
   width: 3rem;
 
-  background-color: rgb(76 76 76 / 61%);
+  background-color: rgba(76, 76, 76, 0.61);
 
   &:hover {
     cursor: pointer;
+    background-color: rgb(76, 76, 76);
   }
 `;
 
