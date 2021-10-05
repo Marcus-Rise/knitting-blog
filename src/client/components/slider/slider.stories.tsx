@@ -35,5 +35,14 @@ Default.args = {
   ],
 };
 
-export { Default };
+const Single = Template.bind({});
+Single.args = {
+  images: [
+    {
+      src: "https://i.ytimg.com/vi/8BPJQAqTddc/maxresdefault.jpg",
+    },
+  ],
+};
+
+export { Default, Single };
 export default Config;

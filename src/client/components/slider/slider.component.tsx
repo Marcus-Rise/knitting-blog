@@ -209,17 +209,23 @@ const Slider: FC<ISliderProps> = ({ images, onClose, startIndex = 0 }) => {
     <Overlay color={"#2e2e2e"}>
       <CloseButton onClick={onClose}>{"X"}</CloseButton>
       <Wrapper ref={wrapperRef}>
-        <NavigationButtonLeft onClick={navigateBack}>
-          <NavigationButtonIconLeft src="/arrow-right.png" alt="navigate back" />
-        </NavigationButtonLeft>
+        {images.length > 1 && (
+          <NavigationButtonLeft onClick={navigateBack}>
+            <NavigationButtonIconLeft src="/arrow-right.png" alt="navigate back" />
+          </NavigationButtonLeft>
+        )}
         <Image src={image.src} alt={image.title} />
-        <NavigationButtonRight onClick={navigateNext}>
-          <NavigationButtonIcon src="/arrow-right.png" alt="navigate next" />
-        </NavigationButtonRight>
+        {images.length > 1 && (
+          <NavigationButtonRight onClick={navigateNext}>
+            <NavigationButtonIcon src="/arrow-right.png" alt="navigate next" />
+          </NavigationButtonRight>
+        )}
       </Wrapper>
-      <NavigationMapWrapper>
-        <NavigationMap length={images.length} index={currentIndex} onSelect={setCurrentIndex} />
-      </NavigationMapWrapper>
+      {images.length > 1 && (
+        <NavigationMapWrapper>
+          <NavigationMap length={images.length} index={currentIndex} onSelect={setCurrentIndex} />
+        </NavigationMapWrapper>
+      )}
     </Overlay>
   );
 };
