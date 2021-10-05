@@ -21,7 +21,6 @@ const ImageAnimationWrapper = styled.div`
   height: 100%;
   width: 100%;
   display: flex;
-  justify-content: space-between;
 `;
 
 const Image = styled.img<{ active?: boolean }>`
@@ -30,9 +29,9 @@ const Image = styled.img<{ active?: boolean }>`
   max-width: 100%;
   height: 100%;
 
-  width: ${(props) => (props.active ? "100%" : "0%")};
-  flex: ${(props) => (props.active ? "2 2 100%" : "1")};
-  transition: flex ease 1s, width ease 1s;
+  width: ${(props) => (props.active ? "100%" : "0")};
+  transform: ${(props) => (props.active ? "unset" : "scaleX(0)")};
+  transition: transform ease 1s;
 `;
 
 const NavigationButton = styled.button`
