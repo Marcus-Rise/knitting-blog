@@ -4,9 +4,11 @@ import styled from "styled-components";
 import { Overlay } from "../overlay";
 import { useSwipe } from "../swiper";
 import { useImagePreloader } from "./image-preloader";
+import { useImageResizer } from "./image-resizer";
+import type { ISliderImage } from "./slider-types";
 
 interface ISliderProps {
-  images: Array<{ title?: string; src: string }>;
+  images: Array<ISliderImage>;
   onClose: () => void;
   startIndex?: number;
 }
@@ -160,7 +162,8 @@ const NavigationMapWrapper = styled.div`
 
 const KEY_DOWN_EVENT = "keydown";
 
-const Slider: FC<ISliderProps> = ({ images, onClose, startIndex = 0 }) => {
+const Slider: FC<ISliderProps> = ({ images: originalImages, onClose, startIndex = 0 }) => {
+  const images = useImageResizer(...originalImages);
   const [currentIndex, setCurrentIndex] = useState(startIndex);
   const wrapperRef = useRef(null);
   const navigateBack = useCallback(() => {
