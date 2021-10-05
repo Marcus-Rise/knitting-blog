@@ -1,8 +1,8 @@
 import type { FC } from "react";
-import React, { useMemo } from "react";
-import type { IImage } from "../image";
-import { Image } from "../image";
-import { ImageView } from "../image-view";
+import React, { useMemo, useState } from "react";
+import type { IImage } from "./item";
+import { ImageGalleryItem } from "./item";
+import { Slider } from "../slider";
 import styled from "styled-components";
 
 const Root = styled.div`
@@ -18,6 +18,7 @@ const Root = styled.div`
 const ImageGallery: FC<{
   items: IImage[];
 }> = (props) => {
+  const [sliderIndex, setSliderIndex] = useState<number | null>(null);
   const album = useMemo(
     () => props.items.map((i) => ({ src: i.src, alt: i.alt ?? "" })),
     [props.items],
@@ -25,14 +26,25 @@ const ImageGallery: FC<{
   const items = useMemo(
     () =>
       props.items.map((i, index) => (
-        <ImageView key={i.src + index} currentIndex={index} album={album}>
-          <Image {...i} />
-        </ImageView>
+        <ImageGalleryItem
+          key={i.src + index}
+          {...i}
+          onClick={() => {
+            setSliderIndex(index);
+          }}
+        />
       )),
-    [props.items, album],
+    [props.items],
   );
 
-  return <Root>{items}</Root>;
+  return (
+    <>
+      {sliderIndex !== null && (
+        <Slider images={album} onClose={() => setSliderIndex(null)} startIndex={sliderIndex} />
+      )}
+      <Root>{items}</Root>
+    </>
+  );
 };
 
 export { ImageGallery };

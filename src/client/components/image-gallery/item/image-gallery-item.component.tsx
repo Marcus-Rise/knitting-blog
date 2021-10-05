@@ -2,7 +2,7 @@ import type { FC } from "react";
 import React from "react";
 import NextImage from "next/image";
 import styled from "styled-components";
-import { BadScript, colors } from "../../styles";
+import { BadScript, colors } from "../../../styles";
 
 interface IImage {
   src: string;
@@ -26,6 +26,10 @@ const ImageStyled = styled.div`
   img {
     object-fit: cover;
   }
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const Label = styled.p`
@@ -35,9 +39,9 @@ const Label = styled.p`
   margin: 0;
 `;
 
-const Image: FC<IImage> = ({ alt, src }) => (
+const ImageGalleryItem: FC<IImage & { onClick?: () => void }> = ({ onClick, alt, src }) => (
   <Root>
-    <ImageStyled>
+    <ImageStyled onClick={onClick}>
       <NextImage
         src={src}
         alt={alt ?? ""}
@@ -53,5 +57,5 @@ const Image: FC<IImage> = ({ alt, src }) => (
   </Root>
 );
 
-export { Image };
+export { ImageGalleryItem };
 export type { IImage };

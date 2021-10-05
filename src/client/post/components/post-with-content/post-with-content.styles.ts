@@ -7,6 +7,10 @@ const ImageStyled = styled.div`
   width: auto;
   overflow: hidden;
 
+  &:hover {
+    cursor: pointer;
+  }
+
   & > div {
     &,
     & > img {

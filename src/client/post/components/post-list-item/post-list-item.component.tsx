@@ -1,9 +1,9 @@
 import type { FC } from "react";
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import NextLink from "next/link";
 import { DateToString } from "../../../../common/utils/date-to-string";
-import { ImageView } from "../../../components";
+import { Slider } from "../../../components";
 import {
   Center,
   Description,
@@ -29,12 +29,20 @@ const PostListItem: FC<IProps> = ({
   slug,
   title,
   priority,
-}) => (
-  <div className={className}>
-    <Title>{title}</Title>
-    <Meta>{DateToString(date)}</Meta>
-    <ImageView album={[{ src: imageSrc, alt: imageLabel }]}>
-      <ImageStyled>
+}) => {
+  const [showImage, setShowImage] = useState(false);
+
+  return (
+    <div className={className}>
+      <Title>{title}</Title>
+      <Meta>{DateToString(date)}</Meta>
+      {showImage && (
+        <Slider
+          images={[{ src: imageSrc, title: imageLabel }]}
+          onClose={() => setShowImage(false)}
+        />
+      )}
+      <ImageStyled onClick={() => setShowImage(true)}>
         <Image
           src={imageSrc}
           alt={imageLabel}
@@ -46,22 +54,22 @@ const PostListItem: FC<IProps> = ({
           }
         />
       </ImageStyled>
-    </ImageView>
-    <Label>{imageLabel}</Label>
-    <Description>{description}</Description>
-    <Center>
-      <Link>
-        <NextLink
-          href={{
-            pathname: "/[slug]",
-            query: { slug },
-          }}
-        >
-          Читать далее
-        </NextLink>
-      </Link>
-    </Center>
-  </div>
-);
+      <Label>{imageLabel}</Label>
+      <Description>{description}</Description>
+      <Center>
+        <Link>
+          <NextLink
+            href={{
+              pathname: "/[slug]",
+              query: { slug },
+            }}
+          >
+            Читать далее
+          </NextLink>
+        </Link>
+      </Center>
+    </div>
+  );
+};
 
 export { PostListItem };

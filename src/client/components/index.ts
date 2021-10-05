@@ -1,9 +1,7 @@
 export * from "./footer";
 export * from "./header";
 export * from "./hr";
-export * from "./image";
 export * from "./image-gallery";
-export * from "./image-view";
 export * from "./layout";
 export * from "./mobile-menu-button";
 export * from "./mobile-menu-close-button";
@@ -13,3 +11,4 @@ export * from "./overlay";
 export * from "./preview-alert";
 export * from "./ul";
 export * from "./container";
+export * from "./slider";

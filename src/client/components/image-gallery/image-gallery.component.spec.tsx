@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import { ImageGallery } from "./image-gallery.component";
-import type { IImage } from "../image";
+import type { IImage } from "./item";
 
 describe("ImageGallery", () => {
   test("render", () => {
