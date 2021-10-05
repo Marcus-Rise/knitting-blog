@@ -9,7 +9,11 @@ class ImagePreloader {
     this._pool = new Array(3).fill(0).map(() => new Image());
   }
 
-  load(src: string): void {
+  load(src?: string): void {
+    if (!src) {
+      return;
+    }
+
     if (!this._pool.length) {
       this.init();
     }
@@ -21,6 +25,8 @@ class ImagePreloader {
         this._query.push(src);
       } else {
         loader.src = src;
+        loader.decoding = "async";
+        // loader.loading = "lazy";
         loader.onload = () => {
           this._loaded.push(src);
 
@@ -39,7 +45,7 @@ class ImagePreloader {
 
 const preloader = new ImagePreloader();
 
-const useImagePreloader = (images: string[]) => {
+const useImagePreloader = (...images: string[]) => {
   useEffect(() => {
     images.map((src) => preloader.load(src));
   }, [images]);

@@ -222,7 +222,7 @@ const Slider: FC<ISliderProps> = ({ images, onClose, startIndex = 0 }) => {
     };
   }, [keyDownEventHandler]);
 
-  useImagePreloader(images.map((i) => i.src));
+  useImagePreloader(images[currentIndex + 1]?.src);
 
   const items = useMemo(
     () =>
