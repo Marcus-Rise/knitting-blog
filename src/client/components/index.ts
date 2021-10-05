@@ -12,3 +12,4 @@ export * from "./overlay";
 export * from "./preview-alert";
 export * from "./ul";
 export * from "./container";
+export * from "./slider";

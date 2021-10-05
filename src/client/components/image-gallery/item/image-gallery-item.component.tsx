@@ -35,9 +35,9 @@ const Label = styled.p`
   margin: 0;
 `;
 
-const ImageGalleryItem: FC<IImage> = ({ alt, src }) => (
+const ImageGalleryItem: FC<IImage & { onClick: () => void }> = ({ onClick, alt, src }) => (
   <Root>
-    <ImageStyled>
+    <ImageStyled onClick={onClick}>
       <NextImage
         src={src}
         alt={alt ?? ""}
