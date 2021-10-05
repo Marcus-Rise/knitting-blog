@@ -49,7 +49,7 @@ const ImageGalleryItem: FC<IImage & { onClick?: () => void }> = ({ onClick, alt,
         width={320}
         placeholder={"blur"}
         blurDataURL={
-          "data:item/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNcXw8AAeMBMA+N6mYAAAAASUVORK5CYII="
+          "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNcXw8AAeMBMA+N6mYAAAAASUVORK5CYII="
         }
       />
     </ImageStyled>
