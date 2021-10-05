@@ -99,6 +99,7 @@ const NavigationMapListItem = styled.li<{ active?: boolean }>`
   height: 1rem;
   width: 1rem;
   margin-bottom: 0;
+  transition: background-color ease 0.25s;
 
   &:not(:last-child) {
     margin-right: 0.5rem;
