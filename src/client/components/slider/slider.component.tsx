@@ -36,10 +36,15 @@ const NavigationButton = styled.button`
   align-items: center;
   color: white;
   font-size: 2rem;
+  transition: opacity ease 0.25s;
 
   &:hover {
     opacity: initial;
     cursor: pointer;
+  }
+
+  &:active {
+    background-color: rgba(76, 76, 76, 0.79);
   }
 `;
 const NavigationButtonLeft = styled(NavigationButton)`
