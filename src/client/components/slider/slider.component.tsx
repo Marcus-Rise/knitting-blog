@@ -1,7 +1,8 @@
 import type { FC } from "react";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import styled from "styled-components";
 import { Overlay } from "../overlay";
+import { useSwipe } from "../swiper";
 
 interface ISliderProps {
   images: Array<{ title?: string; src: string }>;
@@ -143,6 +144,7 @@ const KEY_DOWN_EVENT = "keydown";
 const Slider: FC<ISliderProps> = ({ images, onClose, startIndex = 0 }) => {
   const [currentIndex, setCurrentIndex] = useState(startIndex);
   const image = images[currentIndex];
+  const wrapperRef = useRef(null);
 
   const navigateBack = useCallback(() => {
     setCurrentIndex((index) => {
@@ -163,6 +165,8 @@ const Slider: FC<ISliderProps> = ({ images, onClose, startIndex = 0 }) => {
       }
     });
   }, [images.length]);
+
+  useSwipe(wrapperRef, { onLeft: navigateBack, onRight: navigateNext });
 
   const keyDownEventHandler = useCallback(
     (e: KeyboardEvent) => {
@@ -203,7 +207,7 @@ const Slider: FC<ISliderProps> = ({ images, onClose, startIndex = 0 }) => {
   return (
     <Overlay color={"#2e2e2e"}>
       <CloseButton onClick={onClose}>{"X"}</CloseButton>
-      <Wrapper>
+      <Wrapper ref={wrapperRef}>
         <NavigationButtonLeft onClick={navigateBack}>
           <NavigationButtonIconLeft src="/arrow-right.png" alt="navigate back" />
         </NavigationButtonLeft>
