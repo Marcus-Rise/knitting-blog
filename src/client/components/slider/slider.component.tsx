@@ -15,12 +15,22 @@ const Wrapper = styled.div`
   position: relative;
 `;
 
-const Image = styled.img`
-  object-fit: contain;
+const ImageAnimationWrapper = styled.div`
   max-height: 100%;
   max-width: 100%;
   height: 100%;
   width: 100%;
+  display: flex;
+  justify-content: space-between;
+`;
+
+const Image = styled.img<{ active?: boolean }>`
+  object-fit: contain;
+  max-height: 100%;
+  max-width: 100%;
+  height: 100%;
+  width: ${(props) => (props.active ? "100%" : 0)};
+  transition: width ease-in 0.5s;
 `;
 
 const NavigationButton = styled.button`
@@ -150,9 +160,7 @@ const KEY_DOWN_EVENT = "keydown";
 
 const Slider: FC<ISliderProps> = ({ images, onClose, startIndex = 0 }) => {
   const [currentIndex, setCurrentIndex] = useState(startIndex);
-  const image = images[currentIndex];
   const wrapperRef = useRef(null);
-
   const navigateBack = useCallback(() => {
     setCurrentIndex((index) => {
       if (index === 0) {
@@ -212,6 +220,20 @@ const Slider: FC<ISliderProps> = ({ images, onClose, startIndex = 0 }) => {
     };
   }, [keyDownEventHandler]);
 
+  const items = useMemo(
+    () =>
+      images.map((image, index) => (
+        <Image
+          key={image.src}
+          active={index === currentIndex}
+          src={image.src}
+          alt={image.title}
+          loading={"lazy"}
+        />
+      )),
+    [currentIndex, images],
+  );
+
   return (
     <Overlay color={"#2e2e2e"}>
       <CloseButton onClick={onClose}>{"X"}</CloseButton>
@@ -221,12 +243,14 @@ const Slider: FC<ISliderProps> = ({ images, onClose, startIndex = 0 }) => {
             <NavigationButtonIconLeft src="/arrow-right.png" alt="navigate back" />
           </NavigationButtonLeft>
         )}
-        <Image src={image.src} alt={image.title} />
-        {images.length > 1 && (
-          <NavigationButtonRight onClick={navigateNext}>
-            <NavigationButtonIcon src="/arrow-right.png" alt="navigate next" />
-          </NavigationButtonRight>
-        )}
+        <ImageAnimationWrapper>
+          {items}
+          {images.length > 1 && (
+            <NavigationButtonRight onClick={navigateNext}>
+              <NavigationButtonIcon src="/arrow-right.png" alt="navigate next" />
+            </NavigationButtonRight>
+          )}
+        </ImageAnimationWrapper>
       </Wrapper>
       {images.length > 1 && (
         <NavigationMapWrapper>
