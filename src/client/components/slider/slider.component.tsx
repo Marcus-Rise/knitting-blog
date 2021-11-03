@@ -252,14 +252,12 @@ const Slider: FC<ISliderProps> = ({ images: originalImages, onClose, startIndex 
             <NavigationButtonIconLeft src="/arrow-right.png" alt="navigate back" />
           </NavigationButtonLeft>
         )}
-        <ImageAnimationWrapper>
-          {items}
-          {images.length > 1 && (
-            <NavigationButtonRight onClick={navigateNext}>
-              <NavigationButtonIcon src="/arrow-right.png" alt="navigate next" />
-            </NavigationButtonRight>
-          )}
-        </ImageAnimationWrapper>
+        <ImageAnimationWrapper>{items}</ImageAnimationWrapper>
+        {images.length > 1 && (
+          <NavigationButtonRight onClick={navigateNext}>
+            <NavigationButtonIcon src="/arrow-right.png" alt="navigate next" />
+          </NavigationButtonRight>
+        )}
       </Wrapper>
       {images.length > 1 && (
         <NavigationMapWrapper>
