@@ -4,6 +4,7 @@ import type { IPostService } from "../../post";
 import { POST_SERVICE_PROVIDER } from "../../post";
 import type { ISeoConfigService } from "../config";
 import { SEO_CONFIG_SERVICE_PROVIDER } from "../config";
+import { SeoPostFactory } from "../seo-post.factory";
 
 @injectable()
 class SeoService implements ISeoService {
@@ -35,28 +36,19 @@ class SeoService implements ISeoService {
   }
 
   async generateSitemap(hostName: string): Promise<string> {
-    let buf = `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">`;
     await this._posts.load();
 
     const date = this._posts.itemLastDate;
 
+    let buf = `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
+
     if (!!date) {
-      buf += `<url>
-    <loc>${hostName}/</loc>
-    <lastmod>${SeoService.getDateStr(date)}</lastmod>
-    </url>`;
+      buf += SeoPostFactory.toSitemapRaw({ slug: `${hostName}/`, date: date.toJSON(), hostName });
     }
 
-    this._posts.items.forEach((post) => {
-      const url = `${hostName}/${post.slug}/`;
-      const lastEditDate = new Date(post.date);
-      const dateStr = SeoService.getDateStr(lastEditDate);
-
-      buf += `<url>
-      <loc>${url}</loc>
-      <lastmod>${dateStr}</lastmod>
-      </url>`;
-    });
+    this._posts.items.reduce((raw, { slug, date }) => {
+      return raw + SeoPostFactory.toSitemapRaw({ slug, date, hostName });
+    }, buf);
 
     buf += `</urlset>`;
 
