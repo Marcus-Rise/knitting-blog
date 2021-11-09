@@ -36,19 +36,20 @@ describe("SeoService", () => {
   test("generateSitemap", async () => {
     const lastDate = new Date(2020, 12, 13);
     const service = new SeoService(
-      mock<IPostService>({
-        itemLastDate: null,
+      {
+        itemLastDate: lastDate,
         items: [
-          mock<IPost>({
-            slug: "мужскои-жакет-с-воротником-стоикои",
-            date: new Date(2020, 12, 12).toJSON(),
-          }),
           mock<IPost>({
             slug: "post2",
             date: lastDate.toJSON(),
           }),
+          mock<IPost>({
+            slug: "мужскои-жакет-с-воротником-стоикои",
+            date: new Date(2020, 12, 12).toJSON(),
+          }),
         ],
-      }),
+        async load() {},
+      } as unknown as IPostService,
       mock<ISeoConfigService>(),
     );
 
