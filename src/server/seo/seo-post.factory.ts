@@ -9,7 +9,7 @@ class SeoPostFactory {
     hostName: string;
   }): string {
     const saveSlug = encodeURIComponent(slug);
-    const url = `${hostName}/${saveSlug}/`;
+    const url = !!saveSlug ? `${hostName}/${saveSlug}/` : `${hostName}/`;
     const lastEditDate = new Date(date);
     const dateStr = lastEditDate.toJSON();
 

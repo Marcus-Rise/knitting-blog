@@ -43,16 +43,21 @@ class SeoService implements ISeoService {
     let buf = `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
 
     if (!!date) {
-      buf += SeoPostFactory.toSitemapRaw({ slug: `${hostName}/`, date: date.toJSON(), hostName });
+      buf += SeoPostFactory.toSitemapRaw({ slug: "", date: date.toJSON(), hostName });
     }
 
-    this._posts.items.reduce((raw, { slug, date }) => {
-      return raw + SeoPostFactory.toSitemapRaw({ slug, date, hostName });
-    }, buf);
+    const items = this._posts.items.reduce(
+      (raw, { slug, date }) =>
+        raw +
+        SeoPostFactory.toSitemapRaw({
+          slug,
+          date,
+          hostName,
+        }),
+      buf,
+    );
 
-    buf += `</urlset>`;
-
-    return buf.toString();
+    return `${items}</urlset>`;
   }
 }
 
