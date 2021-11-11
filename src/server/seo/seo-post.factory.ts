@@ -1,3 +1,5 @@
+import { format } from "date-fns";
+
 class SeoPostFactory {
   static toSitemapRaw({
     slug,
@@ -11,7 +13,7 @@ class SeoPostFactory {
     const saveSlug = encodeURIComponent(slug);
     const url = !!saveSlug ? `${hostName}/${saveSlug}/` : `${hostName}/`;
     const lastEditDate = new Date(date);
-    const dateStr = lastEditDate.toJSON();
+    const dateStr = format(lastEditDate, "yyyy-MM-dd");
 
     return `<url>
       <loc>${url}</loc>
