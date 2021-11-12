@@ -40,7 +40,7 @@ class SeoService implements ISeoService {
 
     const date = this._posts.itemLastDate;
 
-    let buf = `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
+    let buf = `<xml version="1.0" encoding="UTF-8"><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
 
     if (!!date) {
       buf += SeoPostFactory.toSitemapRaw({ slug: "", date: date.toJSON(), hostName });
@@ -57,7 +57,7 @@ class SeoService implements ISeoService {
       buf,
     );
 
-    return `${items}</urlset>`;
+    return `${items}</urlset></xml>`;
   }
 }
 
