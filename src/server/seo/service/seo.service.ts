@@ -22,12 +22,12 @@ class SeoService implements ISeoService {
       ? {
           "User-agent": "*",
           Disallow: "/",
-          Sitemap: `${hostName}/sitemap.xml`,
+          Sitemap: `${hostName}/sitemap.txt`,
         }
       : {
           "User-agent": "*",
           Allow: "/",
-          Sitemap: `${hostName}/sitemap.xml`,
+          Sitemap: `${hostName}/sitemap.txt`,
         };
 
     return Object.keys(sections)
@@ -40,13 +40,13 @@ class SeoService implements ISeoService {
 
     const date = this._posts.itemLastDate;
 
-    let buf = `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
+    let buf = "";
 
     if (!!date) {
       buf += SeoPostFactory.toSitemapRaw({ slug: "", date: date.toJSON(), hostName });
     }
 
-    const items = this._posts.items.reduce(
+    return this._posts.items.reduce(
       (raw, { slug, date }) =>
         raw +
         SeoPostFactory.toSitemapRaw({
@@ -56,8 +56,6 @@ class SeoService implements ISeoService {
         }),
       buf,
     );
-
-    return `${items}</urlset>`;
   }
 }
 
