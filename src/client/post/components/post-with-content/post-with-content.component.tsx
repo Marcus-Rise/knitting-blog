@@ -2,7 +2,7 @@ import type { FC } from "react";
 import React, { useState } from "react";
 import { Container, Hr, Slider } from "../../../components";
 import Image from "next/image";
-import { DateToString } from "../../../../common/utils/date-to-string";
+import { useDateToString } from "../../../../common/utils/date-to-string";
 import { PostContent } from "./post-content";
 import type { IPost } from "../../../../common/post";
 import { Footer, ImageStyled, Label, Meta, Title } from "./post-with-content.styles";
@@ -10,14 +10,14 @@ import { Footer, ImageStyled, Label, Meta, Title } from "./post-with-content.sty
 type IProps = IPost;
 
 const PostWithContent: FC<IProps> = ({ content, date, imageLabel, imageSrc, title }) => {
-  const dateStr = DateToString(date);
+  const postDate = useDateToString(date);
   const [showImage, setShowImage] = useState(false);
 
   return (
     <Container>
       <Title>{title}</Title>
       <Hr />
-      <Meta>{dateStr}</Meta>
+      <Meta dateTime={postDate.seo}>{postDate.ui}</Meta>
       {showImage && (
         <Slider
           images={[{ src: imageSrc, title: imageLabel }]}
@@ -42,7 +42,7 @@ const PostWithContent: FC<IProps> = ({ content, date, imageLabel, imageSrc, titl
 
       <PostContent content={content} />
 
-      <Footer>{dateStr}</Footer>
+      <Footer dateTime={postDate.seo}>{postDate.ui}</Footer>
     </Container>
   );
 };

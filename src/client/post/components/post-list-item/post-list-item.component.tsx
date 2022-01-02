@@ -2,7 +2,6 @@ import type { FC } from "react";
 import React, { useCallback, useState } from "react";
 import Image from "next/image";
 import NextLink from "next/link";
-import { DateToString } from "../../../../common/utils/date-to-string";
 import { Slider } from "../../../components";
 import {
   Center,
@@ -14,6 +13,7 @@ import {
   Title,
 } from "./post-list-item.styles";
 import type { IPostWithoutContent } from "../../../../common/post";
+import { useDateToString } from "../../../../common/utils/date-to-string";
 
 interface IProps extends IPostWithoutContent {
   className?: string;
@@ -33,11 +33,12 @@ const PostListItem: FC<IProps> = ({
   const [isShowImage, setIsShowImage] = useState(false);
   const showImage = useCallback(() => setIsShowImage(true), []);
   const closeImage = useCallback(() => setIsShowImage(false), []);
+  const postDate = useDateToString(date);
 
   return (
     <div className={className}>
       <Title>{title}</Title>
-      <Meta>{DateToString(date)}</Meta>
+      <Meta dateTime={postDate.seo}>{postDate.ui}</Meta>
       {isShowImage && (
         <Slider images={[{ src: imageSrc, title: imageLabel }]} onClose={closeImage} />
       )}
