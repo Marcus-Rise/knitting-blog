@@ -7,10 +7,12 @@ const Title = styled.h2`
   margin-bottom: 0;
 `;
 
-const Meta = styled.p`
+const Meta = styled.time`
   color: ${colors.secondary};
   font-size: 1rem;
   text-transform: capitalize;
+  margin: 1em 0;
+  display: block;
 `;
 
 const ImageStyled = styled.div`

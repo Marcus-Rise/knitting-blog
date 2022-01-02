@@ -37,10 +37,12 @@ const Title = styled.h2`
   line-height: initial;
 `;
 
-const Meta = styled.p`
+const Meta = styled.time`
   text-align: center;
   color: ${colors.secondary};
   text-transform: uppercase;
+  display: block;
+  margin: 1em 0;
 `;
 
 const Label = styled.p`
@@ -51,10 +53,12 @@ const Label = styled.p`
   font-size: 1.5rem;
 `;
 
-const Footer = styled.p`
+const Footer = styled.time`
   color: ${colors.secondary};
   text-align: right;
   text-transform: capitalize;
+  display: block;
+  margin: 1em 0;
 `;
 
 export { ImageStyled, Title, Meta, Label, Footer };
