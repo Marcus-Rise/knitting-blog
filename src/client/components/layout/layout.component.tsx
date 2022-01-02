@@ -6,6 +6,7 @@ import type { INavLink } from "../nav";
 import { Header } from "../header";
 import { Footer } from "../footer";
 import { GlobalStyles } from "../../styles";
+import { GoogleAnalytics } from "../google-analytics";
 
 interface ILayoutProps {
   title: string;
@@ -15,6 +16,7 @@ interface ILayoutProps {
 
 const Layout: FC<ILayoutProps> = ({ title, author, links, children }) => (
   <>
+    <GoogleAnalytics />
     <GlobalStyles />
     <Head>
       <title key={"title"}>{title}</title>
