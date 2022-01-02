@@ -1,7 +1,7 @@
 const colors = {
   primary: "#00B4A2",
   accent: "#D83D7E",
-  secondary: "#58585",
+  secondary: "#58585A",
 };
 
 const screenSizes = {
