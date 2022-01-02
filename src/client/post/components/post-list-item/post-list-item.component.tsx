@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import Image from "next/image";
 import NextLink from "next/link";
 import { DateToString } from "../../../../common/utils/date-to-string";
@@ -30,19 +30,18 @@ const PostListItem: FC<IProps> = ({
   title,
   priority,
 }) => {
-  const [showImage, setShowImage] = useState(false);
+  const [isShowImage, setIsShowImage] = useState(false);
+  const showImage = useCallback(() => setIsShowImage(true), []);
+  const closeImage = useCallback(() => setIsShowImage(false), []);
 
   return (
     <div className={className}>
       <Title>{title}</Title>
       <Meta>{DateToString(date)}</Meta>
-      {showImage && (
-        <Slider
-          images={[{ src: imageSrc, title: imageLabel }]}
-          onClose={() => setShowImage(false)}
-        />
+      {isShowImage && (
+        <Slider images={[{ src: imageSrc, title: imageLabel }]} onClose={closeImage} />
       )}
-      <ImageStyled onClick={() => setShowImage(true)}>
+      <ImageStyled onClick={showImage}>
         <Image
           src={imageSrc}
           alt={imageLabel}
