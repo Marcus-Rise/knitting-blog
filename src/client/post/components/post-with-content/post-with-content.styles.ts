@@ -11,7 +11,7 @@ const ImageStyled = styled.div`
     cursor: pointer;
   }
 
-  & > div {
+  & > span {
     &,
     & > img {
       position: relative !important;

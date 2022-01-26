@@ -21,7 +21,7 @@ const ImageStyled = styled.div`
   width: auto;
   overflow: hidden;
 
-  & > div {
+  & > span {
     &,
     & > img {
       position: relative !important;
