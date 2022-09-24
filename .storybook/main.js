@@ -1,5 +1,3 @@
-const path = require("path");
-
 module.exports = {
   stories: ["../src/**/*.stories.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
   addons: [
@@ -18,14 +16,6 @@ module.exports = {
       return `
         ${head}
         <base href="storybook/">
-        <link
-          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&display=swap"
-          rel="stylesheet"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Bad+Script&display=swap"
-          rel="stylesheet"
-        />
       `;
     }
   },
