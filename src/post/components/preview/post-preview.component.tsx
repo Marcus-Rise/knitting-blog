@@ -1,21 +1,11 @@
-import type { FC, PropsWithChildren } from "react";
+import type { FC } from "react";
 import NextImage from "next/future/image";
 import styles from "./post-preview.module.scss";
 import Link from "next/link";
 import { useFormattedPostDate } from "../../date";
 
-const Card: FC<PropsWithChildren> = ({ children }) => <div className={styles.card}>{children}</div>;
-
-const Text: FC<PropsWithChildren> = ({ children }) => <div className={styles.text}>{children}</div>;
-
 const Image: FC<{ alt: string; src: string }> = ({ src, alt }) => (
   <NextImage src={src} alt={alt} className={styles.image} />
-);
-
-const Title: FC<PropsWithChildren> = ({ children }) => <h2 className={styles.title}>{children}</h2>;
-
-const Description: FC<PropsWithChildren> = ({ children }) => (
-  <p className={styles.description}>{children}</p>
 );
 
 const DateString: FC<{ date: Date }> = ({ date }) => {
@@ -34,18 +24,18 @@ const PostPreview: FC<Props> = ({ title, description, slug, imageSrc, date }) =>
   const href = `/${slug}`;
 
   return (
-    <Card>
+    <div className={styles.title}>
       <Link href={href}>
         <Image src={imageSrc} alt={title} />
       </Link>
-      <Text>
+      <div className={styles.text}>
         <Link href={href}>
-          <Title>{title}</Title>
+          <h2 className={styles.title}>{title}</h2>
         </Link>
         <DateString date={date} />
-        <Description>{description}</Description>
-      </Text>
-    </Card>
+        <div className={styles.description}>{description}</div>
+      </div>
+    </div>
   );
 };
 
