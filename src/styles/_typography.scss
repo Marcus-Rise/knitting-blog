@@ -1,0 +1,32 @@
+@mixin BadScript() {
+  font-family: "Bad Script", cursive;
+  font-size: 1rem;
+  line-height: initial;
+  letter-spacing: 0.2em;
+  font-weight: normal;
+}
+
+@mixin Montserrat() {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1rem;
+}
+
+@mixin Light() {
+  @include Montserrat;
+  font-weight: 300;
+}
+
+@mixin Regular() {
+  @include Montserrat;
+  font-weight: 400;
+}
+
+@mixin Bold() {
+  @include Montserrat;
+  font-weight: 700;
+}
+
+@mixin Black() {
+  @include Montserrat;
+  font-weight: 900;
+}
