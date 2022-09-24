@@ -2,7 +2,7 @@
 
 html,
 body {
-  @include t.Montserrat;
+  @include t.montserrat;
 }
 
 body {
@@ -14,7 +14,9 @@ body.modal {
   overflow-y: hidden;
 }
 
+/* stylelint-disable selector-id-pattern */
 #__next {
+  /* stylelint-enable selector-id-pattern */
   height: 100% !important;
 }
 

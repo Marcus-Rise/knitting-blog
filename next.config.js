@@ -7,6 +7,9 @@ const withPWA = require("next-pwa")({
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  images: {
+    domains: ["images.prismic.io"],
+  },
 };
 
 module.exports = withPWA(nextConfig);
