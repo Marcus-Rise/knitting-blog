@@ -9,6 +9,8 @@ const ImageLoader: Loader = ({ src, width, quality }) => {
     url.searchParams.set("q", quality + "");
   }
 
+  url.searchParams.set("auto", "compress,format");
+
   return url.toString();
 };
 
