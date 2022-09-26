@@ -1,0 +1,10 @@
+@use "../../styles/media" as m;
+
+.container {
+  max-width: 75vw;
+  margin: 0 auto;
+
+  @include m.sm {
+    max-width: 90vw;
+  }
+}

@@ -17,6 +17,8 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
+    "@prismicio/client": "^6.7.1",
+    "@prismicio/helpers": "^2.3.5",
     "date-fns": "^2.29.3",
     "next": "12.3.1",
     "next-pwa": "^5.6.0",
@@ -25,6 +27,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.19.1",
+    "@prismicio/types": "^0.2.3",
     "@storybook/addon-actions": "^6.5.12",
     "@storybook/addon-essentials": "^6.5.12",
     "@storybook/addon-interactions": "^6.5.12",
@@ -38,6 +41,7 @@
     "@types/react-dom": "18.0.6",
     "@typescript-eslint/eslint-plugin": "^5.38.0",
     "babel-loader": "^8.2.5",
+    "dotenv": "^16.0.2",
     "eslint": "8.23.1",
     "eslint-config-next": "12.3.1",
     "eslint-config-prettier": "^8.5.0",
@@ -45,6 +49,7 @@
     "eslint-plugin-storybook": "^0.6.4",
     "postcss": "^8.4.16",
     "prettier": "^2.7.1",
+    "prismic-ts-codegen": "^0.1.5",
     "sass": "^1.55.0",
     "storybook-addon-next": "^1.6.9",
     "stylelint": "^14.12.1",

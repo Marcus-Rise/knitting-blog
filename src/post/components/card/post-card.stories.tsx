@@ -1,12 +1,12 @@
 import type { ComponentMeta, ComponentStory } from "@storybook/react";
-import { PostPreview } from "./post-preview.component";
+import { PostCard } from "./post-card.component";
 
-const Config: ComponentMeta<typeof PostPreview> = {
+const Config: ComponentMeta<typeof PostCard> = {
   title: "Post/Preview",
-  component: PostPreview,
+  component: PostCard,
 };
 
-const Template: ComponentStory<typeof PostPreview> = (args) => <PostPreview {...args} />;
+const Template: ComponentStory<typeof PostCard> = (args) => <PostCard {...args} />;
 
 const Default = Template.bind({});
 Default.args = {
@@ -16,7 +16,7 @@ Default.args = {
   slug: "post-slug",
   imageSrc:
     "https://images.prismic.io/nextjs-starter-prismic-blog/fb66c550-06ee-406b-8be3-06ac639f7bb0_laura-kennedy-VVUOodsIwj4-unsplash.jpg?auto=compress%2Cformat&rect=0%2C1404%2C3744%2C2808&w=3840&fit=max",
-  date: new Date(2020, 12, 12),
+  date: "2020-12-21T17:56:12+0000",
 };
 
 export default Config;
