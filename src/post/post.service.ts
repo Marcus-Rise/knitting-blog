@@ -1,7 +1,7 @@
 import type { PostPreviewModel } from "./model";
 import { PostPreviewModelFactory } from "./model";
 import type { PostDocument } from "../prismic";
-import { client } from "../prismic";
+import { client } from "../prismic/prismic-client";
 
 class PostService {
   static async getList(): Promise<PostPreviewModel[]> {
