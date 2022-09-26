@@ -4,7 +4,6 @@ import styles from "./post-card.module.scss";
 import Link from "next/link";
 import { useFormattedPostDate } from "../../date";
 import type { PostPreviewModel } from "../../model";
-import { ImageLoader } from "../../../prismic";
 
 const DateString: FC<{ date: string }> = ({ date }) => {
   const { ui, html } = useFormattedPostDate(date);
@@ -29,7 +28,6 @@ const PostCard: FC<PostPreviewModel> = ({ title, description, slug, image, date 
             height={image.height}
             width={image.width}
             className={styles.image}
-            loader={ImageLoader}
           />
         </a>
       </Link>
