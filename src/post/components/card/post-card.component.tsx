@@ -27,8 +27,8 @@ const PostCard: FC<Props> = ({ title, description, slug, image, date, priorityIm
       <NextImage
         src={image.src}
         alt={image.alt}
-        height={100}
-        width={300}
+        height={image.height}
+        width={image.width}
         className={styles.image}
         priority={priorityImage}
       />
