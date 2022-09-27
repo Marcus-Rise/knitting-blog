@@ -31,6 +31,9 @@ const PostCard: FC<Props> = ({ title, description, slug, image, date, priorityIm
         width={300}
         className={styles.image}
         priority={priorityImage}
+        blurDataURL={
+          "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNcXw8AAeMBMA+N6mYAAAAASUVORK5CYII="
+        }
       />
       <div className={styles.text}>
         <Link href={href}>
