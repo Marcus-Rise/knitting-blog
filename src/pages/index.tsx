@@ -43,11 +43,12 @@ const Home: NextPage<Props> = ({ posts: [firstPost, ...posts] }) => {
       <div style={{ display: "flex", flexDirection: "column", gap: "2rem", padding: "3rem 0" }}>
         <PostCard
           key={firstPost.slug}
-          title={firstPost.title}
-          description={firstPost.description}
-          image={firstPost.image}
           slug={firstPost.slug}
+          priorityImage
+          image={firstPost.image}
+          title={firstPost.title}
           date={firstPost.date}
+          description={firstPost.description}
         />
         {cards}
       </div>

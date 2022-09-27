@@ -15,7 +15,11 @@ const DateString: FC<{ date: string }> = ({ date }) => {
   );
 };
 
-const PostCard: FC<PostPreviewModel> = ({ title, description, slug, image, date }) => {
+type Props = PostPreviewModel & {
+  priorityImage?: boolean;
+};
+
+const PostCard: FC<Props> = ({ title, description, slug, image, date, priorityImage }) => {
   const href = `/${slug}`;
 
   return (
@@ -26,6 +30,7 @@ const PostCard: FC<PostPreviewModel> = ({ title, description, slug, image, date 
         height={300}
         width={500}
         className={styles.image}
+        priority={priorityImage}
       />
       <div className={styles.text}>
         <Link href={href}>
