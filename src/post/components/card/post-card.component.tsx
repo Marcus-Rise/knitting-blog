@@ -20,17 +20,13 @@ const PostCard: FC<PostPreviewModel> = ({ title, description, slug, image, date 
 
   return (
     <div className={styles.card}>
-      <Link href={href}>
-        <a className={styles.link}>
-          <NextImage
-            src={image.src}
-            alt={image.alt}
-            height={image.height}
-            width={image.width}
-            className={styles.image}
-          />
-        </a>
-      </Link>
+      <NextImage
+        src={image.src}
+        alt={image.alt}
+        height={300}
+        width={500}
+        className={styles.image}
+      />
       <div className={styles.text}>
         <Link href={href}>
           <a className={styles.link}>
