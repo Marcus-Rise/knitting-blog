@@ -1,11 +1,11 @@
 import type { AppProps } from "next/app";
 import type { FC } from "react";
 import { Layout } from "../components/layout";
-import manifest from "../../package.json";
 import "../styles/global.scss";
+import { config } from "../config";
 
 const MyApp: FC<AppProps> = ({ Component, pageProps }) => (
-  <Layout title={"Надя вяжет"} authorName={manifest.author.name} authorLink={manifest.author.url}>
+  <Layout title={config.title} authorName={config.author.name} authorLink={config.author.url}>
     <Component {...pageProps} />
   </Layout>
 );

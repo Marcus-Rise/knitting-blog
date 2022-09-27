@@ -1,4 +1,3 @@
-import Head from "next/head";
 import type { FC, PropsWithChildren } from "react";
 import { useMemo } from "react";
 import { Header } from "../header/header.component";
@@ -14,10 +13,6 @@ const Layout: FC<PropsWithChildren<{ title: string; authorName: string; authorLi
 
   return (
     <>
-      <Head>
-        <title key={"title"}>{title}</title>
-        <meta key={"meta-title"} name={"title"} content={title} />
-      </Head>
       <Header title={title} />
       <main>{children}</main>
       <Footer authorName={authorName} authorLink={authorLink} year={year} />
