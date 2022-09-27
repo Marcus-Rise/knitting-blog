@@ -4,7 +4,7 @@ import { PostService } from "../post/post.service";
 const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const hostName = "https://" + String(req.headers.host);
 
-  const posts = await PostService.getList();
+  const posts = await PostService.list();
 
   const urls = posts.reduce(
     (buffer, post) => {

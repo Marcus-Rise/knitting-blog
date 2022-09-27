@@ -1,0 +1,7 @@
+@use '../../styles/color' as c;
+
+.date {
+  @include c.set-color("secondary");
+
+  text-transform: uppercase;
+}

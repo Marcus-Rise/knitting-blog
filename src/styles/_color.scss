@@ -1,6 +1,6 @@
 @use "sass:map";
 @use "variables" as v;
 
-@mixin set-color($property, $color) {
-  #{$property}: map.get(v.$theme-colors, $color);
+@mixin set-color($color) {
+  color: map.get(v.$theme-colors, $color);
 }

@@ -1,4 +1,6 @@
 @use "../../../styles/media" as m;
+@use "../../../styles/typography" as t;
+@use "../../../styles/color" as c;
 
 .card {
   display: grid;
@@ -28,10 +30,6 @@
     grid-column: 1;
     grid-row: 2;
   }
-}
-
-.title {
-  margin: 0;
 }
 
 .date {

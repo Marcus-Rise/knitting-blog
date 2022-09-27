@@ -1,8 +1,8 @@
-import type { PostPreviewModel } from "./post-preview.model";
 import type { PostDocument } from "../../prismic";
+import type { PostWithContentModel } from "./post-with-content.model";
 
-abstract class PostPreviewModelFactory {
-  static fromResponseDto(dto: PostDocument): PostPreviewModel {
+abstract class PostWithContentModelFactory {
+  static fromResponseDto(dto: PostDocument): PostWithContentModel {
     const title = dto.data.title.at(0)?.text ?? "";
 
     let imageSrc: string = "";
@@ -18,7 +18,6 @@ abstract class PostPreviewModelFactory {
     return {
       title,
       description: dto.data.description.at(0)?.text ?? "",
-      slug: dto.uid,
       image: {
         src: imageSrc,
         alt: dto.data.main_image.alt ?? title,
@@ -26,8 +25,9 @@ abstract class PostPreviewModelFactory {
         width: dto.data.main_image.dimensions?.width ?? 0,
       },
       date: dto.first_publication_date,
+      content: dto.data.body,
     };
   }
 }
 
-export { PostPreviewModelFactory };
+export { PostWithContentModelFactory };
