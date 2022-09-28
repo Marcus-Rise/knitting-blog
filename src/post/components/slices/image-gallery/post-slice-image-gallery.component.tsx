@@ -18,6 +18,8 @@ const PostSliceImageGallery: FC<{ slice: PostDocumentDataBodyImageGallerySlice }
         return {
           url: i.gallery_image.url ?? "",
           alt: i.gallery_image.alt ?? "",
+          width: i.gallery_image.dimensions?.width,
+          height: i.gallery_image.dimensions?.height,
         };
       }),
     [slice.items],
@@ -32,8 +34,9 @@ const PostSliceImageGallery: FC<{ slice: PostDocumentDataBodyImageGallerySlice }
           key={index}
           src={image.url}
           alt={image.alt}
-          height={300}
-          width={300}
+          height={image.height}
+          width={image.width}
+          sizes={"100vw"}
           className={styles.image}
           onClick={() => setSliderStartIndex(index)}
         />

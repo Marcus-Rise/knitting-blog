@@ -19,6 +19,7 @@ const PostCard: FC<Props> = ({ title, description, slug, image, date, priorityIm
       width={image.width}
       className={styles.image}
       priority={priorityImage}
+      sizes={"100vw"}
     />
     <div className={styles.text}>
       <Link
