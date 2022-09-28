@@ -11,7 +11,7 @@ type Props = PostPreviewModel & {
 };
 
 const PostCard: FC<Props> = ({ title, description, slug, image, date, priorityImage }) => (
-  <div className={styles.card}>
+  <article className={styles.card}>
     <NextImage
       src={image.src}
       alt={image.alt}
@@ -34,7 +34,7 @@ const PostCard: FC<Props> = ({ title, description, slug, image, date, priorityIm
       <DateComponent date={date} />
       <div className={styles.description}>{description}</div>
     </div>
-  </div>
+  </article>
 );
 
 export { PostCard };

@@ -1,0 +1,19 @@
+@use "../../../../styles/media" as m;
+
+.wrapper {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.image {
+  height: 30vh;
+  width: calc(100% / 3 - 1rem);
+  object-fit: cover;
+  object-position: 0 0;
+
+  @include m.md {
+    height: 20vh;
+  }
+}
