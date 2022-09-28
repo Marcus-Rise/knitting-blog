@@ -1,6 +1,7 @@
 import type { FC } from "react";
 import { useCallback, useMemo, useState } from "react";
 import type { PostDocumentDataBodyImageGallerySlice } from "../../../../prismic";
+import { imageLoader } from "../../../../prismic";
 import NextImage from "next/future/image";
 import styles from "./post-slice-image-gallery.module.scss";
 import dynamic from "next/dynamic";
@@ -18,6 +19,8 @@ const PostSliceImageGallery: FC<{ slice: PostDocumentDataBodyImageGallerySlice }
         return {
           url: i.gallery_image.url ?? "",
           alt: i.gallery_image.alt ?? "",
+          width: i.gallery_image.dimensions?.width,
+          height: i.gallery_image.dimensions?.height,
         };
       }),
     [slice.items],
@@ -32,8 +35,10 @@ const PostSliceImageGallery: FC<{ slice: PostDocumentDataBodyImageGallerySlice }
           key={index}
           src={image.url}
           alt={image.alt}
-          height={300}
-          width={300}
+          height={image.height}
+          width={image.width}
+          sizes={"100vw"}
+          loader={imageLoader}
           className={styles.image}
           onClick={() => setSliderStartIndex(index)}
         />

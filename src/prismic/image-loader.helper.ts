@@ -1,17 +1,6 @@
 import type { ImageLoader as Loader } from "next/future/image";
 
-const ImageLoader: Loader = ({ src, width, quality }) => {
-  const url = new URL(src);
+const imageLoader: Loader = ({ src, width, quality = 75 }) =>
+  src + "?w=" + width + "&q=" + quality + "&auto=compress,format";
 
-  url.searchParams.set("w", width + "");
-
-  if (quality) {
-    url.searchParams.set("q", quality + "");
-  }
-
-  url.searchParams.set("auto", "compress,format");
-
-  return url.toString();
-};
-
-export { ImageLoader };
+export { imageLoader };

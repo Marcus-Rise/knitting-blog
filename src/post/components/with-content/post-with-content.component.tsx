@@ -7,6 +7,7 @@ import { DateComponent } from "../../../components/date";
 import NextImage from "next/future/image";
 import { SliceZone } from "@prismicio/react";
 import { components } from "../slices";
+import { imageLoader } from "../../../prismic";
 
 const PostWithContent: FC<Omit<PostWithContentModel, "description">> = ({
   title,
@@ -23,6 +24,8 @@ const PostWithContent: FC<Omit<PostWithContentModel, "description">> = ({
       alt={image.alt}
       height={image.height}
       width={image.width}
+      sizes={"100vw"}
+      loader={imageLoader}
       className={styles.image}
       priority
     />

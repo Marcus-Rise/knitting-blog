@@ -5,6 +5,7 @@ import Link from "next/link";
 import type { PostPreviewModel } from "../../model";
 import { Title } from "../../../components/title";
 import { DateComponent } from "../../../components/date";
+import { imageLoader } from "../../../prismic";
 
 type Props = PostPreviewModel & {
   priorityImage?: boolean;
@@ -15,10 +16,12 @@ const PostCard: FC<Props> = ({ title, description, slug, image, date, priorityIm
     <NextImage
       src={image.src}
       alt={image.alt}
-      height={100}
-      width={300}
+      height={image.height}
+      width={image.width}
       className={styles.image}
       priority={priorityImage}
+      sizes={"100vw"}
+      loader={imageLoader}
     />
     <div className={styles.text}>
       <Link
