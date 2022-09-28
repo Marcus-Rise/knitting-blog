@@ -1,9 +1,10 @@
 import type { Content } from "@prismicio/client";
+import type { PostImageModel } from "./post-image.model";
 
 type PostWithContentModel = {
   title: string;
   description: string;
-  image: { src: string; alt: string; width: number; height: number };
+  image: PostImageModel;
   date: string;
   content: Content.PostDocumentData["body"];
 };

@@ -22,6 +22,8 @@ const PostCard: FC<Props> = ({ title, description, slug, image, date, priorityIm
       priority={priorityImage}
       sizes={"100vw"}
       loader={imageLoader}
+      placeholder={"blur"}
+      blurDataURL={image.blurDataUrl}
     />
     <div className={styles.text}>
       <Link

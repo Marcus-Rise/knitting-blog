@@ -28,6 +28,8 @@ const PostWithContent: FC<Omit<PostWithContentModel, "description">> = ({
       loader={imageLoader}
       className={styles.image}
       priority
+      placeholder={"blur"}
+      blurDataURL={image.blurDataUrl}
     />
     <SliceZone slices={content} components={components} />
     <DateComponent className={styles.datebottom} date={date} />
