@@ -12,7 +12,7 @@ abstract class PostPreviewModelFactory {
     if (!!dtoUrl) {
       const url = new URL(dtoUrl);
 
-      imageSrc = `${url.origin}${url.pathname}`;
+      imageSrc = `${url.origin}${url.pathname}?auto=compress`;
     }
 
     return {
