@@ -24,3 +24,11 @@ body.modal {
 main {
   min-height: 90vh;
 }
+
+.rsis-image {
+  &, & ~ div {
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+  }
+}

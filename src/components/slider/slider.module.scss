@@ -1,0 +1,28 @@
+@use "../../styles/color" as c;
+
+.wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 101;
+}
+
+.button {
+  @include c.set-back-color("secondary");
+
+  z-index: 102;
+  position: fixed;
+  right: 1rem;
+  top: 1rem;
+  border: none;
+  border-radius: 100%;
+  width: 2rem;
+  height: 2rem;
+
+  &:hover {
+    cursor: pointer;
+    color: white;
+  }
+}
