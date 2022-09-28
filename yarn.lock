@@ -1578,6 +1578,19 @@
     escape-html "^1.0.3"
     imgix-url-builder "^0.0.3"
 
+"@prismicio/next@^0.1.5":
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/@prismicio/next/-/next-0.1.5.tgz#7d4aa090395b05f3469dc63f0f0680eff5511c7b"
+  integrity sha512-JSgR9i3jtJUwEAsrByzRAH66owoGZiDmtoeiMF+Eg4LYWD9z9V2oGEs6XpMUOuEyatWtMzDrori1O7cLD082Sg==
+  dependencies:
+    "@prismicio/client" "^6.7.1"
+    "@prismicio/helpers" "^2.3.3"
+    "@prismicio/react" "^2.5.0"
+    "@prismicio/types" "^0.2.3"
+    eslint-plugin-react "^7.31.7"
+    eslint-plugin-react-hooks "^4.6.0"
+    imgix-url-builder "^0.0.3"
+
 "@prismicio/react@^2.5.0":
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/@prismicio/react/-/react-2.5.0.tgz#2fa27467e153db8d761b72eeec648ac4e7ed910b"
@@ -5514,7 +5527,7 @@ eslint-plugin-prettier@^4.2.1:
   dependencies:
     prettier-linter-helpers "^1.0.0"
 
-eslint-plugin-react-hooks@^4.5.0:
+eslint-plugin-react-hooks@^4.5.0, eslint-plugin-react-hooks@^4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-react-hooks/-/eslint-plugin-react-hooks-4.6.0.tgz#4c3e697ad95b77e93f8646aaa1630c1ba607edd3"
   integrity sha512-oFc7Itz9Qxh2x4gNHStv3BqJq54ExXmfC+a1NjAta66IAN87Wu0R/QArgIS9qKzX3dXKPI9H5crl9QchNMY9+g==

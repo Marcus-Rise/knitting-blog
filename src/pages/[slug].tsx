@@ -31,7 +31,7 @@ const Post: NextPage<Props> = ({ post }) => {
 
 const getStaticProps: GetStaticProps<Props> = async (context) => {
   const uuid = String(context.params?.slug);
-  const post = await PostService.find(uuid);
+  const post = await PostService.find(uuid, context.previewData);
 
   return {
     props: {
