@@ -8,12 +8,12 @@
 }
 
 .image {
-  height: 30vh;
+  height: 20rem;
   width: calc(100% / 3 - 1rem);
   object-fit: cover;
   object-position: 0 0;
 
   @include m.md {
-    height: 20vh;
+    width: 100%;
   }
 }
