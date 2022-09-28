@@ -6,7 +6,8 @@ import type { PreviewData } from "next/types";
 
 abstract class PostService {
   static async list(): Promise<PostPreviewModel[]> {
-    const dto: Array<PostDocument> = await createClient().getAllByType("post", {
+    const client = createClient();
+    const dto: Array<PostDocument> = await client.getAllByType("post", {
       orderings: {
         field: "document.first_publication_date",
         direction: "desc",
@@ -16,8 +17,9 @@ abstract class PostService {
     return dto.map((i) => PostPreviewModelFactory.fromResponseDto(i));
   }
 
-  static async find(uuid: string, previewData: PreviewData): Promise<PostWithContentModel> {
-    const dto: PostDocument = await createClient({ previewData }).getByUID("post", uuid);
+  static async find(uuid: string, previewData?: PreviewData): Promise<PostWithContentModel> {
+    const client = createClient({ previewData });
+    const dto: PostDocument = await client.getByUID("post", uuid);
 
     return PostWithContentModelFactory.fromResponseDto(dto);
   }

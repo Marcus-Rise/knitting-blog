@@ -6,9 +6,11 @@ import { config } from "../config";
 import { PrismicPreview } from "@prismicio/next";
 import { PrismicProvider } from "@prismicio/react";
 import Link from "next/link";
+import { linkResolver } from "../prismic/prismic-link-resolver";
 
 const MyApp: FC<AppProps> = ({ Component, pageProps }) => (
   <PrismicProvider
+    linkResolver={linkResolver}
     internalLinkComponent={({ href, ...props }) => (
       <Link href={href}>
         <a {...props} />
