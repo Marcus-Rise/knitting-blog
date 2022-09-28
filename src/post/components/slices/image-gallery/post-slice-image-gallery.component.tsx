@@ -10,8 +10,8 @@ const PostSliceImageGallery: FC<{ slice: PostDocumentDataBodyImageGallerySlice }
         key={index}
         src={image.url ?? ""}
         alt={image.alt ?? ""}
-        height={image.dimensions?.height}
-        width={image.dimensions?.width}
+        height={300}
+        width={300}
         className={styles.image}
       />
     ))}
