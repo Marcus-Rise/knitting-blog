@@ -1,0 +1,66 @@
+@use "../../styles/media" as m;
+@use "../../styles/typography" as t;
+
+.header {
+  display: flex;
+  flex-direction: column;
+
+  @include m.md {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 5px 5px 0 rgb(50 50 50 / 25%);
+  }
+
+  @include m.md {
+    padding: 0.5rem 1rem;
+  }
+}
+
+.logo {
+  padding-top: 1.75rem;
+  padding-bottom: 1.75rem;
+  box-sizing: border-box;
+  background-image: url("/header_background_left.png"), url("/header_background_right.png");
+  background-repeat: no-repeat, no-repeat;
+  background-size: contain, contain;
+  background-position: left top, right bottom;
+
+  @include m.md {
+    background: none;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    padding: 0;
+    gap: 1rem;
+  }
+}
+
+.image {
+  @include m.lg {
+    display: none !important;
+  }
+}
+
+.link {
+  @include t.bad-script;
+
+  color: inherit;
+  text-decoration: none;
+  font-size: 2.5rem;
+  text-align: center;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  @include m.md {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+}

@@ -1,12 +1,9 @@
-import * as nextImage from "next/image";
+import "../src/styles/global.scss";
+import * as NextImage from "next/future/image";
 
-Object.defineProperty(nextImage, "default", {
+Object.defineProperty(NextImage, "default", {
   configurable: true,
-  value: (props) => (
-    <div>
-      <img src={props.src} alt={props.alt} />
-    </div>
-  ),
+  value: (props) => <img {...props} />,
 });
 
 export const parameters = {

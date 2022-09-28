@@ -1,0 +1,28 @@
+@use "../../../styles/media" as m;
+
+.title {
+  font-size: 2rem;
+  text-align: center;
+
+  @include m.md {
+    font-size: 1.5rem;
+  }
+}
+
+.date {
+  text-align: center;
+  display: block;
+  margin: 1rem 0;
+}
+
+.image {
+  max-width: 100%;
+  height: auto;
+}
+
+.datebottom {
+  text-align: right;
+  display: block;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}

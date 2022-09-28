@@ -1,0 +1,14 @@
+@use "../../styles/media" as m;
+@use "../../styles/typography" as t;
+@use "../../styles/color" as c;
+
+.title {
+  @include t.bad-script;
+  @include c.set-color("primary");
+
+  margin: 0;
+  text-transform: uppercase;
+  line-height: initial;
+  font-weight: bold;
+  font-size: 1.25rem;
+}

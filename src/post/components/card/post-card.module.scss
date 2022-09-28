@@ -1,0 +1,49 @@
+@use "../../../styles/media" as m;
+@use "../../../styles/typography" as t;
+@use "../../../styles/color" as c;
+
+.card {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 35vw auto;
+
+  @include m.md {
+    grid-template-columns: auto;
+    grid-template-rows: auto auto;
+  }
+}
+
+.image {
+  height: auto;
+  width: 100%;
+  object-fit: cover;
+  object-position: 0 0;
+}
+
+.text {
+  grid-column: 2;
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+
+  @include m.md {
+    grid-column: 1;
+    grid-row: 2;
+  }
+}
+
+.date {
+  text-transform: capitalize;
+  font-style: italic;
+}
+
+.description {
+  margin: 0;
+  line-height: 1.75;
+}
+
+.link {
+  position: relative;
+  text-decoration: none;
+  color: inherit;
+}

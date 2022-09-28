@@ -1,0 +1,10 @@
+@use "sass:map";
+@use "variables" as v;
+
+@mixin set-color($color) {
+  color: map.get(v.$theme-colors, $color);
+}
+
+@mixin set-back-color($color) {
+  background-color: map.get(v.$theme-colors, $color);
+}

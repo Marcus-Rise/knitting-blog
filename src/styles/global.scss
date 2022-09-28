@@ -1,0 +1,34 @@
+@use "typography" as t;
+
+html,
+body {
+  @include t.montserrat;
+}
+
+body {
+  margin: 0;
+  padding: 0 !important;
+}
+
+body.modal {
+  max-height: 100vh;
+  overflow-y: hidden;
+}
+
+/* stylelint-disable selector-id-pattern */
+#__next {
+  /* stylelint-enable selector-id-pattern */
+  height: 100% !important;
+}
+
+main {
+  min-height: 90vh;
+}
+
+.rsis-image {
+  &, & ~ div {
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+  }
+}

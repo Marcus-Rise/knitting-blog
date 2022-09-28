@@ -1,0 +1,25 @@
+@use "variables" as v;
+@use "sass:map";
+
+$sm: map.get(v.$screen-sizes, "sm");
+$md: map.get(v.$screen-sizes, "md");
+$lg: map.get(v.$screen-sizes, "lg");
+
+@mixin sm {
+  @media (max-width: #{$sm}px) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media (max-width: #{$md}px) {
+    @content;
+  }
+}
+
+
+@mixin lg {
+  @media (min-width: #{$md + 1}px) {
+    @content;
+  }
+}
