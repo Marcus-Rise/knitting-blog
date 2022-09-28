@@ -45,7 +45,7 @@ const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths: posts.map(({ slug }) => ({ params: { slug } })),
-    fallback: true,
+    fallback: false,
   };
 };
 
