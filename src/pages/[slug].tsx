@@ -8,11 +8,15 @@ import { Container } from "../components/container";
 import { PostWithContent } from "../post/components/with-content";
 
 type Props = {
-  post: PostWithContentModel;
+  post?: PostWithContentModel;
 };
 
 const Post: NextPage<Props> = ({ post }) => {
-  const title = useMemo(() => `${config.title} | ${post.title}`, [post.title]);
+  const title = useMemo(() => `${config.title} | ${post?.title}`, [post?.title]);
+
+  if (!post) {
+    return null;
+  }
 
   return (
     <>
@@ -46,7 +50,7 @@ const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths: posts.map(({ slug }) => ({ params: { slug } })),
-    fallback: false,
+    fallback: true,
   };
 };
 
