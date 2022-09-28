@@ -17,8 +17,9 @@
     box-shadow: 0 5px 5px 0 rgb(50 50 50 / 25%);
   }
 
-  @include m.sm {
-    padding: 0.5rem;
+  @include m.md {
+    padding: 0.5rem 1rem;
+    margin-bottom: 1rem;
   }
 }
 

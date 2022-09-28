@@ -40,7 +40,7 @@ const Home: NextPage<Props> = ({ posts: [firstPost, ...posts] }) => {
         <meta key={"description"} name={"description"} content={description} />
         <meta property="og:image" content={firstPost.image.src} />
       </Head>
-      <div style={{ display: "flex", flexDirection: "column", gap: "2rem", padding: "3rem 0" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
         <PostCard
           key={firstPost.slug}
           slug={firstPost.slug}
