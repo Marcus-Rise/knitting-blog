@@ -2,6 +2,7 @@ import type { FC, PropsWithChildren } from "react";
 import { useMemo } from "react";
 import { Header } from "../header/header.component";
 import { Footer } from "../footer";
+import styles from "./layout.module.scss";
 
 const Layout: FC<PropsWithChildren<{ title: string; authorName: string; authorLink: string }>> = ({
   title,
@@ -14,7 +15,7 @@ const Layout: FC<PropsWithChildren<{ title: string; authorName: string; authorLi
   return (
     <>
       <Header title={title} />
-      <main>{children}</main>
+      <main className={styles.main}>{children}</main>
       <Footer authorName={authorName} authorLink={authorLink} year={year} />
     </>
   );
