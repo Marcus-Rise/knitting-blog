@@ -1,14 +1,40 @@
+@use "media" as m;
+
 @mixin bad-script() {
   font-family: "Bad Script", cursive;
-  font-size: 1rem;
   line-height: initial;
   letter-spacing: 0.2em;
   font-weight: normal;
+  font-size: 2rem;
+
+  @include m.md {
+    font-size: 1.5rem;
+    line-height: 2.25rem;
+  }
+
+  @include m.lg {
+    font-size: 1.75rem;
+    line-height: 2.75rem;
+  }
+
+  @include m.x-lg {
+    font-size: 2rem;
+    line-height: 3rem;
+  }
 }
 
 @mixin montserrat() {
   font-family: Montserrat, sans-serif;
   font-size: 1rem;
+  line-height: 2rem;
+
+  @include m.lg {
+    font-size: 1.05rem;
+  }
+
+  @include m.x-lg {
+    font-size: 1.2rem;
+  }
 }
 
 @mixin light() {

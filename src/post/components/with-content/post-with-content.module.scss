@@ -1,12 +1,5 @@
-@use "../../../styles/media" as m;
-
 .title {
-  font-size: 2rem;
   text-align: center;
-
-  @include m.md {
-    font-size: 1.5rem;
-  }
 }
 
 .date {
@@ -18,6 +11,8 @@
 .image {
   max-width: 100%;
   height: auto;
+  display: block;
+  margin: 0 auto;
 }
 
 .datebottom {
