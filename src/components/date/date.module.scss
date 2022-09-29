@@ -3,5 +3,5 @@
 .date {
   @include c.set-color("secondary");
 
-  text-transform: uppercase;
+  text-transform: capitalize;
 }

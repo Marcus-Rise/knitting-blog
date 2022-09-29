@@ -52,7 +52,6 @@
 
   color: inherit;
   text-decoration: none;
-  font-size: 2.5rem;
   text-align: center;
 
   &:hover {
@@ -62,5 +61,13 @@
   @include m.md {
     margin: 0;
     font-size: 1.5rem;
+  }
+
+  @include m.lg {
+    font-size: 2.5rem;
+  }
+
+  @include m.x-lg {
+    font-size: 3.25rem;
   }
 }

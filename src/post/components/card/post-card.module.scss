@@ -11,6 +11,14 @@
     grid-template-columns: auto;
     grid-template-rows: auto auto;
   }
+
+  @include m.lg {
+    gap: 2rem;
+  }
+
+  @include m.x-lg {
+    gap: 3rem;
+  }
 }
 
 .image {
