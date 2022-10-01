@@ -29,6 +29,8 @@ const Revalidate: NextApiHandler = async (req, res) => {
 
   const postSlug = await PostService.getSlug(postId);
 
+  console.debug(postSlug);
+
   return res
     .revalidate("/" + postSlug)
     .then(() => res.json({ revalidated: true }))
