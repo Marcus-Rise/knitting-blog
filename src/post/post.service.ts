@@ -65,6 +65,13 @@ abstract class PostService {
 
     return post;
   }
+
+  static async getSlug(id: string): Promise<string> {
+    const client = createClient();
+    const dto: PostDocument = await client.getByID(id);
+
+    return dto.uid;
+  }
 }
 
 export { PostService };

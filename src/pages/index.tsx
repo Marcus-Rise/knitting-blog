@@ -63,7 +63,6 @@ const getStaticProps: GetStaticProps<Props> = async () => {
     props: {
       posts,
     },
-    revalidate: true,
   };
 };
 
