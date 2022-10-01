@@ -24,7 +24,7 @@ const Revalidate: NextApiHandler = async (req, res) => {
   const postId = payload.documents.at(0);
 
   if (!postId) {
-    return res.status(400).json({ message: "No document is provided" });
+    return res.status(404).json({ message: "No document was found" });
   }
 
   const postSlug = await PostService.getSlug(postId);
