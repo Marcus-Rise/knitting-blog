@@ -11,8 +11,8 @@ type PrismicHookPayload = {
 };
 
 const Revalidate: NextApiHandler = async (req, res) => {
-  if (req.method !== "POST") {
-    return res.status(405).json({ message: "Method not allowed" });
+  if (!req.body) {
+    return res.status(400).json({ message: "Body must be provided" });
   }
 
   const payload: PrismicHookPayload = req.body;
@@ -31,8 +31,7 @@ const Revalidate: NextApiHandler = async (req, res) => {
 
   console.debug(postSlug);
 
-  return res
-    .revalidate("/" + postSlug)
+  return Promise.all([res.revalidate("/"), res.revalidate(`/${postSlug}`)])
     .then(() => res.json({ revalidated: true }))
     .catch((err) => res.status(500).send(err));
 };
