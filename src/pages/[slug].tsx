@@ -41,7 +41,6 @@ const getStaticProps: GetStaticProps<Props> = async (context) => {
     props: {
       post,
     },
-    revalidate: true,
   };
 };
 
