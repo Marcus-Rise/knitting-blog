@@ -13,11 +13,7 @@ import { THEME_COOKIE_KEY } from "../components/theme/theme-config";
 const MyApp: FC<AppProps> = ({ Component, pageProps }) => (
   <PrismicProvider
     linkResolver={linkResolver}
-    internalLinkComponent={({ href, ...props }) => (
-      <Link href={href}>
-        <a {...props} />
-      </Link>
-    )}
+    internalLinkComponent={({ href, ...props }) => <Link href={href} {...props} />}
   >
     <PrismicPreview repositoryName={process.env.NEXT_PUBLIC_PRISMIC_REPOSITORY ?? ""}>
       <ThemeProvider cookiesKey={THEME_COOKIE_KEY}>
