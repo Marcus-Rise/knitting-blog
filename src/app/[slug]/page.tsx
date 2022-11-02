@@ -1,30 +1,21 @@
 import { Container } from "../../components/container";
 import { PostWithContent } from "../../post/components/with-content";
 import type { IPostService } from "../../server";
-import { bindDependencies, POST_SERVICE } from "../../server";
+import { inject, POST_SERVICE } from "../../server";
 
 type Params = {
   slug: string;
 };
 
-const generateStaticParams = async () => {
-  const func = await bindDependencies(
+const generateStaticParams = () =>
+  inject(
     (postService: IPostService) =>
       postService.getAll().then((posts) => posts.map<Params>((post) => ({ slug: post.slug }))),
     [POST_SERVICE],
   );
 
-  return func();
-};
-
-const getPost = async (uuid: string) => {
-  const func = await bindDependencies(
-    (postService: IPostService) => postService.getByUUID(uuid),
-    [POST_SERVICE],
-  );
-
-  return func();
-};
+const getPost = (uuid: string) =>
+  inject((postService: IPostService) => postService.getByUUID(uuid), [POST_SERVICE]);
 
 const Post = async ({ params }: { params: Params }) => {
   const uuid = params.slug;

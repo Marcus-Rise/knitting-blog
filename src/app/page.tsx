@@ -1,16 +1,10 @@
 import { PostCard } from "../post/components/card/post-card.component";
 import { Container } from "../components/container";
 import type { IPostService } from "../server";
-import { bindDependencies, POST_SERVICE } from "../server";
+import { inject, POST_SERVICE } from "../server";
 
-const getPosts = async () => {
-  const func = await bindDependencies(
-    (postService: IPostService) => postService.getAll(),
-    [POST_SERVICE],
-  );
+const getPosts = () => inject((postService: IPostService) => postService.getAll(), [POST_SERVICE]);
 
-  return func();
-};
 const Home = async () => {
   const [firstPost, ...posts] = await getPosts();
 

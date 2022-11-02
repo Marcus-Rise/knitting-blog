@@ -1,1 +1,1 @@
-export * from "./bind-dependencies.helper";
+export * from "./inject.helper";

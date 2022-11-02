@@ -1,11 +1,8 @@
 import type { GetServerSideProps } from "next";
 import type { IPostService } from "../server";
-import { bindDependencies, POST_SERVICE } from "../server";
+import { inject, POST_SERVICE } from "../server";
 
-const getPosts = bindDependencies(
-  (postService: IPostService) => postService.getAll(),
-  [POST_SERVICE],
-);
+const getPosts = () => inject((postService: IPostService) => postService.getAll(), [POST_SERVICE]);
 
 const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const hostName = "https://" + String(req.headers.host);

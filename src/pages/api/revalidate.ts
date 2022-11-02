@@ -1,15 +1,9 @@
 import type { NextApiHandler } from "next";
 import type { IPostService } from "../../server";
-import { bindDependencies, POST_SERVICE } from "../../server";
+import { inject, POST_SERVICE } from "../../server";
 
-const getPostSlug = async (id: string) => {
-  const func = await bindDependencies(
-    (postService: IPostService) => postService.getSlugByID(id),
-    [POST_SERVICE],
-  );
-
-  return func();
-};
+const getPostSlug = (id: string) =>
+  inject((postService: IPostService) => postService.getSlugByID(id), [POST_SERVICE]);
 
 const REVALIDATE_TOKEN = process.env.REVALIDATE_TOKEN;
 const REPOSITORY_NAME = process.env.NEXT_PUBLIC_PRISMIC_REPOSITORY;
