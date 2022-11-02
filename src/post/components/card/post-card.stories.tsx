@@ -21,7 +21,7 @@ Default.args = {
     height: 1280,
     width: 852,
   },
-  date: "2020-12-21T17:56:12+0000",
+  date: new Date(2020, 11, 20),
 };
 
 export default Config;
