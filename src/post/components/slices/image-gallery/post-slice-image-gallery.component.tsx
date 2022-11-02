@@ -1,7 +1,6 @@
 import type { FC } from "react";
 import { useCallback, useMemo, useState } from "react";
 import type { PostDocumentDataBodyImageGallerySlice } from "../../../../prismic";
-import { imageLoader } from "../../../../prismic";
 import NextImage from "next/image";
 import styles from "./post-slice-image-gallery.module.scss";
 import dynamic from "next/dynamic";
@@ -39,7 +38,6 @@ const PostSliceImageGallery: FC<{ slice: PostDocumentDataBodyImageGallerySlice }
           alt={image.alt}
           height={image.height}
           width={image.width}
-          loader={imageLoader}
           className={styles.image}
           placeholder={"blur"}
           blurDataURL={image.blurDataUrl}

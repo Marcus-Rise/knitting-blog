@@ -18,18 +18,21 @@
   },
   "dependencies": {
     "@marcus-rise/react-theme": "^1.0.0",
+    "@next/font": "^13.0.1",
     "@prismicio/client": "^6.7.1",
     "@prismicio/helpers": "^2.3.5",
     "@prismicio/next": "^0.1.5",
     "@prismicio/react": "^2.5.0",
     "classnames": "^2.3.2",
     "date-fns": "^2.29.3",
+    "inversify": "^6.0.1",
     "next": "13.0.5",
     "next-pwa": "^5.6.0",
     "plaiceholder": "^2.5.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-simple-image-slider": "^2.4.1",
+    "reflect-metadata": "^0.1.13",
     "sharp": "^0.31.0"
   },
   "devDependencies": {

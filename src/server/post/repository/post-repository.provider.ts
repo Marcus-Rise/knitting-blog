@@ -1,0 +1,3 @@
+const POST_REPOSITORY = Symbol.for("POST_REPOSITORY");
+
+export { POST_REPOSITORY };

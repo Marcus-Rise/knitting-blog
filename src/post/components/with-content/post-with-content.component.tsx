@@ -5,9 +5,7 @@ import styles from "./post-with-content.module.scss";
 import { Hr } from "../../../components/hr";
 import { DateComponent } from "../../../components/date";
 import NextImage from "next/image";
-import { SliceZone } from "@prismicio/react";
-import { components } from "../slices";
-import { imageLoader } from "../../../prismic";
+import { components, SliceZone } from "../slices";
 
 const PostWithContent: FC<Omit<PostWithContentModel, "description">> = ({
   title,
@@ -24,7 +22,6 @@ const PostWithContent: FC<Omit<PostWithContentModel, "description">> = ({
       alt={image.alt}
       height={image.height}
       width={image.width}
-      loader={imageLoader}
       className={styles.image}
       priority
       placeholder={"blur"}

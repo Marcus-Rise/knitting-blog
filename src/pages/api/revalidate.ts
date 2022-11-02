@@ -1,5 +1,9 @@
 import type { NextApiHandler } from "next";
-import { PostService } from "../../post/post.service";
+import type { IPostService } from "../../server";
+import { bindDependencies, POST_SERVICE } from "../../server";
+
+const getPostSlug = (id: string) =>
+  bindDependencies((postService: IPostService) => postService.getSlugByID(id), [POST_SERVICE])();
 
 const REVALIDATE_TOKEN = process.env.REVALIDATE_TOKEN;
 const REPOSITORY_NAME = process.env.NEXT_PUBLIC_PRISMIC_REPOSITORY;
@@ -27,7 +31,11 @@ const Revalidate: NextApiHandler = async (req, res) => {
     return res.status(404).json({ message: "No document was found" });
   }
 
-  const postSlug = await PostService.getSlug(postId);
+  const postSlug = await getPostSlug(postId);
+
+  if (!postSlug) {
+    return res.status(404).json({ message: "No document slug was found" });
+  }
 
   return Promise.all([res.revalidate("/"), res.revalidate(`/${postSlug}`)])
     .then(() => res.json({ revalidated: true }))

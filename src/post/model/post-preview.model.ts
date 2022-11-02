@@ -5,6 +5,7 @@ type PostPreviewModel = {
   title: string;
   description: string;
   slug: string;
+  // todo set to Date
   date: string;
 };
 

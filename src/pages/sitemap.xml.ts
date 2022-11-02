@@ -1,10 +1,16 @@
 import type { GetServerSideProps } from "next";
-import { PostService } from "../post/post.service";
+import type { IPostService } from "../server";
+import { bindDependencies, POST_SERVICE } from "../server";
+
+const getPosts = bindDependencies(
+  (postService: IPostService) => postService.getAll(),
+  [POST_SERVICE],
+);
 
 const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const hostName = "https://" + String(req.headers.host);
 
-  const posts = await PostService.list();
+  const posts = await getPosts();
 
   const urls = posts.reduce(
     (buffer, post) => {

@@ -16,6 +16,7 @@ abstract class PostWithContentModelFactory {
     }
 
     return {
+      slug: dto.uid,
       title,
       description: dto.data.description.at(0)?.text ?? "",
       image: {

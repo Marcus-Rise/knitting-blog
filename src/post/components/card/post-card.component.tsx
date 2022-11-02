@@ -1,11 +1,10 @@
 import type { FC } from "react";
 import NextImage from "next/image";
 import styles from "./post-card.module.scss";
-import Link from "next/link";
 import type { PostPreviewModel } from "../../model";
 import { Title } from "../../../components/title";
 import { DateComponent } from "../../../components/date";
-import { imageLoader } from "../../../prismic";
+import Link from "next/link";
 
 type Props = PostPreviewModel & {
   priorityImage?: boolean;
@@ -20,7 +19,6 @@ const PostCard: FC<Props> = ({ title, description, slug, image, date, priorityIm
       width={image.width}
       className={styles.image}
       priority={priorityImage}
-      loader={imageLoader}
       placeholder={"blur"}
       blurDataURL={image.blurDataUrl}
     />
