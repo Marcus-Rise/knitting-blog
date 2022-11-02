@@ -26,7 +26,7 @@ abstract class PostPreviewModelFactory {
         width: dto.data.main_image.dimensions?.width ?? 0,
         blurDataUrl: "",
       },
-      date: dto.first_publication_date,
+      date: new Date(dto.first_publication_date),
     };
   }
 }
