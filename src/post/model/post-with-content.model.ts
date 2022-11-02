@@ -6,7 +6,7 @@ type PostWithContentModel = {
   title: string;
   description: string;
   image: PostImageModel;
-  date: string;
+  date: Date;
   content: Content.PostDocumentData["body"];
 };
 
