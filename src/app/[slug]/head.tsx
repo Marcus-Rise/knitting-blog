@@ -2,8 +2,14 @@ import { config } from "../../config";
 import type { IPostService } from "../../server";
 import { bindDependencies, POST_SERVICE } from "../../server";
 
-const getPost = (uuid: string) =>
-  bindDependencies((postService: IPostService) => postService.getByUUID(uuid), [POST_SERVICE])();
+const getPost = async (uuid: string) => {
+  const func = await bindDependencies(
+    (postService: IPostService) => postService.getByUUID(uuid),
+    [POST_SERVICE],
+  );
+
+  return func();
+};
 
 const Head = async ({ uuid }: { uuid: string }) => {
   const post = await getPost(uuid);

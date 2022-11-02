@@ -2,10 +2,14 @@ import { config } from "../config";
 import type { IPostService } from "../server";
 import { bindDependencies, POST_SERVICE } from "../server";
 
-const getPosts = bindDependencies(
-  (postService: IPostService) => postService.getAll(),
-  [POST_SERVICE],
-);
+const getPosts = async () => {
+  const func = await bindDependencies(
+    (postService: IPostService) => postService.getAll(),
+    [POST_SERVICE],
+  );
+
+  return func();
+};
 
 const Head = async () => {
   const [firstPost, ...posts] = await getPosts();

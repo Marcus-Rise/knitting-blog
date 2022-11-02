@@ -7,14 +7,24 @@ type Params = {
   slug: string;
 };
 
-const generateStaticParams = bindDependencies(
-  (postService: IPostService) =>
-    postService.getAll().then((posts) => posts.map<Params>((post) => ({ slug: post.slug }))),
-  [POST_SERVICE],
-);
+const generateStaticParams = async () => {
+  const func = await bindDependencies(
+    (postService: IPostService) =>
+      postService.getAll().then((posts) => posts.map<Params>((post) => ({ slug: post.slug }))),
+    [POST_SERVICE],
+  );
 
-const getPost = (uuid: string) =>
-  bindDependencies((postService: IPostService) => postService.getByUUID(uuid), [POST_SERVICE])();
+  return func();
+};
+
+const getPost = async (uuid: string) => {
+  const func = await bindDependencies(
+    (postService: IPostService) => postService.getByUUID(uuid),
+    [POST_SERVICE],
+  );
+
+  return func();
+};
 
 const Post = async ({ params }: { params: Params }) => {
   const uuid = params.slug;
