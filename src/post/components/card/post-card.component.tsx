@@ -23,13 +23,7 @@ const PostCard: FC<Props> = ({ title, description, slug, image, date, priorityIm
       blurDataURL={image.blurDataUrl}
     />
     <div className={styles.text}>
-      <Link
-        className={styles.link}
-        href={{
-          pathname: "/[slug]",
-          query: { slug },
-        }}
-      >
+      <Link className={styles.link} href={"/" + slug}>
         <Title>{title}</Title>
       </Link>
       <DateComponent date={date} />
