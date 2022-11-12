@@ -21,7 +21,6 @@ const badScript = Bad_Script({
 
 const Layout: FC<PropsWithChildren> = ({ children }) => (
   <html lang={"ru"}>
-    <head />
     <body className={classNames(montserrat.variable, badScript.variable)}>
       <LayoutBase
         title={config.title}

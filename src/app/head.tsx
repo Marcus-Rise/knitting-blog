@@ -1,8 +1,5 @@
 import { config } from "../config";
-import type { IPostService } from "../server";
-import { inject, POST_SERVICE } from "../server";
-
-const getPosts = () => inject((postService: IPostService) => postService.getAll(), [POST_SERVICE]);
+import { getPosts } from "../server";
 
 const Head = async () => {
   const [firstPost, ...posts] = await getPosts();
