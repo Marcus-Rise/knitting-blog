@@ -1,14 +1,12 @@
 import type { NextMiddleware } from "next/server";
 import { NextResponse } from "next/server";
-import { getRobotsTxt, getSiteMap } from "./seo";
-import { getPosts } from "./server";
+import { getRobotsTxt, getSitemap } from "./server/seo/seo.helper";
 
 const middleware: NextMiddleware = async (request) => {
   const host = request.nextUrl.hostname;
 
   if (request.nextUrl.pathname.startsWith("/sitemap.xml")) {
-    const posts = await getPosts();
-    const sitemap = await getSiteMap(posts, host);
+    const sitemap = await getSitemap(host);
 
     return new NextResponse(sitemap, {
       headers: {

@@ -9335,6 +9335,11 @@ pkg-dir@^5.0.0:
   dependencies:
     find-up "^5.0.0"
 
+placeholder@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/placeholder/-/placeholder-1.0.2.tgz#17bf1021b33a1347c448a4377dfd44c545ad1a07"
+  integrity sha512-rmBFTiyVRoacodnRzs9znXOGZHnQF8YiBADpa7bKghCUpWsGwqa3wDIViXS6b3/ZGbEU2rjVb18HzTn93o7COg==
+
 plaiceholder@^2.5.0:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/plaiceholder/-/plaiceholder-2.5.0.tgz#2a90c2756a597d548c8c7fae863f600de3eb0e0b"
