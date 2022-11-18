@@ -1,7 +1,4 @@
-@use '../../styles/color' as c;
-
 .date {
-  @include c.set-color("secondary");
-
+  color: var(--color-text-secondary);
   text-transform: capitalize;
 }

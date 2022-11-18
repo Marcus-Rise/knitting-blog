@@ -1,8 +1,29 @@
 @use "typography" as t;
+@use "variables" as v;
+@use "sass:map";
+
+:root {
+  --color-primary: #{map.get(v.$theme-colors, "primary")};
+  --color-background: #{map.get(v.$theme-colors, "background")};
+  --color-background-darker: #{map.get(v.$theme-colors, "background-darker")};
+  --color-text-primary: #{map.get(v.$theme-colors, "text-primary")};
+  --color-text-secondary: #{map.get(v.$theme-colors, "text-secondary")};
+}
+
+[data-theme="dark"] {
+  --color-primary: #{map.get(v.$dark-theme-colors, "primary")};
+  --color-background: #{map.get(v.$dark-theme-colors, "background")};
+  --color-background-darker: #{map.get(v.$dark-theme-colors, "background-darker")};
+  --color-text-primary: #{map.get(v.$dark-theme-colors, "text-primary")};
+  --color-text-secondary: #{map.get(v.$dark-theme-colors, "text-secondary")};
+}
 
 html,
 body {
   @include t.montserrat;
+
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
 }
 
 body {

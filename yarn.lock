@@ -1378,6 +1378,11 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
+"@marcus-rise/react-theme@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@marcus-rise/react-theme/-/react-theme-1.0.0.tgz#3bef87d403e75128f95aabf8abb3bc81aeb73955"
+  integrity sha512-5U3dgzft8PPTXg4A1vu84z8B7qyHrC3jZyrG9FyMSRc6xlFYg5zBN44cAJ80ejfs6nIbWBReYN29rACWP+Umdw==
+
 "@mdx-js/mdx@^1.6.22":
   version "1.6.22"
   resolved "https://registry.yarnpkg.com/@mdx-js/mdx/-/mdx-1.6.22.tgz#8a723157bf90e78f17dc0f27995398e6c731f1ba"
