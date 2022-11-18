@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import NextImage from "next/future/image";
+import NextImage from "next/image";
 import styles from "./post-card.module.scss";
 import Link from "next/link";
 import type { PostPreviewModel } from "../../model";
@@ -27,14 +27,13 @@ const PostCard: FC<Props> = ({ title, description, slug, image, date, priorityIm
     />
     <div className={styles.text}>
       <Link
+        className={styles.link}
         href={{
           pathname: "/[slug]",
           query: { slug },
         }}
       >
-        <a className={styles.link}>
-          <Title>{title}</Title>
-        </a>
+        <Title>{title}</Title>
       </Link>
       <DateComponent date={date} />
       <div className={styles.description}>{description}</div>

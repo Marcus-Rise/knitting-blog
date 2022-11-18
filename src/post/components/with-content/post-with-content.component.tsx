@@ -4,7 +4,7 @@ import { Title } from "../../../components/title";
 import styles from "./post-with-content.module.scss";
 import { Hr } from "../../../components/hr";
 import { DateComponent } from "../../../components/date";
-import NextImage from "next/future/image";
+import NextImage from "next/image";
 import { SliceZone } from "@prismicio/react";
 import { components } from "../slices";
 import { imageLoader } from "../../../prismic";

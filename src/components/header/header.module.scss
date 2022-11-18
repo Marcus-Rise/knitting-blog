@@ -48,10 +48,13 @@
 }
 
 .link {
-  @include t.bad-script;
-
   color: inherit;
   text-decoration: none;
+}
+
+.title {
+  @include t.bad-script;
+
   text-align: center;
 
   &:hover {

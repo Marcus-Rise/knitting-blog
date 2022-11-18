@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import styles from "./header.module.scss";
 import Link from "next/link";
-import Image from "next/future/image";
+import Image from "next/image";
 
 const LOGO_SIZE = 35;
 
@@ -10,9 +10,9 @@ type Props = { title: string };
 const Header: FC<Props> = ({ title }) => {
   return (
     <header className={styles.header}>
-      <Link href={"/"}>
+      <Link className={styles.link} href={"/"}>
         <div className={styles.logo}>
-          <h1 className={styles.link}>{title}</h1>
+          <h1 className={styles.title}>{title}</h1>
           <Image
             alt={title}
             src={"/android-chrome-192x192.png"}

@@ -1,5 +1,5 @@
 import "../src/styles/global.scss";
-import * as NextImage from "next/future/image";
+import * as NextImage from "next/image";
 
 Object.defineProperty(NextImage, "default", {
   configurable: true,

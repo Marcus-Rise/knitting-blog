@@ -10,7 +10,7 @@ const Footer: FC<{ authorName: string; authorLink: string; year: string }> = ({
   return (
     <footer className={styles.footer}>
       <span>&#9400; {year}</span>
-      <Link href={authorLink} target={"_blank"} rel="noreferrer">
+      <Link className={styles.link} href={authorLink} target={"_blank"} rel="noreferrer">
         {authorName}
       </Link>
     </footer>
