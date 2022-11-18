@@ -1,13 +1,15 @@
 @use "sass:color" as c;
 
-$theme-colors: (
+$theme-light: (
+        "background-images": 'url("/header_background_left.png"), url("/header_background_right.png")',
         "background": white,
         "background-darker": c.scale(white, $lightness: -10%),
         "primary": #019c8c,
         "text-primary": black,
         "text-secondary": c.scale(black, $lightness: +50%),
 );
-$dark-theme-colors: (
+$theme-dark: (
+        "background-images": 'url("/header_background_left.svg"), url("/header_background_right.svg")',
         "background": #3b4252,
         "background-darker": c.scale(#3b4252, $lightness: -10%),
         "primary": #01b8a5,

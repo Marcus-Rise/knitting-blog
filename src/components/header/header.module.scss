@@ -26,7 +26,7 @@
   padding-top: 1.75rem;
   padding-bottom: 1.75rem;
   box-sizing: border-box;
-  background-image: url("/header_background_left.png"), url("/header_background_right.png");
+  background-image: var(--color-background-images);
   background-repeat: no-repeat, no-repeat;
   background-size: contain, contain;
   background-position: left top, right bottom;

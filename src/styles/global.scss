@@ -3,19 +3,21 @@
 @use "sass:map";
 
 :root {
-  --color-primary: #{map.get(v.$theme-colors, "primary")};
-  --color-background: #{map.get(v.$theme-colors, "background")};
-  --color-background-darker: #{map.get(v.$theme-colors, "background-darker")};
-  --color-text-primary: #{map.get(v.$theme-colors, "text-primary")};
-  --color-text-secondary: #{map.get(v.$theme-colors, "text-secondary")};
+  --color-primary: #{map.get(v.$theme-light, "primary")};
+  --color-background-images: #{map.get(v.$theme-light, "background-images")};
+  --color-background: #{map.get(v.$theme-light, "background")};
+  --color-background-darker: #{map.get(v.$theme-light, "background-darker")};
+  --color-text-primary: #{map.get(v.$theme-light, "text-primary")};
+  --color-text-secondary: #{map.get(v.$theme-light, "text-secondary")};
 }
 
 [data-theme="dark"] {
-  --color-primary: #{map.get(v.$dark-theme-colors, "primary")};
-  --color-background: #{map.get(v.$dark-theme-colors, "background")};
-  --color-background-darker: #{map.get(v.$dark-theme-colors, "background-darker")};
-  --color-text-primary: #{map.get(v.$dark-theme-colors, "text-primary")};
-  --color-text-secondary: #{map.get(v.$dark-theme-colors, "text-secondary")};
+  --color-primary: #{map.get(v.$theme-dark, "primary")};
+  --color-background-images: #{map.get(v.$theme-dark, "background-images")};
+  --color-background: #{map.get(v.$theme-dark, "background")};
+  --color-background-darker: #{map.get(v.$theme-dark, "background-darker")};
+  --color-text-primary: #{map.get(v.$theme-dark, "text-primary")};
+  --color-text-secondary: #{map.get(v.$theme-dark, "text-secondary")};
 }
 
 html,
