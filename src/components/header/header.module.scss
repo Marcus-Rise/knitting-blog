@@ -2,6 +2,7 @@
 @use "../../styles/typography" as t;
 
 .header {
+  background-color: var(--color-background);
   display: flex;
   flex-direction: column;
 
@@ -12,7 +13,6 @@
     position: sticky;
     top: 0;
     z-index: 100;
-    background: white;
     padding: 1rem;
     box-shadow: 0 5px 5px 0 rgb(50 50 50 / 25%);
   }
@@ -26,13 +26,13 @@
   padding-top: 1.75rem;
   padding-bottom: 1.75rem;
   box-sizing: border-box;
-  background-image: var(--color-background-images);
+  background-image: var(--background-images);
   background-repeat: no-repeat, no-repeat;
   background-size: contain, contain;
   background-position: left top, right bottom;
 
   @include m.md {
-    background: none;
+    background-image: none;
     display: flex;
     align-items: center;
     align-content: center;
