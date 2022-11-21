@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { ThemePreference, useTheme } from "@marcus-rise/react-theme";
 import styles from "./theme.module.scss";
 import classNames from "classnames";
@@ -7,7 +7,7 @@ import classNames from "classnames";
 type ThemeProps = { className?: string };
 
 const Theme: FC<ThemeProps> = ({ className }) => {
-  const { isDarkTheme, preferences, toggleTheme } = useTheme();
+  const { preferences, toggleTheme } = useTheme();
 
   const { icon, title } = useMemo(() => {
     let meta: { icon: string; title: string };
@@ -29,14 +29,6 @@ const Theme: FC<ThemeProps> = ({ className }) => {
 
     return meta;
   }, [preferences]);
-
-  useEffect(() => {
-    if (isDarkTheme) {
-      document.documentElement.setAttribute("data-theme", "dark");
-    } else {
-      document.documentElement.setAttribute("data-theme", "light");
-    }
-  }, [isDarkTheme]);
 
   return (
     <button className={classNames(className, styles.button)} onClick={toggleTheme} title={title}>

@@ -1,10 +1,9 @@
 import type { FC, PropsWithChildren } from "react";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { Header } from "../header/header.component";
 import { Footer } from "../footer";
 import styles from "./layout.module.scss";
-import { ThemeProvider } from "@marcus-rise/react-theme";
-import { THEME_COOKIE_KEY } from "../theme/theme-config";
+import { useTheme } from "@marcus-rise/react-theme";
 
 const Layout: FC<PropsWithChildren<{ title: string; authorName: string; authorLink: string }>> = ({
   title,
@@ -12,14 +11,23 @@ const Layout: FC<PropsWithChildren<{ title: string; authorName: string; authorLi
   authorName,
   children,
 }) => {
+  const { isDarkTheme } = useTheme();
   const year = useMemo(() => new Date().getFullYear().toString(), []);
 
+  useEffect(() => {
+    if (isDarkTheme) {
+      document.documentElement.setAttribute("data-theme", "dark");
+    } else {
+      document.documentElement.setAttribute("data-theme", "light");
+    }
+  }, [isDarkTheme]);
+
   return (
-    <ThemeProvider cookiesKey={THEME_COOKIE_KEY}>
+    <>
       <Header title={title} />
       <main className={styles.main}>{children}</main>
       <Footer authorName={authorName} authorLink={authorLink} year={year} />
-    </ThemeProvider>
+    </>
   );
 };
 

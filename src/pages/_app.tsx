@@ -7,6 +7,8 @@ import { PrismicPreview } from "@prismicio/next";
 import { PrismicProvider } from "@prismicio/react";
 import Link from "next/link";
 import { linkResolver } from "../prismic/prismic-link-resolver";
+import { ThemeProvider } from "@marcus-rise/react-theme";
+import { THEME_COOKIE_KEY } from "../components/theme/theme-config";
 
 const MyApp: FC<AppProps> = ({ Component, pageProps }) => (
   <PrismicProvider
@@ -18,9 +20,11 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }) => (
     )}
   >
     <PrismicPreview repositoryName={process.env.NEXT_PUBLIC_PRISMIC_REPOSITORY ?? ""}>
-      <Layout title={config.title} authorName={config.author.name} authorLink={config.author.url}>
-        <Component {...pageProps} />
-      </Layout>
+      <ThemeProvider cookiesKey={THEME_COOKIE_KEY}>
+        <Layout title={config.title} authorName={config.author.name} authorLink={config.author.url}>
+          <Component {...pageProps} />
+        </Layout>
+      </ThemeProvider>
     </PrismicPreview>
   </PrismicProvider>
 );
