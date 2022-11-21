@@ -2,6 +2,7 @@ import type { FC } from "react";
 import styles from "./header.module.scss";
 import Link from "next/link";
 import Image from "next/image";
+import { Theme } from "../theme";
 
 const LOGO_SIZE = 35;
 
@@ -22,6 +23,7 @@ const Header: FC<Props> = ({ title }) => (
         />
       </div>
     </Link>
+    <Theme className={styles.theme} />
   </header>
 );
 
