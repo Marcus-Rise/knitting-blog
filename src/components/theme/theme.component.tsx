@@ -1,13 +1,12 @@
 import type { FC } from "react";
 import { useEffect, useMemo } from "react";
-import { ThemePreference, ThemeProvider, useTheme } from "@marcus-rise/react-theme";
+import { ThemePreference, useTheme } from "@marcus-rise/react-theme";
 import styles from "./theme.module.scss";
-import { THEME_COOKIE_KEY } from "./theme-config";
 import classNames from "classnames";
 
 type ThemeProps = { className?: string };
 
-const ThemeConsumer: FC<ThemeProps> = ({ className }) => {
+const Theme: FC<ThemeProps> = ({ className }) => {
   const { isDarkTheme, preferences, toggleTheme } = useTheme();
 
   const { icon, title } = useMemo(() => {
@@ -45,11 +44,5 @@ const ThemeConsumer: FC<ThemeProps> = ({ className }) => {
     </button>
   );
 };
-
-const Theme: FC<ThemeProps> = (props) => (
-  <ThemeProvider cookiesKey={THEME_COOKIE_KEY}>
-    <ThemeConsumer {...props} />
-  </ThemeProvider>
-);
 
 export { Theme };
