@@ -1,40 +1,49 @@
 import type { FC } from "react";
 import { useMemo } from "react";
 import { ThemePreference, useTheme } from "@marcus-rise/react-theme";
-import styles from "./theme.module.scss";
-import classNames from "classnames";
+import { Theme as ThemeEnum, ThemeToggle } from "./theme-toggle.component";
 
 type ThemeProps = { className?: string };
 
 const Theme: FC<ThemeProps> = ({ className }) => {
-  const { preferences, toggleTheme } = useTheme();
+  const { preferences, setTheme, resetThemeToSystem } = useTheme();
 
-  const { icon, title } = useMemo(() => {
-    let meta: { icon: string; title: string };
+  const value = useMemo(() => {
+    let value: ThemeEnum;
 
     switch (preferences) {
       case ThemePreference.LIGHT: {
-        meta = { title: "Light", icon: "☀︎" };
+        value = ThemeEnum.LIGHT;
         break;
       }
       case ThemePreference.DARK: {
-        meta = { title: "Dark", icon: "☾" };
+        value = ThemeEnum.DARK;
         break;
       }
       default: {
-        meta = { title: "System", icon: "⌽" };
+        value = ThemeEnum.SYSTEM;
         break;
       }
     }
 
-    return meta;
+    return value;
   }, [preferences]);
 
-  return (
-    <button className={classNames(className, styles.button)} onClick={toggleTheme} title={title}>
-      {icon}
-    </button>
-  );
+  const changeTheme = (theme: ThemeEnum) => {
+    switch (theme) {
+      case ThemeEnum.DARK:
+        setTheme(ThemePreference.DARK);
+        break;
+      case ThemeEnum.LIGHT:
+        setTheme(ThemePreference.LIGHT);
+        break;
+      default:
+        resetThemeToSystem();
+        break;
+    }
+  };
+
+  return <ThemeToggle className={className} value={value} onChange={changeTheme} />;
 };
 
 export { Theme };

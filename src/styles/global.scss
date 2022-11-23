@@ -20,12 +20,16 @@
   --color-text-secondary: #{map.get(v.$theme-dark, "text-secondary")};
 }
 
+* {
+  color: var(--color-text-primary);
+  transition: all ease 1s;
+}
+
 html,
 body {
   @include t.montserrat;
 
   background-color: var(--color-background);
-  color: var(--color-text-primary);
 }
 
 body {
