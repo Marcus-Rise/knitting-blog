@@ -24,7 +24,6 @@ const PostWithContent: FC<Omit<PostWithContentModel, "description">> = ({
       alt={image.alt}
       height={image.height}
       width={image.width}
-      sizes={"100vw"}
       loader={imageLoader}
       className={styles.image}
       priority
