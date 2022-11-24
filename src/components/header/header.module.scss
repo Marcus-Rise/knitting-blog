@@ -32,13 +32,8 @@
   padding-top: 1.75rem;
   padding-bottom: 1.75rem;
   box-sizing: border-box;
-  background-image: var(--background-images);
-  background-repeat: no-repeat, no-repeat;
-  background-size: contain, contain;
-  background-position: left top, right bottom;
 
   @include m.md {
-    background-image: none;
     display: flex;
     align-items: center;
     align-content: center;
@@ -79,4 +74,21 @@
   @include m.x-lg {
     font-size: 3.25rem;
   }
+}
+
+.knits {
+  position: absolute;
+  top: 0;
+
+  @include m.md {
+    display: none;
+  }
+}
+
+.knitsLeft {
+  left: 0;
+}
+
+.knitsRight {
+  right: 0;
 }

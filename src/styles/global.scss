@@ -4,7 +4,6 @@
 
 :root {
   --color-primary: #{map.get(v.$theme-light, "primary")};
-  --background-images: #{map.get(v.$theme-light, "background-images")};
   --color-background: #{map.get(v.$theme-light, "background")};
   --color-background-darker: #{map.get(v.$theme-light, "background-darker")};
   --color-text-primary: #{map.get(v.$theme-light, "text-primary")};
@@ -13,7 +12,6 @@
 
 [data-theme="dark"] {
   --color-primary: #{map.get(v.$theme-dark, "primary")};
-  --background-images: #{map.get(v.$theme-dark, "background-images")};
   --color-background: #{map.get(v.$theme-dark, "background")};
   --color-background-darker: #{map.get(v.$theme-dark, "background-darker")};
   --color-text-primary: #{map.get(v.$theme-dark, "text-primary")};
