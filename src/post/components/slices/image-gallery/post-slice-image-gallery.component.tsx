@@ -2,7 +2,7 @@ import type { FC } from "react";
 import { useCallback, useMemo, useState } from "react";
 import type { PostDocumentDataBodyImageGallerySlice } from "../../../../prismic";
 import { imageLoader } from "../../../../prismic";
-import NextImage from "next/future/image";
+import NextImage from "next/image";
 import styles from "./post-slice-image-gallery.module.scss";
 import dynamic from "next/dynamic";
 

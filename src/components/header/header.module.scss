@@ -2,6 +2,7 @@
 @use "../../styles/typography" as t;
 
 .header {
+  background-color: var(--color-background);
   display: flex;
   flex-direction: column;
 
@@ -12,7 +13,6 @@
     position: sticky;
     top: 0;
     z-index: 100;
-    background: white;
     padding: 1rem;
     box-shadow: 0 5px 5px 0 rgb(50 50 50 / 25%);
   }
@@ -22,17 +22,18 @@
   }
 }
 
+.theme {
+  @include m.lg {
+    display: none !important;
+  }
+}
+
 .logo {
   padding-top: 1.75rem;
   padding-bottom: 1.75rem;
   box-sizing: border-box;
-  background-image: url("/header_background_left.png"), url("/header_background_right.png");
-  background-repeat: no-repeat, no-repeat;
-  background-size: contain, contain;
-  background-position: left top, right bottom;
 
   @include m.md {
-    background: none;
     display: flex;
     align-items: center;
     align-content: center;
@@ -48,10 +49,13 @@
 }
 
 .link {
-  @include t.bad-script;
-
   color: inherit;
   text-decoration: none;
+}
+
+.title {
+  @include t.bad-script;
+
   text-align: center;
 
   &:hover {
@@ -70,4 +74,21 @@
   @include m.x-lg {
     font-size: 3.25rem;
   }
+}
+
+.knits {
+  position: absolute;
+  top: 0;
+
+  @include m.md {
+    display: none;
+  }
+}
+
+.knitsLeft {
+  left: 0;
+}
+
+.knitsRight {
+  right: 0;
 }
