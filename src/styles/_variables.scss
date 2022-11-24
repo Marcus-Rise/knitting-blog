@@ -5,7 +5,7 @@ $theme-light: (
         "background": white,
         "background-darker": c.scale(white, $lightness: -10%),
         "primary": #019c8c,
-        "text-primary": black,
+        "text-primary": #323232,
         "text-secondary": c.scale(black, $lightness: +50%),
 );
 $theme-dark: (
