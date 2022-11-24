@@ -1,9 +1,11 @@
 import type { FC, PropsWithChildren } from "react";
 import { Bad_Script, Montserrat } from "@next/font/google";
 import classNames from "classnames";
-import { Layout as LayoutBase } from "../components/layout";
+import { Layout } from "../components/layout";
 import { config } from "../config";
 import "../styles/global.scss";
+import { cookies, headers } from "next/headers";
+import { THEME_COOKIE_KEY } from "../components/theme/theme-config";
 
 const montserrat = Montserrat({
   weight: "400",
@@ -19,18 +21,20 @@ const badScript = Bad_Script({
   display: "swap",
 });
 
-const Layout: FC<PropsWithChildren> = ({ children }) => (
-  <html lang={"ru"}>
-    <body className={classNames(montserrat.variable, badScript.variable)}>
-      <LayoutBase
-        title={config.title}
-        authorName={config.author.name}
-        authorLink={config.author.url}
-      >
-        {children}
-      </LayoutBase>
-    </body>
-  </html>
-);
+const RootLayout: FC<PropsWithChildren> = ({ children }) => {
+  const userPreferColorScheme = cookies().get(THEME_COOKIE_KEY);
+  const systemDefaultColorScheme = headers().get("sec-ch-prefers-color-scheme");
+  const colorScheme = userPreferColorScheme?.value ?? systemDefaultColorScheme;
 
-export default Layout;
+  return (
+    <html data-theme={colorScheme} lang={"ru"}>
+      <body className={classNames(montserrat.variable, badScript.variable)}>
+        <Layout title={config.title} authorName={config.author.name} authorLink={config.author.url}>
+          {children}
+        </Layout>
+      </body>
+    </html>
+  );
+};
+
+export default RootLayout;
