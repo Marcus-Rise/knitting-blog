@@ -22,7 +22,7 @@
 
 * {
   color: var(--color-text-primary);
-  transition: all ease 1s;
+  transition: color ease 1s, background-color ease 1s;
 }
 
 html,
