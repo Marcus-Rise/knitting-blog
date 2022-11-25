@@ -7,7 +7,7 @@ const withPWA = require("next-pwa")({
 
 /** @type {import("next").NextConfig} */
 const nextConfig = {
-  experimental: { appDir: true, enableUndici: notProduction },
+  experimental: { appDir: true },
   reactStrictMode: true,
   images: {
     domains: ["images.prismic.io"],
