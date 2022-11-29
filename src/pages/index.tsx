@@ -1,6 +1,6 @@
 import type { GetStaticProps, NextPage } from "next";
 import type { PostPreviewModel } from "../post/model";
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { PostCard } from "../post/components/card/post-card.component";
 import { Container } from "../components/container";
 import { PostService } from "../post/post.service";
@@ -8,15 +8,16 @@ import Head from "next/head";
 import { config } from "../config";
 
 const sendNotification = async () => {
-  const permission = await Notification.requestPermission();
+  if (Notification.permission !== "granted") {
+    console.debug("request notify permission");
 
-  console.debug("permission: ", permission);
+    await Notification.requestPermission();
+  }
 
-  if (permission === "granted") {
-    setInterval(() => {
-      console.debug("notify");
-      new Notification("Test notification");
-    }, 2000);
+  if (Notification.permission === "granted") {
+    console.debug("notify");
+
+    new Notification("Test notification");
   }
 };
 
@@ -45,12 +46,9 @@ const Home: NextPage<Props> = ({ posts: [firstPost, ...posts] }) => {
     [firstPost, posts],
   );
 
-  useEffect(() => {
-    sendNotification();
-  }, []);
-
   return (
     <Container>
+      <button onClick={sendNotification}>notify</button>
       <Head>
         <title key={"title"}>{config.title}</title>
         <meta key={"meta-title"} name={"title"} content={config.title} />
