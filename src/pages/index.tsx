@@ -7,6 +7,18 @@ import { PostService } from "../post/post.service";
 import Head from "next/head";
 import { config } from "../config";
 
+const sendNotification = async () => {
+  const permission = await Notification.requestPermission();
+
+  console.debug("permission: ", permission);
+
+  if (permission === "granted") {
+    setTimeout(() => {
+      new Notification("title");
+    }, 2000);
+  }
+};
+
 type Props = {
   posts: Array<PostPreviewModel>;
 };
@@ -33,13 +45,7 @@ const Home: NextPage<Props> = ({ posts: [firstPost, ...posts] }) => {
   );
 
   useEffect(() => {
-    Notification.requestPermission().then((permission) => {
-      if (permission === "granted") {
-        new Notification("title", {
-          body: "test",
-        });
-      }
-    });
+    sendNotification();
   }, []);
 
   return (
