@@ -7,20 +7,6 @@ import { PostService } from "../post/post.service";
 import Head from "next/head";
 import { config } from "../config";
 
-const sendNotification = async () => {
-  if (Notification.permission !== "granted") {
-    console.debug("request notify permission");
-
-    await Notification.requestPermission();
-  }
-
-  if (Notification.permission === "granted") {
-    console.debug("notify");
-
-    new Notification("Test notification");
-  }
-};
-
 type Props = {
   posts: Array<PostPreviewModel>;
 };
@@ -48,7 +34,6 @@ const Home: NextPage<Props> = ({ posts: [firstPost, ...posts] }) => {
 
   return (
     <Container>
-      <button onClick={sendNotification}>notify</button>
       <Head>
         <title key={"title"}>{config.title}</title>
         <meta key={"meta-title"} name={"title"} content={config.title} />
