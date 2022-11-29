@@ -13,9 +13,13 @@ const sendNotification = async () => {
   console.debug("permission: ", permission);
 
   if (permission === "granted") {
-    setTimeout(() => {
-      new Notification("title");
-    }, 2000);
+    navigator.serviceWorker.ready.then((registration) => {
+      setInterval(() => {
+        const title = "Server time";
+        const options = {};
+        registration.showNotification(title, options);
+      }, 1000);
+    });
   }
 };
 
