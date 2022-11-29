@@ -1,6 +1,6 @@
 import type { GetStaticProps, NextPage } from "next";
 import type { PostPreviewModel } from "../post/model";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { PostCard } from "../post/components/card/post-card.component";
 import { Container } from "../components/container";
 import { PostService } from "../post/post.service";
@@ -31,6 +31,16 @@ const Home: NextPage<Props> = ({ posts: [firstPost, ...posts] }) => {
     () => [firstPost, ...posts].map((i) => i.title.toLowerCase()).join(", "),
     [firstPost, posts],
   );
+
+  useEffect(() => {
+    Notification.requestPermission().then((permission) => {
+      if (permission === "granted") {
+        new Notification("title", {
+          body: "test",
+        });
+      }
+    });
+  }, []);
 
   return (
     <Container>
