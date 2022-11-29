@@ -30,7 +30,8 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-simple-image-slider": "^2.4.1",
-    "sharp": "^0.31.0"
+    "sharp": "^0.31.0",
+    "web-push": "^3.5.0"
   },
   "devDependencies": {
     "@babel/core": "^7.19.1",
@@ -46,6 +47,7 @@
     "@types/node": "18.7.18",
     "@types/react": "18.0.21",
     "@types/react-dom": "18.0.6",
+    "@types/web-push": "^3.3.2",
     "@typescript-eslint/eslint-plugin": "^5.38.0",
     "babel-loader": "^8.2.5",
     "dotenv": "^16.0.2",

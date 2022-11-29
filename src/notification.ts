@@ -19,57 +19,39 @@ const requestPermission = async (): Promise<void> => {
   }
 };
 
-const VAPID_DOMAIN = process.env.NEXT_PUBLIC_VAPID_DOMAIN;
-
 const register = async (): Promise<PushSubscription | void> => {
   await requestPermission();
 
   if (Notification.permission === "granted") {
     const registration = await navigator.serviceWorker.register("service-worker.js");
 
-    const subscription = await registration.pushManager
-      .getSubscription()
-      .then(async (subscription) => {
-        if (subscription) {
-          return subscription;
-        }
+    const subscription = await registration.pushManager.getSubscription();
 
-        const response = await fetch(VAPID_DOMAIN + "/notification/vapidPublicKey");
-        const vapidPublicKey = await response.text();
+    if (subscription) {
+      return subscription;
+    }
 
-        const convertedVapidKey = urlBase64ToUint8Array(vapidPublicKey);
+    const vapidPublicKey = process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY ?? "";
 
-        return registration.pushManager.subscribe({
-          userVisibleOnly: true,
-          applicationServerKey: convertedVapidKey,
-        });
-      });
+    const convertedVapidKey = urlBase64ToUint8Array(vapidPublicKey);
 
-    // Send the subscription details to the server using the Fetch API.
-    await fetch(VAPID_DOMAIN + "/notification/register", {
-      method: "post",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({
-        subscription,
-      }),
+    return registration.pushManager.subscribe({
+      userVisibleOnly: true,
+      applicationServerKey: convertedVapidKey,
     });
-
-    return subscription;
   }
 };
 
 const sendNotification = async (subscription: PushSubscription): Promise<void> => {
   if (Notification.permission === "granted") {
-    await fetch(VAPID_DOMAIN + "/notification/sendNotification", {
+    await fetch("/api/notification", {
       method: "post",
       headers: {
         "Content-type": "application/json",
       },
       body: JSON.stringify({
         subscription,
-        // delay: 20,
+        // delay: 10,
         // ttl: 10,
       }),
     });
