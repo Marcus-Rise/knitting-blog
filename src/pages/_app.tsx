@@ -10,7 +10,7 @@ import Link from "next/link";
 import { linkResolver } from "../prismic/prismic-link-resolver";
 import { ThemeProvider } from "@marcus-rise/react-theme";
 import { THEME_COOKIE_KEY } from "../components/theme/theme-config";
-import { register, sendNotification } from "../notification";
+import { register, requestPermission, sendNotification } from "../notification";
 
 const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
   const subscription = useRef<PushSubscription>();
@@ -21,13 +21,19 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
   };
 
   useEffect(() => {
-    register().then((sub) => {
+    const subscribe = async () => {
+      await requestPermission();
+
+      const sub = await register();
+
       if (sub) {
         subscription.current = sub;
 
         console.debug("ready to notify");
       }
-    });
+    };
+
+    subscribe();
   }, []);
 
   return (

@@ -20,8 +20,6 @@ const requestPermission = async (): Promise<void> => {
 };
 
 const register = async (): Promise<PushSubscription | void> => {
-  await requestPermission();
-
   if (Notification.permission === "granted") {
     const registration = await navigator.serviceWorker.register("service-worker.js");
 
@@ -58,4 +56,4 @@ const sendNotification = async (subscription: PushSubscription): Promise<void> =
   }
 };
 
-export { register, sendNotification };
+export { requestPermission, register, sendNotification };
