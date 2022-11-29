@@ -1,8 +1,12 @@
 import { config } from "../../config";
 import { getPost } from "../../server";
 
-const Head = async ({ uuid }: { uuid: string }) => {
-  const post = await getPost(uuid);
+type Params = {
+  slug: string;
+};
+
+const Head = async ({ params }: { params: Params }) => {
+  const post = await getPost(params.slug);
 
   if (!post) {
     return null;
