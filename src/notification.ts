@@ -24,7 +24,7 @@ const register = async (): Promise<PushSubscription> => {
 
   const subscription = await registration.pushManager.getSubscription();
 
-  console.debug(registration);
+  console.debug("registration.pushManager", registration.pushManager);
 
   if (subscription) {
     return subscription;
