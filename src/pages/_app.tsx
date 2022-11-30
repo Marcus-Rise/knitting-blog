@@ -19,6 +19,8 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
     const permission = await requestPermission();
 
     if (permission === "granted" && !subscription.current) {
+      console.debug("registering");
+
       subscription.current = await register();
     }
   }, []);
