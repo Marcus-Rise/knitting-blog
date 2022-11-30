@@ -1,6 +1,6 @@
 import type { AppProps } from "next/app";
 import type { FC } from "react";
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useRef } from "react";
 import { Layout } from "../components/layout";
 import "../styles/global.scss";
 import { config } from "../config";
@@ -30,10 +30,6 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
       await sendNotification(subscription.current);
     }
   };
-
-  useEffect(() => {
-    checkPermission();
-  }, [checkPermission]);
 
   return (
     <PrismicProvider
