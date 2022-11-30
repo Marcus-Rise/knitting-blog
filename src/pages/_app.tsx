@@ -1,6 +1,6 @@
 import type { AppProps } from "next/app";
 import type { FC } from "react";
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { Layout } from "../components/layout";
 import "../styles/global.scss";
 import { config } from "../config";
@@ -10,31 +10,37 @@ import Link from "next/link";
 import { linkResolver } from "../prismic/prismic-link-resolver";
 import { ThemeProvider } from "@marcus-rise/react-theme";
 import { THEME_COOKIE_KEY } from "../components/theme/theme-config";
-import { register, requestPermission, sendNotification } from "../notification";
+import {
+  isNotificationPermissionGranted,
+  register,
+  requestPermission,
+  sendNotification,
+} from "../notification";
 
 const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
   const subscription = useRef<PushSubscription>();
+
+  const checkPermission = useCallback(async (): Promise<void> => {
+    if (!isNotificationPermissionGranted()) {
+      const permission = await requestPermission();
+
+      if (permission === "granted") {
+        subscription.current = await register();
+      }
+    }
+  }, []);
+
   const notify = async (): Promise<void> => {
+    await checkPermission();
+
     if (subscription.current) {
       await sendNotification(subscription.current);
     }
   };
 
   useEffect(() => {
-    const subscribe = async () => {
-      await requestPermission();
-
-      const sub = await register();
-
-      if (sub) {
-        subscription.current = sub;
-
-        console.debug("ready to notify");
-      }
-    };
-
-    subscribe();
-  }, []);
+    checkPermission();
+  }, [checkPermission]);
 
   return (
     <PrismicProvider

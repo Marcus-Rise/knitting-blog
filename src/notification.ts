@@ -11,49 +11,47 @@ const urlBase64ToUint8Array = (base64String: string) => {
   return outputArray;
 };
 
-const requestPermission = async (): Promise<void> => {
-  if (Notification.permission !== "granted") {
-    console.debug("request notify permission");
+const isNotificationPermissionGranted = (): boolean => Notification.permission === "granted";
 
-    await Notification.requestPermission();
-  }
+const requestPermission = async (): Promise<NotificationPermission> => {
+  console.debug("request notify permission");
+
+  return Notification.requestPermission();
 };
 
-const register = async (): Promise<PushSubscription | void> => {
-  if (Notification.permission === "granted") {
-    const registration = await navigator.serviceWorker.register("service-worker.js");
+const register = async (): Promise<PushSubscription> => {
+  const registration = await navigator.serviceWorker.register("service-worker.js");
 
-    const subscription = await registration.pushManager.getSubscription();
+  const subscription = await registration.pushManager.getSubscription();
 
-    if (subscription) {
-      return subscription;
-    }
-
-    const vapidPublicKey = process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY ?? "";
-
-    const convertedVapidKey = urlBase64ToUint8Array(vapidPublicKey);
-
-    return registration.pushManager.subscribe({
-      userVisibleOnly: true,
-      applicationServerKey: convertedVapidKey,
-    });
+  if (subscription) {
+    return subscription;
   }
+
+  const vapidPublicKey = process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY ?? "";
+
+  const convertedVapidKey = urlBase64ToUint8Array(vapidPublicKey);
+
+  return registration.pushManager.subscribe({
+    userVisibleOnly: true,
+    applicationServerKey: convertedVapidKey,
+  });
 };
 
 const sendNotification = async (subscription: PushSubscription): Promise<void> => {
-  if (Notification.permission === "granted") {
+  if (isNotificationPermissionGranted()) {
     await fetch("/api/notification", {
       method: "post",
       headers: {
-        "Content-type": "application/json",
+        "Content-type": "application/json,
       },
       body: JSON.stringify({
-        subscription,
+        subscriptio,
         // delay: 10,
         // ttl: 10,
-      }),
+      },
     });
   }
 };
 
-export { requestPermission, register, sendNotification };
+export { isNotificationPermissionGranted, requestPermission, register, sendNotification };
