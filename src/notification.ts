@@ -43,13 +43,13 @@ const sendNotification = async (subscription: PushSubscription): Promise<void> =
     await fetch("/api/notification", {
       method: "post",
       headers: {
-        "Content-type": "application/json,
+        "Content-type": "application/json",
       },
       body: JSON.stringify({
-        subscriptio,
+        subscription,
         // delay: 10,
         // ttl: 10,
-      },
+      }),
     });
   }
 };
