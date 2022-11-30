@@ -39,19 +39,17 @@ const register = async (): Promise<PushSubscription> => {
 };
 
 const sendNotification = async (subscription: PushSubscription): Promise<void> => {
-  if (isNotificationPermissionGranted()) {
-    await fetch("/api/notification", {
-      method: "post",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({
-        subscription,
-        // delay: 10,
-        // ttl: 10,
-      }),
-    });
-  }
+  await fetch("/api/notification", {
+    method: "post",
+    headers: {
+      "Content-type": "application/json",
+    },
+    body: JSON.stringify({
+      subscription,
+      // delay: 10,
+      // ttl: 10,
+    }),
+  });
 };
 
 export { isNotificationPermissionGranted, requestPermission, register, sendNotification };
