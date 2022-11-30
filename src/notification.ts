@@ -22,7 +22,7 @@ const requestPermission = async (): Promise<NotificationPermission> => {
 const register = async (): Promise<PushSubscription> => {
   const registration = await navigator.serviceWorker.ready;
 
-  console.debug("registration.pushManager", registration.pushManager);
+  console.debug("registration", registration);
 
   const subscription = await registration.pushManager.getSubscription();
 
