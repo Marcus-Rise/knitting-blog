@@ -11,8 +11,6 @@ const urlBase64ToUint8Array = (base64String: string) => {
   return outputArray;
 };
 
-const isNotificationPermissionGranted = (): boolean => Notification.permission === "granted";
-
 const requestPermission = async (): Promise<NotificationPermission> => {
   console.debug("request notify permission");
 
@@ -55,4 +53,4 @@ const sendNotification = async (subscription: PushSubscription): Promise<void> =
   });
 };
 
-export { isNotificationPermissionGranted, requestPermission, register, sendNotification };
+export { requestPermission, register, sendNotification };
