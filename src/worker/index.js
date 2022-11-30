@@ -1,3 +1,5 @@
+"use strict";
+
 self.addEventListener("push", (event) => {
   const payload = event.data?.text() ?? "no payload";
 

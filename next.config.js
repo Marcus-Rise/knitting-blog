@@ -1,6 +1,7 @@
 const withPWA = require("next-pwa")({
   disable: process.env.NODE_ENV !== "production",
   dest: "public",
+  customWorkerDir: "src/worker",
 });
 
 /** @type {import("next").NextConfig} */
