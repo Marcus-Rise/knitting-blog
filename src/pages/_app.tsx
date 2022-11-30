@@ -10,23 +10,16 @@ import Link from "next/link";
 import { linkResolver } from "../prismic/prismic-link-resolver";
 import { ThemeProvider } from "@marcus-rise/react-theme";
 import { THEME_COOKIE_KEY } from "../components/theme/theme-config";
-import {
-  isNotificationPermissionGranted,
-  register,
-  requestPermission,
-  sendNotification,
-} from "../notification";
+import { register, requestPermission, sendNotification } from "../notification";
 
 const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
   const subscription = useRef<PushSubscription>();
 
   const checkPermission = useCallback(async (): Promise<void> => {
-    if (!isNotificationPermissionGranted()) {
-      const permission = await requestPermission();
+    const permission = await requestPermission();
 
-      if (permission === "granted") {
-        subscription.current = await register();
-      }
+    if (permission === "granted" && !subscription.current) {
+      subscription.current = await register();
     }
   }, []);
 

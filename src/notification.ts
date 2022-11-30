@@ -46,6 +46,7 @@ const sendNotification = async (subscription: PushSubscription): Promise<void> =
     },
     body: JSON.stringify({
       subscription,
+      body: "Test",
       // delay: 10,
       // ttl: 10,
     }),
