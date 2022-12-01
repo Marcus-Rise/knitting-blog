@@ -10,7 +10,7 @@ self.addEventListener("push", (event) => {
   );
 });
 
-self.addEventListener("install", (event) => {
+self.addEventListener("install", () => {
   // The promise that skipWaiting() returns can be safely ignored.
   self.skipWaiting();
 
