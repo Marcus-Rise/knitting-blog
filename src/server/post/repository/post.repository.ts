@@ -61,9 +61,8 @@ class PostRepository implements IPostRepository {
         .join("\n"),
     );
 
-    const dto: { results: Array<PostDocument> } = await this._http
-      .get(url.href)
-      .then((res) => res.json());
+    const response = await this._http.get(url.href);
+    const dto: { results: Array<PostDocument> } = await response.json();
 
     return dto.results.map((i) => PostPreviewModelFactory.fromResponseDto(i));
   }
