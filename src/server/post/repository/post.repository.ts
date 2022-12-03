@@ -43,7 +43,7 @@ class PostRepository implements IPostRepository {
 
   async list(): Promise<PostPreviewModel[]> {
     const url = new URL("/api/v2/documents/search", this._config.apiUrl);
-    url.searchParams.append("ref", "YzianRAAAMQ8JVGz");
+    url.searchParams.append("ref", this._config.masterRef);
     url.searchParams.append("q", `[[at(document.type,"post")]]`);
     url.searchParams.append("orderings", `[document.first_publication_date desc]`);
     url.searchParams.append("pageSize", `100`);
