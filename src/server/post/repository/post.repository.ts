@@ -17,21 +17,20 @@ class PostRepository implements IPostRepository {
 
   async find(query?: Partial<PostRepositoryQuery>): Promise<PostWithContentModel | null> {
     const url = new URL("/api/v2/documents/search", this._config.apiUrl);
-    url.searchParams.append("ref", "YzianRAAAMQ8JVGz");
-    url.searchParams.append("access_token", this._config.apiToken);
+    url.searchParams.append("ref", this._config.masterRef);
     url.searchParams.append("q", `[[at(document.type,"post")]]`);
 
     if (query?.uuid) {
       url.searchParams.append("q", `[[at(my.post.uid,"${query.uuid}")]]`);
     } else if (query?.id) {
+      url.searchParams.append("access_token", this._config.apiToken);
       url.searchParams.append("q", `[[at(my.post.id,"${query.id}")]]`);
     } else {
       throw new Error("no query params");
     }
 
-    const dto: { results: Array<PostDocument> } = await this._http
-      .get(url.href)
-      .then((res) => res.json());
+    const response = await this._http.get(url.href);
+    const dto: { results: Array<PostDocument> } = await response.json();
 
     const postDto = dto.results.at(0);
 

@@ -34,7 +34,8 @@ class PostService implements IPostService {
   }
 
   async getByUUID(uuid: string): Promise<PostWithContentModel | null> {
-    const post = await this._repo.find({ uuid });
+    const escapedUUID = decodeURIComponent(uuid);
+    const post = await this._repo.find({ uuid: escapedUUID });
 
     if (!post) {
       return null;
