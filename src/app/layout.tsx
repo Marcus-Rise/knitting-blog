@@ -4,8 +4,6 @@ import classNames from "classnames";
 import { Layout } from "../components/layout";
 import { config } from "../config";
 import "../styles/global.scss";
-import { cookies, headers } from "next/headers";
-import { THEME_COOKIE_KEY } from "../components/theme/theme-config";
 
 const montserrat = Montserrat({
   weight: "400",
@@ -21,20 +19,14 @@ const badScript = Bad_Script({
   display: "swap",
 });
 
-const RootLayout: FC<PropsWithChildren> = ({ children }) => {
-  const userPreferColorScheme = cookies().get(THEME_COOKIE_KEY);
-  const systemDefaultColorScheme = headers().get("sec-ch-prefers-color-scheme");
-  const colorScheme = userPreferColorScheme?.value ?? systemDefaultColorScheme;
-
-  return (
-    <html data-theme={colorScheme} lang={"ru"}>
-      <body className={classNames(montserrat.variable, badScript.variable)}>
-        <Layout title={config.title} authorName={config.author.name} authorLink={config.author.url}>
-          {children}
-        </Layout>
-      </body>
-    </html>
-  );
-};
+const RootLayout: FC<PropsWithChildren> = ({ children }) => (
+  <html lang={"ru"}>
+    <body className={classNames(montserrat.variable, badScript.variable)}>
+      <Layout title={config.title} authorName={config.author.name} authorLink={config.author.url}>
+        {children}
+      </Layout>
+    </body>
+  </html>
+);
 
 export default RootLayout;
