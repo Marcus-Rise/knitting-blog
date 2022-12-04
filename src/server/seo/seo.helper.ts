@@ -1,7 +1,3 @@
-import { inject } from "../ioc";
-import type { ISeoService } from "./service";
-import { SEO_SERVICE } from "./service";
-
 const getRobotsTxt = (hostName: string, isAllow: boolean): string => {
   const robots: Record<string, string> = isAllow
     ? {
@@ -20,7 +16,7 @@ const getRobotsTxt = (hostName: string, isAllow: boolean): string => {
     .join("\n");
 };
 
-const getSitemap = (hostName: string) =>
-  inject((seoService: ISeoService) => seoService.generateSitemapXml(hostName), [SEO_SERVICE]);
+const getSitemap = (hostname: string) =>
+  fetch(new URL("/api/sitemap", hostname)).then((res) => res.text());
 
 export { getRobotsTxt, getSitemap };
