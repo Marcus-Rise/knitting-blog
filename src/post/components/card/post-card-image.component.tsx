@@ -9,16 +9,14 @@ const IMAGE_QUALITY = 60;
 
 type Props = typeof NextImage["arguments"];
 
-const PostCardImage: FC<Props> = (props) => {
-  return (
-    <NextImage
-      {...props}
-      placeholder={"blur"}
-      width={IMAGE_SIZE}
-      loader={imageLoader(IMAGE_SIZE, IMAGE_SIZE)}
-      quality={IMAGE_QUALITY}
-    />
-  );
-};
+const PostCardImage: FC<Props> = (props) => (
+  <NextImage
+    {...props}
+    placeholder={"blur"}
+    width={IMAGE_SIZE}
+    loader={imageLoader(IMAGE_SIZE, IMAGE_SIZE)}
+    quality={IMAGE_QUALITY}
+  />
+);
 
 export { PostCardImage };

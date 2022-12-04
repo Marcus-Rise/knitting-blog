@@ -20,7 +20,6 @@ const PostWithContent: FC<Omit<PostWithContentModel, "description">> = ({
     <PostWithContentImage
       src={image.src}
       alt={image.alt}
-      height={image.height}
       width={image.width}
       className={styles.image}
       blurDataURL={image.blurDataUrl}
