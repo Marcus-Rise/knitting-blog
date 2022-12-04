@@ -51,10 +51,14 @@ const ThemeToggle: FC<ThemeToggleProps> = ({ className, onChange, value = Theme.
 
   return (
     <div className={classNames(styles.wrapper, className)} title={title}>
-      <button className={styles.icon} onClick={selectDark}>
+      <button className={styles.icon} onClick={selectDark} aria-label={"Установить темную тему"}>
         <MoonIcon width={ICON_SIZE} height={ICON_SIZE} />
       </button>
-      <button className={styles.toggle} onClick={selectSystem}>
+      <button
+        className={styles.toggle}
+        onClick={selectSystem}
+        aria-label={"Установить системную тему"}
+      >
         <span
           className={classNames(styles.buttonOverlay, styles.buttonOverlayLeft)}
           onClick={stopPropagation(selectDark)}
@@ -71,7 +75,7 @@ const ThemeToggle: FC<ThemeToggleProps> = ({ className, onChange, value = Theme.
           onClick={stopPropagation(selectLight)}
         />
       </button>
-      <button className={styles.icon} onClick={selectLight}>
+      <button className={styles.icon} onClick={selectLight} aria-label={"Установить светлую тему"}>
         <SunIcon width={ICON_SIZE} height={ICON_SIZE} />
       </button>
     </div>
