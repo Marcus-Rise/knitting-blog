@@ -11,7 +11,6 @@ const Slider = dynamic(() =>
 );
 
 const IMAGE_SIZE = 350;
-const IMAGE_QUALITY = 60;
 
 const PostSliceImageGallery: FC<{ slice: PostDocumentDataBodyImageGallerySlice }> = ({ slice }) => {
   const [sliderStartIndex, setSliderStartIndex] = useState<number | null>(null);
@@ -47,7 +46,6 @@ const PostSliceImageGallery: FC<{ slice: PostDocumentDataBodyImageGallerySlice }
           blurDataURL={image.blurDataUrl}
           onClick={() => setSliderStartIndex(index)}
           loader={imageLoader(IMAGE_SIZE, IMAGE_SIZE)}
-          quality={IMAGE_QUALITY}
         />
       ))}
       {sliderStartIndex !== null && (

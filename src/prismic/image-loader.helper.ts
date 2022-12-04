@@ -12,7 +12,7 @@ const imageLoader =
 
     url.searchParams.set("auto", "compress,format,enhance");
     url.searchParams.set("fit", "crop");
-    url.searchParams.set("crop", "faces");
+    url.searchParams.set("crop", "center");
     url.searchParams.set("q", quality.toString());
 
     return url.href;
