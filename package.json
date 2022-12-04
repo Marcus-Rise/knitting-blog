@@ -6,6 +6,7 @@
     "email": "ilya.konstantinov2022@mail.ru",
     "url": "https://ilya-konstantinov.ru"
   },
+  "type": "module",
   "private": true,
   "scripts": {
     "dev": "next dev",

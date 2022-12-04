@@ -1,6 +1,7 @@
-const notProduction = process.env.NODE_ENV !== "production";
+import withPWA from "@ducanh2912/next-pwa";
 
-const withPWA = require("@ducanh2912/next-pwa").default({
+const notProduction = process.env.NODE_ENV !== "production";
+const pwaConfig = withPWA({
   disable: notProduction,
   dest: "public",
 });
@@ -35,4 +36,4 @@ const nextConfig = {
   },
 };
 
-module.exports = withPWA(nextConfig);
+export default pwaConfig(nextConfig);
