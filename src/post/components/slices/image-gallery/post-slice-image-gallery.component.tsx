@@ -1,6 +1,7 @@
 import type { FC } from "react";
 import { useCallback, useMemo, useState } from "react";
 import type { PostDocumentDataBodyImageGallerySlice } from "../../../../prismic";
+import { imageLoader } from "../../../../prismic";
 import NextImage from "next/image";
 import styles from "./post-slice-image-gallery.module.scss";
 import dynamic from "next/dynamic";
@@ -8,6 +9,9 @@ import dynamic from "next/dynamic";
 const Slider = dynamic(() =>
   import("../../../../components/slider").then((module) => module.Slider),
 );
+
+const IMAGE_SIZE = 350;
+const IMAGE_QUALITY = 60;
 
 const PostSliceImageGallery: FC<{ slice: PostDocumentDataBodyImageGallerySlice }> = ({ slice }) => {
   const [sliderStartIndex, setSliderStartIndex] = useState<number | null>(null);
@@ -36,12 +40,14 @@ const PostSliceImageGallery: FC<{ slice: PostDocumentDataBodyImageGallerySlice }
           key={index}
           src={image.url}
           alt={image.alt}
-          height={image.height}
-          width={image.width}
+          height={IMAGE_SIZE}
+          width={IMAGE_SIZE}
           className={styles.image}
           placeholder={"blur"}
           blurDataURL={image.blurDataUrl}
           onClick={() => setSliderStartIndex(index)}
+          loader={imageLoader(IMAGE_SIZE, IMAGE_SIZE)}
+          quality={IMAGE_QUALITY}
         />
       ))}
       {sliderStartIndex !== null && (

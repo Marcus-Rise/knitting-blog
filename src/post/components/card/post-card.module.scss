@@ -22,7 +22,7 @@
 .image {
   width: 100%;
   object-fit: cover;
-  object-position: 0 0;
+  object-position: center;
 
   @include m.x-lg {
     height: 40rem !important;

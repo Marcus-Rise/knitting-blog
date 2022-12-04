@@ -4,8 +4,8 @@ import { Title } from "../../../components/title";
 import styles from "./post-with-content.module.scss";
 import { Hr } from "../../../components/hr";
 import { DateComponent } from "../../../components/date";
-import NextImage from "next/image";
 import { components, SliceZone } from "../slices";
+import { PostWithContentImage } from "./post-with-content-image.component";
 
 const PostWithContent: FC<Omit<PostWithContentModel, "description">> = ({
   title,
@@ -17,14 +17,12 @@ const PostWithContent: FC<Omit<PostWithContentModel, "description">> = ({
     <Title className={styles.title}>{title}</Title>
     <Hr />
     <DateComponent className={styles.date} date={date} />
-    <NextImage
+    <PostWithContentImage
       src={image.src}
       alt={image.alt}
       height={image.height}
       width={image.width}
       className={styles.image}
-      priority
-      placeholder={"blur"}
       blurDataURL={image.blurDataUrl}
     />
     <SliceZone slices={content} components={components} />
