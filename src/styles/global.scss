@@ -50,6 +50,7 @@ main {
   min-height: 90vh;
 }
 
+/* stylelint-disable-next-line selector-class-pattern */
 .rsis-image {
   &, & ~ div {
     background-size: contain !important;
