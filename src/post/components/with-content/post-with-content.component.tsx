@@ -20,6 +20,8 @@ const PostWithContent: FC<Omit<PostWithContentModel, "description">> = ({
     <PostPrimaryImage
       src={image.src}
       alt={image.alt}
+      width={image.width}
+      height={image.height}
       className={styles.image}
       blurDataURL={image.blurDataUrl}
       priority
