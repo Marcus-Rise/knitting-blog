@@ -8,7 +8,7 @@ const pwaConfig = withPWA({
 
 /** @type {import("next").NextConfig} */
 const nextConfig = {
-  experimental: { appDir: true, allowMiddlewareResponseBody: true },
+  experimental: { appDir: true },
   reactStrictMode: true,
   images: {
     domains: ["images.prismic.io"],
