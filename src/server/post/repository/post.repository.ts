@@ -19,11 +19,11 @@ class PostRepository implements IPostRepository {
     const url = new URL("/api/v2/documents/search", this._config.apiUrl);
     url.searchParams.append("ref", this._config.masterRef);
     url.searchParams.append("q", `[[at(document.type,"post")]]`);
+    url.searchParams.append("access_token", this._config.apiToken);
 
     if (query?.uuid) {
       url.searchParams.append("q", `[[at(my.post.uid,"${query.uuid}")]]`);
     } else if (query?.id) {
-      url.searchParams.append("access_token", this._config.apiToken);
       url.searchParams.append("q", `[[at(my.post.id,"${query.id}")]]`);
     } else {
       throw new Error("no query params");
