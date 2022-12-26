@@ -4,7 +4,7 @@ import type { PostPreviewModel } from "../../model";
 import { Title } from "../../../components/title";
 import { DateComponent } from "../../../components/date";
 import Link from "next/link";
-import { PostCardImage } from "./post-card-image.component";
+import { PostPrimaryImage } from "../primary-image";
 
 type Props = PostPreviewModel & {
   priorityImage?: boolean;
@@ -12,10 +12,9 @@ type Props = PostPreviewModel & {
 
 const PostCard: FC<Props> = ({ title, description, slug, image, date, priorityImage }) => (
   <article className={styles.card}>
-    <PostCardImage
+    <PostPrimaryImage
       src={image.src}
       alt={image.alt}
-      height={image.height}
       className={styles.image}
       priority={priorityImage}
       blurDataURL={image.blurDataUrl}
