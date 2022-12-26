@@ -14,7 +14,7 @@ const PostPrimaryImage: FC<Props> = (props) => (
     placeholder={"blur"}
     width={IMAGE_SIZE}
     height={IMAGE_SIZE}
-    loader={imageLoader(IMAGE_SIZE, IMAGE_SIZE)}
+    loader={imageLoader(IMAGE_SIZE)}
   />
 );
 
