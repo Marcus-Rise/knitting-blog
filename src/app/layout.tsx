@@ -1,11 +1,13 @@
 import type { FC, PropsWithChildren } from "react";
 import { Bad_Script, Montserrat } from "next/font/google";
 import classNames from "classnames";
-import { Layout } from "../components/layout";
 import { config } from "../config";
 import "../styles/global.scss";
 import type { Metadata } from "next";
 import { headers } from "next/headers";
+import { Header } from "../components/header";
+import styles from "./layout.module.scss";
+import { Footer } from "../components/footer";
 
 const montserrat = Montserrat({
   weight: "400",
@@ -21,12 +23,14 @@ const badScript = Bad_Script({
   display: "swap",
 });
 
+const year = new Date().getFullYear().toString();
+
 const RootLayout: FC<PropsWithChildren> = ({ children }) => (
   <html lang={"ru"} className={classNames(montserrat.variable, badScript.variable)}>
     <body>
-      <Layout title={config.title} authorName={config.author.name} authorLink={config.author.url}>
-        {children}
-      </Layout>
+      <Header title={config.title} />
+      <main className={styles.main}>{children}</main>
+      <Footer authorName={config.author.name} authorLink={config.author.url} year={year} />
     </body>
   </html>
 );

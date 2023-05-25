@@ -22,11 +22,6 @@
   }
 }
 
-.theme {
-  @include m.lg {
-    display: none !important;
-  }
-}
 
 .logo {
   padding-top: 1.75rem;
