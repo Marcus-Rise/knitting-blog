@@ -29,7 +29,9 @@ const PostWithContent: FC<Omit<PostWithContentModel, "description">> = ({
         priority
       />
     </Suspense>
-    <SliceZone slices={content} components={components} />
+    <Suspense>
+      <SliceZone slices={content} components={components} />
+    </Suspense>
     <DateComponent className={styles.datebottom} date={date} />
   </article>
 );
