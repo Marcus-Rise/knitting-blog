@@ -1,10 +1,14 @@
 import { inject } from "../ioc";
 import type { IPostService } from "./service";
 import { POST_SERVICE } from "./service";
+import type { PreviewData } from "next";
 
 const getPosts = () => inject((postService: IPostService) => postService.getAll(), [POST_SERVICE]);
 
 const getPost = (uuid: string) =>
   inject((postService: IPostService) => postService.getByUUID(uuid), [POST_SERVICE]);
 
-export { getPosts, getPost };
+const getPreview = (preview: PreviewData) =>
+  inject((postService: IPostService) => postService.getPreview(preview), [POST_SERVICE]);
+
+export { getPosts, getPost, getPreview };

@@ -6,7 +6,7 @@ import { linkResolver } from "../../prismic/prismic-link-resolver";
 const Preview: NextApiHandler = async (req, res) => {
   const client = createClient({ req });
 
-  await setPreviewData({ req, res });
+  setPreviewData({ req, res });
 
   await redirectToPreviewURL({ req, res, client, linkResolver });
 };

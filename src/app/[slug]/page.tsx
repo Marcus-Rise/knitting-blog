@@ -1,6 +1,8 @@
 import { Container } from "../../components/container";
 import { PostWithContent } from "../../post/components/with-content";
-import { getPost, getPosts } from "../../server";
+import { getPost, getPosts, getPreview } from "../../server";
+import { previewData } from "next/headers";
+import type { PostWithContentModel } from "../../post/model";
 
 type Params = {
   slug: string;
@@ -13,8 +15,14 @@ const generateStaticParams = async () => {
 };
 
 const Post = async ({ params }: { params: Params }) => {
-  const uuid = params.slug;
-  const post = await getPost(uuid);
+  const preview = previewData();
+  let post: PostWithContentModel | null;
+
+  if (!preview) {
+    post = await getPost(params.slug);
+  } else {
+    post = await getPreview(preview);
+  }
 
   if (!post) {
     return null;

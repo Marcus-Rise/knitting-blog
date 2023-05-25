@@ -4,6 +4,10 @@ import { inject, injectable } from "inversify";
 import type { IPostRepository } from "../repository";
 import { POST_REPOSITORY } from "../repository";
 import { getPlaiceholder } from "plaiceholder";
+import type { PreviewData } from "next";
+
+const isPreviewRefSafe = (preview: PreviewData): preview is Record<"ref", string> =>
+  !!preview && typeof preview === "object" && "ref" in preview && typeof preview.ref === "string";
 
 @injectable()
 class PostService implements IPostService {
@@ -75,6 +79,22 @@ class PostService implements IPostService {
         }
       }),
     );
+  }
+
+  async getPreview(preview: PreviewData): Promise<PostWithContentModel | null> {
+    const isRefSafe = isPreviewRefSafe(preview);
+
+    if (!isRefSafe) {
+      return null;
+    }
+
+    const post = await this._repo.find({ previewRef: preview.ref });
+
+    if (post) {
+      await this.addImagePlaceholdersToPost(post);
+    }
+
+    return post;
   }
 }
 

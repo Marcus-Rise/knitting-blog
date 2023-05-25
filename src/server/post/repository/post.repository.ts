@@ -8,6 +8,13 @@ import type { IPostConfig } from "../config";
 import { POST_CONFIG } from "../config";
 import type { PostDocument } from "../../../prismic";
 
+type PrismicPreviewDto = {
+  label: string;
+  ref: string;
+  mainDocument: string;
+  type: "DRAFT";
+};
+
 @injectable()
 class PostRepository implements IPostRepository {
   constructor(
@@ -16,29 +23,42 @@ class PostRepository implements IPostRepository {
   ) {}
 
   async find(query?: Partial<PostRepositoryQuery>): Promise<PostWithContentModel | null> {
-    const url = new URL("/api/v2/documents/search", this._config.apiUrl);
-    url.searchParams.append("ref", this._config.masterRef);
+    let postDocument: PostDocument | undefined;
+
+    const url: URL = new URL("/api/v2/documents/search", this._config.apiUrl);
     url.searchParams.append("q", `[[at(document.type,"post")]]`);
     url.searchParams.append("access_token", this._config.apiToken);
 
-    if (query?.uuid) {
-      url.searchParams.append("q", `[[at(my.post.uid,"${query.uuid}")]]`);
-    } else if (query?.id) {
-      url.searchParams.append("q", `[[at(my.post.id,"${query.id}")]]`);
+    if (!query?.previewRef) {
+      url.searchParams.append("ref", this._config.masterRef);
+
+      if (query?.uuid) {
+        url.searchParams.append("q", `[[at(my.post.uid,"${query.uuid}")]]`);
+      } else if (query?.id) {
+        url.searchParams.append("q", `[[at(my.post.id,"${query.id}")]]`);
+      } else {
+        throw new Error("no query params");
+      }
+
+      const response = await this._http.get(url.href);
+      const dto: { results: Array<PostDocument> } = await response.json();
+      postDocument = dto.results.at(0);
     } else {
-      throw new Error("no query params");
+      const previewResponse = await this._http.get(query.previewRef);
+      const previewDto: PrismicPreviewDto = await previewResponse.json();
+
+      url.searchParams.append("ref", previewDto.mainDocument);
+
+      const response = await this._http.get(url.href);
+      const dto: { results: Array<PostDocument> } = await response.json();
+      postDocument = dto.results.at(0);
     }
 
-    const response = await this._http.get(url.href);
-    const dto: { results: Array<PostDocument> } = await response.json();
-
-    const postDto = dto.results.at(0);
-
-    if (!postDto) {
+    if (!postDocument) {
       return null;
     }
 
-    return PostWithContentModelFactory.fromResponseDto(postDto);
+    return PostWithContentModelFactory.fromResponseDto(postDocument);
   }
 
   async list(): Promise<PostPreviewModel[]> {

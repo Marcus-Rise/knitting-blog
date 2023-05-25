@@ -3,6 +3,7 @@ import type { PostPreviewModel, PostWithContentModel } from "../../../post/model
 type PostRepositoryQuery = {
   uuid: string;
   id: string;
+  previewRef: string;
 };
 
 interface IPostRepository {

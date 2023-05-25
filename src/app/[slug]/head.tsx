@@ -1,12 +1,21 @@
 import { config } from "../../config";
-import { getPost } from "../../server";
+import { getPost, getPreview } from "../../server";
+import type { PostWithContentModel } from "../../post/model";
+import { previewData } from "next/headers";
 
 type Params = {
   slug: string;
 };
 
 const Head = async ({ params }: { params: Params }) => {
-  const post = await getPost(params.slug);
+  const preview = previewData();
+  let post: PostWithContentModel | null = null;
+
+  if (!preview) {
+    post = await getPost(params.slug);
+  } else {
+    post = await getPreview(preview);
+  }
 
   if (!post) {
     return null;
