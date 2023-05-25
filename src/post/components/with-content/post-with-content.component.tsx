@@ -1,4 +1,5 @@
 import type { FC } from "react";
+import { Suspense } from "react";
 import type { PostWithContentModel } from "../../model";
 import { Title } from "../../../components/title";
 import styles from "./post-with-content.module.scss";
@@ -17,15 +18,17 @@ const PostWithContent: FC<Omit<PostWithContentModel, "description">> = ({
     <Title className={styles.title}>{title}</Title>
     <Hr />
     <DateComponent className={styles.date} date={date} />
-    <PostPrimaryImage
-      src={image.src}
-      alt={image.alt}
-      width={image.width}
-      height={image.height}
-      className={styles.image}
-      blurDataURL={image.blurDataUrl}
-      priority
-    />
+    <Suspense>
+      <PostPrimaryImage
+        src={image.src}
+        alt={image.alt}
+        width={image.width}
+        height={image.height}
+        className={styles.image}
+        blurDataURL={image.blurDataUrl}
+        priority
+      />
+    </Suspense>
     <SliceZone slices={content} components={components} />
     <DateComponent className={styles.datebottom} date={date} />
   </article>
