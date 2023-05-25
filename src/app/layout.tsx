@@ -1,4 +1,5 @@
 import type { FC, PropsWithChildren } from "react";
+import { Suspense } from "react";
 import { Bad_Script, Montserrat } from "next/font/google";
 import classNames from "classnames";
 import { config } from "../config";
@@ -30,7 +31,9 @@ const RootLayout: FC<PropsWithChildren> = ({ children }) => (
     <body>
       <Header title={config.title} />
       <main className={styles.main}>{children}</main>
-      <Footer authorName={config.author.name} authorLink={config.author.url} year={year} />
+      <Suspense>
+        <Footer authorName={config.author.name} authorLink={config.author.url} year={year} />
+      </Suspense>
     </body>
   </html>
 );
