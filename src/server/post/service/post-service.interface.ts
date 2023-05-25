@@ -2,7 +2,7 @@ import type { PostPreviewModel, PostWithContentModel } from "../../../post/model
 import type { PreviewData } from "next";
 
 interface IPostService {
-  getAll(): Promise<PostPreviewModel[]>;
+  getAll(withoutPlaceholder?: boolean): Promise<PostPreviewModel[]>;
 
   getByUUID(uuid: string): Promise<PostWithContentModel | null>;
 

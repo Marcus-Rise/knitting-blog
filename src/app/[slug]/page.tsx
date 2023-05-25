@@ -1,8 +1,9 @@
 import { Container } from "../../components/container";
 import { PostWithContent } from "../../post/components/with-content";
-import { getPost, getPosts, getPreview } from "../../server";
-import { previewData } from "next/headers";
-import type { PostWithContentModel } from "../../post/model";
+import { getPost, getPosts } from "../../server";
+import type { Metadata } from "next";
+import { headers } from "next/headers";
+import { config } from "../../config";
 
 type Params = {
   slug: string;
@@ -15,14 +16,7 @@ const generateStaticParams = async () => {
 };
 
 const Post = async ({ params }: { params: Params }) => {
-  const preview = previewData();
-  let post: PostWithContentModel | null;
-
-  if (!preview) {
-    post = await getPost(params.slug);
-  } else {
-    post = await getPreview(preview);
-  }
+  const post = await getPost(params.slug);
 
   if (!post) {
     return null;
@@ -35,5 +29,21 @@ const Post = async ({ params }: { params: Params }) => {
   );
 };
 
+const generateMetadata = async ({ params }: { params: Params }): Promise<Metadata> => {
+  const host = headers().get("Host") ?? "";
+  const post = await getPost(params.slug);
+  const title = `${config.title} | ${post?.title}`;
+  const description = post?.description;
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+    },
+  };
+};
+
 export default Post;
-export { generateStaticParams };
+export { generateStaticParams, generateMetadata };

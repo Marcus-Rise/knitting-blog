@@ -13,8 +13,12 @@ const isPreviewRefSafe = (preview: PreviewData): preview is Record<"ref", string
 class PostService implements IPostService {
   constructor(@inject(POST_REPOSITORY) private readonly _repo: IPostRepository) {}
 
-  async getAll(): Promise<PostPreviewModel[]> {
+  async getAll(withoutPlaceholder = false): Promise<PostPreviewModel[]> {
     const posts = await this._repo.list();
+
+    if (withoutPlaceholder) {
+      return posts;
+    }
 
     return Promise.all(
       posts.map(async (post) => {
