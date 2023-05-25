@@ -22,6 +22,23 @@ class PostRepository implements IPostRepository {
     @inject(HTTP_SERVICE) private readonly _http: IHttpService,
   ) {}
 
+  async getMasterRef(): Promise<string | undefined> {
+    const url: URL = new URL("/api/v2", this._config.apiUrl);
+    url.searchParams.append("access_token", this._config.apiToken);
+
+    const response = await this._http.get(url.href);
+    const data: {
+      refs: Array<{
+        id: string;
+        ref: string;
+        label: string;
+        isMasterRef: boolean;
+      }>;
+    } = await response.json();
+
+    return data.refs.find((ref) => ref.isMasterRef)?.ref;
+  }
+
   async find(query?: Partial<PostRepositoryQuery>): Promise<PostWithContentModel | null> {
     let postDocument: PostDocument | undefined;
 
@@ -30,7 +47,13 @@ class PostRepository implements IPostRepository {
     url.searchParams.append("access_token", this._config.apiToken);
 
     if (!query?.previewRef) {
-      url.searchParams.append("ref", this._config.masterRef);
+      const masterRef = await this.getMasterRef();
+
+      if (!masterRef) {
+        throw new Error("no master ref");
+      }
+
+      url.searchParams.append("ref", masterRef);
 
       if (query?.uuid) {
         url.searchParams.append("q", `[[at(my.post.uid,"${query.uuid}")]]`);
@@ -62,8 +85,14 @@ class PostRepository implements IPostRepository {
   }
 
   async list(): Promise<PostPreviewModel[]> {
+    const masterRef = await this.getMasterRef();
+
+    if (!masterRef) {
+      throw new Error("no master ref");
+    }
+
     const url = new URL("/api/v2/documents/search", this._config.apiUrl);
-    url.searchParams.append("ref", this._config.masterRef);
+    url.searchParams.append("ref", masterRef);
     url.searchParams.append("access_token", this._config.apiToken);
     url.searchParams.append("q", `[[at(document.type,"post")]]`);
     url.searchParams.append("orderings", `[document.first_publication_date desc]`);
