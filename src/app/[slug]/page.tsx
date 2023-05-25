@@ -2,7 +2,6 @@ import { Container } from "../../components/container";
 import { PostWithContent } from "../../post/components/with-content";
 import { getPost, getPosts } from "../../server";
 import type { Metadata } from "next";
-import { headers } from "next/headers";
 import { config } from "../../config";
 
 type Params = {
@@ -30,7 +29,6 @@ const Post = async ({ params }: { params: Params }) => {
 };
 
 const generateMetadata = async ({ params }: { params: Params }): Promise<Metadata> => {
-  const host = headers().get("Host") ?? "";
   const post = await getPost(params.slug);
   const title = `${config.title} | ${post?.title}`;
   const description = post?.description;
