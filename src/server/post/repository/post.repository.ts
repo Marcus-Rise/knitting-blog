@@ -96,7 +96,7 @@ class PostRepository implements IPostRepository {
     url.searchParams.append("access_token", this._config.apiToken);
     url.searchParams.append("q", `[[at(document.type,"post")]]`);
     url.searchParams.append("orderings", `[document.first_publication_date desc]`);
-    url.searchParams.append("pageSize", `100`);
+    url.searchParams.append("pageSize", `10`);
     url.searchParams.append(
       "graphQuery",
       `{
