@@ -1,14 +1,12 @@
 import type { FC, PropsWithChildren } from "react";
-import { Suspense } from "react";
 import { Bad_Script, Montserrat } from "next/font/google";
 import classNames from "classnames";
 import { config } from "../config";
-import "../styles/global.scss";
 import type { Metadata } from "next";
-import { headers } from "next/headers";
 import { Header } from "../components/header";
 import styles from "./layout.module.scss";
 import { Footer } from "../components/footer";
+import "../styles/global.scss";
 
 const montserrat = Montserrat({
   weight: "400",
@@ -31,16 +29,12 @@ const RootLayout: FC<PropsWithChildren> = ({ children }) => (
     <body>
       <Header title={config.title} />
       <main className={styles.main}>{children}</main>
-      <Suspense>
-        <Footer authorName={config.author.name} authorLink={config.author.url} year={year} />
-      </Suspense>
+      <Footer authorName={config.author.name} authorLink={config.author.url} year={year} />
     </body>
   </html>
 );
 
 const generateMetadata = (): Metadata => {
-  const host = headers().get("Host") ?? "";
-
   return {
     title: config.title,
     description: config.title,
@@ -54,7 +48,6 @@ const generateMetadata = (): Metadata => {
       description: config.title,
     },
     themeColor: "#fff",
-    metadataBase: new URL(`https://${host}`),
   };
 };
 

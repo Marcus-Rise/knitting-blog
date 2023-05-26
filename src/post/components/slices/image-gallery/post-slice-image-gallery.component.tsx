@@ -1,3 +1,5 @@
+"use client";
+
 import type { FC } from "react";
 import { useCallback, useMemo, useState } from "react";
 import type { PostDocumentDataBodyImageGallerySlice } from "../../../../prismic";

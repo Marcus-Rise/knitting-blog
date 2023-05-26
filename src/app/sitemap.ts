@@ -6,7 +6,7 @@ import { inject, POST_SERVICE } from "../server";
 const getPosts = () =>
   inject((postService: IPostService) => postService.getAll(true), [POST_SERVICE]);
 
-export default async (): Promise<MetadataRoute.Sitemap> => {
+const sitemap = async (): Promise<MetadataRoute.Sitemap> => {
   const host = headers().get("Host") ?? "";
   const [firstPost, ...posts] = await getPosts();
 
@@ -25,3 +25,5 @@ export default async (): Promise<MetadataRoute.Sitemap> => {
     })),
   ];
 };
+
+export default sitemap;

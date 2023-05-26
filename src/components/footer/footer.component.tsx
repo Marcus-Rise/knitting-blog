@@ -1,8 +1,7 @@
 import type { FC } from "react";
 import Link from "next/link";
 import styles from "./footer.module.scss";
-import { Theme } from "../theme";
-import { ThemeProvider } from "@marcus-rise/react-theme";
+import { Theme, ThemeProvider } from "../theme";
 import { THEME_COOKIE_KEY } from "../theme/theme-config";
 
 const Footer: FC<{ authorName: string; authorLink: string; year: string }> = ({

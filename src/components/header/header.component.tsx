@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { KnitsLeftIcon, KnitsRightIcon } from "../icons";
 import classNames from "classnames";
+import logo from "../../app/icon.png";
 
 const LOGO_SIZE = 35;
 
@@ -26,7 +27,7 @@ const Header: FC<Props> = ({ title }) => (
         <h1 className={styles.title}>{title}</h1>
         <Image
           alt={title}
-          src={"/android-chrome-192x192.png"}
+          src={logo}
           height={LOGO_SIZE}
           width={LOGO_SIZE}
           quality={15}

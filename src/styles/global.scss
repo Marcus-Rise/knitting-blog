@@ -40,12 +40,6 @@ body.modal {
   overflow-y: hidden;
 }
 
-/* stylelint-disable selector-id-pattern */
-#__next {
-  /* stylelint-enable selector-id-pattern */
-  height: 100% !important;
-}
-
 main {
   min-height: 90vh;
 }

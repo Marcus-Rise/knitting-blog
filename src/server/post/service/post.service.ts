@@ -13,6 +13,15 @@ const isPreviewRefSafe = (preview: PreviewData): preview is Record<"ref", string
 class PostService implements IPostService {
   constructor(@inject(POST_REPOSITORY) private readonly _repo: IPostRepository) {}
 
+  async getImagePlaceholder(src: string): Promise<string> {
+    const response = await fetch(src, { cache: "no-cache" });
+    const buffer = Buffer.from(await response.arrayBuffer());
+
+    const { base64 } = await getPlaiceholder(buffer);
+
+    return base64;
+  }
+
   async getAll(withoutPlaceholder = false): Promise<PostPreviewModel[]> {
     const posts = await this._repo.list();
 
@@ -22,9 +31,7 @@ class PostService implements IPostService {
 
     return Promise.all(
       posts.map(async (post) => {
-        const { base64 } = await getPlaiceholder(post.image.src);
-
-        post.image.blurDataUrl = base64;
+        post.image.blurDataUrl = await this.getImagePlaceholder(post.image.src);
 
         return post;
       }),
@@ -55,8 +62,7 @@ class PostService implements IPostService {
   }
 
   async addImagePlaceholdersToPost(post: PostWithContentModel) {
-    const { base64 } = await getPlaiceholder(post.image.src);
-    post.image.blurDataUrl = base64;
+    post.image.blurDataUrl = await this.getImagePlaceholder(post.image.src);
 
     // @ts-ignore
     post.content = await Promise.all(
@@ -68,10 +74,8 @@ class PostService implements IPostService {
                 return i;
               }
 
-              const { base64 } = await getPlaiceholder(i.gallery_image.url);
-
               // @ts-ignore
-              i.gallery_image.blurDataUrl = base64;
+              i.gallery_image.blurDataUrl = await this.getImagePlaceholder(i.gallery_image.url);
 
               return i;
             }),

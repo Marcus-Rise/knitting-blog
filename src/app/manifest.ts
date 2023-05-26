@@ -4,7 +4,7 @@ import { config } from "../config";
 
 const themeColor = "#ffffff";
 
-export default (): MetadataRoute.Manifest => ({
+const manifest = (): MetadataRoute.Manifest => ({
   name: config.title,
   short_name: config.title,
   theme_color: themeColor,
@@ -15,3 +15,5 @@ export default (): MetadataRoute.Manifest => ({
   id: "/",
   icons: [{ src: icon.src, purpose: "any", sizes: `${icon.height}x${icon.width}` }],
 });
+
+export default manifest;

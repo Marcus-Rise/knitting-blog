@@ -30,6 +30,11 @@ const Post = async ({ params }: { params: Params }) => {
 
 const generateMetadata = async ({ params }: { params: Params }): Promise<Metadata> => {
   const post = await getPost(params.slug);
+
+  if (!post) {
+    return {};
+  }
+
   const title = `${config.title} | ${post?.title}`;
   const description = post?.description;
 
