@@ -14,4 +14,7 @@ const getPost = (uuid: string) =>
 const getPreview = (preview: PreviewData) =>
   inject((postService: IPostService) => postService.getPreview(preview), [POST_SERVICE]);
 
-export { getPosts, getPost, getPreview };
+const getPostSlug = (id: string) =>
+  inject((postService: IPostService) => postService.getSlugByID(id), [POST_SERVICE]);
+
+export { getPosts, getPost, getPreview, getPostSlug };

@@ -58,7 +58,7 @@ class PostRepository implements IPostRepository {
       if (query?.uuid) {
         url.searchParams.append("q", `[[at(my.post.uid,"${query.uuid}")]]`);
       } else if (query?.id) {
-        url.searchParams.append("q", `[[at(my.post.id,"${query.id}")]]`);
+        url.searchParams.append("q", `[[at(document.id,"${query.id}")]]`);
       } else {
         throw new Error("no query params");
       }

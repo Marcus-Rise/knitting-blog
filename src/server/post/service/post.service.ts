@@ -19,7 +19,11 @@ class PostService implements IPostService {
   }
 
   async getSlugByID(id: string): Promise<string | null> {
-    const post = await this._repo.find({ id });
+    const post = await this._repo.find({ id }).catch((e) => {
+      console.error(e);
+
+      return null;
+    });
 
     if (!post) {
       return null;
