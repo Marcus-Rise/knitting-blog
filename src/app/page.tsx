@@ -3,6 +3,8 @@ import { Container } from "../components/container";
 import { getPosts } from "../server";
 import { PostLoadMore } from "../post/components/post-load-more";
 import styles from "./page.module.scss";
+import type { Metadata } from "next";
+import { config } from "../config";
 
 const POST_LAZY_LOAD_LIMIT = 10;
 const POST_LAZY_LOAD_START_PAGE = 2;
@@ -45,4 +47,11 @@ const Home = async () => {
   );
 };
 
+const metadata: Metadata = {
+  title: config.title,
+  description: config.title,
+  keywords: config.title.split(" "),
+};
+
 export default Home;
+export { metadata };

@@ -8,13 +8,9 @@ type Params = {
   slug: string;
 };
 
-const generateStaticParams = async () => {
-  const posts = await getPosts();
+type Props = { params: Params };
 
-  return posts.map<Params>((post) => ({ slug: post.slug }));
-};
-
-const Post = async ({ params }: { params: Params }) => {
+const Post = async ({ params }: Props) => {
   const post = await getPost(params.slug);
 
   if (!post) {
@@ -28,7 +24,13 @@ const Post = async ({ params }: { params: Params }) => {
   );
 };
 
-const generateMetadata = async ({ params }: { params: Params }): Promise<Metadata> => {
+const generateStaticParams = async () => {
+  const posts = await getPosts();
+
+  return posts.map<Params>((post) => ({ slug: post.slug }));
+};
+
+const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
   const post = await getPost(params.slug);
 
   if (!post) {

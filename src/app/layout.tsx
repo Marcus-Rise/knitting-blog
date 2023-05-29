@@ -34,22 +34,17 @@ const RootLayout: FC<PropsWithChildren> = ({ children }) => (
   </html>
 );
 
-const generateMetadata = (): Metadata => {
-  return {
+const metadata: Metadata = {
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+  },
+  openGraph: {
     title: config.title,
     description: config.title,
-    keywords: config.title.split(" "),
-    viewport: {
-      width: "device-width",
-      initialScale: 1,
-    },
-    openGraph: {
-      title: config.title,
-      description: config.title,
-    },
-    themeColor: "#fff",
-  };
+  },
+  themeColor: "#fff",
 };
 
 export default RootLayout;
-export { generateMetadata };
+export { metadata };
