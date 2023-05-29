@@ -1,4 +1,4 @@
-import { getPostSlug } from "../../server";
+import { getPostSlug } from "../../../server";
 import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 
