@@ -22,8 +22,6 @@ const PostSliceImageGallery: FC<{ slice: PostDocumentDataBodyImageGallerySlice }
           alt: i.gallery_image.alt ?? "",
           width: i.gallery_image.dimensions?.width,
           height: i.gallery_image.dimensions?.height,
-          // @ts-ignore
-          blurDataUrl: i.gallery_image.blurDataUrl,
         };
       }),
     [slice.items],
@@ -42,7 +40,6 @@ const PostSliceImageGallery: FC<{ slice: PostDocumentDataBodyImageGallerySlice }
           width={image.width}
           sizes="(max-width: 768px) 100vw, 25vw"
           className={styles.image}
-          blurDataURL={image.blurDataUrl}
           onClick={() => setSliderStartIndex(index)}
         />
       ))}

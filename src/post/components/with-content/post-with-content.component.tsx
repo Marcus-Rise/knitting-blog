@@ -24,7 +24,6 @@ const PostWithContent: FC<Omit<PostWithContentModel, "description">> = ({
       height={image.height}
       sizes={"100vw"}
       className={styles.image}
-      blurDataURL={image.blurDataUrl}
       priority
     />
     <SliceZone slices={content} components={components} />

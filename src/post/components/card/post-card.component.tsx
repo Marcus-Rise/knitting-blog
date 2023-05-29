@@ -19,7 +19,6 @@ const PostCard: FC<Props> = ({ title, description, slug, image, date, priorityIm
       height={image.height}
       sizes="(max-width: 768px) 100vw, 35vw"
       className={styles.image}
-      blurDataURL={image.blurDataUrl}
     />
     <div className={styles.text}>
       <Link className={styles.link} href={"/" + slug}>

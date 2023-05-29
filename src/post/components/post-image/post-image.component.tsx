@@ -19,7 +19,7 @@ const prismicImageLoader: ImageLoader = ({ src, width, quality = 75 }) => {
 };
 
 const PostImage: FC<Props> = (props) => (
-  <NextImage {...props} placeholder={"blur"} loader={prismicImageLoader} />
+  <NextImage {...props} placeholder={"empty"} loader={prismicImageLoader} />
 );
 
 export { PostImage };

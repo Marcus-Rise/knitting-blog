@@ -1,5 +1,4 @@
 import withPWA from "@ducanh2912/next-pwa";
-import withPlaiceholder from "@plaiceholder/next";
 
 const notProduction = process.env.NODE_ENV !== "production";
 const pwaConfig = withPWA({
@@ -37,4 +36,4 @@ const nextConfig = {
   },
 };
 
-export default withPlaiceholder(pwaConfig(nextConfig));
+export default pwaConfig(nextConfig);
