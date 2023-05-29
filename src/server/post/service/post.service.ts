@@ -14,7 +14,13 @@ class PostService implements IPostService {
   constructor(@inject(POST_REPOSITORY) private readonly _repo: IPostRepository) {}
 
   async getImagePlaceholder(src: string): Promise<string> {
-    const response = await fetch(src, { cache: "no-cache" });
+    const url = new URL(src);
+    url.searchParams.set("auto", "compress,format,enhance");
+    url.searchParams.set("fit", "crop");
+    url.searchParams.set("crop", "entropy");
+    url.searchParams.set("q", "20");
+
+    const response = await fetch(url.toString());
     const buffer = Buffer.from(await response.arrayBuffer());
 
     const { base64 } = await getPlaiceholder(buffer);
