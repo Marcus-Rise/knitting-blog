@@ -20,6 +20,7 @@
   "dependencies": {
     "@ducanh2912/next-pwa": "^8.5.1",
     "@marcus-rise/react-theme": "^1.0.2",
+    "@plaiceholder/next": "^3.0.0",
     "@prismicio/client": "^7.0.1",
     "@prismicio/helpers": "^2.3.9",
     "@prismicio/next": "^1.2.1",
