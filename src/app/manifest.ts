@@ -13,7 +13,10 @@ const manifest = (): MetadataRoute.Manifest => ({
   orientation: "any",
   start_url: ".",
   id: "/",
-  icons: [{ src: icon.src, purpose: "any", sizes: `${icon.height}x${icon.width}` }],
+  icons: [
+    { src: icon.src, purpose: "any", sizes: `${icon.height}x${icon.width}` },
+    { src: icon.src, purpose: "maskable", sizes: `${icon.height}x${icon.width}` },
+  ],
 });
 
 export default manifest;
