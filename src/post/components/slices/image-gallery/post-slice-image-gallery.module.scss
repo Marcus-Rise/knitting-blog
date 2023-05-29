@@ -8,10 +8,11 @@
 }
 
 .image {
-  height: 20rem;
+  height: auto;
+  max-height: 20rem;
   width: calc(100% / 3 - 1rem);
   object-fit: cover;
-  object-position: 0 0;
+  object-position: center;
 
   &:hover {
     cursor: pointer;

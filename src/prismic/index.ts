@@ -5,4 +5,3 @@ export type {
   PostDocumentDataBodyTextSlice,
   PostDocumentDataBodyImageGallerySlice,
 } from "./types.generated";
-export * from "./image-loader.helper";

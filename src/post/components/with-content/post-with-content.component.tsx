@@ -5,7 +5,7 @@ import styles from "./post-with-content.module.scss";
 import { Hr } from "../../../components/hr";
 import { DateComponent } from "../../../components/date";
 import { components, SliceZone } from "../slices";
-import { PostPrimaryImage } from "../primary-image";
+import { PostImage } from "../post-image";
 
 const PostWithContent: FC<Omit<PostWithContentModel, "description">> = ({
   title,
@@ -17,11 +17,12 @@ const PostWithContent: FC<Omit<PostWithContentModel, "description">> = ({
     <Title className={styles.title}>{title}</Title>
     <Hr />
     <DateComponent className={styles.date} date={date} />
-    <PostPrimaryImage
+    <PostImage
       src={image.src}
       alt={image.alt}
       width={image.width}
       height={image.height}
+      sizes={"100vw"}
       className={styles.image}
       blurDataURL={image.blurDataUrl}
       priority
