@@ -4,10 +4,12 @@ type PostRepositoryQuery = {
   uuid: string;
   id: string;
   previewRef: string;
+  limit: number;
+  offsetPage: number;
 };
 
 interface IPostRepository {
-  list(): Promise<PostPreviewModel[]>;
+  list(query?: Partial<PostRepositoryQuery>): Promise<PostPreviewModel[]>;
 
   find(query?: Partial<PostRepositoryQuery>): Promise<PostWithContentModel | null>;
 }

@@ -8,12 +8,14 @@ import type { PreviewData } from "next";
 const isPreviewRefSafe = (preview: PreviewData): preview is Record<"ref", string> =>
   !!preview && typeof preview === "object" && "ref" in preview && typeof preview.ref === "string";
 
+const POST_TOTAL_COUNT = 100;
+
 @injectable()
 class PostService implements IPostService {
   constructor(@inject(POST_REPOSITORY) private readonly _repo: IPostRepository) {}
 
-  async getAll(withoutPlaceholder = false): Promise<PostPreviewModel[]> {
-    return this._repo.list();
+  async getAll(limit = POST_TOTAL_COUNT, offsetPage?: number): Promise<PostPreviewModel[]> {
+    return this._repo.list({ limit, offsetPage });
   }
 
   async getSlugByID(id: string): Promise<string | null> {

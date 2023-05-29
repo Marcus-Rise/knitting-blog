@@ -84,7 +84,7 @@ class PostRepository implements IPostRepository {
     return PostWithContentModelFactory.fromResponseDto(postDocument);
   }
 
-  async list(): Promise<PostPreviewModel[]> {
+  async list(query?: Partial<PostRepositoryQuery>): Promise<PostPreviewModel[]> {
     const masterRef = await this.getMasterRef();
 
     if (!masterRef) {
@@ -96,7 +96,15 @@ class PostRepository implements IPostRepository {
     url.searchParams.append("access_token", this._config.apiToken);
     url.searchParams.append("q", `[[at(document.type,"post")]]`);
     url.searchParams.append("orderings", `[document.first_publication_date desc]`);
-    url.searchParams.append("pageSize", `100`);
+
+    if (query?.limit) {
+      url.searchParams.append("pageSize", query?.limit?.toString());
+    }
+
+    if (query?.offsetPage) {
+      url.searchParams.append("page", query?.offsetPage?.toString());
+    }
+
     url.searchParams.append(
       "graphQuery",
       `{

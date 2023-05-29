@@ -2,8 +2,10 @@ import { PostCard } from "../post/components/card";
 import { Container } from "../components/container";
 import { getPosts } from "../server";
 
+const MAIN_PAGE_POST_LIMIT = 10;
+
 const Home = async () => {
-  const [firstPost, ...posts] = await getPosts();
+  const [firstPost, ...posts] = await getPosts(MAIN_PAGE_POST_LIMIT);
 
   const cards = posts.map((post) => (
     <PostCard
