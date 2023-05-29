@@ -1,11 +1,14 @@
 import { PostCard } from "../post/components/card";
 import { Container } from "../components/container";
 import { getPosts } from "../server";
+import { PostLoadMore } from "../post/components/post-load-more";
+import styles from "./page.module.scss";
 
-const MAIN_PAGE_POST_LIMIT = 10;
+const POST_LAZY_LOAD_LIMIT = 10;
+const POST_LAZY_LOAD_START_PAGE = 2;
 
 const Home = async () => {
-  const [firstPost, ...posts] = await getPosts(MAIN_PAGE_POST_LIMIT);
+  const [firstPost, ...posts] = await getPosts(POST_LAZY_LOAD_LIMIT);
 
   const cards = posts.map((post) => (
     <PostCard
@@ -20,7 +23,7 @@ const Home = async () => {
 
   return (
     <Container>
-      <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
+      <div className={styles.postContainer}>
         <PostCard
           key={firstPost.slug}
           slug={firstPost.slug}
@@ -31,6 +34,12 @@ const Home = async () => {
           description={firstPost.description}
         />
         {cards}
+        <PostLoadMore
+          title={"Смотреть больше"}
+          startPage={POST_LAZY_LOAD_START_PAGE}
+          limit={POST_LAZY_LOAD_LIMIT}
+          className={styles.postLoadMoreButton}
+        />
       </div>
     </Container>
   );
