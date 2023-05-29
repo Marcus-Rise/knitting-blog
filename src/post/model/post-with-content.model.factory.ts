@@ -24,7 +24,6 @@ abstract class PostWithContentModelFactory {
         alt: dto.data.main_image.alt ?? title,
         height: dto.data.main_image.dimensions?.height ?? 0,
         width: dto.data.main_image.dimensions?.width ?? 0,
-        blurDataUrl: "",
       },
       date: new Date(dto.first_publication_date),
       content: dto.data.body,
