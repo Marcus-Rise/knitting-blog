@@ -1,6 +1,8 @@
 @use "../../styles/media" as m;
 
 .container {
+  display: grid;
+  gap: 1rem;
   max-width: 75vw;
   margin: 0 auto;
 

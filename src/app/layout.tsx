@@ -7,6 +7,7 @@ import { Header } from "../components/header";
 import styles from "./layout.module.scss";
 import { Footer } from "../components/footer";
 import "../styles/global.scss";
+import { headers } from "next/headers";
 
 const montserrat = Montserrat({
   weight: "400",
@@ -34,17 +35,22 @@ const RootLayout: FC<PropsWithChildren> = ({ children }) => (
   </html>
 );
 
-const metadata: Metadata = {
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-  },
-  openGraph: {
-    title: config.title,
-    description: config.title,
-  },
-  themeColor: "#fff",
+const generateMetadata = (): Metadata => {
+  const host = headers().get("Host") ?? "";
+
+  return {
+    viewport: {
+      width: "device-width",
+      initialScale: 1,
+    },
+    openGraph: {
+      title: config.title,
+      description: config.title,
+    },
+    themeColor: "#fff",
+    metadataBase: new URL(`https://${host}`),
+  };
 };
 
 export default RootLayout;
-export { metadata };
+export { generateMetadata };

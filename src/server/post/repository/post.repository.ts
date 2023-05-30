@@ -67,10 +67,8 @@ class PostRepository implements IPostRepository {
       const dto: { results: Array<PostDocument> } = await response.json();
       postDocument = dto.results.at(0);
     } else {
-      const previewResponse = await this._http.get(query.previewRef);
-      const previewDto: PrismicPreviewDto = await previewResponse.json();
-
-      url.searchParams.append("ref", previewDto.mainDocument);
+      url.searchParams.append("ref", query.previewRef);
+      url.searchParams.append("q", `[[at(document.id,"${query.id}")]]`);
 
       const response = await this._http.get(url.href);
       const dto: { results: Array<PostDocument> } = await response.json();

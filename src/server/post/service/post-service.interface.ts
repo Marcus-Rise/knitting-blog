@@ -1,5 +1,4 @@
 import type { PostPreviewModel, PostWithContentModel } from "../../../post/model";
-import type { PreviewData } from "next";
 
 interface IPostService {
   getAll(limit?: number, offsetPage?: number): Promise<PostPreviewModel[]>;
@@ -8,7 +7,7 @@ interface IPostService {
 
   getSlugByID(id: string): Promise<string | null>;
 
-  getPreview(preview: PreviewData): Promise<PostWithContentModel | null>;
+  getPreview(previewRef: string, documentId: string): Promise<PostWithContentModel | null>;
 }
 
 export type { IPostService };

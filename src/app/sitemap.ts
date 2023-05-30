@@ -8,15 +8,15 @@ const sitemap = async (): Promise<MetadataRoute.Sitemap> => {
 
   return [
     {
-      url: new URL(`https://${host}/`).toString(),
+      url: new URL(`https://${host}/`).href,
       lastModified: firstPost.date,
     },
     {
-      url: new URL(`https://${host}/${firstPost.slug}`).toString(),
+      url: new URL(`https://${host}/${firstPost.slug}`).href,
       lastModified: firstPost.date,
     },
     ...posts.map((post) => ({
-      url: new URL(`https://${host}/${post.slug}`).toString(),
+      url: new URL(`https://${host}/${post.slug}`).href,
       lastModified: post.date,
     })),
   ];

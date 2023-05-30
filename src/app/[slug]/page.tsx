@@ -1,17 +1,44 @@
 import { Container } from "../../components/container";
 import { PostWithContent } from "../../post/components/with-content";
-import { getPost, getPosts } from "../../server";
+import { getPost, getPostPreview } from "../../server";
 import type { Metadata } from "next";
 import { config } from "../../config";
+import { draftMode } from "next/headers";
+import type { PostWithContentModel } from "../../post/model";
+import { redirect } from "next/navigation";
+import Link from "next/link";
+import styles from "./page.module.scss";
 
 type Params = {
   slug: string;
 };
 
-type Props = { params: Params };
+type Props = { params: Params; searchParams: { token: string; documentId: string } };
 
-const Post = async ({ params }: Props) => {
-  const post = await getPost(params.slug);
+const Post = async ({ params, searchParams }: Props) => {
+  const { isEnabled } = draftMode();
+  let post: PostWithContentModel | null;
+
+  if (!isEnabled) {
+    post = await getPost(params.slug);
+  } else {
+    const { token, documentId } = searchParams;
+
+    if (!token || !documentId) {
+      redirect("/404");
+    }
+
+    post = await getPostPreview(token, documentId);
+  }
+
+  const preview = isEnabled && (
+    <div className={styles.preview}>
+      Предпросмотр,{" "}
+      <Link href={"/"} prefetch={false}>
+        выйти
+      </Link>
+    </div>
+  );
 
   if (!post) {
     return null;
@@ -19,19 +46,27 @@ const Post = async ({ params }: Props) => {
 
   return (
     <Container>
+      {preview}
       <PostWithContent {...post} />
     </Container>
   );
 };
 
-const generateStaticParams = async () => {
-  const posts = await getPosts();
+const generateMetadata = async ({ params, searchParams }: Props): Promise<Metadata> => {
+  const { isEnabled } = draftMode();
+  let post: PostWithContentModel | null;
 
-  return posts.map<Params>((post) => ({ slug: post.slug }));
-};
+  if (!isEnabled) {
+    post = await getPost(params.slug);
+  } else {
+    const { token, documentId } = searchParams;
 
-const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
-  const post = await getPost(params.slug);
+    if (!token || !documentId) {
+      return {};
+    }
+
+    post = await getPostPreview(token, documentId);
+  }
 
   if (!post) {
     return {};
@@ -51,4 +86,4 @@ const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
 };
 
 export default Post;
-export { generateStaticParams, generateMetadata };
+export { generateMetadata };

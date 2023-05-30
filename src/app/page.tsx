@@ -5,11 +5,16 @@ import { PostLoadMore } from "../post/components/post-load-more";
 import styles from "./page.module.scss";
 import type { Metadata } from "next";
 import { config } from "../config";
+import { draftMode } from "next/headers";
 
 const POST_LAZY_LOAD_LIMIT = 10;
 const POST_LAZY_LOAD_START_PAGE = 2;
 
 const Home = async () => {
+  if (draftMode().isEnabled) {
+    draftMode().disable();
+  }
+
   const [firstPost, ...posts] = await getPosts(POST_LAZY_LOAD_LIMIT);
 
   const cards = posts.map((post) => (

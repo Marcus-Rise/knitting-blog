@@ -3,10 +3,6 @@ import type { PostPreviewModel, PostWithContentModel } from "../../../post/model
 import { inject, injectable } from "inversify";
 import type { IPostRepository } from "../repository";
 import { POST_REPOSITORY } from "../repository";
-import type { PreviewData } from "next";
-
-const isPreviewRefSafe = (preview: PreviewData): preview is Record<"ref", string> =>
-  !!preview && typeof preview === "object" && "ref" in preview && typeof preview.ref === "string";
 
 const POST_TOTAL_COUNT = 100;
 
@@ -43,14 +39,8 @@ class PostService implements IPostService {
     return post;
   }
 
-  async getPreview(preview: PreviewData): Promise<PostWithContentModel | null> {
-    const isRefSafe = isPreviewRefSafe(preview);
-
-    if (!isRefSafe) {
-      return null;
-    }
-
-    return this._repo.find({ previewRef: preview.ref });
+  async getPreview(previewRef: string, documentId: string): Promise<PostWithContentModel | null> {
+    return this._repo.find({ previewRef, id: documentId });
   }
 }
 
