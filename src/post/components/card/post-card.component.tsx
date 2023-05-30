@@ -23,7 +23,9 @@ const PostCard: FC<Props> = ({ title, description, slug, image, date, priorityIm
     />
     <div className={styles.text}>
       <Link className={styles.link} href={"/" + slug}>
-        <Title>{title}</Title>
+        <Title>
+          {title}&nbsp;<span className={styles.read}>читать&nbsp;далее...</span>
+        </Title>
       </Link>
       <DateComponent date={date} />
       <div className={styles.description}>{description}</div>
