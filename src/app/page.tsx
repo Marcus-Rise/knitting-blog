@@ -54,14 +54,16 @@ const Home = async () => {
 
 const generateMetadata = async (): Promise<Metadata> => {
   const [post] = await getPosts(POST_LAZY_LOAD_LIMIT);
+  const title = config.title;
+  const description = post.description;
 
   return {
-    title: config.title,
-    description: post.description,
-    keywords: [...config.title.split(" "), ...post.slug.split("-")],
+    title,
+    description,
+    keywords: [...title.split(" "), ...post.slug.split("-")],
     openGraph: {
-      title: config.title,
-      description: config.title,
+      title,
+      description,
       images: [{ url: new URL(post.image.src), alt: post.title }],
     },
   };
