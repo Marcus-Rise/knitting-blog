@@ -20,6 +20,12 @@ const Post = async ({ params, searchParams }: Props) => {
   let post: PostWithContentModel | null;
 
   if (!isEnabled) {
+    const { token, documentId } = searchParams;
+
+    if (token && documentId) {
+      redirect(`/api/preview?token=${token}&documentId=${documentId}`);
+    }
+
     post = await getPost(params.slug);
   } else {
     const { token, documentId } = searchParams;
