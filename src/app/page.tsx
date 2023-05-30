@@ -42,7 +42,7 @@ const Home = async () => {
         />
         {cards}
         <PostLoadMore
-          title={"Смотреть больше"}
+          title={"Читать больше"}
           startPage={POST_LAZY_LOAD_START_PAGE}
           limit={POST_LAZY_LOAD_LIMIT}
           className={styles.postLoadMoreButton}
