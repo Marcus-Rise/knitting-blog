@@ -87,6 +87,7 @@ const generateMetadata = async ({ params, searchParams }: Props): Promise<Metada
     openGraph: {
       title,
       description,
+      images: [{ url: new URL(post.image.src), alt: title }],
     },
   };
 };

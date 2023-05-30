@@ -37,18 +37,15 @@ const RootLayout: FC<PropsWithChildren> = ({ children }) => (
 
 const generateMetadata = (): Metadata => {
   const host = headers().get("Host") ?? "";
+  const base = new URL(`https://${host}`);
 
   return {
     viewport: {
       width: "device-width",
       initialScale: 1,
     },
-    openGraph: {
-      title: config.title,
-      description: config.title,
-    },
     themeColor: "#fff",
-    metadataBase: new URL(`https://${host}`),
+    metadataBase: base,
   };
 };
 
