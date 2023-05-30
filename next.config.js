@@ -1,10 +1,14 @@
-const withPWA = require("next-pwa")({
-  disable: process.env.NODE_ENV !== "production",
+import withPWA from "@ducanh2912/next-pwa";
+
+const notProduction = process.env.NODE_ENV !== "production";
+const pwaConfig = withPWA({
+  disable: notProduction,
   dest: "public",
 });
 
 /** @type {import("next").NextConfig} */
 const nextConfig = {
+  experimental: { serverActions: true },
   reactStrictMode: true,
   images: {
     domains: ["images.prismic.io"],
@@ -32,4 +36,4 @@ const nextConfig = {
   },
 };
 
-module.exports = withPWA(nextConfig);
+export default pwaConfig(nextConfig);

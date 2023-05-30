@@ -1,11 +1,10 @@
 import type { FC } from "react";
-import NextImage from "next/image";
 import styles from "./post-card.module.scss";
-import Link from "next/link";
 import type { PostPreviewModel } from "../../model";
 import { Title } from "../../../components/title";
 import { DateComponent } from "../../../components/date";
-import { imageLoader } from "../../../prismic";
+import Link from "next/link";
+import { PostImage } from "../post-image";
 
 type Props = PostPreviewModel & {
   priorityImage?: boolean;
@@ -13,25 +12,17 @@ type Props = PostPreviewModel & {
 
 const PostCard: FC<Props> = ({ title, description, slug, image, date, priorityImage }) => (
   <article className={styles.card}>
-    <NextImage
+    <PostImage
       src={image.src}
       alt={image.alt}
-      height={image.height}
       width={image.width}
-      className={styles.image}
+      height={image.height}
+      sizes="(max-width: 768px) 100vw, 35vw"
       priority={priorityImage}
-      loader={imageLoader}
-      placeholder={"blur"}
-      blurDataURL={image.blurDataUrl}
+      className={styles.image}
     />
     <div className={styles.text}>
-      <Link
-        className={styles.link}
-        href={{
-          pathname: "/[slug]",
-          query: { slug },
-        }}
-      >
+      <Link className={styles.link} href={"/" + slug}>
         <Title>{title}</Title>
       </Link>
       <DateComponent date={date} />

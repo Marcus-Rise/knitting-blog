@@ -2,9 +2,9 @@ import type { FC } from "react";
 import styles from "./header.module.scss";
 import Link from "next/link";
 import Image from "next/image";
-import { Theme } from "../theme";
 import { KnitsLeftIcon, KnitsRightIcon } from "../icons";
 import classNames from "classnames";
+import logo from "../../app/icon.png";
 
 const LOGO_SIZE = 35;
 
@@ -27,7 +27,7 @@ const Header: FC<Props> = ({ title }) => (
         <h1 className={styles.title}>{title}</h1>
         <Image
           alt={title}
-          src={"/android-chrome-192x192.png"}
+          src={logo}
           height={LOGO_SIZE}
           width={LOGO_SIZE}
           quality={15}
@@ -35,7 +35,6 @@ const Header: FC<Props> = ({ title }) => (
         />
       </div>
     </Link>
-    <Theme className={styles.theme} />
   </header>
 );
 

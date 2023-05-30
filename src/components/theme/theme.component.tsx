@@ -1,12 +1,12 @@
 import type { FC } from "react";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { ThemePreference, useTheme } from "@marcus-rise/react-theme";
 import { Theme as ThemeEnum, ThemeToggle } from "./theme-toggle.component";
 
 type ThemeProps = { className?: string };
 
 const Theme: FC<ThemeProps> = ({ className }) => {
-  const { preferences, setTheme, resetThemeToSystem } = useTheme();
+  const { isDarkTheme, preferences, setTheme, resetThemeToSystem } = useTheme();
 
   const value = useMemo(() => {
     let value: ThemeEnum;
@@ -42,6 +42,14 @@ const Theme: FC<ThemeProps> = ({ className }) => {
         break;
     }
   };
+
+  useEffect(() => {
+    if (isDarkTheme) {
+      document.documentElement.setAttribute("data-theme", "dark");
+    } else {
+      document.documentElement.setAttribute("data-theme", "light");
+    }
+  }, [isDarkTheme]);
 
   return <ThemeToggle className={className} value={value} onChange={changeTheme} />;
 };

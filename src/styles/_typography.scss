@@ -1,7 +1,7 @@
 @use "media" as m;
 
 @mixin bad-script() {
-  font-family: "Bad Script", cursive;
+  font-family: var(--bad-script);
   line-height: initial;
   letter-spacing: 0.2em;
   font-weight: normal;
@@ -24,7 +24,7 @@
 }
 
 @mixin montserrat() {
-  font-family: Montserrat, sans-serif;
+  font-family: var(--montserrat);
   font-size: 1rem;
   line-height: 2rem;
 
@@ -35,28 +35,4 @@
   @include m.x-lg {
     font-size: 1.1rem;
   }
-}
-
-@mixin light() {
-  @include montserrat;
-
-  font-weight: 300;
-}
-
-@mixin regular() {
-  @include montserrat;
-
-  font-weight: 400;
-}
-
-@mixin bold() {
-  @include montserrat;
-
-  font-weight: 700;
-}
-
-@mixin black() {
-  @include montserrat;
-
-  font-weight: 900;
 }

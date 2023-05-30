@@ -1,6 +1,4 @@
-import { PostSliceText } from "./text";
-import { PostSliceImageGallery } from "./image-gallery";
+"use client";
 
-const components = { text: PostSliceText, image_gallery: PostSliceImageGallery };
-
-export { components };
+export * from "./slices-map";
+export { SliceZone } from "@prismicio/react";

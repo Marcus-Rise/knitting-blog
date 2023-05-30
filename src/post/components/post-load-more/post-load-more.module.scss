@@ -1,0 +1,16 @@
+.button {
+  border: none;
+  display: inline-block;
+  background-color: var(--color-background-darker);
+  color: var(--color-text-primary);
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:disabled {
+    background-color: var(--color-background);
+  }
+}

@@ -4,10 +4,8 @@ import { Title } from "../../../components/title";
 import styles from "./post-with-content.module.scss";
 import { Hr } from "../../../components/hr";
 import { DateComponent } from "../../../components/date";
-import NextImage from "next/image";
-import { SliceZone } from "@prismicio/react";
-import { components } from "../slices";
-import { imageLoader } from "../../../prismic";
+import { components, SliceZone } from "../slices";
+import { PostImage } from "../post-image";
 
 const PostWithContent: FC<Omit<PostWithContentModel, "description">> = ({
   title,
@@ -19,16 +17,14 @@ const PostWithContent: FC<Omit<PostWithContentModel, "description">> = ({
     <Title className={styles.title}>{title}</Title>
     <Hr />
     <DateComponent className={styles.date} date={date} />
-    <NextImage
+    <PostImage
       src={image.src}
       alt={image.alt}
-      height={image.height}
       width={image.width}
-      loader={imageLoader}
+      height={image.height}
+      sizes={"100vw"}
       className={styles.image}
       priority
-      placeholder={"blur"}
-      blurDataURL={image.blurDataUrl}
     />
     <SliceZone slices={content} components={components} />
     <DateComponent className={styles.datebottom} date={date} />

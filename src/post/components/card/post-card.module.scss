@@ -20,10 +20,17 @@
 }
 
 .image {
-  height: auto;
   width: 100%;
   object-fit: cover;
-  object-position: 0 0;
+  object-position: center;
+
+  @include m.x-lg {
+    height: 40rem !important;
+  }
+
+  @include m.lg {
+    height: 30rem;
+  }
 
   @include m.md {
     max-height: 30rem;
@@ -57,7 +64,6 @@
 }
 
 .link {
-  position: relative;
   text-decoration: none;
   color: inherit;
 }

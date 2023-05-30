@@ -5,7 +5,7 @@ type PostPreviewModel = {
   title: string;
   description: string;
   slug: string;
-  date: string;
+  date: Date;
 };
 
 export type { PostPreviewModel };
