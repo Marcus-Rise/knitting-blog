@@ -8,6 +8,7 @@ import styles from "./layout.module.scss";
 import { Footer } from "../components/footer";
 import "../styles/global.scss";
 import { headers } from "next/headers";
+import { Analytics } from "@vercel/analytics/react";
 
 const montserrat = Montserrat({
   weight: "400",
@@ -31,6 +32,7 @@ const RootLayout: FC<PropsWithChildren> = ({ children }) => (
       <Header title={config.title} />
       <main className={styles.main}>{children}</main>
       <Footer authorName={config.author.name} authorLink={config.author.url} year={year} />
+      <Analytics />
     </body>
   </html>
 );
