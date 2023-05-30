@@ -5,7 +5,7 @@ import { PostLoadMore } from "../post/components/post-load-more";
 import styles from "./page.module.scss";
 import type { Metadata } from "next";
 import { config } from "../config";
-import { draftMode, headers } from "next/headers";
+import { draftMode } from "next/headers";
 
 const POST_LAZY_LOAD_LIMIT = 10;
 const POST_LAZY_LOAD_START_PAGE = 2;
@@ -52,20 +52,15 @@ const Home = async () => {
   );
 };
 
-const generateMetadata = (): Metadata => {
-  const host = headers().get("Host") ?? "";
-  const base = new URL(`https://${host}`);
-
-  return {
+const metadata: Metadata = {
+  title: config.title,
+  description: config.title,
+  keywords: config.title.split(" "),
+  openGraph: {
     title: config.title,
     description: config.title,
-    keywords: config.title.split(" "),
-    openGraph: {
-      title: config.title,
-      description: config.title,
-      images: [{ url: new URL("/opengraph-image.png", base), alt: config.title }],
-    },
-  };
+  },
 };
+
 export default Home;
-export { generateMetadata };
+export { metadata };
