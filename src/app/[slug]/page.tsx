@@ -84,6 +84,7 @@ const generateMetadata = async ({ params, searchParams }: Props): Promise<Metada
   return {
     title,
     description,
+    keywords: [...config.title.split(" "), ...post.slug.split("-")],
     openGraph: {
       title,
       description,

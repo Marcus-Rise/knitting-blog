@@ -52,15 +52,19 @@ const Home = async () => {
   );
 };
 
-const metadata: Metadata = {
-  title: config.title,
-  description: config.title,
-  keywords: config.title.split(" "),
-  openGraph: {
+const generateMetadata = async (): Promise<Metadata> => {
+  const [firstPost] = await getPosts(POST_LAZY_LOAD_LIMIT);
+
+  return {
     title: config.title,
-    description: config.title,
-  },
+    description: firstPost.description,
+    keywords: [...config.title.split(" "), ...firstPost.slug.split("-")],
+    openGraph: {
+      title: config.title,
+      description: config.title,
+    },
+  };
 };
 
 export default Home;
-export { metadata };
+export { generateMetadata };
