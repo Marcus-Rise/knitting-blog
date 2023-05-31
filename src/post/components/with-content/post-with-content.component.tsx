@@ -6,17 +6,23 @@ import { Hr } from "../../../components/hr";
 import { DateComponent } from "../../../components/date";
 import { components, SliceZone } from "../slices";
 import { PostImage } from "../post-image";
+import { TelegramShareButton } from "../../../telegram/components";
+import { TelegramIcon } from "../../../components/icons";
 
-const PostWithContent: FC<Omit<PostWithContentModel, "description">> = ({
-  title,
-  date,
-  content,
-  image,
-}) => (
+type Props = Omit<PostWithContentModel, "description"> & {
+  shareLink: string;
+};
+
+const PostWithContent: FC<Props> = ({ title, date, content, image, shareLink }) => (
   <article>
     <Title className={styles.title}>{title}</Title>
     <Hr />
-    <DateComponent className={styles.date} date={date} />
+    <div className={styles.meta}>
+      <TelegramShareButton className={styles.shareLink} url={shareLink}>
+        Поделиться в Телеграм <TelegramIcon height={"1.5rem"} width={"1.5rem"} />
+      </TelegramShareButton>
+      <DateComponent className={styles.date} date={date} />
+    </div>
     <PostImage
       src={image.src}
       alt={image.alt}
@@ -26,7 +32,9 @@ const PostWithContent: FC<Omit<PostWithContentModel, "description">> = ({
       className={styles.image}
       priority
     />
-    <SliceZone slices={content} components={components} />
+    <div>
+      <SliceZone slices={content} components={components} />
+    </div>
     <DateComponent className={styles.datebottom} date={date} />
   </article>
 );

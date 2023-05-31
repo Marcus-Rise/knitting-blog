@@ -3,7 +3,7 @@ import { PostWithContent } from "../../post/components/with-content";
 import { getPost, getPostPreview } from "../../server";
 import type { Metadata } from "next";
 import { config } from "../../config";
-import { draftMode } from "next/headers";
+import { draftMode, headers } from "next/headers";
 import type { PostWithContentModel } from "../../post/model";
 import { redirect } from "next/navigation";
 import Link from "next/link";
@@ -50,10 +50,14 @@ const Post = async ({ params, searchParams }: Props) => {
     return null;
   }
 
+  const host = headers().get("Host") ?? "";
+  const baseUrl = new URL(`https://${host}`);
+  const shareLink = new URL(post.slug, baseUrl).href;
+
   return (
     <Container>
       {preview}
-      <PostWithContent {...post} />
+      <PostWithContent {...post} shareLink={shareLink} />
     </Container>
   );
 };
