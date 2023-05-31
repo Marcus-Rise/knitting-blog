@@ -1,1 +1,1 @@
-export * from "./telegram-comments.component";
+export { TelegramComments as default } from "./telegram-comments.component";

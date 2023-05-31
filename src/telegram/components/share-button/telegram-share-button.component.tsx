@@ -14,7 +14,7 @@ const TelegramShareButton: FC<Props> = ({ url, text, className, children }) => {
   }
 
   return (
-    <Link href={shareUrl} className={className}>
+    <Link href={shareUrl.href} className={className}>
       {children}
     </Link>
   );
