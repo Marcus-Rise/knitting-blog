@@ -3,14 +3,14 @@
 $theme-light: (
         "background": white,
         "background-darker": c.scale(white, $lightness: -10%),
-        "primary": #019c8c,
+        "primary": #206fa9,
         "text-primary": #323232,
         "text-secondary": c.scale(black, $lightness: +50%),
 );
 $theme-dark: (
         "background": #3b4252,
         "background-darker": c.scale(#3b4252, $lightness: -10%),
-        "primary": #01b8a5,
+        "primary": #2392e4,
         "text-primary": #eee,
         "text-secondary": c.scale(#eee, $lightness: -25%),
 );
