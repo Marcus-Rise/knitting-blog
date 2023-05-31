@@ -9,6 +9,7 @@ import { Footer } from "../components/footer";
 import "../styles/global.scss";
 import { headers } from "next/headers";
 import { Analytics } from "@vercel/analytics/react";
+import { THEME_COOKIE_KEY, ThemeProvider } from "../components/theme";
 
 const montserrat = Montserrat({
   weight: "400",
@@ -29,9 +30,11 @@ const year = new Date().getFullYear().toString();
 const RootLayout: FC<PropsWithChildren> = ({ children }) => (
   <html lang={"ru"} className={classNames(montserrat.variable, badScript.variable)}>
     <body>
-      <Header title={config.title} />
-      <main className={styles.main}>{children}</main>
-      <Footer authorName={config.author.name} authorLink={config.author.url} year={year} />
+      <ThemeProvider cookiesKey={THEME_COOKIE_KEY}>
+        <Header title={config.title} />
+        <main className={styles.main}>{children}</main>
+        <Footer authorName={config.author.name} authorLink={config.author.url} year={year} />
+      </ThemeProvider>
       <Analytics />
     </body>
   </html>

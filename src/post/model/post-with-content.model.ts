@@ -8,6 +8,7 @@ type PostWithContentModel = {
   image: PostImageModel;
   date: Date;
   content: Content.PostDocumentData["body"];
+  telegramPostUrl: string;
 };
 
 export type { PostWithContentModel };
