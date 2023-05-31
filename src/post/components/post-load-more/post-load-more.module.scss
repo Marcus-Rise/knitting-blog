@@ -9,9 +9,14 @@
 
   &:hover {
     cursor: pointer;
+    color: var(--color-text-secondary)
+  }
+
+  &:active {
+    background-color: var(--color-background);
   }
 
   &:disabled {
-    background-color: var(--color-background);
+    color: var(--color-text-secondary)
   }
 }
