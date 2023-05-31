@@ -67,3 +67,13 @@
   text-decoration: none;
   color: inherit;
 }
+
+.read {
+  font-size: 1rem;
+  color: var(--color-primary);
+  display: block;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
