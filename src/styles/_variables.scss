@@ -15,6 +15,7 @@ $theme-dark: (
         "text-secondary": c.scale(#eee, $lightness: -25%),
 );
 $screen-sizes: (
+        "x-sm": 375,
         "sm": 425,
         "md": 768,
         "lg": 1024,
