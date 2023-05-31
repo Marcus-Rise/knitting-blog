@@ -5,10 +5,11 @@ import { useCallback, useEffect, useMemo } from "react";
 import Script from "next/script";
 import { useTheme } from "@marcus-rise/react-theme";
 
-const dataColorLight = "#019c8c";
+const dataColorLight = "#019c8c"; // todo get from _variables;
 const dataColorDark = "#01b8a5s";
 
 const COMMENTS_CONTAINER_ID = "comments";
+const IFRAME_SELECTOR = `[id^="telegram-discussion"]`;
 
 const TelegramComments: FC<{ telegramPostUrl: string; commentsLimit: number }> = ({
   telegramPostUrl,
@@ -30,8 +31,13 @@ const TelegramComments: FC<{ telegramPostUrl: string; commentsLimit: number }> =
     return [channelName, postId];
   }, [dataTelegramDiscussion]);
 
+  const scriptSrc = useMemo(
+    () => `https://telegram.org/js/telegram-widget.js?22#${postId}`,
+    [postId],
+  );
+
   const moveIframe: ComponentProps<typeof Script>["onReady"] = useCallback(() => {
-    const iframe = document.querySelector(`#telegram-discussion--${channelName}-${postId}-1`);
+    const iframe = document.querySelector(IFRAME_SELECTOR);
     const container = document.querySelector(`#${COMMENTS_CONTAINER_ID}`);
 
     if (!container || !iframe) {
@@ -39,10 +45,10 @@ const TelegramComments: FC<{ telegramPostUrl: string; commentsLimit: number }> =
     }
 
     container.append(iframe);
-  }, [channelName, postId]);
+  }, []);
 
   const changeConfig = useCallback(() => {
-    const iframe = document.querySelector(`#telegram-discussion--${channelName}-${postId}-1`);
+    const iframe = document.querySelector(IFRAME_SELECTOR);
 
     if (!iframe) {
       return;
@@ -59,18 +65,38 @@ const TelegramComments: FC<{ telegramPostUrl: string; commentsLimit: number }> =
     srcUrl.searchParams.set("dark", isDarkTheme ? "1" : "0");
 
     iframe.setAttribute("src", srcUrl.href);
-  }, [channelName, isDarkTheme, postId]);
+  }, [isDarkTheme]);
 
   useEffect(() => {
     changeConfig();
   }, [changeConfig]);
+
+  useEffect(() => {
+    return () => {
+      const sc = document.getElementById(`${dataTelegramDiscussion}`);
+
+      if (!sc) {
+        return;
+      }
+
+      sc.remove();
+
+      const iframe = document.querySelector(IFRAME_SELECTOR);
+
+      if (!iframe) {
+        return;
+      }
+
+      iframe.remove();
+    };
+  }, [channelName, dataTelegramDiscussion, postId, scriptSrc]);
 
   return (
     <div id={COMMENTS_CONTAINER_ID}>
       <Script
         id={dataTelegramDiscussion}
         strategy={"lazyOnload"}
-        src="https://telegram.org/js/telegram-widget.js?22"
+        src={scriptSrc}
         data-telegram-discussion={dataTelegramDiscussion}
         data-comments-limit={commentsLimit}
         data-color={dataColorLight}
