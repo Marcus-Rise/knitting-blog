@@ -9,7 +9,9 @@ import { PostImage } from "../post-image";
 import { TelegramIcon } from "../../../components/icons";
 import dynamic from "next/dynamic";
 
-const TelegramComments = dynamic(() => import("../../../telegram/components/comments"));
+const TelegramComments = dynamic(() => import("../../../telegram/components/comments"), {
+  ssr: false,
+});
 const TelegramShareButton = dynamic(() => import("../../../telegram/components/share-button"));
 
 const TELEGRAM_COMMENTS_LIMIT = 5;
