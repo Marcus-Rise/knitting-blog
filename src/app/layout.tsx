@@ -10,6 +10,7 @@ import "../styles/global.scss";
 import { headers } from "next/headers";
 import { Analytics } from "@vercel/analytics/react";
 import { THEME_COOKIE_KEY, ThemeProvider } from "../components/theme";
+import { YandexAnalytics } from "../yandex/analytics";
 
 const montserrat = Montserrat({
   weight: "400",
@@ -36,6 +37,7 @@ const RootLayout: FC<PropsWithChildren> = ({ children }) => (
         <Footer authorName={config.author.name} authorLink={config.author.url} year={year} />
       </ThemeProvider>
       <Analytics />
+      <YandexAnalytics />
     </body>
   </html>
 );
