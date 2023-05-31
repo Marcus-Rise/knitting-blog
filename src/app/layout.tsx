@@ -28,6 +28,8 @@ const badScript = Bad_Script({
 
 const year = new Date().getFullYear().toString();
 
+const analytics = process.env.ANALYTICS === "true";
+
 const RootLayout: FC<PropsWithChildren> = ({ children }) => (
   <html lang={"ru"} className={classNames(montserrat.variable, badScript.variable)}>
     <body>
@@ -36,8 +38,12 @@ const RootLayout: FC<PropsWithChildren> = ({ children }) => (
         <main className={styles.main}>{children}</main>
         <Footer authorName={config.author.name} authorLink={config.author.url} year={year} />
       </ThemeProvider>
-      <Analytics />
-      <YandexAnalytics />
+      {analytics && (
+        <>
+          <Analytics />
+          <YandexAnalytics />
+        </>
+      )}
     </body>
   </html>
 );
