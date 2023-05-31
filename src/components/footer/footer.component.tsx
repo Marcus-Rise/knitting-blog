@@ -13,20 +13,17 @@ const Footer: FC<{ authorName: string; authorLink: string; year: string }> = ({
   year,
 }) => (
   <footer className={styles.footer}>
-    <Link href={TELEGRAM_URL}>
-      <TelegramIcon height={"2rem"} width={"2rem"} />
+    <Link href={TELEGRAM_URL} className={styles.link}>
+      Телеграм канал: <TelegramIcon height={"2rem"} width={"2rem"} />
     </Link>
 
     <div className={styles.links}>
       <ThemeProvider cookiesKey={THEME_COOKIE_KEY}>
         <Theme className={styles.theme} />
       </ThemeProvider>
-      <div>
-        <span>&#9400; {year} </span>
-        <Link className={styles.link} href={authorLink} target={"_blank"} rel="noreferrer">
-          {authorName}
-        </Link>
-      </div>
+      <Link className={styles.link} href={authorLink} target={"_blank"} rel="noreferrer">
+        &#9400; {year} {authorName}
+      </Link>
     </div>
   </footer>
 );
