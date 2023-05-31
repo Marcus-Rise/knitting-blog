@@ -9,16 +9,14 @@ import { PostImage } from "../post-image";
 import { TelegramShareButton } from "../../../telegram/components";
 import { TelegramIcon } from "../../../components/icons";
 
-type Props = Omit<PostWithContentModel, "description"> & {
-  shareLink: string;
-};
+type Props = Omit<PostWithContentModel, "description">;
 
-const PostWithContent: FC<Props> = ({ title, date, content, image, shareLink }) => (
+const PostWithContent: FC<Props> = ({ title, date, content, image, telegramPostUrl }) => (
   <article>
     <Title className={styles.title}>{title}</Title>
     <Hr />
     <div className={styles.meta}>
-      <TelegramShareButton className={styles.shareLink} url={shareLink}>
+      <TelegramShareButton className={styles.shareLink} url={telegramPostUrl}>
         Поделиться в Телеграм <TelegramIcon height={"1.5rem"} width={"1.5rem"} />
       </TelegramShareButton>
       <DateComponent className={styles.date} date={date} />
