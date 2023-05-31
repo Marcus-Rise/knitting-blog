@@ -28,7 +28,9 @@ abstract class PostWithContentModelFactory {
       date: new Date(dto.first_publication_date),
       content: dto.data.body,
       telegramPostUrl:
-        "url" in dto.data.telegram_post_url ? dto.data.telegram_post_url.url ?? "" : "",
+        dto.data.telegram_post_url && "url" in dto.data.telegram_post_url
+          ? dto.data.telegram_post_url.url ?? ""
+          : "",
     };
   }
 }
