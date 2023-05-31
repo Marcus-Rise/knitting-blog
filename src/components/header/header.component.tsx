@@ -5,6 +5,7 @@ import Image from "next/image";
 import { KnitsLeftIcon, KnitsRightIcon } from "../icons";
 import classNames from "classnames";
 import logo from "../../app/icon.png";
+import { Theme } from "../theme";
 
 const LOGO_SIZE = 35;
 
@@ -35,6 +36,7 @@ const Header: FC<Props> = ({ title }) => (
         />
       </div>
     </Link>
+    <Theme className={styles.theme} />
   </header>
 );
 

@@ -5,7 +5,7 @@
 .date {
   text-align: center;
   display: block;
-  margin: 1rem 0;
+  gap: 1rem;
 }
 
 .image {
@@ -21,6 +21,18 @@
 .datebottom {
   text-align: right;
   display: block;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+}
+
+.shareLink {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  text-decoration: none;
+  justify-content: center;
+}
+
+.meta {
+  padding: .5rem 0;
+  display: grid;
+  gap: .5rem
 }
