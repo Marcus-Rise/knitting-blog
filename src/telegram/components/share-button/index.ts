@@ -1,1 +1,1 @@
-export * from "./telegram-share-button.component";
+export { TelegramShareButton as default } from "./telegram-share-button.component";

@@ -6,13 +6,11 @@ import { Hr } from "../../../components/hr";
 import { DateComponent } from "../../../components/date";
 import { components, SliceZone } from "../slices";
 import { PostImage } from "../post-image";
-import { TelegramShareButton } from "../../../telegram/components/share-button";
 import { TelegramIcon } from "../../../components/icons";
 import dynamic from "next/dynamic";
 
-const TelegramComments = dynamic(() => import("../../../telegram/components/comments"), {
-  ssr: false,
-});
+const TelegramComments = dynamic(() => import("../../../telegram/components/comments"));
+const TelegramShareButton = dynamic(() => import("../../../telegram/components/share-button"));
 
 const TELEGRAM_COMMENTS_LIMIT = 5;
 
