@@ -87,3 +87,9 @@
 .knitsRight {
   right: 0;
 }
+
+.theme {
+  @include m.lg {
+    display: none !important;
+  }
+}

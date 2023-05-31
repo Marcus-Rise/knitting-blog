@@ -6,8 +6,11 @@ import { Hr } from "../../../components/hr";
 import { DateComponent } from "../../../components/date";
 import { components, SliceZone } from "../slices";
 import { PostImage } from "../post-image";
-import { TelegramShareButton } from "../../../telegram/components";
+import { TelegramShareButton } from "../../../telegram/components/share-button";
 import { TelegramIcon } from "../../../components/icons";
+import { TelegramComments } from "../../../telegram/components/comments";
+
+const TELEGRAM_COMMENTS_LIMIT = 5;
 
 type Props = Omit<PostWithContentModel, "description">;
 
@@ -16,9 +19,11 @@ const PostWithContent: FC<Props> = ({ title, date, content, image, telegramPostU
     <Title className={styles.title}>{title}</Title>
     <Hr />
     <div className={styles.meta}>
-      <TelegramShareButton className={styles.shareLink} url={telegramPostUrl}>
-        Поделиться в Телеграм <TelegramIcon height={"1.5rem"} width={"1.5rem"} />
-      </TelegramShareButton>
+      {telegramPostUrl && (
+        <TelegramShareButton className={styles.shareLink} url={telegramPostUrl}>
+          Поделиться в Телеграм <TelegramIcon height={"1.5rem"} width={"1.5rem"} />
+        </TelegramShareButton>
+      )}
       <DateComponent className={styles.date} date={date} />
     </div>
     <PostImage
@@ -34,6 +39,9 @@ const PostWithContent: FC<Props> = ({ title, date, content, image, telegramPostU
       <SliceZone slices={content} components={components} />
     </div>
     <DateComponent className={styles.datebottom} date={date} />
+    {telegramPostUrl && (
+      <TelegramComments telegramPostUrl={telegramPostUrl} commentsLimit={TELEGRAM_COMMENTS_LIMIT} />
+    )}
   </article>
 );
 
