@@ -27,6 +27,7 @@ const YandexAnalytics: FC = () => (
     </Script>
     <noscript>
       <div>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="https://mc.yandex.ru/watch/87044556"
           style={{ position: "absolute", left: "-9999px" }}
