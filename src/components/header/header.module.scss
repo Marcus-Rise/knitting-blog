@@ -92,4 +92,8 @@
   @include m.lg {
     display: none !important;
   }
+
+  @include m.x-sm {
+    display: none !important;
+  }
 }
