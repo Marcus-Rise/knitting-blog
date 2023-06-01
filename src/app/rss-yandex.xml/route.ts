@@ -33,9 +33,7 @@ const generateRssYandexChanel = async (req: NextRequest) => {
             const images = node.items
               .map(
                 ({ gallery_image: { alt, dimensions, url } }) =>
-                  `<img src="${url}" alt="${alt || title}" width="${dimensions?.width}" height="${
-                    dimensions?.height
-                  }" />`,
+                  `<img src="${url}" alt="${alt}" width="${dimensions?.width}" height="${dimensions?.height}" />`,
               )
               .join("");
 
