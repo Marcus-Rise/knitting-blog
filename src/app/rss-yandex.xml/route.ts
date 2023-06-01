@@ -43,7 +43,7 @@ const generateRssYandexChanel = async (req: NextRequest) => {
               )
               .join("");
 
-            return `<div>${images}</div>`;
+            return `<div data-block="gallery">${images}</div>`;
           }
         }
       })
@@ -65,7 +65,7 @@ const generateRssYandexChanel = async (req: NextRequest) => {
 
   const headers = new Headers();
 
-  headers.set("Content-Type", "application/rss+xml");
+  headers.set("Content-Type", "text/xml");
 
   return new Response(xml, {
     headers,
