@@ -3,6 +3,7 @@ import { getPost, getPosts } from "../../server";
 import { config } from "../../config";
 import type { NextRequest } from "next/server";
 import { asHTML } from "@prismicio/helpers";
+import { postImageLoader } from "../../post/components/post-image/post-image.helper";
 
 const generateRssYandexChanel = async (req: NextRequest) => {
   const requestHeaders = new Headers(req.headers);
@@ -33,7 +34,10 @@ const generateRssYandexChanel = async (req: NextRequest) => {
             const images = node.items
               .map(
                 ({ gallery_image: { alt, dimensions, url } }) =>
-                  `<img src="${url}" alt="${alt || title}" width="${dimensions?.width}" height="${
+                  `<img src="${postImageLoader({
+                    src: url ?? "",
+                    width: dimensions?.width ?? 300,
+                  })}" alt="${alt || title}" width="${dimensions?.width}" height="${
                     dimensions?.height
                   }" />`,
               )
@@ -49,8 +53,8 @@ const generateRssYandexChanel = async (req: NextRequest) => {
       title,
       date: post.date.toISOString(),
       link: new URL("/" + post.slug, baseUrl).href,
-      image_url: post.image.src,
-      image_caption: post.image.alt,
+      image_url: postImageLoader({ src: post.image.src, width: post.image.width }),
+      image_caption: post.image.alt || title,
       content,
     });
   });
