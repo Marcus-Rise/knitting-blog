@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 import { config } from "../../config";
 import { draftMode } from "next/headers";
 import type { PostWithContentModel } from "../../post/model";
-import { redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
 import styles from "./page.module.scss";
 
@@ -47,7 +47,7 @@ const Post = async ({ params, searchParams }: Props) => {
   );
 
   if (!post) {
-    return null;
+    return notFound();
   }
 
   return (
