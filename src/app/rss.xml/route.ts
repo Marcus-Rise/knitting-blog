@@ -44,7 +44,6 @@ const generateRss = async (req: NextRequest) => {
   const chanel = new RSS({
     title,
     description,
-    pubDate: firstPost.date,
     site_url: baseUrl.href,
     feed_url: feedUrl,
     image_url: Logo.src,
