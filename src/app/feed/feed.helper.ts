@@ -1,10 +1,9 @@
-import RSS from "rss";
-import type { NextRequest } from "next/server";
+import type { PostWithContentModel } from "../../post/model";
+import { asHTML } from "@prismicio/helpers";
 import { postImageLoader } from "../../post/components/post-image";
 import { getPost, getPosts } from "../../server";
 import { config } from "../../config";
-import { asHTML } from "@prismicio/helpers";
-import type { PostWithContentModel } from "../../post/model";
+import { Feed } from "feed";
 import Logo from "../icon.png";
 
 const generatePostHtmlContent = (post: PostWithContentModel): string =>
@@ -31,59 +30,51 @@ const generatePostHtmlContent = (post: PostWithContentModel): string =>
     })
     .join("");
 
-const generateRss = async (req: NextRequest) => {
-  const requestHeaders = new Headers(req.headers);
-  const host = requestHeaders.get("Host") ?? "";
-  const baseUrl = new URL(`https://${host}`);
-  const feedUrl = new URL(req.url).pathname;
-
+const generateFeed = async (baseUrl: URL, feedUrl: string) => {
   const [firstPost, ...posts] = await getPosts(100);
   const title = config.title;
   const description = firstPost.description;
 
-  const chanel = new RSS({
+  const chanel = new Feed({
     title,
     description,
-    site_url: baseUrl.href,
-    feed_url: feedUrl,
-    image_url: new URL(Logo.src, baseUrl).href,
-    webMaster: config.author.email,
+    id: baseUrl.href,
+    link: baseUrl.href,
+    language: "ru",
+    image: new URL(Logo.src, baseUrl).href,
+    favicon: new URL("/favicon.ico", baseUrl).href,
+    copyright: `All rights reserved ${new Date().getFullYear()}, ${config.author.name}`,
+    updated: firstPost.date,
+    author: config.author,
+    feedLinks: {
+      atom: feedUrl,
+    },
   });
 
   for (const item of [firstPost, ...posts]) {
     const post = await getPost(item.slug);
 
     if (!post) {
-      return;
+      continue;
     }
 
     const title = `${config.title} | ${post?.title}`;
     const description = post.description;
-    // const content: string = generatePostHtmlContent(post);
-
+    const content: string = generatePostHtmlContent(post);
     const postUrl = new URL("/" + post.slug, baseUrl).href;
 
-    chanel.item({
+    chanel.addItem({
       title,
       description,
+      content,
       date: post.date,
-      url: postUrl,
-      guid: postUrl,
-      // image_url: postImageLoader({ src: post.image.src, width: post.image.width }),
-      // image_caption: post.image.alt || title,
-      // content,
+      id: postUrl,
+      link: postUrl,
+      image: post.image.src,
     });
   }
 
-  const xml = chanel.xml();
-
-  const headers = new Headers();
-
-  // headers.set("Content-Type", "application/rss+xml");
-
-  return new Response(xml, {
-    headers,
-  });
+  return chanel;
 };
 
-export { generateRss as GET };
+export { generateFeed };
