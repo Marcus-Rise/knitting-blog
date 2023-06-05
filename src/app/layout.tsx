@@ -48,6 +48,7 @@ const RootLayout: FC<PropsWithChildren> = ({ children }) => (
   </html>
 );
 
+const feedTitle = `${config.title} | Все посты`;
 const generateMetadata = (): Metadata => {
   const host = headers().get("Host") ?? "";
   const baseUrl = new URL(`https://${host}`);
@@ -62,7 +63,9 @@ const generateMetadata = (): Metadata => {
     alternates: {
       canonical: baseUrl,
       types: {
-        "application/rss+xml": [{ url: "/api/feed", title: "Все посты" }],
+        "application/rss+xml": [{ url: "/feed/rss.xml", title: feedTitle }],
+        "application/atom+xml": [{ url: "/feed/atom.xml", title: feedTitle }],
+        "application/feed+json": [{ url: "/feed", title: feedTitle }],
       },
     },
   };
