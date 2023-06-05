@@ -31,7 +31,7 @@ const generatePostHtmlContent = (post: PostWithContentModel): string =>
     .join("");
 
 const generateFeed = async (baseUrl: URL, feedUrl: string) => {
-  const [firstPost, ...posts] = await getPosts(100);
+  const [firstPost, ...posts] = await getPosts();
   const title = config.title;
   const description = firstPost.description;
 
