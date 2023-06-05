@@ -46,7 +46,7 @@ const generateRss = async (req: NextRequest) => {
     description,
     site_url: baseUrl.href,
     feed_url: feedUrl,
-    image_url: Logo.src,
+    image_url: new URL(Logo.src, baseUrl).href,
     webMaster: config.author.email,
   });
 
