@@ -5,6 +5,7 @@ import { getPost, getPosts } from "../../server";
 import { config } from "../../config";
 import { asHTML } from "@prismicio/helpers";
 import type { PostWithContentModel } from "../../post/model";
+import Logo from "../icon.png";
 
 const generatePostHtmlContent = (post: PostWithContentModel): string =>
   post.content
@@ -46,7 +47,7 @@ const generateRss = async (req: NextRequest) => {
     pubDate: firstPost.date,
     site_url: baseUrl.href,
     feed_url: feedUrl,
-    image_url: postImageLoader({ src: firstPost.image.src, width: firstPost.image.width }),
+    image_url: Logo.src,
   });
 
   for (const item of [firstPost, ...posts]) {
