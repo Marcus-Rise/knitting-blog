@@ -58,14 +58,12 @@ const generateFeed = async (baseUrl: URL, feedUrl: string) => {
       continue;
     }
 
-    const title = `${config.title} | ${post?.title}`;
-    const description = post.description;
     const content: string = generatePostHtmlContent(post);
     const postUrl = new URL("/" + post.slug, baseUrl).href;
 
     chanel.addItem({
-      title,
-      description,
+      title: post.title,
+      description: post.description,
       content,
       date: post.date,
       id: postUrl,
