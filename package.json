@@ -33,6 +33,7 @@
     "react-dom": "^18.2.0",
     "react-simple-image-slider": "^2.4.1",
     "reflect-metadata": "^0.1.13",
+    "rss": "^1.2.2",
     "sharp": "^0.32.1"
   },
   "devDependencies": {
@@ -49,6 +50,7 @@
     "@types/node": "20.2.5",
     "@types/react": "18.2.7",
     "@types/react-dom": "18.2.4",
+    "@types/rss": "^0.0.30",
     "@typescript-eslint/eslint-plugin": "^5.59.7",
     "babel-loader": "^9.1.2",
     "dotenv": "^16.0.3",

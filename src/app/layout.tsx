@@ -50,7 +50,7 @@ const RootLayout: FC<PropsWithChildren> = ({ children }) => (
 
 const generateMetadata = (): Metadata => {
   const host = headers().get("Host") ?? "";
-  const base = new URL(`https://${host}`);
+  const baseUrl = new URL(`https://${host}`);
 
   return {
     viewport: {
@@ -58,7 +58,13 @@ const generateMetadata = (): Metadata => {
       initialScale: 1,
     },
     themeColor: "#fff",
-    metadataBase: base,
+    metadataBase: baseUrl,
+    alternates: {
+      canonical: baseUrl,
+      types: {
+        "application/rss+xml": [{ url: "/api/feed", title: "Все посты" }],
+      },
+    },
   };
 };
 
