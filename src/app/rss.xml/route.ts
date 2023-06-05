@@ -48,6 +48,7 @@ const generateRss = async (req: NextRequest) => {
     site_url: baseUrl.href,
     feed_url: feedUrl,
     image_url: Logo.src,
+    webMaster: config.author.email,
   });
 
   for (const item of [firstPost, ...posts]) {
