@@ -8,6 +8,7 @@ import type { PostWithContentModel } from "../../post/model";
 import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
 import styles from "./page.module.scss";
+import type { AlternateURLs } from "next/dist/lib/metadata/types/alternative-urls-types";
 
 type Params = {
   slug: string;
@@ -60,7 +61,7 @@ const Post = async ({ params, searchParams }: Props) => {
 
 const generateMetadata = async (
   { params, searchParams }: Props,
-  parent?: ResolvingMetadata,
+  parent: ResolvingMetadata,
 ): Promise<Metadata> => {
   const host = headers().get("Host") ?? "";
   const baseUrl = new URL(`https://${host}`);
@@ -87,9 +88,8 @@ const generateMetadata = async (
   const description = post?.description;
   const images = [{ url: new URL(post.image.src), alt: title }];
   const canonicalUrl = new URL("/" + post.slug, baseUrl);
-
-  const parentMeta = await parent;
-  const alternates = parentMeta?.alternates ?? {};
+  const previousAlternateTypes: AlternateURLs["types"] =
+    (await parent).alternates?.types ?? undefined;
 
   return {
     title,
@@ -110,7 +110,7 @@ const generateMetadata = async (
       url: canonicalUrl,
     },
     alternates: {
-      ...alternates,
+      types: previousAlternateTypes,
       canonical: canonicalUrl,
     },
   };
