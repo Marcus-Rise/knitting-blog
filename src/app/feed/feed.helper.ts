@@ -1,36 +1,9 @@
-import type { PostWithContentModel } from "../../post/model";
-import { asHTML } from "@prismicio/helpers";
-import { postImageLoader } from "../../post/components/post-image";
-import { getPost, getPosts } from "../../server";
+import { getPosts } from "../../server";
 import { config } from "../../config";
 import { Feed } from "feed";
 import Logo from "../icon.png";
 
-const generatePostHtmlContent = (post: PostWithContentModel): string =>
-  post.content
-    .map((node) => {
-      switch (node.slice_type) {
-        case "text": {
-          return asHTML(node.primary.text);
-        }
-        case "image_gallery": {
-          const images = node.items
-            .map(
-              ({ gallery_image: { alt, dimensions, url } }) =>
-                `<img src="${postImageLoader({
-                  src: url ?? "",
-                  width: dimensions?.width ?? 300,
-                })}" alt="${alt}" width="${dimensions?.width}" height="${dimensions?.height}" />`,
-            )
-            .join("");
-
-          return `<div data-block="gallery">${images}</div>`;
-        }
-      }
-    })
-    .join("");
-
-const generateFeed = async (baseUrl: URL, feedUrl: string) => {
+const generateFeed = async (baseUrl: URL) => {
   const [firstPost, ...posts] = await getPosts();
   const title = config.title;
   const description = firstPost.description;
@@ -46,25 +19,14 @@ const generateFeed = async (baseUrl: URL, feedUrl: string) => {
     copyright: `All rights reserved ${new Date().getFullYear()}, ${config.author.name}`,
     updated: firstPost.date,
     author: config.author,
-    feedLinks: {
-      atom: feedUrl,
-    },
   });
 
-  for (const item of [firstPost, ...posts]) {
-    const post = await getPost(item.slug);
-
-    if (!post) {
-      continue;
-    }
-
-    const content: string = generatePostHtmlContent(post);
+  for (const post of [firstPost, ...posts]) {
     const postUrl = new URL("/" + post.slug, baseUrl).href;
 
     chanel.addItem({
       title: post.title,
       description: post.description,
-      content,
       date: post.date,
       id: postUrl,
       link: postUrl,

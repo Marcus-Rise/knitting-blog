@@ -5,9 +5,8 @@ const generateFeedJson = async (req: NextRequest) => {
   const requestHeaders = new Headers(req.headers);
   const host = requestHeaders.get("Host") ?? "";
   const baseUrl = new URL(`https://${host}`);
-  const feedUrl = new URL(req.url).pathname;
 
-  const chanel = await generateFeed(baseUrl, feedUrl);
+  const chanel = await generateFeed(baseUrl);
   const json = chanel.json1();
 
   const headers = new Headers();
