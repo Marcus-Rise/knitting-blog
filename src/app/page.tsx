@@ -5,7 +5,7 @@ import { PostLoadMore } from "../post/components/post-load-more";
 import styles from "./page.module.scss";
 import type { Metadata } from "next";
 import { config } from "../config";
-import { draftMode } from "next/headers";
+import { draftMode, headers } from "next/headers";
 
 const POST_LAZY_LOAD_LIMIT = 10;
 const POST_LAZY_LOAD_START_PAGE = 2;
@@ -53,18 +53,28 @@ const Home = async () => {
 };
 
 const generateMetadata = async (): Promise<Metadata> => {
+  const host = headers().get("Host") ?? "";
+  const baseUrl = new URL(`https://${host}`);
   const [post] = await getPosts(POST_LAZY_LOAD_LIMIT);
   const title = config.title;
   const description = post.description;
+  const images = [{ url: new URL(post.image.src), alt: post.title }];
 
   return {
     title,
     description,
     keywords: [...title.split(" "), ...post.slug.split("-")],
+    twitter: {
+      title,
+      description,
+      images,
+      card: "summary_large_image",
+    },
     openGraph: {
       title,
       description,
-      images: [{ url: new URL(post.image.src), alt: post.title }],
+      images,
+      url: new URL("/", baseUrl),
     },
   };
 };
