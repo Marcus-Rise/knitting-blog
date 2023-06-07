@@ -6,7 +6,7 @@ import Logo from "../icon.png";
 const generateFeed = async (baseUrl: URL) => {
   const [firstPost, ...posts] = await getPosts();
   const title = config.title;
-  const description = firstPost.description;
+  const description = config.description;
 
   const chanel = new Feed({
     title,
