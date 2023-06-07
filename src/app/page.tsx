@@ -55,15 +55,15 @@ const Home = async () => {
 const generateMetadata = async (): Promise<Metadata> => {
   const host = headers().get("Host") ?? "";
   const baseUrl = new URL(`https://${host}`);
-  const [post] = await getPosts(POST_LAZY_LOAD_LIMIT);
+  const [firstPost] = await getPosts(POST_LAZY_LOAD_LIMIT);
   const title = config.title;
-  const description = post.description;
-  const images = [{ url: new URL(post.image.src), alt: post.title }];
+  const description = config.description;
+  const images = [{ url: new URL(firstPost.image.src), alt: firstPost.title }];
 
   return {
     title,
     description,
-    keywords: [...title.split(" "), ...post.slug.split("-")],
+    keywords: [...title.split(" "), ...firstPost.slug.split("-")],
     twitter: {
       title,
       description,
