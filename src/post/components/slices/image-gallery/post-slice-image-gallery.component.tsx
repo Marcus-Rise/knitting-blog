@@ -1,59 +1,33 @@
-"use client";
-
 import type { FC } from "react";
-import { useCallback, useMemo, useState } from "react";
 import type { PostDocumentDataBodyImageGallerySlice } from "../../../../prismic";
 import styles from "./post-slice-image-gallery.module.scss";
 import dynamic from "next/dynamic";
 import { PostImage } from "../../post-image";
 
-const Slider = dynamic(() =>
-  import("../../../../components/slider").then((module) => module.Slider),
-);
+const Slider = dynamic(() => import("../../../../components/slider"));
 
 const PostSliceImageGallery: FC<{ slice: PostDocumentDataBodyImageGallerySlice }> = ({ slice }) => {
-  const [sliderStartIndex, setSliderStartIndex] = useState<number | null>(null);
+  const images = slice.items.map((i) => ({
+    url: i.gallery_image.url ?? "",
+    alt: i.gallery_image.alt ?? "",
+    width: i.gallery_image.dimensions?.width,
+    height: i.gallery_image.dimensions?.height,
+  }));
 
-  const images = useMemo(
-    () =>
-      slice.items.map((i) => {
-        return {
-          url: i.gallery_image.url ?? "",
-          alt: i.gallery_image.alt ?? "",
-          width: i.gallery_image.dimensions?.width,
-          height: i.gallery_image.dimensions?.height,
-        };
-      }),
-    [slice.items],
-  );
+  const cards = images.map((image, index) => (
+    <Slider key={index} className={styles.imageWrapper} images={images} startIndex={index}>
+      <PostImage
+        src={image.url}
+        alt={image.alt}
+        height={image.height}
+        width={image.width}
+        sizes="(max-width: 768px) 100vw, 25vw"
+        className={styles.image}
+      />
+    </Slider>
+  ));
 
-  const closeSlider = useCallback(() => setSliderStartIndex(null), []);
-
-  const cards = useMemo(
-    () =>
-      images.map((image, index) => (
-        <PostImage
-          key={index}
-          src={image.url}
-          alt={image.alt}
-          height={image.height}
-          width={image.width}
-          sizes="(max-width: 768px) 100vw, 25vw"
-          className={styles.image}
-          onClick={() => setSliderStartIndex(index)}
-        />
-      )),
-    [images],
-  );
-
-  return (
-    <div className={styles.wrapper}>
-      {cards}
-      {sliderStartIndex !== null && (
-        <Slider startIndex={sliderStartIndex} images={images} onClose={closeSlider} />
-      )}
-    </div>
-  );
+  return <div className={styles.wrapper}>{cards}</div>;
 };
 
 export { PostSliceImageGallery };

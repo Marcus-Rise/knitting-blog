@@ -1,39 +1,66 @@
 "use client";
 
-import type { FC } from "react";
-import { useEffect } from "react";
+import type { FC, PropsWithChildren } from "react";
+import { useCallback, useEffect, useState } from "react";
 import SimpleImageSlider from "react-simple-image-slider";
 import styles from "./slider.module.scss";
 
-type Props = { images: Array<{ url: string }>; startIndex: number; onClose: () => void };
+type Props = PropsWithChildren<{
+  className?: string;
+  images: Array<{ url: string }>;
+  startIndex?: number;
+  onClose?: () => void;
+}>;
 
-const Slider: FC<Props> = ({ images, startIndex, onClose }) => {
-  useEffect(() => {
+const Slider: FC<Props> = ({ className, images, startIndex = 0, onClose, children }) => {
+  const [open, setOpen] = useState(false);
+  const disallowScroll = useCallback(() => {
     const body = document.getElementsByTagName("body")[0];
 
     body.style.overflow = "hidden";
-
-    return () => {
-      body.style.overflow = "initial";
-    };
   }, []);
 
+  const allowScroll = useCallback(() => {
+    const body = document.getElementsByTagName("body")[0];
+
+    body.style.overflow = "initial";
+  }, []);
+
+  useEffect(() => {
+    if (open) {
+      disallowScroll();
+    } else {
+      allowScroll();
+    }
+  }, [allowScroll, disallowScroll, open]);
+
   return (
-    <>
-      <button className={styles.button} onClick={onClose}>
-        X
-      </button>
-      <div className={styles.wrapper}>
-        <SimpleImageSlider
-          width={"100%"}
-          height={"100%"}
-          images={images}
-          showBullets={true}
-          showNavs={true}
-          startIndex={startIndex}
-        />
-      </div>
-    </>
+    <div className={className} onClick={() => setOpen(true)}>
+      {open && (
+        <>
+          <button
+            className={styles.button}
+            onClick={(e) => {
+              e.stopPropagation();
+              setOpen(false);
+            }}
+          >
+            X
+          </button>
+          <div className={styles.wrapper}>
+            <SimpleImageSlider
+              width={"100%"}
+              height={"100%"}
+              images={images}
+              showBullets={true}
+              showNavs={true}
+              startIndex={startIndex}
+            />
+          </div>
+        </>
+      )}
+      {children}
+    </div>
   );
 };
 
