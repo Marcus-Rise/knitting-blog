@@ -1,5 +1,3 @@
-"use client";
-
 import { PostSliceText } from "./text";
 import { PostSliceImageGallery } from "./image-gallery";
 import type { SliceZoneProps } from "@prismicio/react";

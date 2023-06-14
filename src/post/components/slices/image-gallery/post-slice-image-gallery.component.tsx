@@ -29,9 +29,9 @@ const PostSliceImageGallery: FC<{ slice: PostDocumentDataBodyImageGallerySlice }
 
   const closeSlider = useCallback(() => setSliderStartIndex(null), []);
 
-  return (
-    <div className={styles.wrapper}>
-      {images.map((image, index) => (
+  const cards = useMemo(
+    () =>
+      images.map((image, index) => (
         <PostImage
           key={index}
           src={image.url}
@@ -42,7 +42,13 @@ const PostSliceImageGallery: FC<{ slice: PostDocumentDataBodyImageGallerySlice }
           className={styles.image}
           onClick={() => setSliderStartIndex(index)}
         />
-      ))}
+      )),
+    [images],
+  );
+
+  return (
+    <div className={styles.wrapper}>
+      {cards}
       {sliderStartIndex !== null && (
         <Slider startIndex={sliderStartIndex} images={images} onClose={closeSlider} />
       )}

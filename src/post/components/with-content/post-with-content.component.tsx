@@ -35,7 +35,7 @@ const PostWithContent: FC<Props> = ({ title, date, content, image, telegramPostU
       alt={image.alt}
       width={image.width}
       height={image.height}
-      sizes={"100vw"}
+      sizes="(max-width: 425px) 90vw, (max-width: 768px) 55vw, (max-width: 1440px) 75vw, 100vw"
       className={styles.image}
       priority
     />
