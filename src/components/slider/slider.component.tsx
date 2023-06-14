@@ -2,8 +2,10 @@
 
 import type { FC, PropsWithChildren } from "react";
 import { useCallback, useEffect, useState } from "react";
-import SimpleImageSlider from "react-simple-image-slider";
 import styles from "./slider.module.scss";
+import dynamic from "next/dynamic";
+
+const SimpleImageSlider = dynamic(() => import("react-simple-image-slider"));
 
 type Props = PropsWithChildren<{
   className?: string;

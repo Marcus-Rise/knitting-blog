@@ -1,10 +1,8 @@
 import type { FC } from "react";
 import type { PostDocumentDataBodyImageGallerySlice } from "../../../../prismic";
 import styles from "./post-slice-image-gallery.module.scss";
-import dynamic from "next/dynamic";
 import { PostImage } from "../../post-image";
-
-const Slider = dynamic(() => import("../../../../components/slider"));
+import Slider from "../../../../components/slider";
 
 const PostSliceImageGallery: FC<{ slice: PostDocumentDataBodyImageGallerySlice }> = ({ slice }) => {
   const images = slice.items.map((i) => ({
