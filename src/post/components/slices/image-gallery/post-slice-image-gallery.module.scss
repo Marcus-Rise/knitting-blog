@@ -7,18 +7,25 @@
   justify-content: space-between;
 }
 
-.image {
-  height: auto;
-  max-height: 20rem;
-  width: calc(100% / 3 - 1rem);
-  object-fit: cover;
-  object-position: center;
 
-  &:hover {
-    cursor: pointer;
-  }
+.imageWrapper {
+  width: calc(100% / 3 - 1rem);
 
   @include m.md {
     width: 100%;
   }
+
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+
+.image {
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+  height: auto;
+  max-height: 20rem;
 }
