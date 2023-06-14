@@ -43,12 +43,14 @@ const Home = async () => {
           description={firstPost.description}
         />
         {cards}
-        <PostLoadMore
-          title={"Читать больше"}
-          startPage={POST_LAZY_LOAD_START_PAGE}
-          limit={POST_LAZY_LOAD_LIMIT}
-          className={styles.postLoadMoreButton}
-        />
+        {[firstPost, ...posts].length === POST_LAZY_LOAD_LIMIT && (
+          <PostLoadMore
+            title={"Читать больше"}
+            startPage={POST_LAZY_LOAD_START_PAGE}
+            limit={POST_LAZY_LOAD_LIMIT}
+            className={styles.postLoadMoreButton}
+          />
+        )}
       </div>
     </Container>
   );
