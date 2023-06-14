@@ -1,9 +1,11 @@
+"use client";
 import type { FC } from "react";
-import { useEffect, useMemo } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { ThemePreference, useTheme } from "@marcus-rise/react-theme";
 import { Theme as ThemeEnum, ThemeToggle } from "./theme-toggle.component";
 
 type ThemeProps = { className?: string };
+const THEME_DATA_KEY = "data-theme";
 
 const Theme: FC<ThemeProps> = ({ className }) => {
   const { isDarkTheme, preferences, setTheme, resetThemeToSystem } = useTheme();
@@ -29,25 +31,28 @@ const Theme: FC<ThemeProps> = ({ className }) => {
     return value;
   }, [preferences]);
 
-  const changeTheme = (theme: ThemeEnum) => {
-    switch (theme) {
-      case ThemeEnum.DARK:
-        setTheme(ThemePreference.DARK);
-        break;
-      case ThemeEnum.LIGHT:
-        setTheme(ThemePreference.LIGHT);
-        break;
-      default:
-        resetThemeToSystem();
-        break;
-    }
-  };
+  const changeTheme = useCallback(
+    (theme: ThemeEnum) => {
+      switch (theme) {
+        case ThemeEnum.DARK:
+          setTheme(ThemePreference.DARK);
+          break;
+        case ThemeEnum.LIGHT:
+          setTheme(ThemePreference.LIGHT);
+          break;
+        default:
+          resetThemeToSystem();
+          break;
+      }
+    },
+    [resetThemeToSystem, setTheme],
+  );
 
   useEffect(() => {
     if (isDarkTheme) {
-      document.documentElement.setAttribute("data-theme", "dark");
+      document.documentElement.setAttribute(THEME_DATA_KEY, "dark");
     } else {
-      document.documentElement.setAttribute("data-theme", "light");
+      document.documentElement.setAttribute(THEME_DATA_KEY, "light");
     }
   }, [isDarkTheme]);
 
