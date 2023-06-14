@@ -21,7 +21,7 @@ const PostSliceImageGallery: FC<{ slice: PostDocumentDataBodyImageGallerySlice }
         alt={image.alt}
         height={image.height}
         width={image.width}
-        sizes="(max-width: 768px) 100vw, 25vw"
+        sizes="(min-width: 768px) 25vw"
         className={styles.image}
       />
     </Slider>
