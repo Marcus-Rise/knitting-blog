@@ -1,5 +1,3 @@
-"use client";
-
 import type { FC } from "react";
 import type { PostDocumentDataBodyTextSlice } from "../../../../prismic";
 import { isFilled } from "@prismicio/helpers";
