@@ -1,3 +1,5 @@
+@use "../../../styles/media" as m;
+
 .title {
   text-align: center;
 }
@@ -16,6 +18,22 @@
   margin: 0 auto;
   object-fit: cover;
   object-position: center;
+
+  @include m.x-lg {
+    height: 40rem !important;
+  }
+
+  @include m.lg {
+    height: 30rem;
+  }
+
+  @include m.md {
+    max-height: 30rem;
+  }
+
+  @include m.sm {
+    max-height: 20rem;
+  }
 }
 
 .datebottom {
