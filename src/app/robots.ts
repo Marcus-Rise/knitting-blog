@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { headers } from "next/headers";
+import { config } from "../config";
 
 type Rules = MetadataRoute.Robots["rules"];
 
@@ -13,11 +13,9 @@ const disallowRules: Rules = {
 };
 
 const robots = (): MetadataRoute.Robots => {
-  const isAllow = Boolean(process.env.ALLOW_ROBOTS);
-  const host = headers().get("Host") ?? "";
-  const baseUrl = new URL(`https://${host}`);
+  const isAllow = process.env.ALLOW_ROBOTS === "true";
 
-  const sitemap = new URL(`/sitemap.xml`, baseUrl).href;
+  const sitemap = new URL(`/sitemap.xml`, config.baseUrl).href;
 
   return {
     rules: isAllow ? allowRules : disallowRules,

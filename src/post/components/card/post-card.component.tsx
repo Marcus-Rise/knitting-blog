@@ -1,3 +1,5 @@
+"use server";
+
 import type { FC } from "react";
 import styles from "./post-card.module.scss";
 import type { PostPreviewModel } from "../../model";

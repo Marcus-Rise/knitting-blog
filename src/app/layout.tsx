@@ -7,7 +7,6 @@ import { Header } from "../components/header";
 import styles from "./layout.module.scss";
 import { Footer } from "../components/footer";
 import "../styles/global.scss";
-import { headers } from "next/headers";
 import { Analytics } from "@vercel/analytics/react";
 import { THEME_COOKIE_KEY, ThemeProvider } from "../components/theme";
 import { YandexAnalytics } from "../yandex/analytics";
@@ -49,27 +48,22 @@ const RootLayout: FC<PropsWithChildren> = ({ children }) => (
 );
 
 const feedTitle = `${config.title} | Все посты`;
-const generateMetadata = (): Metadata => {
-  const host = headers().get("Host") ?? "";
-  const baseUrl = new URL(`https://${host}`);
-
-  return {
-    viewport: {
-      width: "device-width",
-      initialScale: 1,
+const metadata: Metadata = {
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+  },
+  themeColor: "#fff",
+  metadataBase: config.baseUrl,
+  alternates: {
+    canonical: config.baseUrl,
+    types: {
+      "application/rss+xml": [{ url: "/feed/rss.xml", title: feedTitle }],
+      "application/atom+xml": [{ url: "/feed/atom.xml", title: feedTitle }],
+      "application/feed+json": [{ url: "/feed", title: feedTitle }],
     },
-    themeColor: "#fff",
-    metadataBase: baseUrl,
-    alternates: {
-      canonical: baseUrl,
-      types: {
-        "application/rss+xml": [{ url: "/feed/rss.xml", title: feedTitle }],
-        "application/atom+xml": [{ url: "/feed/atom.xml", title: feedTitle }],
-        "application/feed+json": [{ url: "/feed", title: feedTitle }],
-      },
-    },
-  };
+  },
 };
 
 export default RootLayout;
-export { generateMetadata };
+export { metadata };

@@ -3,7 +3,7 @@ import { PostWithContent } from "../../post/components/with-content";
 import { getPost, getPostPreview } from "../../server";
 import type { Metadata, ResolvingMetadata } from "next";
 import { config } from "../../config";
-import { draftMode, headers } from "next/headers";
+import { draftMode } from "next/headers";
 import type { PostWithContentModel } from "../../post/model";
 import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
@@ -63,8 +63,6 @@ const generateMetadata = async (
   { params, searchParams }: Props,
   parent: ResolvingMetadata,
 ): Promise<Metadata> => {
-  const host = headers().get("Host") ?? "";
-  const baseUrl = new URL(`https://${host}`);
   const { isEnabled } = draftMode();
   let post: PostWithContentModel | null;
 
@@ -84,10 +82,10 @@ const generateMetadata = async (
     return {};
   }
 
-  const title = `${config.title} | ${post?.title}`;
-  const description = post?.description;
+  const title = `${config.title} | ${post.title}`;
+  const description = post.description;
   const images = [{ url: new URL(post.image.src), alt: title }];
-  const canonicalUrl = new URL("/" + post.slug, baseUrl);
+  const canonicalUrl = new URL("/" + post.slug, config.baseUrl);
   const previousAlternateTypes: AlternateURLs["types"] =
     (await parent).alternates?.types ?? undefined;
 
