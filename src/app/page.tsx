@@ -4,7 +4,7 @@ import { getPosts } from "../server";
 import styles from "./page.module.scss";
 import type { Metadata } from "next";
 import { config } from "../config";
-import { draftMode, headers } from "next/headers";
+import { draftMode } from "next/headers";
 import dynamic from "next/dynamic";
 
 const POST_LAZY_LOAD_LIMIT = 10;
@@ -57,8 +57,6 @@ const Home = async () => {
 };
 
 const generateMetadata = async (): Promise<Metadata> => {
-  const host = headers().get("Host") ?? "";
-  const baseUrl = new URL(`https://${host}`);
   const [firstPost] = await getPosts(POST_LAZY_LOAD_LIMIT);
   const title = config.title;
   const description = config.description;
@@ -78,7 +76,7 @@ const generateMetadata = async (): Promise<Metadata> => {
       title,
       description,
       images,
-      url: new URL("/", baseUrl),
+      url: new URL("/", config.baseUrl),
     },
   };
 };

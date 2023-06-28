@@ -1,21 +1,18 @@
 import type { MetadataRoute } from "next";
-import { headers } from "next/headers";
 import { getPosts } from "../server";
+import { config } from "../config";
 
 type Page = MetadataRoute.Sitemap[number];
 
 const sitemap = async (): Promise<MetadataRoute.Sitemap> => {
-  const host = headers().get("Host") ?? "";
-  const baseUrl = new URL(`https://${host}`);
-
   const [firstPost, ...posts] = await getPosts();
 
   const mainPage: Page = {
-    url: new URL("/", baseUrl).href,
+    url: new URL("/", config.baseUrl).href,
     lastModified: firstPost.date,
   };
   const postPages = [firstPost, ...posts].map((post) => ({
-    url: new URL(`/${post.slug}`, baseUrl).href,
+    url: new URL(`/${post.slug}`, config.baseUrl).href,
     lastModified: post.date,
   }));
 
