@@ -82,8 +82,8 @@ const generateMetadata = async (
     return {};
   }
 
-  const title = `${config.title} | ${post?.title}`;
-  const description = post?.description;
+  const title = `${config.title} | ${post.title}`;
+  const description = post.description;
   const images = [{ url: new URL(post.image.src), alt: title }];
   const canonicalUrl = new URL("/" + post.slug, config.baseUrl);
   const previousAlternateTypes: AlternateURLs["types"] =
