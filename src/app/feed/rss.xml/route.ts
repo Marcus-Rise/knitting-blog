@@ -1,8 +1,7 @@
-import type { NextRequest } from "next/server";
 import { generateFeed } from "../feed.helper";
 import { config } from "../../../config";
 
-const generateRss = async (req: NextRequest) => {
+const generateRss = async () => {
   const chanel = await generateFeed(config.baseUrl);
   const xml = chanel.rss2();
 

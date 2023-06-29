@@ -1,8 +1,7 @@
-import type { NextRequest } from "next/server";
 import { generateFeed } from "../feed.helper";
 import { config } from "../../../config";
 
-const generateAtom = async (req: NextRequest) => {
+const generateAtom = async () => {
   const chanel = await generateFeed(config.baseUrl);
   const xml = chanel.atom1();
 

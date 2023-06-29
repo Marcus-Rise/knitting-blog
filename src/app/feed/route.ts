@@ -1,8 +1,7 @@
-import type { NextRequest } from "next/server";
 import { generateFeed } from "./feed.helper";
 import { config } from "../../config";
 
-const generateFeedJson = async (req: NextRequest) => {
+const generateFeedJson = async () => {
   const chanel = await generateFeed(config.baseUrl);
   const json = chanel.json1();
 
