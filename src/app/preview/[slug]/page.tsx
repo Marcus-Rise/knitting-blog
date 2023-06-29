@@ -16,7 +16,11 @@ const Post = async ({ searchParams }: Props) => {
   const { isEnabled } = draftMode();
   const { token, documentId } = searchParams;
 
-  if (!isEnabled || !token || !documentId) {
+  if (token && documentId) {
+    if (!isEnabled) {
+      return redirect(`/api/preview?token=${token}&documentId=${documentId}`);
+    }
+  } else {
     return redirect("/404");
   }
 

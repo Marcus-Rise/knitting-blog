@@ -1,7 +1,7 @@
 import { draftMode } from "next/headers";
 import { redirect } from "next/navigation";
 
-const previewExit = async () => {
+const previewExit = () => {
   const { isEnabled } = draftMode();
 
   if (isEnabled) {
