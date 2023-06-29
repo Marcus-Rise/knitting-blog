@@ -1,51 +1,19 @@
 import { Container } from "../../components/container";
 import { PostWithContent } from "../../post/components/with-content";
-import { getPost, getPostPreview } from "../../server";
+import { getPost, getPosts } from "../../server";
 import type { Metadata, ResolvingMetadata } from "next";
 import { config } from "../../config";
-import { draftMode } from "next/headers";
-import type { PostWithContentModel } from "../../post/model";
-import { notFound, redirect } from "next/navigation";
-import Link from "next/link";
-import styles from "./page.module.scss";
+import { notFound } from "next/navigation";
 import type { AlternateURLs } from "next/dist/lib/metadata/types/alternative-urls-types";
 
 type Params = {
   slug: string;
 };
 
-type Props = { params: Params; searchParams: { token: string; documentId: string } };
+type Props = { params: Params };
 
-const Post = async ({ params, searchParams }: Props) => {
-  const { isEnabled } = draftMode();
-  let post: PostWithContentModel | null;
-
-  if (!isEnabled) {
-    const { token, documentId } = searchParams;
-
-    if (token && documentId) {
-      redirect(`/api/preview?token=${token}&documentId=${documentId}`);
-    }
-
-    post = await getPost(params.slug);
-  } else {
-    const { token, documentId } = searchParams;
-
-    if (!token || !documentId) {
-      redirect("/404");
-    }
-
-    post = await getPostPreview(token, documentId);
-  }
-
-  const preview = isEnabled && (
-    <div className={styles.preview}>
-      Предпросмотр,{" "}
-      <Link href={"/"} prefetch={false}>
-        выйти
-      </Link>
-    </div>
-  );
+const Post = async ({ params }: Props) => {
+  const post = await getPost(params.slug);
 
   if (!post) {
     return notFound();
@@ -53,30 +21,24 @@ const Post = async ({ params, searchParams }: Props) => {
 
   return (
     <Container>
-      {preview}
       <PostWithContent {...post} />
     </Container>
   );
 };
 
+const generateStaticParams = async (): Promise<Array<Params>> => {
+  const posts = await getPosts();
+
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
+};
+
 const generateMetadata = async (
-  { params, searchParams }: Props,
+  { params }: Props,
   parent: ResolvingMetadata,
 ): Promise<Metadata> => {
-  const { isEnabled } = draftMode();
-  let post: PostWithContentModel | null;
-
-  if (!isEnabled) {
-    post = await getPost(params.slug);
-  } else {
-    const { token, documentId } = searchParams;
-
-    if (!token || !documentId) {
-      return {};
-    }
-
-    post = await getPostPreview(token, documentId);
-  }
+  const post = await getPost(params.slug);
 
   if (!post) {
     return {};
@@ -115,4 +77,4 @@ const generateMetadata = async (
 };
 
 export default Post;
-export { generateMetadata };
+export { generateMetadata, generateStaticParams };

@@ -20,7 +20,7 @@ const previewStart = async (request: Request) => {
 
   draftMode().enable();
 
-  redirect("/" + encodeURI(`${post.slug}?token=${token}&documentId=${documentId}`));
+  redirect("/preview/" + encodeURI(`${post.slug}?token=${token}&documentId=${documentId}`));
 };
 
 export { previewStart as GET };
