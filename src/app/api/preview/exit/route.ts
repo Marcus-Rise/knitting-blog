@@ -1,6 +1,7 @@
 import { draftMode } from "next/headers";
 import { redirect } from "next/navigation";
 
+const dynamic = "force-dynamic";
 const previewExit = () => {
   const { isEnabled } = draftMode();
 
@@ -11,4 +12,4 @@ const previewExit = () => {
   redirect("/");
 };
 
-export { previewExit as GET };
+export { previewExit as GET, dynamic };
