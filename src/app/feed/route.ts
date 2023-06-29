@@ -1,12 +1,9 @@
 import type { NextRequest } from "next/server";
 import { generateFeed } from "./feed.helper";
+import { config } from "../../config";
 
 const generateFeedJson = async (req: NextRequest) => {
-  const requestHeaders = new Headers(req.headers);
-  const host = requestHeaders.get("Host") ?? "";
-  const baseUrl = new URL(`https://${host}`);
-
-  const chanel = await generateFeed(baseUrl);
+  const chanel = await generateFeed(config.baseUrl);
   const json = chanel.json1();
 
   const headers = new Headers();

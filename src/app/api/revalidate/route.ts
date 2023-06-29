@@ -37,6 +37,9 @@ const Revalidate = async (req: Request) => {
   revalidatePath("/");
   revalidatePath(`/${postSlug}`);
   revalidatePath(`/sitemap.xml`);
+  revalidatePath(`/feed`);
+  revalidatePath(`/feed/atom.xml`);
+  revalidatePath(`/feed/rss.xml`);
 
   return NextResponse.json({ revalidated: true });
 };
