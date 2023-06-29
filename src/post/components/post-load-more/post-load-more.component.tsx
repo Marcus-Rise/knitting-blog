@@ -1,10 +1,12 @@
 "use client";
 
-import type { FC, ReactNode } from "react";
-import { useCallback, useState, useTransition } from "react";
+import type { FC } from "react";
+import { useCallback, useMemo, useState, useTransition } from "react";
 import styles from "./post-load-more.module.scss";
 import classNames from "classnames";
 import loadPosts from "./post-load-more.helper";
+import type { PostPreviewModel } from "../../model";
+import { PostCard } from "../card";
 
 type Props = {
   title: string;
@@ -15,11 +17,11 @@ type Props = {
 
 const PostLoadMore: FC<Props> = ({ title, startPage, limit, className }) => {
   const [offsetPage, setOffsetPage] = useState(startPage);
-  const [posts, setPosts] = useState<Array<ReactNode>>([]);
+  const [posts, setPosts] = useState<Array<PostPreviewModel>>([]);
   const [isPending, startTransition] = useTransition();
   const [isEnd, setIsEnd] = useState(false);
 
-  const addPosts = useCallback((posts: Array<ReactNode>) => {
+  const addPosts = useCallback((posts: Array<PostPreviewModel>) => {
     if (!posts.length) {
       setIsEnd(true);
     }
@@ -28,9 +30,24 @@ const PostLoadMore: FC<Props> = ({ title, startPage, limit, className }) => {
     setOffsetPage((offset) => offset + 1);
   }, []);
 
+  const items = useMemo(
+    () =>
+      posts.map((post) => (
+        <PostCard
+          key={post.slug}
+          title={post.title}
+          description={post.description}
+          image={post.image}
+          slug={post.slug}
+          date={post.date}
+        />
+      )),
+    [posts],
+  );
+
   return (
     <>
-      {posts}
+      {items}
       {!isEnd && (
         <button
           className={classNames(styles.button, className)}

@@ -1,1 +1,1 @@
-export { PostLoadMore as default } from "./post-load-more.component";
+export * from "./post-load-more.component";
