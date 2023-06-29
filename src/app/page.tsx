@@ -4,24 +4,18 @@ import { getPosts } from "../server";
 import styles from "./page.module.scss";
 import type { Metadata } from "next";
 import { config } from "../config";
-import { draftMode } from "next/headers";
-import dynamic from "next/dynamic";
+import { PostLoadMore } from "../post/components/post-load-more";
 
 const POST_LAZY_LOAD_LIMIT = 10;
 const POST_LAZY_LOAD_START_PAGE = 2;
 
-const PostLoadMore = dynamic(() => import("../post/components/post-load-more"));
-
 const Home = async () => {
-  if (draftMode().isEnabled) {
-    draftMode().disable();
-  }
+  const posts = await getPosts(POST_LAZY_LOAD_LIMIT);
 
-  const [firstPost, ...posts] = await getPosts(POST_LAZY_LOAD_LIMIT);
-
-  const cards = posts.map((post) => (
+  const cards = posts.map((post, index) => (
     <PostCard
       key={post.slug}
+      priorityImage={index === 0}
       title={post.title}
       description={post.description}
       image={post.image}
@@ -33,17 +27,8 @@ const Home = async () => {
   return (
     <Container>
       <div className={styles.postContainer}>
-        <PostCard
-          key={firstPost.slug}
-          slug={firstPost.slug}
-          priorityImage
-          image={firstPost.image}
-          title={firstPost.title}
-          date={firstPost.date}
-          description={firstPost.description}
-        />
         {cards}
-        {[firstPost, ...posts].length === POST_LAZY_LOAD_LIMIT && (
+        {posts.length === POST_LAZY_LOAD_LIMIT && (
           <PostLoadMore
             title={"Читать больше"}
             startPage={POST_LAZY_LOAD_START_PAGE}

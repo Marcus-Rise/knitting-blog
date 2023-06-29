@@ -1,22 +1,9 @@
-"use server";
+import type { PostPreviewModel } from "../../model";
 
-import { getPosts } from "../../../server";
-import { PostCard } from "../card";
+const loadPosts = async (limit: number, page: number): Promise<Array<PostPreviewModel>> => {
+  const response = await fetch(`/api/post?limit=${limit}&page=${page}`);
 
-const loadPosts = async (limit: number, offset: number) => {
-  const posts = await getPosts(limit, offset);
-
-  return posts.map((post) => (
-    <PostCard
-      key={post.slug}
-      slug={post.slug}
-      priorityImage
-      image={post.image}
-      title={post.title}
-      date={post.date}
-      description={post.description}
-    />
-  ));
+  return await response.json();
 };
 
 export default loadPosts;
