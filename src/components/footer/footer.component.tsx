@@ -18,7 +18,7 @@ const Footer: FC<{ authorName: string; authorLink: string; year: string }> = ({
 
     <div className={styles.links}>
       <Theme className={styles.theme} />
-      <Link className={styles.link} href={authorLink} target={"_blank"} rel="noreferrer">
+      <Link className={styles.link} href={authorLink} target={"_blank"}>
         &#9400; {year} {authorName}
       </Link>
     </div>
