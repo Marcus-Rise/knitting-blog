@@ -34,12 +34,7 @@ const Revalidate = async (req: Request) => {
     return NextResponse.json({ message: "No document slug was found" }, { status: 404 });
   }
 
-  revalidatePath("/");
-  revalidatePath(`/${postSlug}`);
-  revalidatePath(`/sitemap.xml`);
-  revalidatePath(`/feed`);
-  revalidatePath(`/feed/atom.xml`);
-  revalidatePath(`/feed/rss.xml`);
+  revalidatePath("/", "layout");
 
   return NextResponse.json({ revalidated: true });
 };
