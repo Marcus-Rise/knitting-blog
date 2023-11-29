@@ -2,7 +2,7 @@ import type { FC, PropsWithChildren } from "react";
 import { Bad_Script, Montserrat } from "next/font/google";
 import classNames from "classnames";
 import { config } from "../config";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Header } from "../components/header";
 import styles from "./layout.module.scss";
 import { Footer } from "../components/footer";
@@ -49,11 +49,6 @@ const RootLayout: FC<PropsWithChildren> = ({ children }) => (
 
 const feedTitle = `${config.title} | Все посты`;
 const metadata: Metadata = {
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-  },
-  themeColor: "#fff",
   metadataBase: config.baseUrl,
   alternates: {
     canonical: config.baseUrl,
@@ -65,5 +60,12 @@ const metadata: Metadata = {
   },
 };
 
+const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  colorScheme: "light dark",
+  themeColor: "#fff",
+};
+
 export default RootLayout;
-export { metadata };
+export { metadata, viewport };

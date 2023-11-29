@@ -1,16 +1,21 @@
 import withPWA from "@ducanh2912/next-pwa";
 
-const notProduction = process.env.NODE_ENV !== "production";
 const pwaConfig = withPWA({
-  disable: notProduction,
   dest: "public",
+  cacheOnFrontEndNav: true,
+  aggressiveFrontEndNavCaching: true,
 });
 
 /** @type {import("next").NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["images.prismic.io"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.prismic.io",
+      },
+    ],
   },
   headers() {
     return [
